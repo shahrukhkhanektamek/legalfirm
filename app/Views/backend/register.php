@@ -7,9 +7,8 @@
     <meta charset="utf-8" />
     <title>Singup - Free Spirit Pole Dance</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="_token" content="{{csrf_token()}}">
-    <meta content="You can manage your schedule, subscription of classes using account panel." name="description" />
-    <meta content="Singup - Free Spirit Pole Dance" name="author" />
+    <meta name="_token" content="<?= csrf_hash() ?>">
+    
     <!-- App favicon -->
     <link rel="shortcut icon" href="https://ik.imagekit.io/freespiritpoledance/logo/favicon.png?tr=fo-ico">
     <!-- Layout config Js -->

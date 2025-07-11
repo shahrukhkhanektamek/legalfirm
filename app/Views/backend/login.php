@@ -10,7 +10,7 @@
     <title>Login - <?=env('APP_NAME') ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="_token" content="<?=csrf_token()?>">
+    <meta name="_token" content="<?= csrf_hash() ?>">
     <meta name="base_url" content="<?=base_url('/')?>/">
     <meta content="Login - <?=env('APP_NAME')?>" name="author" />
     <!-- App favicon -->

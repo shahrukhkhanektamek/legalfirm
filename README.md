@@ -1,3 +1,21 @@
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/shahrukhkhanektamek/hindi-bible-backendn.git
+git branch -M main
+git checkout -b dev
+git push -u origin dev
+
+
+
+git add .
+git commit -m "Update"
+git push
+
+
+
+
+
 # CodeIgniter 4 Framework
 
 ## What is CodeIgniter?
