@@ -25,13 +25,13 @@
 										<div class="login-header">
 											<h3>Login <span>DreamsCLG</span></h3>
 										</div>
-										<form action="advocate/dashboard.php">
+										<form class="form_data" action="<?= base_url(route_to('auth.user.login-action')); ?>" method="post" id="LoginForm" novalidate >
 											<div class="form-group form-focus">
-												<input type="email" class="form-control floating">
+												<input type="email" class="form-control floating" name="username" required>
 												<label class="focus-label">Email</label>
 											</div>
 											<div class="form-group form-focus">
-												<input type="password" class="form-control floating">
+												<input type="password" class="form-control floating" name="password" required>
 												<label class="focus-label">Password</label>
 											</div>
 											<div class="text-end">

@@ -44,6 +44,17 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter'=>'Admi
     });
 
 
+    $routes->group('country', function($routes) {
+        $routes->get('/', 'AdminCountryController::index', ['as' => 'country.list']);
+        $routes->get('load_data', 'AdminCountryController::load_data', ['as' => 'country.load_data']);
+        $routes->get('add', 'AdminCountryController::add', ['as' => 'country.add']);
+        $routes->get('edit/(:any)?', 'AdminCountryController::edit/$1', ['as' => 'country.edit']);
+        $routes->get('view/(:any)', 'AdminCountryController::view/$1', ['as' => 'country.view']);
+        $routes->post('update', 'AdminCountryController::update', ['as' => 'country.update']);
+        $routes->post('delete/(:any)', 'AdminCountryController::delete/$1', ['as' => 'country.delete']);
+        $routes->post('block_unblock/(:any)', 'AdminCountryController::block_unblock/$1', ['as' => 'country.block_unblock']);
+    });
+
     $routes->group('state', function($routes) {
         $routes->get('/', 'AdminStateController::index', ['as' => 'state.list']);
         $routes->get('load_data', 'AdminStateController::load_data', ['as' => 'state.load_data']);

@@ -13,6 +13,7 @@ $routes->post('bike-modal', 'Home::bike_modal');
 
 $routes->post('search-vendor', 'Home::search_vendor');
 $routes->post('search-city', 'Home::search_city');
+$routes->post('search-country', 'Home::search_country');
 
 
 $routes->post('contact-enquiry', 'Enquiry::contact_enquiry');

@@ -10,7 +10,7 @@ class AdminStateController extends BaseController
      protected $arr_values = array(
         'routename'=>'state.', 
         'title'=>'State', 
-        'table_name'=>'state',
+        'table_name'=>'states',
         'page_title'=>'State',
         "folder_name"=>'backend/admin/state',
         "upload_path"=>'upload/',
@@ -39,14 +39,18 @@ class AdminStateController extends BaseController
         $status = $this->request->getVar('status');
         $order_by = $this->request->getVar('order_by');
         $filter_search_value = $this->request->getVar('filter_search_value');
-         $page = $this->request->getVar('page') ?: 1; 
- $offset = ($page - 1) * $limit;
+        $page = $this->request->getVar('page') ?: 1; 
+        $offset = ($page - 1) * $limit;
 
         $data['table_name'] = $this->arr_values['table_name'];
         $data['upload_path'] = $this->arr_values['upload_path'];
         $data['route'] = base_url(route_to($this->arr_values['routename'].'list'));   
 
         $data_list = $this->db->table($this->arr_values['table_name'])
+
+        ->join('countries', 'countries.id = ' . $this->arr_values['table_name'] . '.country_id', 'left')
+        ->select("countries.name as country_name, {$this->arr_values['table_name']}.*")
+
         ->where([$this->arr_values['table_name'] . '.status' => $status])
                 ->orderBy($this->arr_values['table_name'] . '.id', $order_by)
         
@@ -115,6 +119,7 @@ class AdminStateController extends BaseController
 
         $data = [
             "name"=>$this->request->getPost('name'),
+            "country_id"=>$this->request->getPost('country'),
             "status"=>$this->request->getPost('status'),
             "is_delete"=>0,
         ];

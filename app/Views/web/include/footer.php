@@ -119,19 +119,45 @@
 		<!-- /Main Wrapper -->
 	
 		<!-- jQuery -->
-		  <script src="<?=$base_url ?>assets/js/jquery-3.7.1.min.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
+		  <!-- <script src="<?=base_url() ?>assets/js/jquery-3.7.1.min.js" type="2c8673e8960f9f9975d13815-text/javascript"></script> -->
 		  
 		
 		<!-- Bootstrap Core JS -->
-		<script src="<?=$base_url ?>assets/js/bootstrap.bundle.min.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
+		<script src="<?=base_url() ?>assets/js/bootstrap.bundle.min.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
 		
 		<!-- Slick JS -->
-		<script src="<?=$base_url ?>assets/js/slick.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
+		<script src="<?=base_url() ?>assets/js/slick.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
 		
 		<!-- Custom JS -->
-		<script src="<?=$base_url ?>assets/js/script.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
+		<script src="<?=base_url() ?>assets/js/script.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
 	
-	<script src="<?=$base_url ?>assets/js/rocket-loader.min.js" data-cf-settings="2c8673e8960f9f9975d13815-|49" defer></script>
+		<script src="<?=base_url() ?>assets/js/rocket-loader.min.js" data-cf-settings="2c8673e8960f9f9975d13815-|49" defer></script>
+
+		<script src="<?=base_url('public/')?>/toast/saber-toast.js"></script>
+    	<script src="<?=base_url('public/')?>/toast/script.js"></script>
+
+
+<script>
+	$(document).on('click',".logout",function (e) {
+	  event.preventDefault();
+	  loader('show');
+	  $.ajax({
+	      url:"<?=base_url(route_to('auth.logout'))?>",
+	      type:"GET",
+	      dataType:"json",
+	      success:function(d)
+	      {
+	        admin_response_data_check(d)  
+	      },
+	      error: function(e) 
+	    {
+	      admin_response_data_check(e)
+	    } 
+	  });
+	});
+</script>
+
+
 
 </body>
 

@@ -288,6 +288,25 @@ $(document).ready(function () {
       }
     });
 
+    $('#country').select2({
+      ajax: {
+        url: "<?=base_url(route_to('search-country'))?>",
+        method:"post",
+        "headers": {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+       },
+        data: function (params) {
+          var query = {
+            search: params.term,
+            type: 'public'
+          }
+
+          // Query parameters will be ?search=[term]&type=public
+          return query;
+        }
+      }
+    });
+
     $('#select-city').select2({
       ajax: {
         url: "<?=base_url(route_to('search-city'))?>",

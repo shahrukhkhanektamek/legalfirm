@@ -256,6 +256,25 @@ class Home extends BaseController
         $data['results'] = $return_data;
         return $this->response->setStatusCode(200)->setJSON($data);       
     }
+    public function search_country($value='')
+    {        
+        $search = $this->request->getVar('search');
+        $table_name = 'countries';
+        $builder = $this->db->table($table_name)->where("{$table_name}.status", 1);
+        if (!empty($search)) {
+            $builder->groupStart()->like("{$table_name}.name", $search)->groupEnd();
+        }
+        $data_list = $builder->orderBy("{$table_name}.id", 'desc')->limit(50, 0)->get()->getResult();
+        $return_data = [];
+        foreach ($data_list as $key => $value) {
+            $return_data[] = [
+                "id" => $value->id,
+                "text" => $value->name,
+            ];
+        }
+        $data['results'] = $return_data;
+        return $this->response->setStatusCode(200)->setJSON($data);       
+    }
     public function search_city($value='')
     {        
         $search = $this->request->getVar('search');

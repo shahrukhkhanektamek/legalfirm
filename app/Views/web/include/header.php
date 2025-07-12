@@ -12,7 +12,10 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 <head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-		<title>DreamsCLG</title>
+		<meta name="_token" content="<?= csrf_hash() ?>">
+    	<meta name="base_url" content="<?=base_url('/')?>/">
+
+		<title><?=env("APP_NAME") ?></title>
 		
 		<!-- Favicons -->
 		<link rel="shortcut icon" type="image/x-icon" href="<?=$base_url ?>assets/img/favicon.png">
@@ -26,6 +29,15 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 		
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="<?=$base_url ?>assets/css/style.css">
+
+
+		<link rel="stylesheet" href="<?=base_url('public')?>/toast/saber-toast.css">
+	    <link rel="stylesheet" href="<?=base_url('public')?>/toast/style.css">
+	    <link rel="stylesheet" href="<?=base_url('public')?>/front_css.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	    <script src="<?=base_url('public')?>/front_script.js"></script>
+
 
 	</head>		
 	<body>

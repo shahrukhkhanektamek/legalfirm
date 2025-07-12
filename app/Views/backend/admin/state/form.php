@@ -37,11 +37,25 @@
                     <div class="card-body">
                         <div class="live-preview">
                             <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Country <span class="text-danger">*</span></label>
+                                    <select class="" name="country" id="country"  required>
+                                        <option value="" >Select Country</option>
+                                        <?php if(!empty($row)){
+                                            $country = $db->table('countries')->where("id",$row->country_id)->get()->getFirstRow();
+                                            if(!empty($country))
+                                            {
+                                        ?>
+                                            <option value="<?=$country->id ?>" selected><?=$country->name ?></option>
+                                        <?php }} ?>
+                                    </select>
+                                </div>
                                 
                                 <div class="col-md-6">
                                     <label class="form-label">Name <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="name" placeholder="" value="<?=@$row->name?>" required>
-                                </div>
+                                </div>                                
 
                                 <div class="col-md-6 hide">
                                     <label class="form-label">Slug <span class="text-danger">*</span></label>
