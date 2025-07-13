@@ -7,7 +7,7 @@
                      <div class="col-xxl-12">
                         <div class="breadcrumb-content z-index-2">
                            <div class="breadcrumb-list">
-                              <span><a href="index.html">404</a></span>
+                              <span><a href="<?=base_url() ?>">404</a></span>
                               <span class="dvdr">
                                  <i>
                                     <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">

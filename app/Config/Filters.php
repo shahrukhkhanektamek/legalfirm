@@ -35,8 +35,10 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'AdminAuth'     => \App\Filters\AdminAuth::class,
-        'VendorAuth'     => \App\Filters\VendorAuth::class,
         'UserAuth'     => \App\Filters\UserAuth::class,
+        'AdvocateAuth'     => \App\Filters\AdvocateAuth::class,
+        'CaAuth'     => \App\Filters\CaAuth::class,
+        'AdviserAuth'     => \App\Filters\AdviserAuth::class,
     ];
 
     /**

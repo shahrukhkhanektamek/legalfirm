@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2025 at 02:45 PM
+-- Generation Time: Jul 13, 2025 at 10:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -5340,6 +5340,274 @@ INSERT INTO `color` (`id`, `name`, `code`, `status`, `add_by`, `add_date_time`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `countries`
+--
+
+CREATE TABLE `countries` (
+  `id` int(11) NOT NULL,
+  `iso` char(2) NOT NULL,
+  `name` varchar(80) NOT NULL,
+  `nicename` varchar(80) NOT NULL,
+  `iso3` char(3) DEFAULT NULL,
+  `numcode` smallint(6) DEFAULT NULL,
+  `phonecode` int(5) NOT NULL,
+  `add_by` int(11) DEFAULT NULL,
+  `add_date_time` datetime DEFAULT NULL,
+  `update_date_time` datetime DEFAULT NULL,
+  `update_history` text DEFAULT NULL,
+  `slug` text DEFAULT NULL,
+  `is_delete` tinyint(1) DEFAULT 0,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `countries`
+--
+
+INSERT INTO `countries` (`id`, `iso`, `name`, `nicename`, `iso3`, `numcode`, `phonecode`, `add_by`, `add_date_time`, `update_date_time`, `update_history`, `slug`, `is_delete`, `status`) VALUES
+(1, 'AF', 'AFGHANISTAN', 'Afghanistan', 'AFG', 4, 93, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(2, 'AL', 'ALBANIA', 'Albania', 'ALB', 8, 355, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(3, 'DZ', 'ALGERIA', 'Algeria', 'DZA', 12, 213, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(4, 'AS', 'AMERICAN SAMOA', 'American Samoa', 'ASM', 16, 1684, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(5, 'AD', 'ANDORRA', 'Andorra', 'AND', 20, 376, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(6, 'AO', 'ANGOLA', 'Angola', 'AGO', 24, 244, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(7, 'AI', 'ANGUILLA', 'Anguilla', 'AIA', 660, 1264, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(8, 'AQ', 'ANTARCTICA', 'Antarctica', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(9, 'AG', 'ANTIGUA AND BARBUDA', 'Antigua and Barbuda', 'ATG', 28, 1268, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(10, 'AR', 'ARGENTINA', 'Argentina', 'ARG', 32, 54, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(11, 'AM', 'ARMENIA', 'Armenia', 'ARM', 51, 374, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(12, 'AW', 'ARUBA', 'Aruba', 'ABW', 533, 297, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(13, 'AU', 'AUSTRALIA', 'Australia', 'AUS', 36, 61, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(14, 'AT', 'AUSTRIA', 'Austria', 'AUT', 40, 43, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(15, 'AZ', 'AZERBAIJAN', 'Azerbaijan', 'AZE', 31, 994, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(16, 'BS', 'BAHAMAS', 'Bahamas', 'BHS', 44, 1242, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(17, 'BH', 'BAHRAIN', 'Bahrain', 'BHR', 48, 973, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(18, 'BD', 'BANGLADESH', 'Bangladesh', 'BGD', 50, 880, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(19, 'BB', 'BARBADOS', 'Barbados', 'BRB', 52, 1246, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(20, 'BY', 'BELARUS', 'Belarus', 'BLR', 112, 375, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(21, 'BE', 'BELGIUM', 'Belgium', 'BEL', 56, 32, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(22, 'BZ', 'BELIZE', 'Belize', 'BLZ', 84, 501, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(23, 'BJ', 'BENIN', 'Benin', 'BEN', 204, 229, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(24, 'BM', 'BERMUDA', 'Bermuda', 'BMU', 60, 1441, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(25, 'BT', 'BHUTAN', 'Bhutan', 'BTN', 64, 975, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(26, 'BO', 'BOLIVIA', 'Bolivia', 'BOL', 68, 591, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(27, 'BA', 'BOSNIA AND HERZEGOVINA', 'Bosnia and Herzegovina', 'BIH', 70, 387, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(28, 'BW', 'BOTSWANA', 'Botswana', 'BWA', 72, 267, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(29, 'BV', 'BOUVET ISLAND', 'Bouvet Island', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(30, 'BR', 'BRAZIL', 'Brazil', 'BRA', 76, 55, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(31, 'IO', 'BRITISH INDIAN OCEAN TERRITORY', 'British Indian Ocean Territory', NULL, NULL, 246, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(32, 'BN', 'BRUNEI DARUSSALAM', 'Brunei Darussalam', 'BRN', 96, 673, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(33, 'BG', 'BULGARIA', 'Bulgaria', 'BGR', 100, 359, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(34, 'BF', 'BURKINA FASO', 'Burkina Faso', 'BFA', 854, 226, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(35, 'BI', 'BURUNDI', 'Burundi', 'BDI', 108, 257, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(36, 'KH', 'CAMBODIA', 'Cambodia', 'KHM', 116, 855, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(37, 'CM', 'CAMEROON', 'Cameroon', 'CMR', 120, 237, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(38, 'CA', 'CANADA', 'Canada', 'CAN', 124, 1, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(39, 'CV', 'CAPE VERDE', 'Cape Verde', 'CPV', 132, 238, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(40, 'KY', 'CAYMAN ISLANDS', 'Cayman Islands', 'CYM', 136, 1345, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(41, 'CF', 'CENTRAL AFRICAN REPUBLIC', 'Central African Republic', 'CAF', 140, 236, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(42, 'TD', 'CHAD', 'Chad', 'TCD', 148, 235, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(43, 'CL', 'CHILE', 'Chile', 'CHL', 152, 56, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(44, 'CN', 'CHINA', 'China', 'CHN', 156, 86, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(45, 'CX', 'CHRISTMAS ISLAND', 'Christmas Island', NULL, NULL, 61, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(46, 'CC', 'COCOS (KEELING) ISLANDS', 'Cocos (Keeling) Islands', NULL, NULL, 672, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(47, 'CO', 'COLOMBIA', 'Colombia', 'COL', 170, 57, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(48, 'KM', 'COMOROS', 'Comoros', 'COM', 174, 269, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(49, 'CG', 'CONGO', 'Congo', 'COG', 178, 242, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(50, 'CD', 'CONGO, THE DEMOCRATIC REPUBLIC OF THE', 'Congo, the Democratic Republic of the', 'COD', 180, 242, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(51, 'CK', 'COOK ISLANDS', 'Cook Islands', 'COK', 184, 682, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(52, 'CR', 'COSTA RICA', 'Costa Rica', 'CRI', 188, 506, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(53, 'CI', 'COTE D\'IVOIRE', 'Cote D\'Ivoire', 'CIV', 384, 225, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(54, 'HR', 'CROATIA', 'Croatia', 'HRV', 191, 385, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(55, 'CU', 'CUBA', 'Cuba', 'CUB', 192, 53, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(56, 'CY', 'CYPRUS', 'Cyprus', 'CYP', 196, 357, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(57, 'CZ', 'CZECH REPUBLIC', 'Czech Republic', 'CZE', 203, 420, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(58, 'DK', 'DENMARK', 'Denmark', 'DNK', 208, 45, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(59, 'DJ', 'DJIBOUTI', 'Djibouti', 'DJI', 262, 253, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(60, 'DM', 'DOMINICA', 'Dominica', 'DMA', 212, 1767, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(61, 'DO', 'DOMINICAN REPUBLIC', 'Dominican Republic', 'DOM', 214, 1809, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(62, 'EC', 'ECUADOR', 'Ecuador', 'ECU', 218, 593, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(63, 'EG', 'EGYPT', 'Egypt', 'EGY', 818, 20, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(64, 'SV', 'EL SALVADOR', 'El Salvador', 'SLV', 222, 503, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(65, 'GQ', 'EQUATORIAL GUINEA', 'Equatorial Guinea', 'GNQ', 226, 240, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(66, 'ER', 'ERITREA', 'Eritrea', 'ERI', 232, 291, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(67, 'EE', 'ESTONIA', 'Estonia', 'EST', 233, 372, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(68, 'ET', 'ETHIOPIA', 'Ethiopia', 'ETH', 231, 251, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(69, 'FK', 'FALKLAND ISLANDS (MALVINAS)', 'Falkland Islands (Malvinas)', 'FLK', 238, 500, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(70, 'FO', 'FAROE ISLANDS', 'Faroe Islands', 'FRO', 234, 298, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(71, 'FJ', 'FIJI', 'Fiji', 'FJI', 242, 679, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(72, 'FI', 'FINLAND', 'Finland', 'FIN', 246, 358, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(73, 'FR', 'FRANCE', 'France', 'FRA', 250, 33, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(74, 'GF', 'FRENCH GUIANA', 'French Guiana', 'GUF', 254, 594, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(75, 'PF', 'FRENCH POLYNESIA', 'French Polynesia', 'PYF', 258, 689, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(76, 'TF', 'FRENCH SOUTHERN TERRITORIES', 'French Southern Territories', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(77, 'GA', 'GABON', 'Gabon', 'GAB', 266, 241, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(78, 'GM', 'GAMBIA', 'Gambia', 'GMB', 270, 220, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(79, 'GE', 'GEORGIA', 'Georgia', 'GEO', 268, 995, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(80, 'DE', 'GERMANY', 'Germany', 'DEU', 276, 49, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(81, 'GH', 'GHANA', 'Ghana', 'GHA', 288, 233, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(82, 'GI', 'GIBRALTAR', 'Gibraltar', 'GIB', 292, 350, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(83, 'GR', 'GREECE', 'Greece', 'GRC', 300, 30, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(84, 'GL', 'GREENLAND', 'Greenland', 'GRL', 304, 299, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(85, 'GD', 'GRENADA', 'Grenada', 'GRD', 308, 1473, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(86, 'GP', 'GUADELOUPE', 'Guadeloupe', 'GLP', 312, 590, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(87, 'GU', 'GUAM', 'Guam', 'GUM', 316, 1671, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(88, 'GT', 'GUATEMALA', 'Guatemala', 'GTM', 320, 502, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(89, 'GN', 'GUINEA', 'Guinea', 'GIN', 324, 224, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(90, 'GW', 'GUINEA-BISSAU', 'Guinea-Bissau', 'GNB', 624, 245, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(91, 'GY', 'GUYANA', 'Guyana', 'GUY', 328, 592, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(92, 'HT', 'HAITI', 'Haiti', 'HTI', 332, 509, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(93, 'HM', 'HEARD ISLAND AND MCDONALD ISLANDS', 'Heard Island and Mcdonald Islands', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(94, 'VA', 'HOLY SEE (VATICAN CITY STATE)', 'Holy See (Vatican City State)', 'VAT', 336, 39, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(95, 'HN', 'HONDURAS', 'Honduras', 'HND', 340, 504, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(96, 'HK', 'HONG KONG', 'Hong Kong', 'HKG', 344, 852, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(97, 'HU', 'HUNGARY', 'Hungary', 'HUN', 348, 36, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(98, 'IS', 'ICELAND', 'Iceland', 'ISL', 352, 354, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(99, 'IN', 'INDIA', 'India', 'IND', 356, 91, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(100, 'ID', 'INDONESIA', 'Indonesia', 'IDN', 360, 62, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(101, 'IR', 'IRAN, ISLAMIC REPUBLIC OF', 'Iran, Islamic Republic of', 'IRN', 364, 98, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(102, 'IQ', 'IRAQ', 'Iraq', 'IRQ', 368, 964, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(103, 'IE', 'IRELAND', 'Ireland', 'IRL', 372, 353, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(104, 'IL', 'ISRAEL', 'Israel', 'ISR', 376, 972, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(105, 'IT', 'ITALY', 'Italy', 'ITA', 380, 39, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(106, 'JM', 'JAMAICA', 'Jamaica', 'JAM', 388, 1876, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(107, 'JP', 'JAPAN', 'Japan', 'JPN', 392, 81, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(108, 'JO', 'JORDAN', 'Jordan', 'JOR', 400, 962, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(109, 'KZ', 'KAZAKHSTAN', 'Kazakhstan', 'KAZ', 398, 7, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(110, 'KE', 'KENYA', 'Kenya', 'KEN', 404, 254, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(111, 'KI', 'KIRIBATI', 'Kiribati', 'KIR', 296, 686, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(112, 'KP', 'KOREA, DEMOCRATIC PEOPLE\'S REPUBLIC OF', 'Korea, Democratic People\'s Republic of', 'PRK', 408, 850, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(113, 'KR', 'KOREA, REPUBLIC OF', 'Korea, Republic of', 'KOR', 410, 82, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(114, 'KW', 'KUWAIT', 'Kuwait', 'KWT', 414, 965, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(115, 'KG', 'KYRGYZSTAN', 'Kyrgyzstan', 'KGZ', 417, 996, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(116, 'LA', 'LAO PEOPLE\'S DEMOCRATIC REPUBLIC', 'Lao People\'s Democratic Republic', 'LAO', 418, 856, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(117, 'LV', 'LATVIA', 'Latvia', 'LVA', 428, 371, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(118, 'LB', 'LEBANON', 'Lebanon', 'LBN', 422, 961, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(119, 'LS', 'LESOTHO', 'Lesotho', 'LSO', 426, 266, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(120, 'LR', 'LIBERIA', 'Liberia', 'LBR', 430, 231, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(121, 'LY', 'LIBYAN ARAB JAMAHIRIYA', 'Libyan Arab Jamahiriya', 'LBY', 434, 218, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(122, 'LI', 'LIECHTENSTEIN', 'Liechtenstein', 'LIE', 438, 423, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(123, 'LT', 'LITHUANIA', 'Lithuania', 'LTU', 440, 370, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(124, 'LU', 'LUXEMBOURG', 'Luxembourg', 'LUX', 442, 352, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(125, 'MO', 'MACAO', 'Macao', 'MAC', 446, 853, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(126, 'MK', 'MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF', 'Macedonia, the Former Yugoslav Republic of', 'MKD', 807, 389, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(127, 'MG', 'MADAGASCAR', 'Madagascar', 'MDG', 450, 261, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(128, 'MW', 'MALAWI', 'Malawi', 'MWI', 454, 265, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(129, 'MY', 'MALAYSIA', 'Malaysia', 'MYS', 458, 60, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(130, 'MV', 'MALDIVES', 'Maldives', 'MDV', 462, 960, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(131, 'ML', 'MALI', 'Mali', 'MLI', 466, 223, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(132, 'MT', 'MALTA', 'Malta', 'MLT', 470, 356, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(133, 'MH', 'MARSHALL ISLANDS', 'Marshall Islands', 'MHL', 584, 692, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(134, 'MQ', 'MARTINIQUE', 'Martinique', 'MTQ', 474, 596, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(135, 'MR', 'MAURITANIA', 'Mauritania', 'MRT', 478, 222, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(136, 'MU', 'MAURITIUS', 'Mauritius', 'MUS', 480, 230, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(137, 'YT', 'MAYOTTE', 'Mayotte', NULL, NULL, 269, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(138, 'MX', 'MEXICO', 'Mexico', 'MEX', 484, 52, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(139, 'FM', 'MICRONESIA, FEDERATED STATES OF', 'Micronesia, Federated States of', 'FSM', 583, 691, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(140, 'MD', 'MOLDOVA, REPUBLIC OF', 'Moldova, Republic of', 'MDA', 498, 373, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(141, 'MC', 'MONACO', 'Monaco', 'MCO', 492, 377, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(142, 'MN', 'MONGOLIA', 'Mongolia', 'MNG', 496, 976, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(143, 'MS', 'MONTSERRAT', 'Montserrat', 'MSR', 500, 1664, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(144, 'MA', 'MOROCCO', 'Morocco', 'MAR', 504, 212, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(145, 'MZ', 'MOZAMBIQUE', 'Mozambique', 'MOZ', 508, 258, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(146, 'MM', 'MYANMAR', 'Myanmar', 'MMR', 104, 95, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(147, 'NA', 'NAMIBIA', 'Namibia', 'NAM', 516, 264, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(148, 'NR', 'NAURU', 'Nauru', 'NRU', 520, 674, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(149, 'NP', 'NEPAL', 'Nepal', 'NPL', 524, 977, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(150, 'NL', 'NETHERLANDS', 'Netherlands', 'NLD', 528, 31, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(151, 'AN', 'NETHERLANDS ANTILLES', 'Netherlands Antilles', 'ANT', 530, 599, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(152, 'NC', 'NEW CALEDONIA', 'New Caledonia', 'NCL', 540, 687, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(153, 'NZ', 'NEW ZEALAND', 'New Zealand', 'NZL', 554, 64, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(154, 'NI', 'NICARAGUA', 'Nicaragua', 'NIC', 558, 505, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(155, 'NE', 'NIGER', 'Niger', 'NER', 562, 227, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(156, 'NG', 'NIGERIA', 'Nigeria', 'NGA', 566, 234, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(157, 'NU', 'NIUE', 'Niue', 'NIU', 570, 683, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(158, 'NF', 'NORFOLK ISLAND', 'Norfolk Island', 'NFK', 574, 672, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(159, 'MP', 'NORTHERN MARIANA ISLANDS', 'Northern Mariana Islands', 'MNP', 580, 1670, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(160, 'NO', 'NORWAY', 'Norway', 'NOR', 578, 47, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(161, 'OM', 'OMAN', 'Oman', 'OMN', 512, 968, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(162, 'PK', 'PAKISTAN', 'Pakistan', 'PAK', 586, 92, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(163, 'PW', 'PALAU', 'Palau', 'PLW', 585, 680, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(164, 'PS', 'PALESTINIAN TERRITORY, OCCUPIED', 'Palestinian Territory, Occupied', NULL, NULL, 970, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(165, 'PA', 'PANAMA', 'Panama', 'PAN', 591, 507, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(166, 'PG', 'PAPUA NEW GUINEA', 'Papua New Guinea', 'PNG', 598, 675, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(167, 'PY', 'PARAGUAY', 'Paraguay', 'PRY', 600, 595, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(168, 'PE', 'PERU', 'Peru', 'PER', 604, 51, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(169, 'PH', 'PHILIPPINES', 'Philippines', 'PHL', 608, 63, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(170, 'PN', 'PITCAIRN', 'Pitcairn', 'PCN', 612, 0, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(171, 'PL', 'POLAND', 'Poland', 'POL', 616, 48, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(172, 'PT', 'PORTUGAL', 'Portugal', 'PRT', 620, 351, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(173, 'PR', 'PUERTO RICO', 'Puerto Rico', 'PRI', 630, 1787, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(174, 'QA', 'QATAR', 'Qatar', 'QAT', 634, 974, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(175, 'RE', 'REUNION', 'Reunion', 'REU', 638, 262, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(176, 'RO', 'ROMANIA', 'Romania', 'ROM', 642, 40, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(177, 'RU', 'RUSSIAN FEDERATION', 'Russian Federation', 'RUS', 643, 70, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(178, 'RW', 'RWANDA', 'Rwanda', 'RWA', 646, 250, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(179, 'SH', 'SAINT HELENA', 'Saint Helena', 'SHN', 654, 290, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(180, 'KN', 'SAINT KITTS AND NEVIS', 'Saint Kitts and Nevis', 'KNA', 659, 1869, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(181, 'LC', 'SAINT LUCIA', 'Saint Lucia', 'LCA', 662, 1758, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(182, 'PM', 'SAINT PIERRE AND MIQUELON', 'Saint Pierre and Miquelon', 'SPM', 666, 508, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(183, 'VC', 'SAINT VINCENT AND THE GRENADINES', 'Saint Vincent and the Grenadines', 'VCT', 670, 1784, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(184, 'WS', 'SAMOA', 'Samoa', 'WSM', 882, 684, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(185, 'SM', 'SAN MARINO', 'San Marino', 'SMR', 674, 378, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(186, 'ST', 'SAO TOME AND PRINCIPE', 'Sao Tome and Principe', 'STP', 678, 239, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(187, 'SA', 'SAUDI ARABIA', 'Saudi Arabia', 'SAU', 682, 966, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(188, 'SN', 'SENEGAL', 'Senegal', 'SEN', 686, 221, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(189, 'CS', 'SERBIA AND MONTENEGRO', 'Serbia and Montenegro', NULL, NULL, 381, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(190, 'SC', 'SEYCHELLES', 'Seychelles', 'SYC', 690, 248, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(191, 'SL', 'SIERRA LEONE', 'Sierra Leone', 'SLE', 694, 232, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(192, 'SG', 'SINGAPORE', 'Singapore', 'SGP', 702, 65, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(193, 'SK', 'SLOVAKIA', 'Slovakia', 'SVK', 703, 421, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(194, 'SI', 'SLOVENIA', 'Slovenia', 'SVN', 705, 386, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(195, 'SB', 'SOLOMON ISLANDS', 'Solomon Islands', 'SLB', 90, 677, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(196, 'SO', 'SOMALIA', 'Somalia', 'SOM', 706, 252, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(197, 'ZA', 'SOUTH AFRICA', 'South Africa', 'ZAF', 710, 27, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(198, 'GS', 'SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS', 'South Georgia and the South Sandwich Islands', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(199, 'ES', 'SPAIN', 'Spain', 'ESP', 724, 34, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(200, 'LK', 'SRI LANKA', 'Sri Lanka', 'LKA', 144, 94, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(201, 'SD', 'SUDAN', 'Sudan', 'SDN', 736, 249, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(202, 'SR', 'SURINAME', 'Suriname', 'SUR', 740, 597, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(203, 'SJ', 'SVALBARD AND JAN MAYEN', 'Svalbard and Jan Mayen', 'SJM', 744, 47, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(204, 'SZ', 'SWAZILAND', 'Swaziland', 'SWZ', 748, 268, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(205, 'SE', 'SWEDEN', 'Sweden', 'SWE', 752, 46, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(206, 'CH', 'SWITZERLAND', 'Switzerland', 'CHE', 756, 41, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(207, 'SY', 'SYRIAN ARAB REPUBLIC', 'Syrian Arab Republic', 'SYR', 760, 963, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(208, 'TW', 'TAIWAN, PROVINCE OF CHINA', 'Taiwan, Province of China', 'TWN', 158, 886, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(209, 'TJ', 'TAJIKISTAN', 'Tajikistan', 'TJK', 762, 992, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(210, 'TZ', 'TANZANIA, UNITED REPUBLIC OF', 'Tanzania, United Republic of', 'TZA', 834, 255, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(211, 'TH', 'THAILAND', 'Thailand', 'THA', 764, 66, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(212, 'TL', 'TIMOR-LESTE', 'Timor-Leste', NULL, NULL, 670, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(213, 'TG', 'TOGO', 'Togo', 'TGO', 768, 228, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(214, 'TK', 'TOKELAU', 'Tokelau', 'TKL', 772, 690, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(215, 'TO', 'TONGA', 'Tonga', 'TON', 776, 676, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(216, 'TT', 'TRINIDAD AND TOBAGO', 'Trinidad and Tobago', 'TTO', 780, 1868, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(217, 'TN', 'TUNISIA', 'Tunisia', 'TUN', 788, 216, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(218, 'TR', 'TURKEY', 'Turkey', 'TUR', 792, 90, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(219, 'TM', 'TURKMENISTAN', 'Turkmenistan', 'TKM', 795, 7370, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(220, 'TC', 'TURKS AND CAICOS ISLANDS', 'Turks and Caicos Islands', 'TCA', 796, 1649, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(221, 'TV', 'TUVALU', 'Tuvalu', 'TUV', 798, 688, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(222, 'UG', 'UGANDA', 'Uganda', 'UGA', 800, 256, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(223, 'UA', 'UKRAINE', 'Ukraine', 'UKR', 804, 380, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(224, 'AE', 'UNITED ARAB EMIRATES', 'United Arab Emirates', 'ARE', 784, 971, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(225, 'GB', 'UNITED KINGDOM', 'United Kingdom', 'GBR', 826, 44, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(226, 'US', 'UNITED STATES', 'United States', 'USA', 840, 1, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(227, 'UM', 'UNITED STATES MINOR OUTLYING ISLANDS', 'United States Minor Outlying Islands', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(228, 'UY', 'URUGUAY', 'Uruguay', 'URY', 858, 598, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(229, 'UZ', 'UZBEKISTAN', 'Uzbekistan', 'UZB', 860, 998, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(230, 'VU', 'VANUATU', 'Vanuatu', 'VUT', 548, 678, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(231, 'VE', 'VENEZUELA', 'Venezuela', 'VEN', 862, 58, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(232, 'VN', 'VIET NAM', 'Viet Nam', 'VNM', 704, 84, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(233, 'VG', 'VIRGIN ISLANDS, BRITISH', 'Virgin Islands, British', 'VGB', 92, 1284, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(234, 'VI', 'VIRGIN ISLANDS, U.S.', 'Virgin Islands, U.s.', 'VIR', 850, 1340, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(235, 'WF', 'WALLIS AND FUTUNA', 'Wallis and Futuna', 'WLF', 876, 681, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(236, 'EH', 'WESTERN SAHARA', 'Western Sahara', 'ESH', 732, 212, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(237, 'YE', 'YEMEN', 'Yemen', 'YEM', 887, 967, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(238, 'ZM', 'ZAMBIA', 'Zambia', 'ZMB', 894, 260, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(239, 'ZW', 'ZIMBABWE', 'Zimbabwe', 'ZWE', 716, 263, NULL, NULL, '2025-07-12 15:20:15', NULL, NULL, 0, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `enquiry_blog`
 --
 
@@ -5801,7 +6069,14 @@ INSERT INTO `login_history` (`id`, `user_id`, `role`, `ip_address`, `date`, `tim
 (271, '1', 1, '103.171.187.83', '2025-06-30', '16:29:42', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (272, '7', 2, '103.171.187.83', '2025-06-30', '16:30:31', '', NULL, '', NULL, 1, 'cf82961e705e5bd11396a55dac73903e'),
 (273, '1', 1, '103.171.187.83', '2025-06-30', '16:30:45', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
-(274, '1', 1, '::1', '2025-07-11', '16:46:04', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e');
+(274, '1', 1, '::1', '2025-07-11', '16:46:04', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e'),
+(275, '3', 2, '::1', '2025-07-12', '16:42:35', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(276, '3', 2, '::1', '2025-07-12', '17:05:12', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(277, '17', 3, '::1', '2025-07-12', '17:07:58', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(278, '17', 3, '::1', '2025-07-12', '17:54:09', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(279, '17', 3, '::1', '2025-07-12', '17:54:34', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(280, '3', 2, '::1', '2025-07-13', '22:55:24', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(281, '3', 2, '::1', '2025-07-13', '23:01:11', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e');
 
 -- --------------------------------------------------------
 
@@ -6430,7 +6705,7 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`id`, `name`, `route`, `nav`, `status`, `add_by`, `add_date_time`, `update_date_time`, `update_history`, `slug`, `is_delete`) VALUES
 (1, 'Admin', 'admin', 'admin', '1', 1, '2024-08-26 18:07:32', '2024-08-26 18:07:32', NULL, NULL, 0),
 (2, 'User', 'user', 'user', '1', 1, '2024-08-28 15:38:32', '2024-08-28 15:38:32', NULL, NULL, 0),
-(3, 'Vendor', 'vendor', 'vendor', '1', 1, '2024-08-28 15:38:32', '2024-08-28 15:38:32', NULL, NULL, 0);
+(3, 'Advocate', 'advocate', 'advocate', '1', 1, '2024-08-28 15:38:32', '2024-08-28 15:38:32', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -6772,65 +7047,62 @@ INSERT INTO `slugs` (`id`, `slug`, `table_name`, `p_id`, `page_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `state`
+-- Table structure for table `states`
 --
 
-CREATE TABLE `state` (
-  `id` bigint(20) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
+CREATE TABLE `states` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `country_id` int(11) NOT NULL,
   `add_by` int(11) DEFAULT NULL,
   `add_date_time` datetime DEFAULT NULL,
   `update_date_time` datetime DEFAULT NULL,
   `update_history` text DEFAULT NULL,
   `slug` text DEFAULT NULL,
-  `is_delete` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `is_delete` tinyint(1) DEFAULT 0,
+  `status` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `state`
+-- Dumping data for table `states`
 --
 
-INSERT INTO `state` (`id`, `name`, `status`, `add_by`, `add_date_time`, `update_date_time`, `update_history`, `slug`, `is_delete`) VALUES
-(2, 'RJ', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(3, 'UP', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(5, 'MH', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(6, 'Andhra Pradesh', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(7, 'Arunachal Pradesh', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(8, 'Assam', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(9, 'Bihar', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(10, 'Chhattisgarh', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(11, 'Goa', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(12, 'Gujarat', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(13, 'Haryana', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(14, 'Himachal Pradesh', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(15, 'Jharkhand', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(16, 'Karnataka', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(17, 'Kerala', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(18, 'Madhya Pradesh', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(19, 'Maharashtra', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(20, 'Manipur', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(21, 'Meghalaya', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(22, 'Mizoram', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(23, 'Nagaland', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(24, 'Odisha', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(25, 'Punjab', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(26, 'Rajasthan', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(27, 'Sikkim', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(28, 'Tamil Nadu', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(29, 'Telangana', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(30, 'Tripura', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(31, 'Uttar Pradesh', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(32, 'Uttarakhand', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(33, 'West Bengal	', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(34, 'Andaman and Nicobar Islands', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(35, 'Chandigarh', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(36, 'Dadra Nagar Haveli and Daman Diu', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(37, 'Delhi', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(38, 'Jammu and Kashmir', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(39, 'Ladakh', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(40, 'Lakshadweep', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(41, 'Puducherry', 1, NULL, NULL, NULL, NULL, 'puducherry', 0);
+INSERT INTO `states` (`id`, `name`, `country_id`, `add_by`, `add_date_time`, `update_date_time`, `update_history`, `slug`, `is_delete`, `status`) VALUES
+(1, 'ANDHRA PRADESH', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(2, 'ASSAM', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(3, 'ARUNACHAL PRADESH', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(4, 'BIHAR', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(5, 'GUJRAT', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(6, 'HARYANA', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(7, 'HIMACHAL PRADESH', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(8, 'JAMMU & KASHMIR', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(9, 'KARNATAKA', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(10, 'KERALA', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(11, 'MADHYA PRADESH', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(12, 'MAHARASHTRA', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(13, 'MANIPUR', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(14, 'MEGHALAYA', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(15, 'MIZORAM', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(16, 'NAGALAND', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(17, 'ORISSA', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(18, 'PUNJAB', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(19, 'RAJASTHAN', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(20, 'SIKKIM', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(21, 'TAMIL NADU', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(22, 'TRIPURA', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(23, 'UTTAR PRADESH', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(24, 'WEST BENGAL', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(25, 'DELHI', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(26, 'GOA', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(27, 'PONDICHERY', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(28, 'LAKSHDWEEP', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(29, 'DAMAN & DIU', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(30, 'DADRA & NAGAR', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(31, 'CHANDIGARH', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(32, 'ANDAMAN & NICOBAR', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(33, 'UTTARANCHAL', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(34, 'JHARKHAND', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
+(35, 'CHATTISGARH', 99, NULL, NULL, NULL, NULL, NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -6917,6 +7189,7 @@ CREATE TABLE `users` (
   `image` text DEFAULT NULL,
   `pan` text DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
+  `address` text DEFAULT NULL,
   `sales_contact` text DEFAULT NULL,
   `authorized_person` text DEFAULT NULL,
   `person_contact` text DEFAULT NULL,
@@ -6928,6 +7201,7 @@ CREATE TABLE `users` (
   `country` varchar(100) DEFAULT NULL,
   `state` varchar(50) DEFAULT NULL,
   `city` varchar(50) DEFAULT NULL,
+  `pincode` varchar(100) DEFAULT NULL,
   `area` varchar(150) DEFAULT NULL,
   `brand` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`brand`)),
   `add_by` int(11) DEFAULT NULL,
@@ -6941,21 +7215,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_id`, `referral_id`, `company_name`, `name`, `username`, `email`, `password`, `remember_token`, `add_date_time`, `status`, `role`, `is_paid`, `gender`, `age`, `kyc_step`, `kyc_message`, `image`, `pan`, `phone`, `sales_contact`, `authorized_person`, `person_contact`, `gst`, `udyam`, `workshop_address`, `service_contact`, `spares_accessories_contact`, `country`, `state`, `city`, `area`, `brand`, `add_by`, `update_date_time`, `update_history`, `slug`, `is_delete`) VALUES
-(1, 100, NULL, NULL, 'Bike King', 'admin@gmail.com', 'admin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '2020-08-30 15:56:58', 1, 1, 1, 1, 25, 1, 'gsgsghwegweyw', '1750181213_11adf6ab9a69ead32220.webp', '32523523', '1122334455', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'DELHI', 'GOKULPUR', NULL, NULL, 1, '2025-01-04 12:48:46', NULL, NULL, 0),
-(2, 101, NULL, 'My Brand', 'Bike King Vendor', 'vendor@gmail.com', 'vendor@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '2020-08-30 15:56:58', 1, 3, 1, 1, 25, 1, 'gsgsghwegweyw', '2025-01-04-6778e0d6dfebc.png', '32523523', '123456890', '5646546546', 'Demo 1', 'Demo 2', 'demo 3', 'demo 4', 'demo 5', 'demo 6', 'demo 7', NULL, 'DELHI', '5116', NULL, '[\"7\",\"8\",\"9\",\"10\",\"11\",\"12\",\"13\",\"14\"]', 1, '2025-06-14 00:53:13', NULL, 'bike-king', 0),
-(3, 102, NULL, 'Demo Company', 'Shte', '', 'test@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '583', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2025-05-28 21:39:18', NULL, 'shte', 0),
-(4, 103, NULL, 'afas', 'fasfsa', '', 'sharukhkhanektamek1998@gmail.com', 'c7d1e45c19751c1cc08263c1f470b184', NULL, '2025-05-28 21:42:45', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2523523', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2025-05-28 21:42:45', NULL, 'fasfsa', 0),
-(5, 104, NULL, 'afas', 'fasfsa', '', 'fsaf', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:42:45', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2523523', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2025-05-28 21:42:45', NULL, 'fasfsa', 0),
-(6, 105, NULL, NULL, 'User', '', 'user@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '2025-06-11 21:17:50', 1, 2, 0, NULL, NULL, 0, '', 'user.png', NULL, '5445646', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 0, NULL, NULL, NULL, 0),
-(7, 106, NULL, NULL, 'Nabil Ansari', '', 'nabilansari688@gmail.com', 'cf82961e705e5bd11396a55dac73903e', '', '2025-06-14 05:31:14', 1, 2, 0, NULL, NULL, 0, '', 'user.png', NULL, '9049454815', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 0, NULL, NULL, NULL, 0),
-(8, 107, NULL, 'Nidhi Auto Service', 'Nabil Ansari', '', 'nabilansari4958@gmail.com', 'f925916e2754e5e03f75dd58a5733251', NULL, '2025-06-14 11:11:36', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '9049454815', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '5116', NULL, '[\"7\",\"8\",\"9\",\"10\",\"11\",\"12\",\"14\"]', 1, '2025-06-14 11:11:36', NULL, 'nabil-ansari', 0),
-(11, 108, NULL, NULL, 'V', '', 'v@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '2025-06-15 07:36:07', 1, 3, 0, NULL, NULL, 0, '', '1750091980_1d11fd931200f81e5e01.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 0, NULL, NULL, NULL, 0),
-(12, 109, NULL, 'fasfsa', 'user Bame', '', 'v2@gmail.com', 'c20ad4d76fe97759aa27a0c99bff6710', '', '2025-06-15 07:46:51', 1, 3, 0, 1, 0, 0, '', 'user.png', 'PAN No Firm', '46546546', 'Sales Contact', 'Authorized Perso', 'Person Contac', 'GST No', 'dyam No', 'Workshop Addres', 'Service Contact N', 'Spares & Accessories Contac', NULL, '', '5114', 'Nangloi', '[\"7\",\"8\",\"10\",\"12\"]', 0, NULL, NULL, NULL, 0),
-(13, 110, NULL, 'Autospare Center', 'Jimmy', '', 'nabilansari123@gmail.com', '224f81e1e48126e1cc3c4d4d8c4ff2b7', '', '2025-06-15 10:12:32', 1, 3, 0, 1, 0, 0, '', '1750142343_81704498f7855607daab.webp', '12345678987654xx', '12345678990', '123456789901', 'Nabil Ansari', '123456789902', '12345678987654', 'xx12345678987654', 'Street road, Sultanpuri, New Delhi', '123456789876544', '123456789876544', NULL, '', '5116', 'Sultanpuri', '[\"7\",\"8\"]', 0, NULL, NULL, NULL, 0),
-(14, 111, NULL, 'Kubera Suzuki', 'Kubera Wheels Pvt Ltd ', '', 'gssuryawanshi20@gmail.com', 'd480ba72bc6aeb4c97ebca67826d3feb', '', '2025-06-27 08:53:30', 1, 3, 0, NULL, NULL, 0, '', 'user.png', 'Accps6395L', '9422253344', '7887882088', 'Vishal ', '8999797749', '27ACCPs6395L3ZS', '111111111', 'Bappa Sitaram Road, Panchavati ', '7887882088', '7887882088', NULL, '', '2673', 'Panchavati', '[\"11\"]', 0, NULL, NULL, NULL, 0),
-(15, 112, NULL, NULL, 'GSS', '', 'jainsuryawanshi@gmail.com', 'd480ba72bc6aeb4c97ebca67826d3feb', '', '2025-06-27 09:01:46', 1, 2, 0, NULL, NULL, 0, '', 'user.png', NULL, '7391966744', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 0, '2025-07-11 16:51:11', NULL, NULL, 0),
-(16, 113, NULL, 'delta', 'Jimmy', '', 'freespiritpoledance7@gmail.com', 'cd252ce20ef6d9f71f8dc6243700182e', '', '2025-06-30 06:56:22', 1, 3, 0, NULL, NULL, 0, '', 'user.png', 'sdsd', '1234567890', '2323', 'wqw', '323', 'desd', 'sdsd', 'Street road', '322', '43434', NULL, '', '5116', 'peera gadhi', '[\"8\",\"9\",\"10\"]', 0, NULL, NULL, NULL, 0);
+INSERT INTO `users` (`id`, `user_id`, `referral_id`, `company_name`, `name`, `username`, `email`, `password`, `remember_token`, `add_date_time`, `status`, `role`, `is_paid`, `gender`, `age`, `kyc_step`, `kyc_message`, `image`, `pan`, `phone`, `address`, `sales_contact`, `authorized_person`, `person_contact`, `gst`, `udyam`, `workshop_address`, `service_contact`, `spares_accessories_contact`, `country`, `state`, `city`, `pincode`, `area`, `brand`, `add_by`, `update_date_time`, `update_history`, `slug`, `is_delete`) VALUES
+(1, 101, NULL, 'My Brand', 'Bike King Vendor', 'vendor@gmail.com', 'vendor@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '2020-08-30 15:56:58', 1, 1, 1, 1, 25, 1, 'gsgsghwegweyw', '2025-01-04-6778e0d6dfebc.png', '32523523', '123456890', NULL, '5646546546', 'Demo 1', 'Demo 2', 'demo 3', 'demo 4', 'demo 5', 'demo 6', 'demo 7', NULL, 'DELHI', '5116', NULL, NULL, '[\"7\",\"8\",\"9\",\"10\",\"11\",\"12\",\"13\",\"14\"]', 1, '2025-06-14 00:53:13', NULL, 'bike-king', 0),
+(3, 102, NULL, 'Demo Company', 'User', '', 'user@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '5443643', 'fafas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '99', '25', 'fsfsa', 'fsafsa', NULL, NULL, 1, '2025-05-28 21:39:18', NULL, 'shte', 0),
+(17, 103, NULL, 'Demo Company', 'Advocate', '', 'advocate@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '583', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2025-05-28 21:39:18', NULL, 'shte', 0),
+(18, 104, NULL, 'Demo Company', 'CA', '', 'ca@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '583', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2025-05-28 21:39:18', NULL, 'shte', 0),
+(19, 105, NULL, 'Demo Company', 'Adviser', '', 'adviser@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '583', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2025-05-28 21:39:18', NULL, 'shte', 0);
 
 -- --------------------------------------------------------
 
@@ -7154,6 +7419,12 @@ ALTER TABLE `color`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `countries`
+--
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `enquiry_blog`
 --
 ALTER TABLE `enquiry_blog`
@@ -7292,9 +7563,9 @@ ALTER TABLE `slugs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `state`
+-- Indexes for table `states`
 --
-ALTER TABLE `state`
+ALTER TABLE `states`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -7380,6 +7651,12 @@ ALTER TABLE `color`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+
+--
 -- AUTO_INCREMENT for table `enquiry_blog`
 --
 ALTER TABLE `enquiry_blog`
@@ -7407,7 +7684,7 @@ ALTER TABLE `enquiry_lead`
 -- AUTO_INCREMENT for table `login_history`
 --
 ALTER TABLE `login_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=275;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=282;
 
 --
 -- AUTO_INCREMENT for table `main_menu`
@@ -7518,10 +7795,10 @@ ALTER TABLE `slugs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=525;
 
 --
--- AUTO_INCREMENT for table `state`
+-- AUTO_INCREMENT for table `states`
 --
-ALTER TABLE `state`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+ALTER TABLE `states`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `transaction`
@@ -7533,7 +7810,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users_temp`

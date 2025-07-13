@@ -204,7 +204,11 @@ require APPPATH. 'Libraries/phpmailer/SMTP.php';
     {
       $user_id = $session['id'];
       $db = db_connect();
-      return $user = $db->table('users')->where('id', $user_id)->get()->getRow();
+      return $user = $db->table('users')->where('users.id', $user_id)
+      ->join('countries', 'countries.id = ' . 'users.country', 'left')
+      ->join('states', 'states.id = ' . 'users.state', 'left')
+      ->select("users.*, countries.name as country_name, states.name as state_name ")
+      ->get()->getRow();
     }
     else return false;
   }

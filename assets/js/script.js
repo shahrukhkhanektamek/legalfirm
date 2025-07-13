@@ -9,14 +9,14 @@ Version      : 1.0
 	
 	// Stick Sidebar
 	
-	if ($(window).width() > 767) {
-		if($('.theiaStickySidebar').length > 0) {
-			$('.theiaStickySidebar').theiaStickySidebar({
-			  // Settings
-			  additionalMarginTop: 70
-			});
-		}
-	}	
+	// if ($(window).width() > 767) {
+	// 	if($('.theiaStickySidebar').length > 0) {
+	// 		$('.theiaStickySidebar').theiaStickySidebar({
+	// 		  // Settings
+	// 		  additionalMarginTop: 70
+	// 		});
+	// 	}
+	// }	
 	
 	// Sticky Menu
 	
@@ -81,10 +81,7 @@ Version      : 1.0
 	// Select 2
 	
 	if($('.select').length > 0) {
-		$('.select').select2({
-			minimumResultsForSearch: -1,
-			width: '100%'
-		});
+		$('.select').select2();
 	}
 	 
     // Tooltip
@@ -94,17 +91,17 @@ Version      : 1.0
 
 	// Date Time Picker
 	
-	if($('.datetimepicker').length > 0) {
-		$('.datetimepicker').datetimepicker({
-			format: 'DD/MM/YYYY',
-			icons: {
-				up: "fas fa-chevron-up",
-				down: "fas fa-chevron-down",
-				next: 'fas fa-chevron-right',
-				previous: 'fas fa-chevron-left'
-			}
-		});
-	}
+	// if($('.datetimepicker').length > 0) {
+	// 	$('.datetimepicker').datetimepicker({
+	// 		format: 'DD/MM/YYYY',
+	// 		icons: {
+	// 			up: "fas fa-chevron-up",
+	// 			down: "fas fa-chevron-down",
+	// 			next: 'fas fa-chevron-right',
+	// 			previous: 'fas fa-chevron-left'
+	// 		}
+	// 	});
+	// }
 	
 	// Floating Label
 

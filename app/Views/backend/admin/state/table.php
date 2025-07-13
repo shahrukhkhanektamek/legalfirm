@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th data-ordering="false">Name</th>
+            <th data-ordering="false">Country</th>
             <!-- <th data-ordering="false">Slug</th> -->
             <th data-ordering="false">Status</th>
             <th>Action</th>
@@ -13,6 +14,7 @@
         <?php foreach($data_list as $key=> $value) { ?>
             <tr>
                 <td><?=$value->name?></td>
+                <td><?=$value->country_name?></td>
                 <!-- <td><?=$value->slug?></td> -->
                 <td><?=status_get($value->status)?></td>
                 <td>

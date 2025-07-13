@@ -1,4 +1,15 @@
 <?php  
+$role = 0;	
+$user_id = 0;	
+$user = get_user();
+if(!empty($user))
+{
+	$role = $user->role;
+	$user_id = $user->id;
+	$user_role = get_role_by_id($user->role);
+}
+
+
 $base_url = base_url();
 $url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
@@ -12,7 +23,10 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 <head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-		<title>DreamsCLG</title>
+		<meta name="_token" content="<?= csrf_hash() ?>">
+    	<meta name="base_url" content="<?=base_url('/')?>/">
+
+		<title><?=env("APP_NAME") ?></title>
 		
 		<!-- Favicons -->
 		<link rel="shortcut icon" type="image/x-icon" href="<?=$base_url ?>assets/img/favicon.png">
@@ -26,6 +40,55 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 		
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="<?=$base_url ?>assets/css/style.css">
+
+
+		<link rel="stylesheet" href="<?=base_url('public')?>/toast/saber-toast.css">
+		<link rel="stylesheet" href="<?=base_url('public')?>/toast/style.css">
+		<link rel="stylesheet" href="<?=base_url('public')?>/front_css.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="<?=base_url('public')?>/front_script.js"></script>
+		<link rel="stylesheet" href="<?=base_url('public')?>/upload-multiple/style.css">
+		<script src="<?=base_url('public')?>/upload-multiple/script.js"></script>
+		<link rel="stylesheet" href="<?=base_url('public/')?>/assetsadmin/select2/css/select2.min.css">
+		<script src="https://cdn.ckeditor.com/4.18.0/full/ckeditor.js"></script>
+
+
+		<style>
+			.select2-container--default .select2-selection--multiple .select2-selection__choice {
+		      background-color: #71519d;
+		      border: 1px solid #71519d;
+		    }
+		    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+		      color: white;
+		    }
+		    .select2-container .select2-selection--single
+		    {
+		      height: calc(2.25rem + 2px);
+		    }
+		    .select2-container--default .select2-selection--single {
+		        padding: 5px 5px;
+		        padding-top: 6px;
+		    }
+		    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+		      top: 70%;
+		    }
+		    .select2-container--default .select2-selection--single {
+		        border: var(--bs-border-width) solid var(--bs-border-color);
+		    }
+		    .modal.show {
+			    opacity: 1;
+			    display: block;
+			}
+			.modal.show::before {
+			    content: "";
+			    position: fixed;
+			    width: 100%;
+			    height: 100%;
+			    background: rgba(0, 0, 0, 0.5);
+			}
+		</style>
+
 
 	</head>		
 	<body>
@@ -84,9 +147,13 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 						</ul>
 					</div>		 
 					<ul class="nav header-navbar-rht">
-						<li><a href="<?=$base_url ?>login.php">Log in</a></li>
-						<li><a href="<?=$base_url ?>register.php" class="login-btn">Signup </a></li>
-						
+						<?php if(!in_array($role, [2,3,4,5,6,7])){ ?>
+							<li><a href="<?=$base_url ?>login.php">Log in</a></li>
+							<li><a href="<?=$base_url ?>register.php" class="login-btn">Signup </a></li>
+						<?php }else{?>
+							<li><a href="<?=base_url($user_role->route.'/dashboard')?>" class="login-btn">My Account </a></li>
+						<?php } ?>
+
 					</ul>
 				</nav>
 			</header>

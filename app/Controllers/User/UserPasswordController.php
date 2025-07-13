@@ -11,7 +11,7 @@ class UserPasswordController extends BaseController
         'title'=>'Password', 
         'table_name'=>'users',
         'page_title'=>'Password',
-        "folder_name"=>'backend/vendor/password',
+        "folder_name"=>'user/password',
         "upload_path"=>'upload/',
         "page_name"=>'password.php',
        );

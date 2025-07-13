@@ -12,6 +12,8 @@ $routes->post('bike-modal', 'Home::bike_modal');
 
 
 $routes->post('search-vendor', 'Home::search_vendor');
+$routes->post('search-country', 'Home::search_country');
+$routes->post('search-state', 'Home::search_state');
 $routes->post('search-city', 'Home::search_city');
 
 

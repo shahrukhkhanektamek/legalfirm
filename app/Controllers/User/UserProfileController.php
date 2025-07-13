@@ -11,7 +11,7 @@ class UserProfileController extends BaseController
         'title'=>'Profile', 
         'table_name'=>'users',
         'page_title'=>'Profile',
-        "folder_name"=>'backend/vendor/profile',
+        "folder_name"=>'user/profile',
         "upload_path"=>'upload/',
         "page_name"=>'profile.php',
        );
@@ -33,7 +33,9 @@ class UserProfileController extends BaseController
         $data['route'] = base_url(route_to($this->arr_values['routename'].'index'));      
         $data['pagenation'] = array($this->arr_values['title']);
         $row = $this->db->table($this->arr_values['table_name'])->where(["id"=>$id,])->get()->getFirstRow();
-        return view($this->arr_values['folder_name'].'/form',compact('data','row'));
+        $db = $this->db;
+        $mainData = $this->mainData;
+        return view($this->arr_values['folder_name'].'/form',compact('data','row','db','mainData'));
     }
     public function update()
     {
@@ -44,23 +46,13 @@ class UserProfileController extends BaseController
 
         $data = [
             "name"=>$this->request->getPost('name'),
-            "gender"=>$this->request->getPost('gender'),
-            "age"=>$this->request->getPost('age'),
-            "phone"=>$this->request->getPost('mobile'),
+            "phone"=>$this->request->getPost('phone'),
             "email"=>$this->request->getPost('email'),
-
-
-            "sales_contact"=>$this->request->getPost('sales_contact'),
-            "authorized_person"=>$this->request->getPost('authorized_person'),
-            "person_contact"=>$this->request->getPost('person_contact'),
-            "gst"=>$this->request->getPost('gst'),
-            "pan"=>$this->request->getPost('pan'),
-            "udyam"=>$this->request->getPost('udyam'),
-            "workshop_address"=>$this->request->getPost('workshop_address'),
-            "service_contact"=>$this->request->getPost('service_contact'),
-            "spares_accessories_contact"=>$this->request->getPost('spares_accessories_contact'),
-
-
+            "address"=>$this->request->getPost('address'),
+            "country"=>$this->request->getPost('country'),
+            "state"=>$this->request->getPost('state'),
+            "city"=>$this->request->getPost('city'),
+            "pincode"=>$this->request->getPost('pincode'),
             "status"=>1,
         ];
 

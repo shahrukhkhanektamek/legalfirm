@@ -119,19 +119,111 @@
 		<!-- /Main Wrapper -->
 	
 		<!-- jQuery -->
-		  <script src="<?=$base_url ?>assets/js/jquery-3.7.1.min.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
+		  <!-- <script src="<?=base_url() ?>assets/js/jquery-3.7.1.min.js" type="2c8673e8960f9f9975d13815-text/javascript"></script> -->
 		  
 		
 		<!-- Bootstrap Core JS -->
-		<script src="<?=$base_url ?>assets/js/bootstrap.bundle.min.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
+		<script src="<?=base_url() ?>assets/js/bootstrap.bundle.min.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
 		
 		<!-- Slick JS -->
-		<script src="<?=$base_url ?>assets/js/slick.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
+		<script src="<?=base_url() ?>assets/js/slick.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
+
+		
+		<!-- Sticky Sidebar JS -->
+        <script src="<?=base_url() ?>assets/plugins/theia-sticky-sidebar/ResizeSensor.js" type="badcbf867befed73334dd13e-text/javascript"></script>
+        <script src="<?=base_url() ?>assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js" type="badcbf867befed73334dd13e-text/javascript"></script>
 		
 		<!-- Custom JS -->
-		<script src="<?=$base_url ?>assets/js/script.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
+		<script src="<?=base_url() ?>assets/js/script.js" type="2c8673e8960f9f9975d13815-text/javascript"></script>
 	
-	<script src="<?=$base_url ?>assets/js/rocket-loader.min.js" data-cf-settings="2c8673e8960f9f9975d13815-|49" defer></script>
+		<script src="<?=base_url() ?>assets/js/rocket-loader.min.js" data-cf-settings="2c8673e8960f9f9975d13815-|49" defer></script>
+
+
+		<script src="<?=base_url('public/')?>/toast/saber-toast.js"></script>
+		<script src="<?=base_url('public/')?>/toast/script.js"></script>
+		<script src="<?=base_url('public/')?>/assetsadmin/select2/js/select2.full.min.js"></script>
+
+
+<script>
+	$(document).on('click',".logout",function (e) {
+	  event.preventDefault();
+	  loader('show');
+	  $.ajax({
+	      url:"<?=base_url(route_to('auth.logout'))?>",
+	      type:"GET",
+	      dataType:"json",
+	      success:function(d)
+	      {
+	        admin_response_data_check(d)  
+	      },
+	      error: function(e) 
+	    {
+	      admin_response_data_check(e)
+	    } 
+	  });
+	});
+</script>
+
+<script>
+	$('#country').select2({
+      ajax: {
+        url: "<?=base_url(route_to('search-country'))?>",
+        method:"post",
+        "headers": {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+       },
+        data: function (params) {
+          var query = {
+            search: params.term,
+            type: 'public'
+          }
+
+          // Query parameters will be ?search=[term]&type=public
+          return query;
+        }
+      }
+    });
+	$('#state').select2({
+      ajax: {
+        url: "<?=base_url(route_to('search-state'))?>",
+        method:"post",
+        "headers": {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+       },
+        data: function (params) {
+          var query = {
+            search: params.term,
+            type: 'public',
+            id: $("#country").val()
+          }
+
+          // Query parameters will be ?search=[term]&type=public
+          return query;
+        }
+      }
+    });
+
+    $('#select-city').select2({
+      ajax: {
+        url: "<?=base_url(route_to('search-city'))?>",
+        method:"post",
+        "headers": {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+       },
+        data: function (params) {
+          var query = {
+            search: params.term,
+            type: 'public'
+          }
+
+          // Query parameters will be ?search=[term]&type=public
+          return query;
+        }
+      }
+    });
+</script>
+
+
 
 </body>
 

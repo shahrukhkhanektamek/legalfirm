@@ -19,117 +19,10 @@ class Home extends BaseController
     }
     public function all($page = null)
     {        
-        $data = [];
-        $table_name = '';
-        $p_id = '';
-        $meta_image = '';
-
-        // Get the full base URL
-        $request = service('request');
-        $base = base_url();
-        $slug = $url = $request->getUri()->getSegment(1); // Get the path from URL
-        $stateCity = '';
-        if(!empty($url))
-        {
-            $checkStateCity = explode('-in-',$url);
-            if(count($checkStateCity)>1)
-            {
-                $stateCity = decodeSlug($checkStateCity[1]);
-                $emptyCehck1 = $this->db->table('state')->where("name", $stateCity)->get()->getRow();
-                $emptyCehck2 = $this->db->table('city')->where("name", $stateCity)->get()->getRow();
-                if(!empty($emptyCehck1) || !empty($emptyCehck2))
-                {
-                    $url = $checkStateCity[0];
-                }
-            }
-        }
-
+        $data = $this->mainData;
+        $check_page = $data['check_page'];
+        $page = $data['page'];
         
-        if(empty($page))
-        {
-            $url = 'home';
-            $page = 'index.php';
-        }
-
-        // Check if the slug exists in the database
-        $slug_data = $this->db->table("slugs")
-            ->where("slug", $url)
-            ->get()
-            ->getResultObject();
-
-        if (!empty($slug_data)) {
-            $slug_data = $slug_data[0];
-            $page = $slug_data->page_name;
-            $table_name = $slug_data->table_name;
-            $p_id = $slug_data->p_id;
-        } else {
-            $count = explode(".", $page);
-            if (count($count) == 1) {
-                $page = $count[0] . '.php';
-            } else {
-                $page = $count[0] . '.' . $count[1];
-            }
-        }
-
-
-        // Check if the page file exists
-        if($page=='user.php')
-        {
-            $session = session()->get('user');
-            $role = @$session['role'];
-            if($role!=2) return redirect()->to(base_url('login'));
-            $check_page = ROOTPATH . 'app/Views/web/account/dashboard.php';
-        }
-        else
-        {
-            $check_page = ROOTPATH . 'app/Views/web/' . $page;
-        }
-
-
-        $data['contact_detail'] = json_decode($this->db->table('setting')->getWhere(["name"=>'main',])->getRow()->data);
-        $data['policy'] = json_decode($this->db->table('setting')->getWhere(["name"=>'policy',])->getRow()->data);
-        $data['logo'] = json_decode($this->db->table('setting')->getWhere(["name"=>'logo',])->getRow()->data);
-        $data['db'] = $this->db;
-        $data['request'] = $this->request;
-        $data['pager'] = $this->pager;
-        $data['slug'] = $slug;
-        $data['id'] = 0;
-        $data['stateCity'] = $stateCity ? ' In '.$stateCity : $stateCity;
-        $data['script'] = $this->db->table('script')->get()->getRow();
-
-
-        $num1 = rand(1, 10);
-        $num2 = rand(1, 10);
-        session()->set('captcha_answer', $num1 + $num2);
-        $data['captcha_num1'] = $num1;
-        $data['captcha_num2'] = $num2;
-
-
-
-        
-        $meta_select = "page_name, meta_title, meta_keywords, meta_description, meta_author";
-        $meta_data = $this->db->table("meta_tags")->select($meta_select)->where("slug", $url)->get()->getResultObject();
-        $meta_title = '';
-        $meta_keyword = '';
-        $meta_description = '';
-        $meta_auther = '';
-        if (!empty($meta_data)) {
-            $meta_data = $meta_data[0];
-            $meta_title = $meta_data->meta_title;
-            $meta_keyword = $meta_data->meta_keywords;
-            $meta_description = $meta_data->meta_description;
-            $meta_auther = $meta_data->meta_author;
-        } else {
-            $meta_data = $this->db->table("meta_tags")->select($meta_select)->where(["slug" => 'home', "is_delete" => 0, "status" => 1])->limit(1)->get()->getResultObject();
-            if (!empty($meta_data)) {
-                $meta_data = $meta_data[0];
-                $meta_title = $meta_data->meta_title;
-                $meta_keyword = $meta_data->meta_keywords;
-                $meta_description = $meta_data->meta_description;
-                $meta_auther = $meta_data->meta_author;
-            }
-        }
-        $data['meta_data'] = $meta_data;
         
 
         if (file_exists($check_page)) {
@@ -251,6 +144,45 @@ class Home extends BaseController
             $return_data[] = [
                 "id" => $value->id,
                 "text" => $value->company_name.' ('.$value->name.', '.$value->area.', '.$value->city_name.')',
+            ];
+        }
+        $data['results'] = $return_data;
+        return $this->response->setStatusCode(200)->setJSON($data);       
+    }
+    public function search_country($value='')
+    {        
+        $search = $this->request->getVar('search');
+        $table_name = 'countries';
+        $builder = $this->db->table($table_name)->where("{$table_name}.status", 1);
+        if (!empty($search)) {
+            $builder->groupStart()->like("{$table_name}.name", $search)->groupEnd();
+        }
+        $data_list = $builder->orderBy("{$table_name}.id", 'desc')->limit(50, 0)->get()->getResult();
+        $return_data = [];
+        foreach ($data_list as $key => $value) {
+            $return_data[] = [
+                "id" => $value->id,
+                "text" => $value->name,
+            ];
+        }
+        $data['results'] = $return_data;
+        return $this->response->setStatusCode(200)->setJSON($data);       
+    }
+    public function search_state($value='')
+    {        
+        $search = $this->request->getVar('search');
+        $id = $this->request->getVar('id');
+        $table_name = 'states';
+        $builder = $this->db->table($table_name)->where("{$table_name}.status", 1)->where("{$table_name}.country_id",$id);
+        if (!empty($search)) {
+            $builder->groupStart()->like("{$table_name}.name", $search)->groupEnd();
+        }
+        $data_list = $builder->orderBy("{$table_name}.id", 'desc')->limit(50, 0)->get()->getResult();
+        $return_data = [];
+        foreach ($data_list as $key => $value) {
+            $return_data[] = [
+                "id" => $value->id,
+                "text" => $value->name,
             ];
         }
         $data['results'] = $return_data;
