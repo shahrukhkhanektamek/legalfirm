@@ -222,17 +222,29 @@ class AuthUser extends BaseController
     {
         $first_name = $this->request->getPost('name');
         $email = $this->request->getPost('email');
-        $mobile = $this->request->getPost('mobile');
+        $mobile = $this->request->getPost('phone');
         $password = $this->request->getPost('password');
         $cpassword = $this->request->getPost('cpassword');
         $gender = $this->request->getPost('gender');
-        $age = $this->request->getPost('age');
-
-        $state = '';
-        $role = 2;
-        $name = $first_name;
+        $dob = $this->request->getPost('dob');
+        $country = $this->request->getPost('country');
+        $state = $this->request->getPost('state');
+        $city = $this->request->getPost('city');
+        $pincode = $this->request->getPost('pincode');
+        $address = $this->request->getPost('address');
+        $age = '';
 
         
+        $role = $this->request->getPost('role');
+        $name = $first_name;
+
+        if (!in_array($role, [2,3,4,5])) {
+            $responseCode = 400;
+            $result['message'] = 'Select Role!';
+            $result['action'] = 'register';
+            $result['status'] = $responseCode;
+            return $this->response->setStatusCode($responseCode)->setJSON($result);
+        }
 
         $check_email = $this->db->table('users')->where('email', $email)->get()->getRow();
         $check_mobile = $this->db->table('users')->where('phone', $mobile)->get()->getRow();
@@ -268,113 +280,43 @@ class AuthUser extends BaseController
                 'email'          => $email,
                 'password'       => md5($password), // Consider using password_hash()
                 'gender'         => $gender,
-                'age'            => $age,
                 'status'         => 1,
                 'role'           => $role,
                 'is_paid'        => 0,
                 'image'          => 'user.png',
                 'phone'          => $mobile,
+                'dob'            => $dob,
+                'country'        => $country,
                 'state'          => $state,
+                'city'           => $city,
+                'pincode'        => $pincode,
+                'address'        => $address,
                 'user_id'        => $user_id,
                 'add_by'         => 0
             ];
 
             $this->db->table('users')->insert($userData);
-
-            $url = base_url(route_to('user.dashboard')); // Adjust route as needed
-
-            $responseCode = 200;
-            $result['message'] = 'Register Successfully';
-            $result['action'] = 'redirect';
-            $result['url'] = $url;
-            $result['status'] = $responseCode;
-            return $this->response->setStatusCode($responseCode)->setJSON($result);
-        }
-    }
-    public function vendor_register_action()
-    {
-        $first_name = $this->request->getPost('name');
-        $email = $this->request->getPost('email');
-        $mobile = $this->request->getPost('mobile');
-        $password = $this->request->getPost('password');
-        $cpassword = $this->request->getPost('cpassword');
-        $gender = $this->request->getPost('gender');
-        $age = $this->request->getPost('age');
-
-        $state = '';
-        $role = 3;
-        $name = $first_name;
-
-        
-
-        $check_email = $this->db->table('users')->where('email', $email)->get()->getRow();
-        $check_mobile = $this->db->table('users')->where('phone', $mobile)->get()->getRow();
-
-        if (!empty($check_email) || empty($email)) {
-            $responseCode = 400;
-            $result['message'] = 'Email Exist!';
-            $result['action'] = 'register';
-            $result['status'] = $responseCode;
-            return $this->response->setStatusCode($responseCode)->setJSON($result);
-        } elseif (!empty($check_mobile) || empty($mobile)) {
-            $responseCode = 400;
-            $result['message'] = 'Mobile Exist!';
-            $result['action'] = 'register';
-            $result['status'] = $responseCode;
-            return $this->response->setStatusCode($responseCode)->setJSON($result);
-        } elseif ($password !== $cpassword) {
-            $responseCode = 400;
-            $result['message'] = 'Confirm Password Not Match!';
-            $result['action'] = 'register';
-            $result['status'] = $responseCode;
-            return $this->response->setStatusCode($responseCode)->setJSON($result);
-        } else {
-            $old_user = $this->db->table("users")->orderBy('user_id', 'desc')->get()->getFirstRow();
-            $user_id = $old_user ? $old_user->user_id + 1 : 1;
-
-            $userData = [
-                'remember_token' => '',
-                'kyc_step'       => 0,
-                'is_delete'      => 0,
-                'kyc_message'    => '',
-                'name'           => $name,
-                'email'          => $email,
-                'password'       => md5($password), // Consider using password_hash()
-                'gender'         => $gender,
-                'age'            => $age,
-                'status'         => 1,
-                'role'           => $role,
-                'is_paid'        => 0,
-                'image'          => 'user.png',
-                'phone'          => $mobile,
-                'state'          => $state,
-                'user_id'        => $user_id,
-                'add_by'         => 0,
-
-                "company_name"=>$this->request->getPost('company_name'),
-                "city"=>$this->request->getPost('city'),
-                "area"=>$this->request->getPost('area'),
-                "brand"=>json_encode($this->request->getPost('brand')),
-                "sales_contact"=>$this->request->getPost('sales_contact'),
-                "authorized_person"=>$this->request->getPost('authorized_person'),
-                "person_contact"=>$this->request->getPost('person_contact'),
-                "gst"=>$this->request->getPost('gst'),
-                "pan"=>$this->request->getPost('pan'),
-                "udyam"=>$this->request->getPost('udyam'),
-                "workshop_address"=>$this->request->getPost('workshop_address'),
-                "service_contact"=>$this->request->getPost('service_contact'),
-                "spares_accessories_contact"=>$this->request->getPost('spares_accessories_contact'),
-
-
-            ];
-
-            $this->db->table('users')->insert($userData);
             $insertId = $this->db->insertID();
+            $user = $this->db->table('users')->where(['id' => $insertId])->get()->getRow();
+            $role = $user->role;
+            $roledata = $this->db->table('role')
+                ->where('id', $role)
+                ->get()
+                ->getRow();
+            
+            $url = site_url($roledata->route . '/dashboard'); // equivalent to url(route())
 
-            $user = $this->db->table('users')->where(['id' => $insertId])->whereIn('role', [3])->get()->getRow();
+            // Here you might want to create a session for the user
             $this->token_session($user);
 
-            $url = base_url(route_to('vendor.dashboard')); // Adjust route as needed
+            // Check login history
+            $login_detail = $this->db->table('login_history')
+                ->orderBy('id', 'desc')
+                ->where(['user_id' => $user->id, 'status' => 1])
+                ->get()
+                ->getRow();
+
+            
 
             $responseCode = 200;
             $result['message'] = 'Register Successfully';

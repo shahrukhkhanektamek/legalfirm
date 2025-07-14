@@ -1,4 +1,4 @@
-<?php $user = $user = get_user(); ?>
+<?php $user = $user = get_user();$user_role = get_role_by_id($user->role); ?>
 <div class="profile-sidebar">
 								<div class="widget-profile pro-widget-content">
 									<div class="profile-info-widget">
@@ -18,19 +18,19 @@
 									<nav class="dashboard-menu">
 										<ul>
 											<li class="active">
-												<a href="<?=base_url()?>user/dashboard">
+												<a href="<?=base_url().$user_role->nav.'/' ?>dashboard">
 													<i class="fas fa-columns"></i>
 													<span>Dashboard</span>
 												</a>
 											</li>
 											<li>
-												<a href="<?=base_url()?>user/profile">
+												<a href="<?=base_url().$user_role->nav.'/' ?>profile">
 													<i class="fas fa-user-cog"></i>
 													<span>Profile Settings</span>
 												</a>
 											</li>
 											<li>
-												<a href="<?=base_url()?>user/password">
+												<a href="<?=base_url().$user_role->nav.'/' ?>password">
 													<i class="fas fa-lock"></i>
 													<span>Change Password</span>
 												</a>

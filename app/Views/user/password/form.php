@@ -34,18 +34,21 @@
 										<div class="col-md-12 col-lg-6">
 										
 											<!-- Change Password Form -->
-											<form class="form_data" action="<?=base_url('user/password/update'); ?>" method="post" id="PasswordForm" novalidate >
+											<form class="form_data" action="<?=($data['route'].'/update'); ?>" method="post" id="PasswordForm" novalidate >
 												<div class="form-group">
 													<label>Old Password</label>
 													<input type="password" class="form-control" required name="old_password">
+													<i class="fa fa-eye password_show_hide"></i>
 												</div>
 												<div class="form-group">
 													<label>New Password</label>
 													<input type="password" class="form-control" required name="npassword">
+													<i class="fa fa-eye password_show_hide"></i>
 												</div>
 												<div class="form-group">
 													<label>Confirm Password</label>
 													<input type="password" class="form-control" required name="cpassword">
+													<i class="fa fa-eye password_show_hide"></i>
 												</div>
 												<div class="submit-section">
 													<button type="submit" class="btn btn-primary">Save Changes</button>

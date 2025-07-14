@@ -87,6 +87,32 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 			    height: 100%;
 			    background: rgba(0, 0, 0, 0.5);
 			}
+			.form-group {
+			    position: relative;
+			}
+			.password_show_hide {
+			    position: absolute;
+			    right: 10px;
+			    top: 35px;
+			    cursor: pointer;
+			    color: #757575;
+			}
+			.custom-form .form-focus .focus-label {
+			    left: 25px;
+			}
+			.custom-form .form-focus .select2-container--default .select2-selection--single .select2-selection__rendered {
+			    margin: 0;
+			    padding: 0 0 0 7px;
+			}
+			.custom-form .password_show_hide {
+			    right: 25px;
+			    top: 18px;
+			}
+			.select2-container {
+			    width: 100% !important;
+			}
+
+
 		</style>
 
 

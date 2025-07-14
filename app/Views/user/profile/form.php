@@ -94,7 +94,7 @@ input#crop {
 								<div class="card-body">
 									
 									<!-- Profile Settings Form -->
-									<form class="form_data" action="<?=base_url('user/profile/update'); ?>" method="post" id="ProfileForm" novalidate >
+									<form class="form_data" action="<?=($data['route'].'/update'); ?>" method="post" id="ProfileForm" novalidate >
 										<div class="row form-row">
 											<div class="col-12 col-md-12">
 												<div class="form-group">
@@ -321,7 +321,7 @@ $(document).ready(function() {
                 
                 // Send the cropped image to the server
                 $.ajax({
-                    url: "<?=base_url() ?>",
+                    url: "<?=($data['route'].'/update-profile-image') ?>",
                     method: 'POST',
                     data: formData,
                     processData: false,

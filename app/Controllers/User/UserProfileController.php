@@ -83,4 +83,59 @@ class UserProfileController extends BaseController
             return $this->response->setStatusCode($responseCode)->setJSON($result);
         }
     }
+    public function update_profile_image()
+    {
+        $session = session()->get('user');
+        $add_by = $session['id'];
+        $id = $add_by;
+
+        $data = [
+            "status"=>1,
+        ];
+
+        $image = $this->request->getFile('croppedImage');
+
+        if ($image && $image->isValid() && !$image->hasMoved()) {
+
+            $uploadPath = FCPATH.$this->arr_values['upload_path'];
+
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
+            }
+
+            // Unique file name
+            $fileName = time() . '-' . uniqid() . '.jpg';
+
+            if ($image->move($uploadPath, $fileName)) {
+                
+                // Success response (add your response here)
+                $data['image'] = $fileName;
+                $this->db->table($this->arr_values['table_name'])->where('id', $id)->update($data);
+                
+
+                return $this->response->setJSON([
+                    'status' => 200,
+                    'message' => 'Image uploaded successfully.',
+                    'path' => $uploadPath . $fileName,
+                    'action' => 'reload',
+                    'data' => [],
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'status' => 200,
+                    'message' => 'Failed to save image.',
+                    'action' => 'reload',
+                    'data' => [],
+                ]);
+            }
+        } else {
+            return $this->response->setJSON([
+                'status' => 200,
+                'message' => 'No image file uploaded or invalid.',
+                'action' => 'reload',
+                'data' => [],
+            ]);
+        }
+    }
+
 }

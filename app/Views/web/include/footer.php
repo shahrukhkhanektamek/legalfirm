@@ -145,11 +145,15 @@
 
 
 <script>
+	$('.tags').select2({
+	  tags: true,
+	  tokenSeparators: ['||', '\n']
+	});
 	$(document).on('click',".logout",function (e) {
 	  event.preventDefault();
 	  loader('show');
 	  $.ajax({
-	      url:"<?=base_url(route_to('auth.logout'))?>",
+	      url:"<?=base_url('user/logout')?>",
 	      type:"GET",
 	      dataType:"json",
 	      success:function(d)

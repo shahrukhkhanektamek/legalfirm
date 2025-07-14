@@ -18,9 +18,17 @@ $(document).on("click", ".password_show_hide",(function(e) {
   this_btn = $(this);
   input_field = $(this_btn).parent().find('input');
   if($(input_field).attr("type")=='password')
+  {
     $(input_field).attr("type","text");
+    $(this_btn).removeClass('fa-eye')    
+    $(this_btn).addClass('fa-eye-slash')    
+  }
   else
+  {
     $(input_field).attr("type","password");    
+    $(this_btn).removeClass('fa-eye-slash')    
+    $(this_btn).addClass('fa-eye')    
+  }
 }));
 
 function success_message(text)

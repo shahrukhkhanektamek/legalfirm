@@ -91,7 +91,7 @@ class AuthBackend extends BaseController
         // Query the user from the database
         $user = $this->db->table('users')
             ->where(['email' => $username])
-            ->whereIn('role', [1,3])
+            ->whereIn('role', [1])
             ->get()
             ->getRow();
 
