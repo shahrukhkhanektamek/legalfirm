@@ -35,7 +35,7 @@
 												<label class="focus-label">Password</label>
 											</div>
 											<div class="text-end">
-												<a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>
+												<a class="forgot-link" href="forgot-password">Forgot Password ?</a>
 											</div>
 											<button class="btn btn-primary btn-block btn-lg login-btn w-100" type="submit">Login</button>
 											<div class="login-or">
@@ -50,7 +50,7 @@
 													<a href="#" class="btn btn-google btn-block w-100"><i class="fab fa-google me-1"></i> Login</a>
 												</div>
 											</div>
-											<div class="text-center dont-have">Don’t have an account? <a href="register.html">Register</a></div>
+											<div class="text-center dont-have">Don’t have an account? <a href="register">Register</a></div>
 										</form>
 									</div>
 								</div>

@@ -1,6 +1,12 @@
 <?php
 $row = $file_data['row'];
 $row =(array) $row;
+
+if(empty($data['upload_path']))
+	$upload_path = 'upload/';
+else
+	$upload_path = $data['upload_path'];
+
 ?>
 
   <div class="drag-area"> 
@@ -25,7 +31,7 @@ $row =(array) $row;
 				{
 					if(!empty($value_image->image_path))
 					{
-					$image_path = FCPATH.'upload/'.$value_image->image_path;
+					$image_path = FCPATH.$upload_path.$value_image->image_path;
 					if(file_exists($image_path))
 					{
 						$image = base64_encode(file_get_contents($image_path));

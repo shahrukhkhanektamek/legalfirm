@@ -13,9 +13,15 @@ class ImageModel extends Model
     protected $allowedFields = ['image_name', 'image_path', 'image_alt_text']; // Adjust your allowed fields
 
     // Upload and update image function
-    public function upload_multiple_image(array $all_image_column_names, string $table_name = '', string $p_id = '', $getPost=[])
+    public function upload_multiple_image(array $all_image_column_names, string $table_name = '', string $p_id = '', $getPost=[], $uploadSource='')
     {
         $return_array = [];
+        if(empty($uploadSource)) $uploadPath = 'upload/';
+        else $uploadPath = $uploadSource;
+
+        if(!file_exists(FCPATH.$uploadPath))
+            mkdir(FCPATH.$uploadPath);
+        
 
         foreach ($all_image_column_names as $key => $value) {
 
@@ -34,7 +40,7 @@ class ImageModel extends Model
                 // If images are present, delete the old ones
                 if (!empty($images) && json_decode($images)) {
                     foreach (json_decode($images) as $key5 => $value_img) {
-                        $file_path = FCPATH . 'upload/' . $value_img->image_path;
+                        $file_path = FCPATH . $uploadPath . $value_img->image_path;
                         if (file_exists($file_path)) {
                             unlink($file_path); // Delete old image
                         }
@@ -56,10 +62,10 @@ class ImageModel extends Model
                     $image_time = Time::now()->getTimestamp() . $key . $key2 . $value . '.' . pathinfo($image_name, PATHINFO_EXTENSION);
 
                     // Save image to the server
-                    $file_path = FCPATH . 'upload/' . $image_time;
+                    $file_path = FCPATH . $uploadPath . $image_time;
                     if (file_put_contents($file_path, $image_content)) {
 
-                        $webp_path = FCPATH . 'upload/' . pathinfo($image_time, PATHINFO_FILENAME) . '.webp';
+                        $webp_path = FCPATH . $uploadPath . pathinfo($image_time, PATHINFO_FILENAME) . '.webp';
                         $converted = $this->convertToWebP($file_path, $webp_path);
                         if ($converted) {
                             unlink($file_path); // Delete original
@@ -87,8 +93,11 @@ class ImageModel extends Model
     }
 
 
-    public function upload_image($name, $getPost, $accepts=[])
+    public function upload_image($name, $getPost, $accepts=[], $uploadSource='')
     {
+        if(empty($uploadSource)) $uploadPath = 'upload/';
+        else $uploadPath = $uploadSource;
+
         // Check if a file has been uploaded
         if ($getPost->getFile($name)) {
             // Get the uploaded file
@@ -107,8 +116,8 @@ class ImageModel extends Model
                 $image->move(FCPATH . 'upload', $newName);
                 
                 // Get the file path
-                $filePath = FCPATH . 'upload/' . $newName;
-                $imageNameWebp = FCPATH . 'upload/' . explode(".", $newName)[0].".webp" ;
+                $filePath = FCPATH . $uploadPath . $newName;
+                $imageNameWebp = FCPATH . $uploadPath . explode(".", $newName)[0].".webp" ;
 
                 if($newName!='default.jpg' && $newName!='user.png')
                 {                    

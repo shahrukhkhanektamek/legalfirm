@@ -22,7 +22,7 @@ if(!empty($user))
 						<div class="col-md-12 col-12">
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="<?=base_url() ?>">Home</a></li>
+									<li class="breadcrumb-item"><a href="<?=base_url() ?>"Home</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Kyc Update</li>
 								</ol>
 							</nav>
@@ -43,6 +43,24 @@ if(!empty($user))
 						</div>
 
 						<div class="col-md-7 col-lg-8 col-xl-9">
+
+							<div class="col-md-12">
+								  <?php if($user->kyc_step==1){?>
+					              <div class="alert alert-success show" role="alert"><strong>Success</strong> - Your Kyc Is Approved. You can change your kyc.
+					              </div>
+					              <?php }else if($user->kyc_step==0){ ?>										              
+					              <div class="alert alert-info show" role="alert"><strong>Information</strong> - Update Your Kyc  
+					              </div>
+
+					              <?php }else if($user->kyc_step==2){ ?>
+					              <div class="alert alert-info show" role="alert"><strong>Information</strong> - Your Kyc Is Under Review
+					              </div>
+					              <?php }else if($user->kyc_step==3){ ?>
+					              <div class="alert alert-danger show" role="alert"><strong>Warning</strong> - Your Kyc Rejected!
+					              </div>
+					              <?php } ?>
+							</div>
+
 							<form class="form_data" action="<?=($data['route'].'/update'); ?>" method="post" id="ProfileForm" novalidate >
 								
 								
@@ -51,7 +69,7 @@ if(!empty($user))
 									<div class="card-body">
 										<h4 class="card-title">About Me</h4>
 										<div class="form-group mb-0">
-											<textarea class="form-control" rows="5"></textarea>
+											<textarea class="form-control" rows="5" name="about"><?=@$user->amount ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -59,95 +77,214 @@ if(!empty($user))
 								
 								
 
-								<!-- Contact Details -->
+								<!-- Bank Details -->
 								<div class="card contact-card">
 									<div class="card-body">
-										<h4 class="card-title">Contact Details</h4>
+										<h4 class="card-title">Bank Details</h4>
 										<div class="row form-row">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>Address Line 1</label>
-													<input type="text" class="form-control">
+													<label>Your Name as per Bank Account</label>
+													<input type="text" class="form-control" name="bank_holder_name" value="<?=@$kyc->bank_holder_name ?>" value="<?=@$kyc->bank_holder_name ?>" >
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class="control-label">Address Line 2</label>
-													<input type="text" class="form-control">
+													<label class="control-label">Your Nomani Name</label>
+													<input type="text" class="form-control" name="nomani" value="<?=@$kyc->nomani ?>" >
 												</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-4">
 												<div class="form-group">
-													<label class="control-label">City</label>
-													<input type="text" class="form-control">
+													<label class="control-label">IFSC</label>
+													<input type="text" class="form-control" name="ifsc" value="<?=@$kyc->ifsc ?>" >
 												</div>
 											</div>
 
-											<div class="col-md-6">
+											<div class="col-md-4">
 												<div class="form-group">
-													<label class="control-label">State / Province</label>
-													<input type="text" class="form-control">
+													<label class="control-label">Bank Name</label>
+													<input type="text" class="form-control" name="bank_name" value="<?=@$kyc->bank_name ?>" >
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="control-label">Account Number</label>
+													<input type="text" class="form-control" name="account_number" value="<?=@$kyc->account_number ?>" >
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class="control-label">Country</label>
-													<input type="text" class="form-control">
+													<label class="control-label">Account Type</label>
+													<select class="select" name="account_type" >
+										                <option value="0" >Select Type</option>
+										                <option value="Saving" <?php if(@$kyc->account_type=='Saving') echo'selected'; ?> >Saving</option>
+										                <option value="Current" <?php if(@$kyc->account_type=='Current') echo'selected'; ?>>Current</option>
+										            </select>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class="control-label">Postal Code</label>
-													<input type="text" class="form-control">
+													<label class="control-label">PAN Card</label>
+													<input type="text" class="form-control" name="pan" value="<?=@$kyc->pan ?>" >
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Bank Registered Mobile</label>
+													<input type="number" class="form-control" name="rg_mobile" value="<?=@$kyc->rg_mobile ?>" >
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Bank Registered Email</label>
+													<input type="text" class="form-control" name="rg_email" value="<?=@$kyc->rg_email ?>">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="control-label">Address</label>
+													<input type="text" class="form-control" name="address" value="<?=@$kyc->address ?>">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Bank Passbook Image</label>
+													<?php
+			                                             $file_data = array(
+			                                                 "position"=>1,
+			                                                 "columna_name"=>"passbook_image",
+			                                                 "multiple"=>false,
+			                                                 "accept"=>'image/*',
+			                                                 "col"=>"col-md-12",
+			                                                 "alt_text"=>"none",
+			                                                 "row"=>@$kyc,
+			                                             );
+			                                        ?>
+			                                        <?=view('upload-multiple/index',compact('file_data','db','data'))?>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">PanCard Image</label>
+													<?php
+			                                             $file_data = array(
+			                                                 "position"=>2,
+			                                                 "columna_name"=>"pancard_image",
+			                                                 "multiple"=>false,
+			                                                 "accept"=>'image/*',
+			                                                 "col"=>"col-md-12",
+			                                                 "alt_text"=>"none",
+			                                                 "row"=>@$kyc,
+			                                             );
+			                                        ?>
+			                                        <?=view('upload-multiple/index',compact('file_data','db','data'))?>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Aadhar Front Image</label>
+													<?php
+			                                             $file_data = array(
+			                                                 "position"=>3,
+			                                                 "columna_name"=>"aadharfront_image",
+			                                                 "multiple"=>false,
+			                                                 "accept"=>'image/*',
+			                                                 "col"=>"col-md-12",
+			                                                 "alt_text"=>"none",
+			                                                 "row"=>@$kyc,
+			                                             );
+			                                        ?>
+			                                        <?=view('upload-multiple/index',compact('file_data','db','data'))?>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Aadhar Back Image</label>
+													<?php
+			                                             $file_data = array(
+			                                                 "position"=>4,
+			                                                 "columna_name"=>"aadharback_image",
+			                                                 "multiple"=>false,
+			                                                 "accept"=>'image/*',
+			                                                 "col"=>"col-md-12",
+			                                                 "alt_text"=>"none",
+			                                                 "row"=>@$kyc,
+			                                             );
+			                                        ?>
+			                                        <?=view('upload-multiple/index',compact('file_data','db','data'))?>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<!-- /Contact Details -->
+								<!-- /Bank Details -->
 
-								<!-- Services and Specialization -->
-								<div class="card services-card">
-									<div class="card-body">
-										<h4 class="card-title">Services and Specialization</h4>
-										<div class="form-group">
-											<label>Services</label>
-											<select class="select" name="service" required>
-												<option>Select</option>
-											</select>
-										</div> 
-										<div class="form-group mb-0">
-											<label>Specialization </label>
-											<select class="select" name="service" required>
-												<option>Select</option>
-											</select>
-										</div> 
-									</div>              
-								</div>
-								<!-- /Services and Specialization -->
+								
 
 
+								<!-- advocate -->
 								<!-- Institution Info -->
 								<div class="card">
 									<div class="card-body">
 										<h4 class="card-title">Info</h4>
+										
+										<!-- advocate -->
 										<div class="row form-row">
 											<div class="col-md-4">
 												<div class="form-group">
 													<label>Bar Council Registration Number</label>
-													<input type="text" class="form-control">
+													<input type="text" class="form-control" name="bar_number" value="<?=@$kyc->bar_number ?>" >
 												</div>
 											</div>
 											<div class="col-md-4">
 												<div class="form-group">
 													<label>Enrollment Year</label>
-													<input type="text" class="form-control">
+													<input type="text" class="form-control" name="enrollment_year" value="<?=@$kyc->enrollment_year ?>" >
 												</div>
 											</div>
 											<div class="col-md-4">
 												<div class="form-group">
 													<label>Practicing Court(s)</label>
-													<input type="text" class="form-control">
+													<input type="text" class="form-control" name="practicing_court" value="<?=@$kyc->practicing_court ?>">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Specialization </label>
+													<select class="select" name="specialization[]" multiple >
+														<option value="">Select</option>
+														<?php
+														$list = $db->table("specializations")->where(["status"=>1,])->get()->getResultObject();
+														foreach ($list as $key => $value) {
+														$selected = '';
+														if(!empty($partner_specializations))
+														{
+															if(in_array($value->id, $partner_specializations)) $selected = 'selected';
+														}
+														?>
+															<option value="<?=$value->id ?>" <?=$selected ?> ><?=$value->name ?></option>
+														<?php } ?>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Services </label>
+													<select class="select" name="service[]" multiple >
+														<option value="">Select</option>
+														<?php
+														$list = $db->table("service")->where(["status"=>1,])->get()->getResultObject();
+														foreach ($list as $key => $value) {
+														$selected = '';
+														if(!empty($partner_services))
+														{
+															if(in_array($value->id, $partner_services)) $selected = 'selected';
+														}
+														?>
+															<option value="<?=$value->id ?>" <?=$selected ?> ><?=$value->name ?></option>
+														<?php } ?>
+													</select>
 												</div>
 											</div>
 											<div class="col-md-12">
@@ -155,19 +292,115 @@ if(!empty($user))
 													<label>License Upload</label>
 													<?php
 			                                             $file_data = array(
-			                                                 "position"=>1,
-			                                                 "columna_name"=>"images",
+			                                                 "position"=>5,
+			                                                 "columna_name"=>"license",
 			                                                 "multiple"=>false,
 			                                                 "accept"=>'image/*',
 			                                                 "col"=>"col-md-2",
 			                                                 "alt_text"=>"none",
-			                                                 "row"=>$row,
+			                                                 "row"=>@$kyc,
 			                                             );
 			                                        ?>
-			                                        <?=view('upload-multiple/index',compact('file_data','db'))?>
+			                                        <?=view('upload-multiple/index',compact('file_data','db','data'))?>
 												</div>
 											</div>
 										</div>
+
+
+										<!-- CA -->
+										<div class="row form-row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>ICAI Membership Number</label>
+													<input type="text" class="form-control" name="membership_number" value="<?=@$kyc->membership_number ?>" >
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Firm Name</label>
+													<input type="text" class="form-control" name="firm_name" value="<?=@$kyc->firm_name ?>">
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Certificate Upload</label>
+													<?php
+			                                             $file_data = array(
+			                                                 "position"=>6,
+			                                                 "columna_name"=>"certificate",
+			                                                 "multiple"=>false,
+			                                                 "accept"=>'image/*',
+			                                                 "col"=>"col-md-2",
+			                                                 "alt_text"=>"none",
+			                                                 "row"=>@$kyc,
+			                                             );
+			                                        ?>
+			                                        <?=view('upload-multiple/index',compact('file_data','db','data'))?>
+												</div>
+											</div>
+										</div>
+
+
+										<!-- Adviser  -->
+										<div class="row form-row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Expertise Area</label>
+													<select class="select" name="expertise[]" multiple >
+														<option value="">Select</option>
+														<?php
+														$list = $db->table("expertise")->where(["status"=>1,])->get()->getResultObject();
+														foreach ($list as $key => $value) {
+														$selected = '';
+														if(!empty($partner_expertises))
+														{
+															if(in_array($value->id, $partner_expertises)) $selected = 'selected';
+														}
+														?>
+															<option value="<?=$value->id ?>" <?=$selected ?> ><?=$value->name ?></option>
+														<?php } ?>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Certification Details</label>
+													<select class="select" name="certification[]" multiple >
+														<option value="">Select</option>
+														<?php
+														$list = $db->table("certification")->where(["status"=>1,])->get()->getResultObject();
+														foreach ($list as $key => $value) {
+														$selected = '';
+														if(!empty($partner_certifications))
+														{
+															if(in_array($value->id, $partner_certifications)) $selected = 'selected';
+														}
+														?>
+															<option value="<?=$value->id ?>" <?=$selected ?> ><?=$value->name ?></option>
+														<?php } ?>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Certificate Upload</label>
+													<?php
+			                                             $file_data = array(
+			                                                 "position"=>7,
+			                                                 "columna_name"=>"certificate",
+			                                                 "multiple"=>false,
+			                                                 "accept"=>'image/*',
+			                                                 "col"=>"col-md-2",
+			                                                 "alt_text"=>"none",
+			                                                 "row"=>@$kyc,
+			                                             );
+			                                        ?>
+			                                        <?=view('upload-multiple/index',compact('file_data','db','data'))?>
+												</div>
+											</div>
+										</div>
+
+
 									</div>
 								</div>
 								<!-- /Institution Info -->
@@ -179,7 +412,22 @@ if(!empty($user))
 										<div class="form-group mb-0">
 											<div id="pricing_select">
 												<div class="custom-control custom-radio custom-control-inline">
-													<input type="text" class="form-control" id="custom_rating_input" name="custom_rating_count" value="" placeholder="20">
+													<input type="number" class="form-control" name="appointment_amount" value="<?=@$kyc->appointment_amount ?>"  placeholder="20">
+												</div>
+											</div>
+										</div>										
+									</div>
+								</div>
+								<!-- /Pricing -->
+
+								<!-- Pricing -->
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title">Experience</h4>										
+										<div class="form-group mb-0">
+											<div id="pricing_select">
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="number" class="form-control" name="experience" value="<?=@$kyc->experience ?>"  placeholder="20">
 												</div>
 											</div>
 										</div>										
@@ -200,19 +448,32 @@ if(!empty($user))
 														<div class="col-12 col-md-6 col-lg-4">
 															<div class="form-group">
 																<label>Degree</label>
-																<input type="text" class="form-control">
+																<select class="select" name="education[]" id="education">
+																	<?php
+																	$list = $db->table("education")->where(["status"=>1,])->get()->getResultObject();
+																	foreach ($list as $key => $value) {
+																	$selected = '';
+																	if(!empty($partner_educations))
+																	{
+																		if(in_array($value->id, $partner_educations)) $selected = 'selected';
+																	}
+																	?>
+																		<option value="<?=$value->id ?>" <?=$selected ?> ><?=$value->name ?></option>
+																	<?php } ?>
+																</select>
+
 															</div> 
 														</div>
 														<div class="col-12 col-md-6 col-lg-4">
 															<div class="form-group">
 																<label>College/Institute</label>
-																<input type="text" class="form-control">
+																<input type="text" class="form-control" name="collage[]">
 															</div> 
 														</div>
 														<div class="col-12 col-md-6 col-lg-4">
 															<div class="form-group">
 																<label>Year of Completion</label>
-																<input type="text" class="form-control">
+																<input type="text" class="form-control" name="year_complete[]">
 															</div> 
 														</div>
 													</div>
@@ -226,49 +487,7 @@ if(!empty($user))
 								</div>
 								<!-- /Education -->
 							
-								<!-- Experience -->
-								<div class="card">
-									<div class="card-body">
-										<h4 class="card-title">Experience</h4>
-										<div class="experience-info">
-											<div class="row form-row experience-cont">
-												<div class="col-12 col-md-10 col-lg-11">
-													<div class="row form-row">
-														<div class="col-12 col-md-6 col-lg-4">
-															<div class="form-group">
-																<label>Institution Name</label>
-																<input type="text" class="form-control">
-															</div> 
-														</div>
-														<div class="col-12 col-md-6 col-lg-4">
-															<div class="form-group">
-																<label>From</label>
-																<input type="text" class="form-control">
-															</div> 
-														</div>
-														<div class="col-12 col-md-6 col-lg-4">
-															<div class="form-group">
-																<label>To</label>
-																<input type="text" class="form-control">
-															</div> 
-														</div>
-														<div class="col-12 col-md-6 col-lg-4">
-															<div class="form-group">
-																<label>Designation</label>
-																<input type="text" class="form-control">
-															</div> 
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="add-more">
-											<a href="javascript:void(0);" class="add-experience"><i class="fa fa-plus-circle"></i> Add More</a>
-										</div>
-									</div>
-								</div>
-								<!-- /Experience -->
-								
+															
 							
 								
 								<div class="submit-section submit-btn-bottom">
@@ -303,7 +522,7 @@ if(!empty($user))
 
     $(".add-education").on('click', function () {
 
-    	console.log("Afsaf");
+    	let ttm = Date.now();
 		
 		var educationcontent = '<div class="row form-row education-cont">' +
 			'<div class="col-12 col-md-10 col-lg-11">' +
@@ -311,19 +530,26 @@ if(!empty($user))
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
 							'<label>Degree</label>' +
-							'<input type="text" class="form-control">' +
+							`<select class="select" name="education[]" id="select${ttm}"><option value="">Select</option>
+							<?php
+							$list = $db->table("education")->where(["status"=>1,])->get()->getResultObject();
+							foreach ($list as $key => $value) {
+							?>
+								<option value="<?=$value->id ?>" ><?=$value->name ?></option>
+							<?php } ?>
+							</select>` +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
 							'<label>College/Institute</label>' +
-							'<input type="text" class="form-control">' +
+							'<input type="text" class="form-control" name="collage[]">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
 							'<label>Year of Completion</label>' +
-							'<input type="text" class="form-control">' +
+							'<input type="text" class="form-control" name="year_complete[]">' +
 						'</div>' +
 					'</div>' +
 				'</div>' +
@@ -332,6 +558,7 @@ if(!empty($user))
 		'</div>';
 		
         $(".education-info").append(educationcontent);
+        $("#select"+ttm).select2();
         return false;
     });
 	

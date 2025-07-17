@@ -161,21 +161,21 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 									<li class="has-submenu">
 										<a href="<?=$base_url ?>#">Instructors</a>
 										<ul class="submenu">
-											<li><a href="<?=$base_url ?>map-grid.php">Map Grid</a></li>
-											<li><a href="<?=$base_url ?>map-list.php">Map List</a></li>
+											<li><a href="<?=$base_url ?>map-grid">Map Grid</a></li>
+											<li><a href="<?=$base_url ?>map-list">Map List</a></li>
 										</ul>
 									</li>
 								</ul>
 							</li>
-							<li class="has-submenu"><a href="<?=$base_url ?>contact.php">Contact Us</a></li>
+							<li class="has-submenu"><a href="<?=$base_url ?>contact">Contact Us</a></li>
 							
 							
 						</ul>
 					</div>		 
 					<ul class="nav header-navbar-rht">
 						<?php if(!in_array($role, [2,3,4,5,6,7])){ ?>
-							<li><a href="<?=$base_url ?>login.php">Log in</a></li>
-							<li><a href="<?=$base_url ?>register.php" class="login-btn">Signup </a></li>
+							<li><a href="<?=$base_url ?>login">Log in</a></li>
+							<li><a href="<?=$base_url ?>register" class="login-btn">Signup </a></li>
 						<?php }else{?>
 							<li><a href="<?=base_url($user_role->route.'/dashboard')?>" class="login-btn">My Account </a></li>
 						<?php } ?>

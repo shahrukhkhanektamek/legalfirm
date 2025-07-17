@@ -15,6 +15,7 @@ $routes->post('search-vendor', 'Home::search_vendor');
 $routes->post('search-country', 'Home::search_country');
 $routes->post('search-state', 'Home::search_state');
 $routes->post('search-city', 'Home::search_city');
+$routes->post('search-education', 'Home::search_education');
 
 
 $routes->post('contact-enquiry', 'Enquiry::contact_enquiry');

@@ -7,6 +7,7 @@
 					<img src="<?=image_check($user->image,'user.png') ?>" alt="User Image">
 				</a>
 				<div class="profile-det-info">
+					<h5><i class="fas fa-user"></i> <?=$user->name?></h5>
 					<h5><i class="fas fa-calendar"></i> <?=date("d M Y", strtotime($user->add_date_time))?></h5>
 					<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> <?=$user->country_name ?>, <?=$user->state_name ?></h5>
 				</div>
@@ -37,6 +38,12 @@
 						<a href="<?=base_url().$user_role->nav.'/' ?>reviews">
 							<i class="fas fa-star"></i>
 							<span>Reviews</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?=base_url().$user_role->nav.'/' ?>kyc">
+							<i class="fas fa-id-badge"></i>
+							<span>Kyc</span>
 						</a>
 					</li>
 					<li>

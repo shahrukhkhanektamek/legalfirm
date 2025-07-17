@@ -25,11 +25,11 @@
 								<div class="footer-widget footer-menu">
 									<h2 class="footer-title">POPULAR Services</h2>
 									<ul>
-										<li><a href="courses.php">Personal Injury</a></li>
-										<li><a href="courses.php">Family Law</a></li>
-										<li><a href="courses.php">Criminal Defense</a></li>
-										<li><a href="courses.php">Business and Corporate Law</a></li>
-										<li><a href="courses.php">Real Estate</a></li>
+										<li><a href="courses">Personal Injury</a></li>
+										<li><a href="courses">Family Law</a></li>
+										<li><a href="courses">Criminal Defense</a></li>
+										<li><a href="courses">Business and Corporate Law</a></li>
+										<li><a href="courses">Real Estate</a></li>
 									</ul>
 								</div>
 								<!-- /Footer Widget -->
@@ -42,11 +42,11 @@
 								<div class="footer-widget footer-menu">
 									<h2 class="footer-title">Quick Links</h2>
 									<ul>
-										<li><a href="booking.php">About Us</a></li>
-										<li><a href="chat.php">Contact Us</a></li>
-										<li><a href="reviews.php">Advocates</a></li>
-										<li><a href="favourites.php">Legal Advisers </a></li>
-										<li><a href="college.php">Chartered Accountant (CA)</a></li>
+										<li><a href="booking">About Us</a></li>
+										<li><a href="chat">Contact Us</a></li>
+										<li><a href="reviews">Advocates</a></li>
+										<li><a href="favourites">Legal Advisers </a></li>
+										<li><a href="college">Chartered Accountant (CA)</a></li>
 									</ul>
 								</div>
 								<!-- /Footer Widget -->
@@ -91,7 +91,7 @@
 								</div>
 								<div class="col-md-6 col-lg-4">
 									<div class="copyright-text center-text">
-										<p class="mb-0"><a href="term-condition.php">Terms and Conditions</a> - <a href="privacy-policy.php">Privacy Policy</a></p>
+										<p class="mb-0"><a href="term-condition">Terms and Conditions</a> - <a href="privacy-policy">Privacy Policy</a></p>
 									</div>
 								</div>
 								<div class="col-md-2 col-lg-4 right-text">
