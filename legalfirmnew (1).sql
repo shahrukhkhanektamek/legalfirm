@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2025 at 09:35 PM
+-- Generation Time: Jul 18, 2025 at 04:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -6018,7 +6018,12 @@ INSERT INTO `kyc` (`id`, `user_id`, `bank_holder_name`, `nomani`, `bank_name`, `
 (46, 17, 'fafasf', 'safsa', 'jkh', 'jk', 'Saving', 'sfajh', 'hjkhjk', '543543', 'jkh', 'jkh', '[]', '[]', '[]', '[]', NULL, NULL, 'jk', '0000', 'h', '[]', 'kjh', 'jkh', '[]', NULL, NULL, 10, 20, 0, 17, NULL, NULL, NULL, NULL, 0),
 (47, 17, 'fafasf', 'safsa', 'jkh', 'jk', 'Saving', 'sfajh', 'hjkhjk', '543543', 'jkh', 'jkh', '[]', '[]', '[]', '[]', NULL, NULL, 'jk', '0000', 'h', '[]', 'kjh', 'jkh', '[]', NULL, NULL, 10, 20, 0, 17, NULL, NULL, NULL, NULL, 0),
 (48, 17, 'fafasf', 'safsa', 'jkh', 'jk', 'Saving', 'sfajh', 'hjkhjk', '543543', 'jkh', 'jkh', '[]', '[]', '[]', '[]', NULL, NULL, 'jk', '0000', 'h', '[]', 'kjh', 'jkh', '[]', NULL, NULL, 10, 20, 0, 17, NULL, NULL, NULL, NULL, 0),
-(49, 17, 'fafasf', 'safsa', 'jkh', 'jk', 'Saving', 'sfajh', 'hjkhjk', '543543', 'jkh', 'jkh', '[]', '[]', '[]', '[]', NULL, NULL, 'jk', '0000', 'h', '[]', 'kjh', 'jkh', '[]', NULL, NULL, 10, 20, 0, 17, NULL, NULL, NULL, NULL, 0);
+(49, 17, 'fafasf', 'safsa', 'jkh', 'jk', 'Saving', 'sfajh', 'hjkhjk', '543543', 'jkh', 'jkh', '[]', '[]', '[]', '[]', NULL, NULL, 'jk', '0000', 'h', '[]', 'kjh', 'jkh', '[]', NULL, NULL, 10, 20, 0, 17, NULL, NULL, NULL, NULL, 0),
+(50, 17, 'fafasf', 'safsa', 'jkh', 'jk', 'Saving', 'sfajh', 'hjkhjk', '543543', 'jkh', 'jkh', '[]', '[]', '[]', '[]', NULL, NULL, 'jk', '0000', 'h', '[]', 'kjh', 'jkh', '[]', NULL, NULL, 10, 20, 0, 17, NULL, NULL, NULL, NULL, 0),
+(51, 17, 'fafasf', 'safsa', 'jkh', 'jk', 'Saving', 'sfajh', 'hjkhjk', '543543', 'jkh', 'jkh', '[]', '[]', '[]', '[]', NULL, NULL, 'jk', '0000', 'h', '[]', 'kjh', 'jkh', '[]', NULL, NULL, 10, 20, 0, 17, NULL, NULL, NULL, NULL, 0),
+(52, 17, 'fafasf', 'safsa', 'jkh', 'jk', 'Saving', 'sfajh', 'hjkhjk', '543543', 'jkh', 'jkh', '[]', '[]', '[]', '[]', NULL, NULL, 'jk', '0000', 'h', '[]', 'kjh', 'jkh', '[]', NULL, NULL, 10, 20, 0, 17, NULL, NULL, NULL, NULL, 0),
+(53, 17, 'fafasf', 'safsa', 'jkh', 'jk', 'Saving', 'sfajh', 'hjkhjk', '543543', 'jkh', 'jkh', NULL, NULL, NULL, NULL, NULL, NULL, 'jk', '0000', 'h', '[{\"image_name\":\"banner3.jpg\",\"image_path\":\"175284883840license.webp\",\"image_alt_text\":\"\"}]', 'kjh', 'jkh', '[{\"image_name\":\"banner3.jpg\",\"image_path\":\"175284883850certificate.webp\",\"image_alt_text\":\"\"}]', NULL, NULL, 10, 20, 0, 17, NULL, NULL, NULL, NULL, 0),
+(54, 17, 'fafasf', 'safsa', 'jkh', 'jk', 'Saving', 'sfajh', 'hjkhjk', '543543', 'jkh', 'jkh', NULL, NULL, NULL, NULL, NULL, NULL, 'jk', '0000', 'h', '[{\"image_name\":\"banner3.jpg\",\"image_path\":\"175284894540license.jpg\",\"image_alt_text\":\"\"}]', NULL, 'jkh', NULL, NULL, NULL, 10, 20, 0, 17, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -6343,7 +6348,8 @@ INSERT INTO `login_history` (`id`, `user_id`, `role`, `ip_address`, `date`, `tim
 (295, '17', 3, '::1', '2025-07-14', '20:52:04', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (296, '21', 3, '::1', '2025-07-14', '22:16:26', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (297, '17', 3, '::1', '2025-07-17', '21:34:37', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
-(298, '17', 3, '::1', '2025-07-17', '21:36:51', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e');
+(298, '17', 3, '::1', '2025-07-17', '21:36:51', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(299, '17', 3, '::1', '2025-07-18', '19:26:10', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e');
 
 -- --------------------------------------------------------
 
@@ -6657,17 +6663,6 @@ CREATE TABLE `partner_certification` (
   `c_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `partner_certification`
---
-
-INSERT INTO `partner_certification` (`id`, `user_id`, `c_id`) VALUES
-(13, 17, 1),
-(14, 17, 3),
-(16, 17, 2),
-(18, 17, 4),
-(19, 17, 5);
-
 -- --------------------------------------------------------
 
 --
@@ -6687,7 +6682,9 @@ CREATE TABLE `partner_education` (
 --
 
 INSERT INTO `partner_education` (`id`, `user_id`, `ed_id`, `collage`, `year_complete`) VALUES
-(25, 17, 1, '', '0000');
+(33, 17, 1, 'rqwr', '2020'),
+(34, 17, 2, 'rqw', '2022'),
+(35, 17, 3, 'rqw', '2025');
 
 -- --------------------------------------------------------
 
@@ -6700,16 +6697,6 @@ CREATE TABLE `partner_expertise` (
   `user_id` int(11) NOT NULL,
   `e_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `partner_expertise`
---
-
-INSERT INTO `partner_expertise` (`id`, `user_id`, `e_id`) VALUES
-(13, 17, 1),
-(14, 17, 3),
-(16, 17, 2),
-(17, 17, 25);
 
 -- --------------------------------------------------------
 
@@ -7082,7 +7069,9 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`id`, `name`, `route`, `nav`, `status`, `add_by`, `add_date_time`, `update_date_time`, `update_history`, `slug`, `is_delete`) VALUES
 (1, 'Admin', 'admin', 'admin', '1', 1, '2024-08-26 18:07:32', '2024-08-26 18:07:32', NULL, NULL, 0),
 (2, 'User', 'user', 'user', '1', 1, '2024-08-28 15:38:32', '2024-08-28 15:38:32', NULL, NULL, 0),
-(3, 'Advocate', 'partner', 'partner', '1', 1, '2024-08-28 15:38:32', '2024-08-28 15:38:32', NULL, NULL, 0);
+(3, 'Advocate', 'partner', 'partner', '1', 1, '2024-08-28 15:38:32', '2024-08-28 15:38:32', NULL, NULL, 0),
+(4, 'CA', 'partner', 'partner', '1', 1, '2024-08-28 15:38:32', '2024-08-28 15:38:32', NULL, NULL, 0),
+(5, 'Adviser', 'partner', 'partner', '1', 1, '2024-08-28 15:38:32', '2024-08-28 15:38:32', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -8186,13 +8175,13 @@ ALTER TABLE `expertise`
 -- AUTO_INCREMENT for table `kyc`
 --
 ALTER TABLE `kyc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `login_history`
 --
 ALTER TABLE `login_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=299;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
 
 --
 -- AUTO_INCREMENT for table `main_menu`
@@ -8234,7 +8223,7 @@ ALTER TABLE `partner_certification`
 -- AUTO_INCREMENT for table `partner_education`
 --
 ALTER TABLE `partner_education`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `partner_expertise`
@@ -8306,7 +8295,7 @@ ALTER TABLE `product_vehicle_type`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `script`

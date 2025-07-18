@@ -222,7 +222,7 @@ if(!empty($user))
 
 								
 
-
+								<?php if($role==3){ ?>
 								<!-- advocate -->
 								<!-- Institution Info -->
 								<div class="card">
@@ -305,8 +305,8 @@ if(!empty($user))
 												</div>
 											</div>
 										</div>
-
-
+									<?php } ?>
+									<?php if($role==4){ ?>
 										<!-- CA -->
 										<div class="row form-row">
 											<div class="col-md-6">
@@ -339,8 +339,10 @@ if(!empty($user))
 												</div>
 											</div>
 										</div>
+									<?php } ?>
 
 
+									<?php if($role==5){ ?>
 										<!-- Adviser  -->
 										<div class="row form-row">
 											<div class="col-md-12">
@@ -399,6 +401,7 @@ if(!empty($user))
 												</div>
 											</div>
 										</div>
+									<?php } ?>
 
 
 									</div>
@@ -442,43 +445,11 @@ if(!empty($user))
 									<div class="card-body">
 										<h4 class="card-title">Education</h4>
 										<div class="education-info">
-											<div class="row form-row education-cont">
-												<div class="col-12 col-md-10 col-lg-11">
-													<div class="row form-row">
-														<div class="col-12 col-md-6 col-lg-4">
-															<div class="form-group">
-																<label>Degree</label>
-																<select class="select" name="education[]" id="education">
-																	<?php
-																	$list = $db->table("education")->where(["status"=>1,])->get()->getResultObject();
-																	foreach ($list as $key => $value) {
-																	$selected = '';
-																	if(!empty($partner_educations))
-																	{
-																		if(in_array($value->id, $partner_educations)) $selected = 'selected';
-																	}
-																	?>
-																		<option value="<?=$value->id ?>" <?=$selected ?> ><?=$value->name ?></option>
-																	<?php } ?>
-																</select>
+											
+								<?php echo view('upload-multiple/education',compact('row','db','data','partner_educations','partner_education')); ?>
 
-															</div> 
-														</div>
-														<div class="col-12 col-md-6 col-lg-4">
-															<div class="form-group">
-																<label>College/Institute</label>
-																<input type="text" class="form-control" name="collage[]">
-															</div> 
-														</div>
-														<div class="col-12 col-md-6 col-lg-4">
-															<div class="form-group">
-																<label>Year of Completion</label>
-																<input type="text" class="form-control" name="year_complete[]">
-															</div> 
-														</div>
-													</div>
-												</div>
-											</div>
+
+
 										</div>
 										<div class="add-more">
 											<a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>

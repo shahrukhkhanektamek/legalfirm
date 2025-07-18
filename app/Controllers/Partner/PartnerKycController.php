@@ -76,7 +76,7 @@ class PartnerKycController extends BaseController
             $partner_educations[] = $value->ed_id;
         }
 
-        return view($this->arr_values['folder_name'].'/form',compact('data','row','db','mainData','kyc','partner_specializations','partner_services','partner_expertises','partner_certifications','partner_educations'));
+        return view($this->arr_values['folder_name'].'/form',compact('data','row','db','mainData','kyc','partner_specializations','partner_services','partner_expertises','partner_certifications','partner_educations','partner_education'));
     }
     public function update()
     {        
