@@ -50,6 +50,17 @@ $routes->group('partner', ['namespace' => 'App\Controllers\Partner', 'filter'=>'
     });
 
 
+    
+    $routes->group('gemini', function($routes) {
+
+        $routes->group('ask-ally', function($routes) {
+            $routes->get('/', 'GeminiController::index');
+            $routes->post('update', 'GeminiController::update');
+        });
+
+    });
+
+
 
 });
 

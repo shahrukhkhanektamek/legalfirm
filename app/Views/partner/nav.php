@@ -28,6 +28,51 @@
 							<span>Leads</span>
 						</a>
 					</li>
+
+					<li>
+						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+							<i class="fas fa-robot"></i>
+							<span>Ask Ally</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+							<i class="fas fa-scale-balanced"></i>
+							<span>Legal Research</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+							<i class="fas fa-user-tie"></i>
+							<span>Lawyer</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+							<i class="fas fa-language"></i>
+							<span>Translator</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+							<i class="fas fa-pen-to-square"></i>
+							<span>Complaint Writer</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+							<i class="fas fa-file"></i>
+							<span>Document Generator</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+							<i class="fas fa-search"></i>
+							<span>Document Analyzer</span>
+						</a>
+					</li>
+
+
 					<li>
 						<a href="<?=base_url().$user_role->nav.'/' ?>my-clients">
 							<i class="fas fa-user-injured"></i>
