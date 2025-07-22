@@ -132,6 +132,8 @@ abstract class BaseController extends Controller
         // Check if the page file exists
         $data['check_page'] = $check_page = ROOTPATH . 'app/Views/web/' . $page;
         $data['page'] = $page;
+        $data['table_name'] = $table_name;
+        $data['p_id'] = $p_id;
 
 
         $data['contact_detail'] = json_decode($this->db->table('setting')->getWhere(["name"=>'main',])->getRow()->data);

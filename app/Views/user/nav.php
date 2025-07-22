@@ -24,6 +24,36 @@
 												</a>
 											</li>
 											<li>
+												<a href="<?=base_url().$user_role->nav.'/' ?>reviews">
+													<i class="fas fa-star"></i>
+													<span>Services</span>
+												</a>
+											</li>
+											<li>
+												<a href="<?=base_url().$user_role->nav.'/' ?>reviews">
+													<i class="fas fa-star"></i>
+													<span>Reviews</span>
+												</a>
+											</li>
+											<li>
+												<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+													<i class="fas fa-user-tie"></i>
+													<span>Lawyer</span>
+												</a>
+											</li>
+											<li>
+												<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+													<i class="fas fa-user-tie"></i>
+													<span>Adviser</span>
+												</a>
+											</li>
+											<li>
+												<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+													<i class="fas fa-user-tie"></i>
+													<span>CA</span>
+												</a>
+											</li>
+											<li>
 												<a href="<?=base_url().$user_role->nav.'/' ?>profile">
 													<i class="fas fa-user-cog"></i>
 													<span>Profile Settings</span>

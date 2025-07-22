@@ -25,7 +25,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="<?=base_url(route_to('showroom.list'))?>" class="nav-link" data-key="t-analytics"> Kyc </a>
+                <a href="<?=base_url(route_to('admin-user.list'))?>" class="nav-link" data-key="t-analytics"> Kyc </a>
             </li>
         </ul>
     </div>
@@ -58,10 +58,21 @@
         <i class="ri-wallet-line"></i> <span data-key="t-transaction">Cases</span>
     </a>
 </li>
+
 <li class="nav-item">
-    <a class="nav-link menu-link" href="<?=base_url(route_to('transaction.list'))?>">
-        <i class="ri-wallet-line"></i> <span data-key="t-transaction">Service</span>
+    <a class="nav-link menu-link" href="#services" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="services">
+        <i class="ri-message-2-line"></i> <span data-key="t-dashboards">Services</span>
     </a>
+    <div class="collapse menu-dropdown" id="services">
+        <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+                <a href="<?=base_url(route_to('service-category.list'))?>" class="nav-link" data-key="t-analytics">Category </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url(route_to('service.list'))?>" class="nav-link" data-key="t-analytics"> Service </a>
+            </li>
+        </ul>
+    </div>
 </li>
 
 
@@ -157,39 +168,7 @@
 
 
 
-<!-- <li class="nav-item">
-    <a class="nav-link menu-link" href="#product" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="product">
-        <i class="ri-e-bike-line"></i> <span data-key="t-dashboards">Manage Products</span>
-    </a>
-    <div class="collapse menu-dropdown" id="product">
-        <ul class="nav nav-sm flex-column">
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('color.list'))?>" class="nav-link" data-key="t-analytics"> Colours </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('body-type.list'))?>" class="nav-link" data-key="t-analytics"> Body Type </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('top-speed.list'))?>" class="nav-link" data-key="t-analytics"> Top Speed </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('vehicle-type.list'))?>" class="nav-link" data-key="t-analytics"> E-Vehicle Type </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('two-wheelers-range.list'))?>" class="nav-link" data-key="t-analytics"> E-Two Wheelers Range </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('charging-time.list'))?>" class="nav-link" data-key="t-analytics"> E-Bikes Charging Time </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('features.list'))?>" class="nav-link" data-key="t-analytics"> E-Features </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('product.list'))?>" class="nav-link" data-key="t-analytics"> Add Bike </a>
-            </li>
-        </ul>
-    </div>
-</li> -->
+
 
 <li class="nav-item">
     <a class="nav-link menu-link" href="#setting" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="setting">

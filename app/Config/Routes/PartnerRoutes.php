@@ -54,8 +54,13 @@ $routes->group('partner', ['namespace' => 'App\Controllers\Partner', 'filter'=>'
     $routes->group('gemini', function($routes) {
 
         $routes->group('ask-ally', function($routes) {
-            $routes->get('/', 'GeminiController::index');
-            $routes->post('update', 'GeminiController::update');
+            $routes->get('/', 'GeminiController::ask_ally');
+            $routes->post('action', 'GeminiController::action');
+        });
+
+        $routes->group('legal-research', function($routes) {
+            $routes->get('/', 'GeminiController::legal_research');
+            $routes->post('legal_research_action', 'GeminiController::legal_research_action');
         });
 
     });

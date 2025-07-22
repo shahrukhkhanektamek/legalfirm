@@ -111,7 +111,21 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 			.select2-container {
 			    width: 100% !important;
 			}
-
+#resaponse-area, .resaponse-area {
+    min-height: 200px;
+    max-height: 300px;
+    position: relative;
+}
+.resaponse-area .my-loader {
+    position: absolute;
+}
+.resaponse-area-card
+{
+	display: none;
+}
+.breadcrumb-bar .breadcrumb-title, .page-breadcrumb ol li.active, h2.bd-course-breadcrumb-title {
+    text-transform: capitalize;
+}
 
 		</style>
 
@@ -157,15 +171,34 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 							<li class="has-submenu"><a href="<?=$base_url ?>">Business and Corporate Law</a></li>
 							<li class="has-submenu">
 								<a href="<?=$base_url ?>#">Other Services <i class="fas fa-chevron-down"></i></a>
+
+								<?php
+								$serviceCategory = $db->table("service_category")->where(["status"=>1,])->get()->getResult();
+								if(!empty($serviceCategory)) {
+								?>
+
 								<ul class="submenu">
-									<li class="has-submenu">
-										<a href="<?=$base_url ?>#">Instructors</a>
-										<ul class="submenu">
-											<li><a href="<?=$base_url ?>map-grid">Map Grid</a></li>
-											<li><a href="<?=$base_url ?>map-list">Map List</a></li>
-										</ul>
-									</li>
+									<?php foreach ($serviceCategory as $key => $value) { 
+										
+										?>
+										<li class="has-submenu">
+											<a href="<?=$base_url.$value->slug ?>"><?=$value->name ?></a>
+											<?php
+												$services = $db->table("service")->where(["status"=>1,"service_type"=>1,"category"=>$value->id,])->get()->getResult();
+												if(!empty($services)){
+											?>
+												<ul class="submenu">
+													<?php 
+													foreach ($services as $key2 => $value2) {
+													?>
+														<li><a href="<?=$base_url.$value2->slug ?>"><?=$value2->name ?></a></li>
+													<?php } ?>
+												</ul>
+											<?php } ?>
+										</li>
+									<?php } ?>
 								</ul>
+							<?php } ?>
 							</li>
 							<li class="has-submenu"><a href="<?=$base_url ?>contact">Contact Us</a></li>
 							

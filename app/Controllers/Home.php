@@ -22,6 +22,8 @@ class Home extends BaseController
         $data = $this->mainData;
         $check_page = $data['check_page'];
         $page = $data['page'];
+        $table_name = $data['table_name'];
+        $p_id = $data['p_id'];
         
         
 
@@ -37,11 +39,7 @@ class Home extends BaseController
                     $data['id'] = $data['row_data']->id;
                 }
                 $data['row'] = $data['row_data'];
-
             }
-            if($page=='user.php')
-            return view('web/account/dashboard.php' , $data);
-            else
             return view('web/' . $page, $data);
 
         } else {

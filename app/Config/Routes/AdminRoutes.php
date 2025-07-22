@@ -88,16 +88,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter'=>'Admi
         $routes->post('block_unblock/(:any)', 'AdminUserController::block_unblock/$1', ['as' => 'admin-user.block_unblock']);
     });
 
-    $routes->group('showroom', function($routes) {
-        $routes->get('/', 'AdminShowroomController::index', ['as' => 'showroom.list']);
-        $routes->get('load_data', 'AdminShowroomController::load_data', ['as' => 'showroom.load_data']);
-        $routes->get('add', 'AdminShowroomController::add', ['as' => 'showroom.add']);
-        $routes->get('edit/(:any)?', 'AdminShowroomController::edit/$1', ['as' => 'showroom.edit']);
-        $routes->get('view/(:any)', 'AdminShowroomController::view/$1', ['as' => 'showroom.view']);
-        $routes->post('update', 'AdminShowroomController::update', ['as' => 'showroom.update']);
-        $routes->post('delete/(:any)', 'AdminShowroomController::delete/$1', ['as' => 'showroom.delete']);
-        $routes->post('block_unblock/(:any)', 'AdminShowroomController::block_unblock/$1', ['as' => 'showroom.block_unblock']);
-    });
+  
 
     $routes->group('transaction', function($routes) {
         $routes->get('/', 'AdminTransactionController::index', ['as' => 'transaction.list']);
@@ -144,108 +135,31 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter'=>'Admi
     });
 
 
-    $routes->group('main-menu', function($routes) {
-        $routes->get('/', 'AdminMainMenuController::index', ['as' => 'main-menu.list']);
-        $routes->get('load_data', 'AdminMainMenuController::load_data', ['as' => 'main-menu.load_data']);
-        $routes->get('add', 'AdminMainMenuController::add', ['as' => 'main-menu.add']);
-        $routes->get('edit/(:any)?', 'AdminMainMenuController::edit/$1', ['as' => 'main-menu.edit']);
-        $routes->get('view/(:any)', 'AdminMainMenuController::view/$1', ['as' => 'main-menu.view']);
-        $routes->post('update', 'AdminMainMenuController::update', ['as' => 'main-menu.update']);
-        $routes->post('delete/(:any)', 'AdminMainMenuController::delete/$1', ['as' => 'main-menu.delete']);
-        $routes->post('block_unblock/(:any)', 'AdminMainMenuController::block_unblock/$1', ['as' => 'main-menu.block_unblock']);
-    });
-
-    $routes->group('menu-category', function($routes) {
-        $routes->get('/', 'AdminMenuCategoryController::index', ['as' => 'menu-category.list']);
-        $routes->get('load_data', 'AdminMenuCategoryController::load_data', ['as' => 'menu-category.load_data']);
-        $routes->get('add', 'AdminMenuCategoryController::add', ['as' => 'menu-category.add']);
-        $routes->get('edit/(:any)?', 'AdminMenuCategoryController::edit/$1', ['as' => 'menu-category.edit']);
-        $routes->get('view/(:any)', 'AdminMenuCategoryController::view/$1', ['as' => 'menu-category.view']);
-        $routes->post('update', 'AdminMenuCategoryController::update', ['as' => 'menu-category.update']);
-        $routes->post('delete/(:any)', 'AdminMenuCategoryController::delete/$1', ['as' => 'menu-category.delete']);
-        $routes->post('block_unblock/(:any)', 'AdminMenuCategoryController::block_unblock/$1', ['as' => 'menu-category.block_unblock']);
+    $routes->group('service-category', function($routes) {
+        $routes->get('/', 'AdminServiceCategoryController::index', ['as' => 'service-category.list']);
+        $routes->get('load_data', 'AdminServiceCategoryController::load_data', ['as' => 'service-category.load_data']);
+        $routes->get('add', 'AdminServiceCategoryController::add', ['as' => 'service-category.add']);
+        $routes->get('edit/(:any)?', 'AdminServiceCategoryController::edit/$1', ['as' => 'service-category.edit']);
+        $routes->get('view/(:any)', 'AdminServiceCategoryController::view/$1', ['as' => 'service-category.view']);
+        $routes->post('update', 'AdminServiceCategoryController::update', ['as' => 'service-category.update']);
+        $routes->post('delete/(:any)', 'AdminServiceCategoryController::delete/$1', ['as' => 'service-category.delete']);
+        $routes->post('block_unblock/(:any)', 'AdminServiceCategoryController::block_unblock/$1', ['as' => 'service-category.block_unblock']);
     });
 
 
-
-
-
-
-    $routes->group('color', function($routes) {
-        $routes->get('/', 'AdminColorController::index', ['as' => 'color.list']);
-        $routes->get('load_data', 'AdminColorController::load_data', ['as' => 'color.load_data']);
-        $routes->get('add', 'AdminColorController::add', ['as' => 'color.add']);
-        $routes->get('edit/(:any)?', 'AdminColorController::edit/$1', ['as' => 'color.edit']);
-        $routes->post('update', 'AdminColorController::update', ['as' => 'color.update']);
-        $routes->post('delete/(:any)', 'AdminColorController::delete/$1', ['as' => 'color.delete']);
-        $routes->post('block_unblock/(:any)', 'AdminColorController::block_unblock/$1', ['as' => 'color.block_unblock']);
-    });
-    $routes->group('body-type', function($routes) {
-        $routes->get('/', 'AdminBodyTypeController::index', ['as' => 'body-type.list']);
-        $routes->get('load_data', 'AdminBodyTypeController::load_data', ['as' => 'body-type.load_data']);
-        $routes->get('add', 'AdminBodyTypeController::add', ['as' => 'body-type.add']);
-        $routes->get('edit/(:any)?', 'AdminBodyTypeController::edit/$1', ['as' => 'body-type.edit']);
-        $routes->post('update', 'AdminBodyTypeController::update', ['as' => 'body-type.update']);
-        $routes->post('delete/(:any)', 'AdminBodyTypeController::delete/$1', ['as' => 'body-type.delete']);
-        $routes->post('block_unblock/(:any)', 'AdminBodyTypeController::block_unblock/$1', ['as' => 'body-type.block_unblock']);
-    });
-    $routes->group('top-speed', function($routes) {
-        $routes->get('/', 'AdminTopSpeedController::index', ['as' => 'top-speed.list']);
-        $routes->get('load_data', 'AdminTopSpeedController::load_data', ['as' => 'top-speed.load_data']);
-        $routes->get('add', 'AdminTopSpeedController::add', ['as' => 'top-speed.add']);
-        $routes->get('edit/(:any)?', 'AdminTopSpeedController::edit/$1', ['as' => 'top-speed.edit']);
-        $routes->post('update', 'AdminTopSpeedController::update', ['as' => 'top-speed.update']);
-        $routes->post('delete/(:any)', 'AdminTopSpeedController::delete/$1', ['as' => 'top-speed.delete']);
-        $routes->post('block_unblock/(:any)', 'AdminTopSpeedController::block_unblock/$1', ['as' => 'top-speed.block_unblock']);
-    });
-    $routes->group('vehicle-type', function($routes) {
-        $routes->get('/', 'AdminVehicleTypeController::index', ['as' => 'vehicle-type.list']);
-        $routes->get('load_data', 'AdminVehicleTypeController::load_data', ['as' => 'vehicle-type.load_data']);
-        $routes->get('add', 'AdminVehicleTypeController::add', ['as' => 'vehicle-type.add']);
-        $routes->get('edit/(:any)?', 'AdminVehicleTypeController::edit/$1', ['as' => 'vehicle-type.edit']);
-        $routes->post('update', 'AdminVehicleTypeController::update', ['as' => 'vehicle-type.update']);
-        $routes->post('delete/(:any)', 'AdminVehicleTypeController::delete/$1', ['as' => 'vehicle-type.delete']);
-        $routes->post('block_unblock/(:any)', 'AdminVehicleTypeController::block_unblock/$1', ['as' => 'vehicle-type.block_unblock']);
-    });
-    $routes->group('two-wheelers-range', function($routes) {
-        $routes->get('/', 'AdminTwoWheelersRangeController::index', ['as' => 'two-wheelers-range.list']);
-        $routes->get('load_data', 'AdminTwoWheelersRangeController::load_data', ['as' => 'two-wheelers-range.load_data']);
-        $routes->get('add', 'AdminTwoWheelersRangeController::add', ['as' => 'two-wheelers-range.add']);
-        $routes->get('edit/(:any)?', 'AdminTwoWheelersRangeController::edit/$1', ['as' => 'two-wheelers-range.edit']);
-        $routes->post('update', 'AdminTwoWheelersRangeController::update', ['as' => 'two-wheelers-range.update']);
-        $routes->post('delete/(:any)', 'AdminTwoWheelersRangeController::delete/$1', ['as' => 'two-wheelers-range.delete']);
-        $routes->post('block_unblock/(:any)', 'AdminTwoWheelersRangeController::block_unblock/$1', ['as' => 'two-wheelers-range.block_unblock']);
-    });
-    $routes->group('charging-time', function($routes) {
-        $routes->get('/', 'AdminChargingTimeController::index', ['as' => 'charging-time.list']);
-        $routes->get('load_data', 'AdminChargingTimeController::load_data', ['as' => 'charging-time.load_data']);
-        $routes->get('add', 'AdminChargingTimeController::add', ['as' => 'charging-time.add']);
-        $routes->get('edit/(:any)?', 'AdminChargingTimeController::edit/$1', ['as' => 'charging-time.edit']);
-        $routes->post('update', 'AdminChargingTimeController::update', ['as' => 'charging-time.update']);
-        $routes->post('delete/(:any)', 'AdminChargingTimeController::delete/$1', ['as' => 'charging-time.delete']);
-        $routes->post('block_unblock/(:any)', 'AdminChargingTimeController::block_unblock/$1', ['as' => 'charging-time.block_unblock']);
-    });
-    $routes->group('features', function($routes) {
-        $routes->get('/', 'AdminFeaturesController::index', ['as' => 'features.list']);
-        $routes->get('load_data', 'AdminFeaturesController::load_data', ['as' => 'features.load_data']);
-        $routes->get('add', 'AdminFeaturesController::add', ['as' => 'features.add']);
-        $routes->get('edit/(:any)?', 'AdminFeaturesController::edit/$1', ['as' => 'features.edit']);
-        $routes->post('update', 'AdminFeaturesController::update', ['as' => 'features.update']);
-        $routes->post('delete/(:any)', 'AdminFeaturesController::delete/$1', ['as' => 'features.delete']);
-        $routes->post('block_unblock/(:any)', 'AdminFeaturesController::block_unblock/$1', ['as' => 'features.block_unblock']);
+    $routes->group('service', function($routes) {
+        $routes->get('/', 'AdminServiceController::index', ['as' => 'service.list']);
+        $routes->get('load_data', 'AdminServiceController::load_data', ['as' => 'service.load_data']);
+        $routes->get('add', 'AdminServiceController::add', ['as' => 'service.add']);
+        $routes->get('edit/(:any)?', 'AdminServiceController::edit/$1', ['as' => 'service.edit']);
+        $routes->get('view/(:any)', 'AdminServiceController::view/$1', ['as' => 'service.view']);
+        $routes->post('update', 'AdminServiceController::update', ['as' => 'service.update']);
+        $routes->post('delete/(:any)', 'AdminServiceController::delete/$1', ['as' => 'service.delete']);
+        $routes->post('block_unblock/(:any)', 'AdminServiceController::block_unblock/$1', ['as' => 'service.block_unblock']);
     });
 
-    $routes->group('product', function($routes) {
-        $routes->get('/', 'AdminProductController::index', ['as' => 'product.list']);
-        $routes->get('load_data', 'AdminProductController::load_data', ['as' => 'product.load_data']);
-        $routes->get('add', 'AdminProductController::add', ['as' => 'product.add']);
-        $routes->get('edit/(:any)?', 'AdminProductController::edit/$1', ['as' => 'product.edit']);
-        $routes->get('view/(:any)', 'AdminProductController::view/$1', ['as' => 'product.view']);
-        $routes->post('update', 'AdminProductController::update', ['as' => 'product.update']);
-        $routes->post('delete/(:any)', 'AdminProductController::delete/$1', ['as' => 'product.delete']);
-        $routes->post('block_unblock/(:any)', 'AdminProductController::block_unblock/$1', ['as' => 'product.block_unblock']);
-    });
 
+   
     
 
 

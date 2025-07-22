@@ -30,13 +30,13 @@
 					</li>
 
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>ask-ally">
 							<i class="fas fa-robot"></i>
 							<span>Ask Ally</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>legal-research">
 							<i class="fas fa-scale-balanced"></i>
 							<span>Legal Research</span>
 						</a>
