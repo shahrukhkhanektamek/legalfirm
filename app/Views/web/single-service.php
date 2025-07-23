@@ -144,22 +144,9 @@ $cities = $db->table('city')->getWhere(["status"=>1,])->getResultObject();
 		                           </div>
 		                           <div class="row g-30">
 		                              
-		                              <?php foreach ($servicesCard as $key => $value) { ?>
-		                                 <div class="col-xxl-4 col-xl-6 col-lg-6 col-md-6">
-		                                    <div class="bd-course-wrapper style-two">
-		                                       <div class="bd-course-thumb-wrapper bd-course-thumb-style small-style p-relative">
-		                                          <div class="bd-course-thumb-bg bg-1"><img src="<?=image_check_front($value->image) ?>" alt="images"></div>
-		                                       </div>
-		                                       <div class="bd-course-content">
-		                                          <h5 class="bd-course-title underline mb-10"><a href="<?=base_url($value->slug) ?>"><?=$value->name ?></a></h5>
-		                                          <p class="bd-course-description mb-10"><?=$value->sort_description ?></p>
-		                                          <div class="bd-course-btn">
-		                                             <a class="bd-btn btn-outline-primary" href="<?=base_url($value->slug) ?>">View More</a>
-		                                          </div>
-		                                       </div>
-		                                    </div>
-		                                 </div>
-		                              <?php } ?>
+		                              <?php foreach ($servicesCard as $key => $value) { 
+		                              	echo view("web/card/service-grid",["col"=>"col-md-6 col-lg-4","value"=>$value,]);
+		                              } ?>
 
 
 		                              

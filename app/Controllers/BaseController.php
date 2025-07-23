@@ -79,7 +79,7 @@ abstract class BaseController extends Controller
             if(count($checkStateCity)>1)
             {
                 $stateCity = decodeSlug($checkStateCity[1]);
-                $emptyCehck1 = $this->db->table('state')->where("name", $stateCity)->get()->getRow();
+                $emptyCehck1 = $this->db->table('states')->where("name", $stateCity)->get()->getRow();
                 $emptyCehck2 = $this->db->table('city')->where("name", $stateCity)->get()->getRow();
                 if(!empty($emptyCehck1) || !empty($emptyCehck2))
                 {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2025 at 03:08 PM
+-- Generation Time: Jul 23, 2025 at 10:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -6359,7 +6359,8 @@ INSERT INTO `login_history` (`id`, `user_id`, `role`, `ip_address`, `date`, `tim
 (304, '17', 3, '::1', '2025-07-22', '17:02:11', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (305, '20', 3, '::1', '2025-07-22', '17:24:28', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (306, '3', 2, '::1', '2025-07-22', '17:24:46', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e'),
-(307, '1', 1, '::1', '2025-07-22', '17:34:08', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e');
+(307, '1', 1, '::1', '2025-07-22', '17:34:08', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(308, '1', 1, '::1', '2025-07-24', '01:26:35', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e');
 
 -- --------------------------------------------------------
 
@@ -7241,11 +7242,11 @@ CREATE TABLE `service_category` (
 --
 
 INSERT INTO `service_category` (`id`, `name`, `files`, `status`, `add_by`, `add_date_time`, `update_date_time`, `update_history`, `slug`, `is_delete`) VALUES
-(13, 'Startup', '', 1, NULL, NULL, '2025-07-22 17:59:39', NULL, 'startup-1', 0),
-(14, 'Intellectual Property', '', 1, NULL, NULL, NULL, NULL, 'intellectual-property', 0),
-(15, 'Goods & Services Tax', '', 1, NULL, NULL, NULL, NULL, 'goods-services-tax', 0),
-(16, 'Income Tax', '', 1, NULL, NULL, NULL, NULL, 'income-tax', 0),
-(17, 'Accounting & Compliance', '', 1, NULL, NULL, NULL, NULL, 'accounting-compliance', 0);
+(13, 'Startup', '', 1, NULL, NULL, '2025-07-24 01:27:13', NULL, 'startup', 0),
+(14, 'Intellectual Property', '', 1, NULL, NULL, '2025-07-24 01:27:09', NULL, 'intellectual-property', 0),
+(15, 'Goods & Services Tax', '', 1, NULL, NULL, '2025-07-24 01:27:07', NULL, 'goods-services-tax', 0),
+(16, 'Income Tax', '', 1, NULL, NULL, '2025-07-24 01:27:05', NULL, 'income-tax', 0),
+(17, 'Accounting & Compliance', '', 1, NULL, NULL, '2025-07-24 01:26:54', NULL, 'accounting-compliance', 0);
 
 -- --------------------------------------------------------
 
@@ -7294,21 +7295,6 @@ CREATE TABLE `slugs` (
 --
 
 INSERT INTO `slugs` (`id`, `slug`, `table_name`, `p_id`, `page_name`) VALUES
-(168, 'startup', 'main_menu', 13, 'single-service.php'),
-(169, 'intellectual-property', 'main_menu', 14, 'single-service.php'),
-(170, 'goods-services-tax', 'main_menu', 15, 'single-service.php'),
-(171, 'income-tax', 'main_menu', 16, 'single-service.php'),
-(173, 'for-indian-entrepreneurs', 'menu_category', 10, 'single-service.php'),
-(174, 'for-foreign-entrepreneurs', 'menu_category', 13, 'single-service.php'),
-(175, 'special-entities', 'menu_category', 14, 'single-service.php'),
-(176, 'registrations', 'menu_category', 15, 'single-service.php'),
-(177, 'trademark', 'menu_category', 16, 'single-service.php'),
-(178, 'others', 'menu_category', 17, 'single-service.php'),
-(179, 'gst-services', 'menu_category', 18, 'single-service.php'),
-(180, 'compliance', 'menu_category', 19, 'single-service.php'),
-(181, 'tax-filing', 'menu_category', 20, 'single-service.php'),
-(182, 'payroll-compliance', 'menu_category', 21, 'single-service.php'),
-(183, 'corporate-filings-1', 'menu_category', 22, 'single-service.php'),
 (243, 'registration', 'blog_sub_category', 1, 'blog.php'),
 (244, 'private-limited-company-1', 'blog_sub_category', 2, 'blog.php'),
 (251, 'proprietorship', 'service', 1, 'single-service.php'),
@@ -7362,64 +7348,17 @@ INSERT INTO `slugs` (`id`, `slug`, `table_name`, `p_id`, `page_name`) VALUES
 (301, 'authorized-capital-increase', 'service', 51, 'single-service.php'),
 (302, 'share-transfer-company', 'service', 52, 'single-service.php'),
 (303, 'moa-amendment', 'service', 53, 'single-service.php'),
-(306, 'accounting-compliance', 'main_menu', 17, 'single-service.php'),
 (320, 'gst-registration', 'service', 24, 'single-service.php'),
 (322, 'trademark-registration', 'service', 16, 'single-service.php'),
-(335, 'shte', 'users', 3, 'howroom-single.php'),
-(336, 'fasfsa', 'users', 4, 'howroom-single.php'),
-(339, 'we-provide-best-solutions-to-grow-your-business-1', 'package', 6, 'package-single.php'),
-(340, 'income-tax-single-1', 'package', 4, 'package-single.php'),
-(381, 'startup-1-1', 'product_body_type', 1, 'body-type.php'),
-(382, 'intellectual-property-1-1', 'product_body_type', 2, 'body-type.php'),
-(383, 'goods-services-tax-1-1', 'product_body_type', 3, 'body-type.php'),
-(384, 'income-tax-1-1', 'product_body_type', 4, 'body-type.php'),
-(385, 'compliance-1-1', 'product_body_type', 5, 'body-type.php'),
-(386, 'adventure-tourer', 'product_body_type', 6, 'body-type.php'),
-(387, 'super', 'product_body_type', 7, 'body-type.php'),
-(388, 'dirt', 'product_body_type', 8, 'body-type.php'),
-(389, 'sports-naked', 'product_body_type', 9, 'body-type.php'),
-(390, 'cafe-racer', 'product_body_type', 10, 'body-type.php'),
-(391, 'tourer', 'product_body_type', 11, 'body-type.php'),
-(392, 'sports-tourer', 'product_body_type', 12, 'body-type.php'),
-(393, 'off-road', 'product_body_type', 13, 'body-type.php'),
-(394, 'roadster', 'product_body_type', 14, 'body-type.php'),
-(395, 'scrambler', 'product_body_type', 15, 'body-type.php'),
-(442, 'above-90-km-hr', 'product_top_speed', 7, 'top-speed.php'),
-(443, '60-90-km-hr', 'product_top_speed', 8, 'top-speed.php'),
-(444, '30-60-km-hr', 'product_top_speed', 9, 'top-speed.php'),
-(445, '0-30-km-hr', 'product_top_speed', 10, 'top-speed.php'),
-(446, 'moped', 'product_vehicle_type', 7, 'vehicle-type.php'),
-(447, 'cycles', 'product_vehicle_type', 8, 'vehicle-type.php'),
-(448, 'under-120', 'product_two_wheelers_range', 7, 'two-wheelers-range.php'),
-(449, 'under-100', 'product_two_wheelers_range', 8, 'two-wheelers-range.php'),
-(452, 'under-80', 'product_two_wheelers_range', 9, 'two-wheelers-range.php'),
-(455, 'under-6-hours', 'product_charging_time', 7, 'charging-time.php'),
-(456, 'under-4-hours', 'product_charging_time', 8, 'charging-time.php'),
-(457, 'under-4-hours-1', 'product_charging_time', 9, 'charging-time.php'),
-(458, 'under-2-hours', 'product_charging_time', 10, 'charging-time.php'),
-(459, 'mobile-connectivity', 'product_features', 7, 'features.php'),
-(460, 'fast-charging', 'product_features', 8, 'features.php'),
-(461, 'charging-point', 'product_features', 9, 'features.php'),
 (464, 'automotive-news', 'blog_category', 5, 'blog.php'),
 (465, 'electric-technology', 'blog_category', 6, 'blog.php'),
-(467, 'ffsaf-1', 'package', 7, 'package-single.php'),
-(481, 'yamaha-mt-15-v2-0', 'product', 55, 'single-product.php'),
-(487, 'proprietorship-2', 'product', 1, 'single-product.php'),
-(491, 'yamaha-mt-15-v2-0-1', 'product', 62, 'single-product.php'),
 (493, 'afsa', 'blog', 8, 'blog-single.php'),
 (497, 'bike-king', 'users', 2, 'howroom-single.php'),
-(498, 'nabil-ansari', 'users', 8, 'howroom-single.php'),
-(499, 'royal-enfield-flying-flea-s6-scrambler-spotted-testing-for-first-time-along-with-the-flying-flea-c6', 'blog', 11, 'blog-single.php'),
-(506, 'honda-activa-6g', 'product', 63, 'single-product.php'),
-(515, 'red', 'color', 17, 'color.php'),
-(516, 'black', 'color', 18, 'color.php'),
-(518, 'blue', 'color', 19, 'color.php'),
-(520, 'revolt-rv400', 'product', 64, 'single-product.php'),
-(521, '450-electric-scooter', 'product', 65, 'single-product.php'),
-(523, 'suzuki-access-125', 'product', 66, 'single-product.php'),
-(524, 'hero-pleasure-xtec', 'product', 67, 'single-product.php'),
-(526, 'winding-up-company', 'service', 54, 'service-single.php'),
-(527, 'startup-1', 'service_category', 13, 'services.php');
+(528, 'accounting-compliance', 'service_category', 17, 'services.php'),
+(529, 'income-tax', 'service_category', 16, 'services.php'),
+(530, 'goods-services-tax', 'service_category', 15, 'services.php'),
+(531, 'intellectual-property', 'service_category', 14, 'services.php'),
+(532, 'startup', 'service_category', 13, 'services.php');
 
 -- --------------------------------------------------------
 
@@ -8192,7 +8131,7 @@ ALTER TABLE `kyc`
 -- AUTO_INCREMENT for table `login_history`
 --
 ALTER TABLE `login_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=308;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=309;
 
 --
 -- AUTO_INCREMENT for table `menu_category`
@@ -8330,7 +8269,7 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `slugs`
 --
 ALTER TABLE `slugs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=528;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=533;
 
 --
 -- AUTO_INCREMENT for table `states`
