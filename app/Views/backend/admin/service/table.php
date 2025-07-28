@@ -3,6 +3,8 @@
         <tr>
             <th data-ordering="false">Name</th>
             <th data-ordering="false">Image</th>
+            <th data-ordering="false">Category</th>
+            <th data-ordering="false">Service Type</th>
             <th data-ordering="false">Status</th>
             <th>Action</th>
         </tr>
@@ -15,6 +17,8 @@
                 <td><?=$value->name?></td>                
                 <td>
                     <img class="img-thumbnail" src="<?=image_check($value->image)?>" style="width: auto;height: 45px;">                                    </td>
+                <td><?=$value->category_name ?></td>
+                <td><?=$value->service_type_name ?></td>
                 <td><?=status_get($value->status)?></td>
                 <td>
                     <a href="<?=$data['route'].'/edit/'.encript($value->id)?>" class="btn btn-sm btn-outline-primary btn-icon waves-effect" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="ri-ball-pen-line"></i></a>

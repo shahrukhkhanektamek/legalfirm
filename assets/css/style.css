@@ -23052,7 +23052,8 @@ body.indexfourteen {
     float: right;
     color: #757575;
 }
-.category-widget .categories li a:hover {
+.category-widget .categories li a:hover,
+.category-widget .categories li a.active {
 	color: #966b2f;
 }
 .category-widget .categories > li > a > i {

@@ -1,4 +1,69 @@
-<?php include"include/header.php"; ?>
+<?php 
+include"include/header.php"; 
+
+$table_nameOld = $table_name;
+
+
+$builder = $db->table('service_category');
+$builder->select('service_category.*, COUNT(service.id) as services_count');
+$builder->join('service', 'service.category = service_category.id', 'left');
+$builder->where('service_category.status', 1);
+$builder->groupBy('service_category.id');
+$builder->orderBy('service_category.id', 'desc');
+
+$service_category = $builder->get()->getResult();
+
+
+
+
+
+$uri = $request->getUri()->getSegment(1);
+$limit = 12;
+$status = 1;
+$order_by = $request->getVar('order_by') ?:'1';
+$filter_search_value = $request->getVar('filter_search_value');
+$page = $request->getVar('page') ?: 1;
+$offset = ($page - 1) * $limit;
+
+
+
+$table_name = "service";
+$data['route'] = base_url('services');   
+
+
+$query = $db->table($table_name)
+    ->where([
+        $table_name . '.status' => $status,
+    ])
+    ->join('service_category', 'service_category.id = '.$table_name.'.category', 'left')
+    ->select("{$table_name}.*,service_category.name as category_name");
+
+
+$query->orderBy($table_name . '.id', 'desc'); 
+
+
+if($table_nameOld=='service_category')
+{
+	$query->where($table_name.'.category', $row->id);
+}
+
+if(!empty($filter_search_value))
+{
+    $query->groupStart()
+        ->like($table_name . '.name', $filter_search_value)
+    ->groupEnd();
+}
+
+$total = $query->countAllResults(false);
+$data_list = $query->limit($limit, $offset)->get()->getResult();
+$data['pager'] = $pager->makeLinks($page, $limit, $total);
+$data['totalData'] = $total;
+$data['startData'] = $offset + 1;
+$data['endData'] = ($offset + $limit > $total) ? $total : ($offset + $limit);
+$data['data_list'] = $data_list;
+
+?>
+
 
 
 
@@ -31,12 +96,10 @@
 							<div class="card category-widget">
 								<div class="card-body">
 									<ul class="categories">
-										<li><a href="#">Instructors <span>(62)</span></a></li>
-										<li><a href="#">Students Life <span>(27)</span></a></li>
-										<li><a href="#">Courses <span>(41)</span></a></li>
-										<li><a href="#">Study Tips <span>(16)</span></a></li>
-										<li><a href="#">College List<span>(55)</span></a></li>
-										<li><a href="#">University  <span>(07)</span></a></li>
+										<li><a href="<?=base_url('services') ?>" >All </a></li>
+										<?php foreach ($service_category as $key => $value) { ?>
+											<li><a href="<?=base_url().$value->slug ?>" class="<?php if($value->slug==$uri)echo 'active'; ?>"><?=$value->name ?> <span>(<?=$value->services_count ?>)</span></a></li>
+										<?php } ?>
 									</ul>
 								</div>
 							</div>							
@@ -56,122 +119,14 @@
 						
 							<div class="row row-grid">
 								
-
-
-								<div class="col-md-6 col-lg-4">
-									<div class="course-section">
-										<div class="course-top">
-											<div class="course-img">
-												<img src="assets/img/service/service1.webp" alt="" class="img-fluid">
-											</div>
-										</div>
-										<div class="course-content service-content">
-											<h5>Personal Injury</h5>
-											<h2><a href="service-details.php">Personal Injury</a></h2>
-											<p>If you've been injured due to someone else's negligence, our personal injury attorneys are here to help. We handle cases involving car accidents, slip and falls, medical malpractice, and more. Our goal is to secure the compensation you deserve, helping you recover and move forward.</p>
-											<div class="text-center">
-												<a href="advocates.php" class="btn course-btn">Book Now</a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-6 col-lg-4">
-									<div class="course-section">
-										<div class="course-top">
-											<div class="course-img">
-												<img src="assets/img/service/service1.webp" alt="" class="img-fluid">
-											</div>
-										</div>
-										<div class="course-content service-content">
-											<h5>Personal Injury</h5>
-											<h2><a href="service-details.php">Personal Injury</a></h2>
-											<p>If you've been injured due to someone else's negligence, our personal injury attorneys are here to help. We handle cases involving car accidents, slip and falls, medical malpractice, and more. Our goal is to secure the compensation you deserve, helping you recover and move forward.</p>
-											<div class="text-center">
-												<a href="advocates.php" class="btn course-btn">Book Now</a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-6 col-lg-4">
-									<div class="course-section">
-										<div class="course-top">
-											<div class="course-img">
-												<img src="assets/img/service/service1.webp" alt="" class="img-fluid">
-											</div>
-										</div>
-										<div class="course-content service-content">
-											<h5>Personal Injury</h5>
-											<h2><a href="service-details.php">Personal Injury</a></h2>
-											<p>If you've been injured due to someone else's negligence, our personal injury attorneys are here to help. We handle cases involving car accidents, slip and falls, medical malpractice, and more. Our goal is to secure the compensation you deserve, helping you recover and move forward.</p>
-											<div class="text-center">
-												<a href="advocates.php" class="btn course-btn">Book Now</a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-6 col-lg-4">
-									<div class="course-section">
-										<div class="course-top">
-											<div class="course-img">
-												<img src="assets/img/service/service1.webp" alt="" class="img-fluid">
-											</div>
-										</div>
-										<div class="course-content service-content">
-											<h5>Personal Injury</h5>
-											<h2><a href="service-details.php">Personal Injury</a></h2>
-											<p>If you've been injured due to someone else's negligence, our personal injury attorneys are here to help. We handle cases involving car accidents, slip and falls, medical malpractice, and more. Our goal is to secure the compensation you deserve, helping you recover and move forward.</p>
-											<div class="text-center">
-												<a href="advocates.php" class="btn course-btn">Book Now</a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-6 col-lg-4">
-									<div class="course-section">
-										<div class="course-top">
-											<div class="course-img">
-												<img src="assets/img/service/service1.webp" alt="" class="img-fluid">
-											</div>
-										</div>
-										<div class="course-content service-content">
-											<h5>Personal Injury</h5>
-											<h2><a href="service-details.php">Personal Injury</a></h2>
-											<p>If you've been injured due to someone else's negligence, our personal injury attorneys are here to help. We handle cases involving car accidents, slip and falls, medical malpractice, and more. Our goal is to secure the compensation you deserve, helping you recover and move forward.</p>
-											<div class="text-center">
-												<a href="advocates.php" class="btn course-btn">Book Now</a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-6 col-lg-4">
-									<div class="course-section">
-										<div class="course-top">
-											<div class="course-img">
-												<img src="assets/img/service/service1.webp" alt="" class="img-fluid">
-											</div>
-										</div>
-										<div class="course-content service-content">
-											<h5>Personal Injury</h5>
-											<h2><a href="service-details.php">Personal Injury</a></h2>
-											<p>If you've been injured due to someone else's negligence, our personal injury attorneys are here to help. We handle cases involving car accidents, slip and falls, medical malpractice, and more. Our goal is to secure the compensation you deserve, helping you recover and move forward.</p>
-											<div class="text-center">
-												<a href="advocates.php" class="btn course-btn">Book Now</a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-
-								
-								
+								<?php foreach ($data_list as $key => $value) { 
+	                              	echo view("web/card/service-grid",["col"=>"col-md-6 col-lg-4","value"=>$value,]);
+	                            } ?>
 															
 							</div>
+							<div class="pagination d-flex align-items-center justify-content-center">        
+			                    <?=$data['pager']?>
+			                </div>
 
 						</div>
 					</div>

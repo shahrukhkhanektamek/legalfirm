@@ -57,6 +57,11 @@ $cities = $db->table('city')->getWhere(["status"=>1,])->getResultObject();
 						<!-- Blog Sidebar -->
 						<div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
 
+							<div class="card category-widget">
+								<div class="card-body">
+									<a href="#" class="btn btn-primary">Hire Advocate</a>									
+								</div>
+							</div>
 							
 							<!-- Categories -->
 							<div class="card category-widget">

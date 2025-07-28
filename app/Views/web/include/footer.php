@@ -44,9 +44,9 @@
 									<ul>
 										<li><a href="booking">About Us</a></li>
 										<li><a href="chat">Contact Us</a></li>
-										<li><a href="reviews">Advocates</a></li>
-										<li><a href="favourites">Legal Advisers </a></li>
-										<li><a href="college">Chartered Accountant (CA)</a></li>
+										<li><a href="advocates">Advocates</a></li>
+										<li><a href="advisers">Legal Advisers </a></li>
+										<li><a href="ca">Chartered Accountant (CA)</a></li>
 									</ul>
 								</div>
 								<!-- /Footer Widget -->

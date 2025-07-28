@@ -289,7 +289,7 @@ var form = '';
             $(form)[0].reset();
             // $("#"+fid)[0].reset();
             // $('#'+fid+' .images-ul').empty();
-            if($(".js-example-basic-single")) $(".js-example-basic-single").select2();
+            if($("select")) $("select").select2();
             // $("select").select2();
           }
           else if(result.action=="login")

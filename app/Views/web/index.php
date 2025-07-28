@@ -13,8 +13,8 @@
 								<h1>Achieve Your Dreams.</h1>
 								<h1>Book your Course.</h1>
 								<div class="btn-item">
-									<a class="btn get-btn" href="courses.html">Contact now</a>
-									<a class="btn courses-btn" href="courses.html">All Services</a>
+									<a class="btn get-btn" href="contact">Contact now</a>
+									<a class="btn courses-btn" href="services">All Services</a>
 								</div>
 							</div>
 						</div>
@@ -39,53 +39,24 @@
 					<div class="row blog-grid-row">
 						
 
-
-						<div class="col-md-4 col-sm-12">
+<?php
+$services = $db->table("service")->limit(10)->where(["status"=>1,"service_type"=>2,])->orderBy('id','desc')->get()->getResult();
+foreach ($services as $key => $value) {
+?>						<div class="col-md-4 col-sm-12">
 							<div class="blog grid-blog grid-service">
 								<div class="blog-image">
-									<a href="blog-details.html"><img class="img-fluid" src="assets/img/service/service1.webp" alt="Post Image"></a>
+									<a href="<?=base_url().$value->slug ?>"><img class="img-fluid" src="<?=image_check($value->image) ?>" alt="Post Image"></a>
 								</div>
 								<div class="blog-content">
-									<h3 class="blog-title"><a href="blog-details.html">Personal Injury</a></h3>
-									<p class="mb-0">If you've been injured due to someone else's negligence, our personal injury attorneys are here to help. We handle cases involving car accidents, slip and falls, medical malpractice, and more. Our goal is to secure the compensation you deserve, helping you recover and move forward.</p>
+									<h3 class="blog-title"><a href="<?=base_url().$value->slug ?>"><?=$value->name ?></a></h3>
+									<p class="mb-0"><?=$value->sort_description ?></p>
 								</div>
 								<div class="text-center">
-									<a href="instructor-profile.html" class="btn course-btn mt-3">Learn More</a>
+									<a href="<?=base_url().$value->slug ?>" class="btn course-btn mt-3">Learn More</a>
 								</div>
 							</div>							
 						</div>
-
-						<div class="col-md-4 col-sm-12">
-							<div class="blog grid-blog grid-service">
-								<div class="blog-image">
-									<a href="blog-details.html"><img class="img-fluid" src="assets/img/service/service2.webp" alt="Post Image"></a>
-								</div>
-								<div class="blog-content">
-									<h3 class="blog-title"><a href="blog-details.html">Family Law</a></h3>
-									<p class="mb-0">If you've been injured due to someone else's negligence, our personal injury attorneys are here to help. We handle cases involving car accidents, slip and falls, medical malpractice, and more. Our goal is to secure the compensation you deserve, helping you recover and move forward.</p>
-								</div>
-								<div class="text-center">
-									<a href="instructor-profile.html" class="btn course-btn mt-3">Learn More</a>
-								</div>
-							</div>							
-						</div>
-
-						<div class="col-md-4 col-sm-12">
-							<div class="blog grid-blog grid-service">
-								<div class="blog-image">
-									<a href="blog-details.html"><img class="img-fluid" src="assets/img/service/service3.webp" alt="Post Image"></a>
-								</div>
-								<div class="blog-content">
-									<h3 class="blog-title"><a href="blog-details.html">Criminal Defense</a></h3>
-									<p class="mb-0">If you've been injured due to someone else's negligence, our personal injury attorneys are here to help. We handle cases involving car accidents, slip and falls, medical malpractice, and more. Our goal is to secure the compensation you deserve, helping you recover and move forward.</p>
-								</div>
-								<div class="text-center">
-									<a href="instructor-profile.html" class="btn course-btn mt-3">Learn More</a>
-								</div>
-							</div>							
-						</div>
-
-
+<?php } ?>
 
 					</div>
 
@@ -96,7 +67,8 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="clg see-all text-center"> 
-							<a href="services.php" class="btn all-btn">View all <i class="fas fa-caret-right right-arrow"></i></a>
+							<a href="services
+						" class="btn all-btn">View all <i class="fas fa-caret-right right-arrow"></i></a>
 						</div>
 					</div>
 				</div>
@@ -140,130 +112,11 @@
 						<div class="col-md-12">
 							<div class="instructor-slider slider">
 							
-								<!-- Advocates Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- /Advocates Item -->	
-								<!-- Advocates Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- /Advocates Item -->	
-								<!-- Advocates Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- /Advocates Item -->	
-								<!-- Advocates Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- /Advocates Item -->							
+									<?php
+										$advocates = $db->table("users")->limit(10)->where(["status"=>1,"role"=>3,])->orderBy('id','desc')->get()->getResult();
+										foreach ($advocates as $key => $value) {
+											echo view("web/card/advocate-grid",["col"=>"","value"=>$value,]);
+									} ?>				
 							
 							</div>
 						</div>
@@ -272,7 +125,8 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="see-all  text-center"> 
-								<a href="advocates.php" class="btn all-btn">View all <i class="fas fa-caret-right right-arrow"></i></a>
+								<a href="advocates
+							" class="btn all-btn">View all <i class="fas fa-caret-right right-arrow"></i></a>
 							</div>
 						</div>
 					</div>
@@ -317,131 +171,12 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="instructor-slider slider">
-							
-								<!-- Legal Advisers Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- /Legal Advisers Item -->	
-								<!-- Legal Advisers Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- /Legal Advisers Item -->	
-								<!-- Legal Advisers Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- /Legal Advisers Item -->	
-								<!-- Legal Advisers Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- /Legal Advisers Item -->							
+
+								<?php
+									$adviser = $db->table("users")->limit(10)->where(["status"=>1,"role"=>5,])->orderBy('id','desc')->get()->getResult();
+									foreach ($adviser as $key => $value) {
+										echo view("web/card/adviser-grid",["col"=>"","value"=>$value,]);
+								} ?>
 							
 							</div>
 						</div>
@@ -450,7 +185,8 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="see-all  text-center"> 
-								<a href="advisers.php" class="btn all-btn">View all <i class="fas fa-caret-right right-arrow"></i></a>
+								<a href="advisers
+							" class="btn all-btn">View all <i class="fas fa-caret-right right-arrow"></i></a>
 							</div>
 						</div>
 					</div>
@@ -516,131 +252,12 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="instructor-slider slider">
-							
-								<!--  CA Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- / CA Item -->	
-								<!--  CA Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- / CA Item -->	
-								<!--  CA Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- / CA Item -->	
-								<!--  CA Item -->
-								<div class="instructor-item">
-									<div class="profile-box">
-										<div class="img-part">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" class="img-fluid" alt="instructor">
-										</div>
-										<div class="profile-info">
-											<div class="rating"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star non-checked"></i><i class="fa fa-star non-checked"></i></div>
-											<h3><a href="instructor-profile.html">David Lee</a></h3>
-											<h4>Aerospace Engineering</h4>		
-										</div>
-										<div class="instructor-line"></div>	
-									</div>
-									<div class="profile-detail">
-										<div class="row">
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-01.png" class="img-fluid" alt="college"></div>
-												<div><p>University of Hertfordshire</p></div>
-											</div>
-											<div class="col-6 d-flex align-items-center clg">
-												<div class="icon"><img src="assets/img/icon/icon-02.png" class="img-fluid" alt="college"></div>
-												<div><h5>Expertise</h5> <p class="exp">Aerodynamics</p> </div>
-											</div>
-										</div>
-										<div class="d-flex justify-content-between align-items-center"> 
-											<div class="experience">Experience : 25 years</div>
-											<a href="booking.html" class="btn btn-read">BOOK NOW</a>
-										</div>	
-									</div>	
-								</div>
-								<!-- / CA Item -->							
+								
+								<?php
+									$ca = $db->table("users")->limit(10)->where(["status"=>1,"role"=>4,])->orderBy('id','desc')->get()->getResult();
+									foreach ($ca as $key => $value) {
+										echo view("web/card/ca-grid",["col"=>"","value"=>$value,]);
+								} ?>						
 							
 							</div>
 						</div>
@@ -649,7 +266,8 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="see-all  text-center"> 
-								<a href="ca.php" class="btn all-btn">View all <i class="fas fa-caret-right right-arrow"></i></a>
+								<a href="ca
+							" class="btn all-btn">View all <i class="fas fa-caret-right right-arrow"></i></a>
 							</div>
 						</div>
 					</div>

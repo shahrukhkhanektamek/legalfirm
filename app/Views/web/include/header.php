@@ -127,6 +127,28 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
     text-transform: capitalize;
 }
 
+
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+}
+.pagination li.active a {
+    background: lightgray;
+    border-color: lightgray;
+}
+
+.pagination li a {
+    padding: 3px 10px !important;
+    display: inline-block;
+    border: 1px solid;
+    margin: 0 5px 0 0;
+    border-radius: 3px;
+}
+
+
+
+
 		</style>
 
 

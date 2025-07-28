@@ -48,8 +48,14 @@ class AdminServiceController extends BaseController
 
         $data_list = $this->db->table($this->arr_values['table_name'])
         
-        ->select("blog_category.name as category_name, {$this->arr_values['table_name']}.*")
-        ->join('blog_category', 'blog_category.id = ' . $this->arr_values['table_name'] . '.category', 'left')
+        ->select("service_category.name as category_name, 
+                CASE 
+                  WHEN service_type = 1 THEN 'Other' 
+                  WHEN service_type = 2 THEN 'Legal' 
+                  ELSE 'other' 
+              END AS service_type_name,
+            {$this->arr_values['table_name']}.*")
+        ->join('service_category', 'service_category.id = ' . $this->arr_values['table_name'] . '.category', 'left')
 
         ->where([$this->arr_values['table_name'] . '.status' => $status])
         ->orderBy($this->arr_values['table_name'] . '.id', $order_by)
@@ -124,30 +130,33 @@ class AdminServiceController extends BaseController
             "slug"=>$this->request->getPost('slug'),
             "sort_description"=>$this->request->getPost('sort_description'),
             "full_description"=>$this->request->getPost('full_description'),
-            "basic_status"=>$this->request->getPost('basic_status'),
-            "basic_price"=>$this->request->getPost('basic_price'),
-            "basic_market_price"=>$this->request->getPost('basic_market_price'),
-            "basic_smartfiling_price"=>$this->request->getPost('basic_smartfiling_price'),
-            "basic_you_save"=>$this->request->getPost('basic_you_save'),
-            "basic_government_fee"=>$this->request->getPost('basic_government_fee'),
-            "basic_description"=>$this->request->getPost('basic_description'),
-            "basic_price_description"=>$this->request->getPost('basic_price_description'),
-            "standard_status"=>$this->request->getPost('standard_status'),
-            "standard_price"=>$this->request->getPost('standard_price'),
-            "standard_market_price"=>$this->request->getPost('standard_market_price'),
-            "standard_smartfiling_price"=>$this->request->getPost('standard_smartfiling_price'),
-            "standard_you_save"=>$this->request->getPost('standard_you_save'),
-            "standard_government_fee"=>$this->request->getPost('standard_government_fee'),
-            "standard_description"=>$this->request->getPost('standard_description'),
-            "standard_price_description"=>$this->request->getPost('standard_price_description'),
-            "pro_status"=>$this->request->getPost('pro_status'),
-            "pro_price"=>$this->request->getPost('pro_price'),
-            "pro_market_price"=>$this->request->getPost('pro_market_price'),
-            "pro_smartfiling_price"=>$this->request->getPost('pro_smartfiling_price'),
-            "pro_you_save"=>$this->request->getPost('pro_you_save'),
-            "pro_government_fee"=>$this->request->getPost('pro_government_fee'),
-            "pro_description"=>$this->request->getPost('pro_description'),
-            "pro_price_description"=>$this->request->getPost('pro_price_description'),
+
+
+            // "basic_status"=>$this->request->getPost('basic_status'),
+            // "basic_price"=>$this->request->getPost('basic_price'),
+            // "basic_market_price"=>$this->request->getPost('basic_market_price'),
+            // "basic_smartfiling_price"=>$this->request->getPost('basic_smartfiling_price'),
+            // "basic_you_save"=>$this->request->getPost('basic_you_save'),
+            // "basic_government_fee"=>$this->request->getPost('basic_government_fee'),
+            // "basic_description"=>$this->request->getPost('basic_description'),
+            // "basic_price_description"=>$this->request->getPost('basic_price_description'),
+            // "standard_status"=>$this->request->getPost('standard_status'),
+            // "standard_price"=>$this->request->getPost('standard_price'),
+            // "standard_market_price"=>$this->request->getPost('standard_market_price'),
+            // "standard_smartfiling_price"=>$this->request->getPost('standard_smartfiling_price'),
+            // "standard_you_save"=>$this->request->getPost('standard_you_save'),
+            // "standard_government_fee"=>$this->request->getPost('standard_government_fee'),
+            // "standard_description"=>$this->request->getPost('standard_description'),
+            // "standard_price_description"=>$this->request->getPost('standard_price_description'),
+            // "pro_status"=>$this->request->getPost('pro_status'),
+            // "pro_price"=>$this->request->getPost('pro_price'),
+            // "pro_market_price"=>$this->request->getPost('pro_market_price'),
+            // "pro_smartfiling_price"=>$this->request->getPost('pro_smartfiling_price'),
+            // "pro_you_save"=>$this->request->getPost('pro_you_save'),
+            // "pro_government_fee"=>$this->request->getPost('pro_government_fee'),
+            // "pro_description"=>$this->request->getPost('pro_description'),
+            // "pro_price_description"=>$this->request->getPost('pro_price_description'),
+
             "document_area"=>$this->request->getPost('document_area'),
             "extra"=>$this->request->getPost('extra'),
             "status"=>$this->request->getPost('status'),
