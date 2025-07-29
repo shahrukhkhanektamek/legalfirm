@@ -19,6 +19,13 @@ $routes->group('user', ['namespace' => 'App\Controllers\User', 'filter'=>'UserAu
     });
 
 
+    $routes->group('advocates', function($routes) {
+        $routes->get('/', 'UserAdvocatesController::index', ['as' => 'user.advocates.list']);
+        $routes->get('load_data', 'UserAdvocatesController::load_data', ['as' => 'user.advocates.load_data']);
+        $routes->get('view/(:any)', 'UserAdvocatesController::view/$1', ['as' => 'user.advocates.view']);
+        $routes->post('scratch', 'UserAdvocatesController::scratch', ['as' => 'user.advocates.scratch']);
+    });
+
 
     $routes->group('package', function($routes) {
         $routes->get('/', 'UserPackageController::index', ['as' => 'user.package.list']);

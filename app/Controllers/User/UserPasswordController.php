@@ -33,7 +33,8 @@ class UserPasswordController extends BaseController
         $data['route'] = base_url(route_to($this->arr_values['routename'].'index'));      
         $data['pagenation'] = array($this->arr_values['title']);
         $row = $this->db->table($this->arr_values['table_name'])->where(["id"=>$id,])->get()->getFirstRow();
-        return view($this->arr_values['folder_name'].'/form',compact('data','row'));
+        $db = $this->db;
+        return view($this->arr_values['folder_name'].'/form',compact('data','row','db'));
     }
     public function update()
     {
