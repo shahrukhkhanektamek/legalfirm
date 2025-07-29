@@ -59,7 +59,7 @@ $cities = $db->table('city')->getWhere(["status"=>1,])->getResultObject();
 
 							<div class="card category-widget">
 								<div class="card-body">
-									<a href="#" class="btn btn-primary">Hire Advocate</a>									
+									<a href="<?=base_url().'user/advocates'?>" class="btn btn-primary">Hire Advocate</a>									
 								</div>
 							</div>
 							

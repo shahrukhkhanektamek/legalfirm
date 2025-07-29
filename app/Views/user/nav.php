@@ -36,19 +36,19 @@
 												</a>
 											</li>
 											<li>
-												<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+												<a href="<?=base_url() ?>advocates">
 													<i class="fas fa-user-tie"></i>
 													<span>Lawyer</span>
 												</a>
 											</li>
 											<li>
-												<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+												<a href="<?=base_url() ?>advisers">
 													<i class="fas fa-user-tie"></i>
 													<span>Adviser</span>
 												</a>
 											</li>
 											<li>
-												<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+												<a href="<?=base_url() ?>ca">
 													<i class="fas fa-user-tie"></i>
 													<span>CA</span>
 												</a>
