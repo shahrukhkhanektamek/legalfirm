@@ -4,7 +4,7 @@
 
 $routes->add('(.*)', 'Home::all/$1');
 // $routes->add('user/(:any)', 'Home::all/$1');
-$routes->get('test', 'Test::index');
+$routes->get('for-testing', 'Test::index');
 
 
 $routes->post('bike-modal', 'Home::bike_modal');

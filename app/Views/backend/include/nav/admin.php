@@ -113,7 +113,7 @@
     </div>
 </li> -->
 
-<li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Website Country/State</span></li>
+<li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Manage Other</span></li>
 <li class="nav-item">
     <a class="nav-link menu-link" href="<?=base_url(route_to('country.list'))?>">
         <i class="ri-image-line"></i> <span data-key="t-transaction">Country</span>
@@ -122,6 +122,16 @@
 <li class="nav-item">
     <a class="nav-link menu-link" href="<?=base_url(route_to('state.list'))?>">
         <i class="ri-image-line"></i> <span data-key="t-transaction">State</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link menu-link" href="<?=base_url(route_to('education.list'))?>">
+        <i class="ri-image-line"></i> <span data-key="t-transaction">Education</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link menu-link" href="<?=base_url(route_to('certification.list'))?>">
+        <i class="ri-image-line"></i> <span data-key="t-transaction">Certification</span>
     </a>
 </li>
 

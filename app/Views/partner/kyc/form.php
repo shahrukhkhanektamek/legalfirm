@@ -222,13 +222,13 @@ if(!empty($user))
 
 								
 
-								<?php if($role==3){ ?>
-								<!-- advocate -->
+								
 								<!-- Institution Info -->
 								<div class="card">
 									<div class="card-body">
 										<h4 class="card-title">Info</h4>
 										
+									<?php if($role==3){ ?>
 										<!-- advocate -->
 										<div class="row form-row">
 											<div class="col-md-4">
@@ -255,7 +255,7 @@ if(!empty($user))
 													<select class="select" name="specialization[]" multiple >
 														<option value="">Select</option>
 														<?php
-														$list = $db->table("specializations")->where(["status"=>1,])->get()->getResultObject();
+														$list = $db->table("service")->where(["status"=>1,"service_type"=>2,])->get()->getResultObject();
 														foreach ($list as $key => $value) {
 														$selected = '';
 														if(!empty($partner_specializations))
@@ -274,7 +274,7 @@ if(!empty($user))
 													<select class="select" name="service[]" multiple >
 														<option value="">Select</option>
 														<?php
-														$list = $db->table("service")->where(["status"=>1,])->get()->getResultObject();
+														$list = $db->table("service")->where(["status"=>1,"service_type"=>1,])->get()->getResultObject();
 														foreach ($list as $key => $value) {
 														$selected = '';
 														if(!empty($partner_services))
@@ -351,7 +351,7 @@ if(!empty($user))
 													<select class="select" name="expertise[]" multiple >
 														<option value="">Select</option>
 														<?php
-														$list = $db->table("expertise")->where(["status"=>1,])->get()->getResultObject();
+														$list = $db->table("service")->where(["status"=>1,"service_type"=>3,])->get()->getResultObject();
 														foreach ($list as $key => $value) {
 														$selected = '';
 														if(!empty($partner_expertises))

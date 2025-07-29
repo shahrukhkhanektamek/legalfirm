@@ -76,6 +76,36 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter'=>'Admi
         $routes->post('delete/(:any)', 'AdminCityController::delete/$1', ['as' => 'city.delete']);
         $routes->post('block_unblock/(:any)', 'AdminCityController::block_unblock/$1', ['as' => 'city.block_unblock']);
     });
+    $routes->group('education', function($routes) {
+        $routes->get('/', 'AdminEducationController::index', ['as' => 'education.list']);
+        $routes->get('load_data', 'AdminEducationController::load_data', ['as' => 'education.load_data']);
+        $routes->get('add', 'AdminEducationController::add', ['as' => 'education.add']);
+        $routes->get('edit/(:any)?', 'AdminEducationController::edit/$1', ['as' => 'education.edit']);
+        $routes->get('view/(:any)', 'AdminEducationController::view/$1', ['as' => 'education.view']);
+        $routes->post('update', 'AdminEducationController::update', ['as' => 'education.update']);
+        $routes->post('delete/(:any)', 'AdminEducationController::delete/$1', ['as' => 'education.delete']);
+        $routes->post('block_unblock/(:any)', 'AdminEducationController::block_unblock/$1', ['as' => 'education.block_unblock']);
+    });
+    
+    $routes->group('certification', function($routes) {
+        $routes->get('/', 'AdminCertificationController::index', ['as' => 'certification.list']);
+        $routes->get('load_data', 'AdminCertificationController::load_data', ['as' => 'certification.load_data']);
+        $routes->get('add', 'AdminCertificationController::add', ['as' => 'certification.add']);
+        $routes->get('edit/(:any)?', 'AdminCertificationController::edit/$1', ['as' => 'certification.edit']);
+        $routes->get('view/(:any)', 'AdminCertificationController::view/$1', ['as' => 'certification.view']);
+        $routes->post('update', 'AdminCertificationController::update', ['as' => 'certification.update']);
+        $routes->post('delete/(:any)', 'AdminCertificationController::delete/$1', ['as' => 'certification.delete']);
+        $routes->post('block_unblock/(:any)', 'AdminCertificationController::block_unblock/$1', ['as' => 'certification.block_unblock']);
+    });
+
+
+
+
+
+
+
+
+
 
     $routes->group('admin-user', function($routes) {
         $routes->get('/', 'AdminUserController::index', ['as' => 'admin-user.list']);

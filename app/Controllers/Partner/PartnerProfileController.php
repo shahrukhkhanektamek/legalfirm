@@ -48,6 +48,8 @@ class PartnerProfileController extends BaseController
             "name"=>$this->request->getPost('name'),
             "phone"=>$this->request->getPost('phone'),
             "email"=>$this->request->getPost('email'),
+            "gender"=>$this->request->getPost('gender'),
+            "dob"=>$this->request->getPost('dob'),
             "address"=>$this->request->getPost('address'),
             "country"=>$this->request->getPost('country'),
             "state"=>$this->request->getPost('state'),

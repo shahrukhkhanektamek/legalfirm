@@ -1,3 +1,7 @@
+<?php
+$serviceUrl = '';
+if(!empty($service)) $serviceUrl = '?service='.$service;
+?>
 <?php if(!empty($col)){ ?>
 <div class="col-md-6 col-lg-4">
 <?php } ?>
@@ -26,7 +30,7 @@
 		</div>
 		<div class="d-flex justify-content-between align-items-center"> 
 			<div class="experience">Experience : 25 years</div>
-			<a href="<?=base_url('advocate-profile/'.encript($value->id)) ?>" class="btn btn-read">BOOK NOW</a>
+			<a href="<?=base_url('ca/'.encript($value->id)).$serviceUrl ?>" class="btn btn-read">BOOK NOW</a>
 		</div>	
 	</div>	
 </div>

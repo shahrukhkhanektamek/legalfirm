@@ -14,10 +14,52 @@ class Test extends BaseController
     }
     public function index()
     {
-        $table_name = 'service';
-        $page_name = 'single-service.php';
-        $main_menus = $this->db->table($table_name)->getWhere(["status"=>1,])->getResultObject();
+
         // die;
+        // $table_name = 'service';
+        // $page_name = 'single-service.php';
+        // $expertise = $this->db->table("expertise")->getWhere(["status"=>1,])->getResultObject();
+        // // die;
+        // foreach ($expertise as $key => $value)
+        // {
+        //     $data = [
+        //         "name"=>$value->name,
+        //         "service_type"=>3,
+        //         "category"=>18,
+        //         "slug"=>'',
+        //         "sort_description"=>'',
+        //         "full_description"=>'',
+        //         "document_area"=>'',
+        //         "extra"=>'',
+        //         "status"=>1,
+        //         "is_delete"=>0,
+        //     ];
+        //     $data['add_by'] = 1;
+        //     $data['add_date_time'] = date("Y-m-d H:i:s");
+        //     $data['update_date_time'] = date("Y-m-d H:i:s");
+        //     if($this->db->table($table_name)->insert($data)) $entryStatus = true;
+        //     else $entryStatus = false;
+        //     $id = $insertId = $this->db->insertID();
+
+        //     $name = $data['name'];
+        //     if(empty($this->request->getPost('slug'))) $slug = slug($name);
+        //     else $slug = slug($this->request->getPost('slug'));
+        //     $p_id = $id;
+        //     $table_name = $table_name;
+        //     $new_slug = insert_slug($slug,$p_id,$table_name,$page_name);
+
+        //     insert_meta_tag($new_slug,$name);
+
+
+        // }
+
+
+        
+
+        die;
+        $table_name = 'certification';
+        $page_name = 'partners.php';
+        $main_menus = $this->db->table($table_name)->getWhere(["status"=>1,])->getResultObject();
         foreach ($main_menus as $key => $value)
         {
             $name = $value->name;

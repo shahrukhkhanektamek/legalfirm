@@ -63,6 +63,12 @@ abstract class BaseController extends Controller
         $this->pager = \Config\Services::pager();
 
         $page = $this->request->getUri()->getSegment(1);
+
+        $uri2 = '';
+        $segment2 = $this->request->getUri()->getSegments();
+        if(!empty($segment2))
+            if(!empty($segment2[1]))
+                $uri2 = $segment2[1];
         $data = [];
         $table_name = '';
         $p_id = '';
@@ -127,11 +133,17 @@ abstract class BaseController extends Controller
         $data['user'] = $user;
         $data['role'] = $role;
         $data['user_id'] = $user_id;
+        $data['uri2'] = $uri2;
 
 
         if($page=='advocates.php' || $page=='ca.php' || $page=='advisers.php')
         {
             $page = 'partners.php';
+        }
+
+        if($page=='advocate.php' || $page=='ca.php' || $page=='adviser.php')
+        {
+            $page = 'partner-profile.php';
         }
 
         // Check if the page file exists

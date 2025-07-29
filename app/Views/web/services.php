@@ -21,7 +21,7 @@ $uri = $request->getUri()->getSegment(1);
 $limit = 12;
 $status = 1;
 $order_by = $request->getVar('order_by') ?:'1';
-$filter_search_value = $request->getVar('filter_search_value');
+$search = $request->getVar('search');
 $page = $request->getVar('page') ?: 1;
 $offset = ($page - 1) * $limit;
 
@@ -47,10 +47,10 @@ if($table_nameOld=='service_category')
 	$query->where($table_name.'.category', $row->id);
 }
 
-if(!empty($filter_search_value))
+if(!empty($search))
 {
     $query->groupStart()
-        ->like($table_name . '.name', $filter_search_value)
+        ->like($table_name . '.name', $search)
     ->groupEnd();
 }
 
@@ -109,7 +109,7 @@ $data['data_list'] = $data_list;
 							<div class="col-md-12">
 								<form class="mb-3">
 									<div class="input-group">
-										<input type="text" placeholder="Search Keyword..." class="form-control">
+										<input type="text" placeholder="Search Keyword..." class="form-control" name="search" value="<?=$search ?>">
 										<button type="submit" class="btn btn-primary">search</button>
 									</div>
 								</form>
@@ -124,9 +124,17 @@ $data['data_list'] = $data_list;
 	                            } ?>
 															
 							</div>
-							<div class="pagination d-flex align-items-center justify-content-center">        
-			                    <?=$data['pager']?>
-			                </div>
+							
+			                <div class="pagination">
+							        <div class="pagination-result">
+							        Showing
+							        <span class="start-data">  <?=$data['startData'] ?></span>
+							        <span>to</span>
+							        <span class="end-data"><?=$data['endData'] ?></span>
+							        <span class="total-data"><?=$data['totalData'] ?> Results</span>
+							    </div>
+							    <?=$data['pager']?>
+							</div>
 
 						</div>
 					</div>

@@ -25,11 +25,11 @@
 								<div class="footer-widget footer-menu">
 									<h2 class="footer-title">POPULAR Services</h2>
 									<ul>
-										<li><a href="courses">Personal Injury</a></li>
-										<li><a href="courses">Family Law</a></li>
-										<li><a href="courses">Criminal Defense</a></li>
-										<li><a href="courses">Business and Corporate Law</a></li>
-										<li><a href="courses">Real Estate</a></li>
+										<li><a href="<?=base_url()?>services">Personal Injury</a></li>
+										<li><a href="<?=base_url()?>services">Family Law</a></li>
+										<li><a href="<?=base_url()?>services">Criminal Defense</a></li>
+										<li><a href="<?=base_url()?>services">Business and Corporate Law</a></li>
+										<li><a href="<?=base_url()?>services">Real Estate</a></li>
 									</ul>
 								</div>
 								<!-- /Footer Widget -->
@@ -42,11 +42,11 @@
 								<div class="footer-widget footer-menu">
 									<h2 class="footer-title">Quick Links</h2>
 									<ul>
-										<li><a href="booking">About Us</a></li>
-										<li><a href="chat">Contact Us</a></li>
-										<li><a href="advocates">Advocates</a></li>
-										<li><a href="advisers">Legal Advisers </a></li>
-										<li><a href="ca">Chartered Accountant (CA)</a></li>
+										<li><a href="<?=base_url()?>booking">About Us</a></li>
+										<li><a href="<?=base_url()?>chat">Contact Us</a></li>
+										<li><a href="<?=base_url()?>advocates">Advocates</a></li>
+										<li><a href="<?=base_url()?>advisers">Legal Advisers </a></li>
+										<li><a href="<?=base_url()?>ca">Chartered Accountant (CA)</a></li>
 									</ul>
 								</div>
 								<!-- /Footer Widget -->
@@ -91,16 +91,16 @@
 								</div>
 								<div class="col-md-6 col-lg-4">
 									<div class="copyright-text center-text">
-										<p class="mb-0"><a href="term-condition">Terms and Conditions</a> - <a href="privacy-policy">Privacy Policy</a></p>
+										<p class="mb-0"><a href="<?=base_url()?>term-condition">Terms and Conditions</a> - <a href="<?=base_url()?>privacy-policy">Privacy Policy</a></p>
 									</div>
 								</div>
 								<div class="col-md-2 col-lg-4 right-text">
 									<div class="social-icon">
 											<ul>
-												<li><a href="#" class="icon" target="_blank"><i class="fab fa-facebook-f"></i> </a></li>
-												<li><a href="#" class="icon" target="_blank"><i class="fab fa-twitter"></i> </a></li>
-												<li><a href="#" class="icon" target="_blank"><i class="fab fa-instagram"></i> </a></li>
-												<li><a href="#" class="icon" target="_blank"><i class="fab fa-linkedin-in"></i> </a></li>
+												<li><a href="<?=base_url()?>#" class="icon" target="_blank"><i class="fab fa-facebook-f"></i> </a></li>
+												<li><a href="<?=base_url()?>#" class="icon" target="_blank"><i class="fab fa-twitter"></i> </a></li>
+												<li><a href="<?=base_url()?>#" class="icon" target="_blank"><i class="fab fa-instagram"></i> </a></li>
+												<li><a href="<?=base_url()?>#" class="icon" target="_blank"><i class="fab fa-linkedin-in"></i> </a></li>
 											</ul>
 										</div>
 								</div>

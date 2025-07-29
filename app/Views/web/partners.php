@@ -24,18 +24,20 @@ $page = $request->getVar('page') ?: 1;
 $offset = ($page - 1) * $limit;
 
 
+$service = $request->getVar('service');
 
 
 $table_name = "users";
 $data['route'] = base_url('services');   
 
 
+$select = "{$table_name}.*";
 $query = $db->table($table_name)
     ->where([
         $table_name . '.status' => $status,
     ]);
-    // ->join('service_category', 'service_category.id = '.$table_name.'.category', 'left')
-    // ->select("{$table_name}.*,service_category.name as category_name");
+    
+    
 
 
 $page_title = '';
@@ -60,37 +62,113 @@ if($uri=='advisers')
 
 
 $countries = $request->getVar('country') ?:[];
-if (!empty($countries)) {
+if (!empty($countries[0])) {
     if (!empty($countries) && is_array($countries)) {
-
-        // // Fetch matching location IDs from DB
-        // $locationQuery = $db->table('property_location')
-        //     ->select('id')
-        //     ->where('status', 1)
-        //     ->whereIn('slug', $countries)
-        //     ->get();
-        // $locationDB = $locationQuery->getResult();
-        // foreach ($locationDB as $loc) {
-        //     $query->orWhere($table_name.".location", $loc->id);
-        // }
-
-        $query->orWhere($table_name.".country", $countries);
-        
+        $query->where($table_name.".country", $countries);        
     }
 }
 
 $states = $request->getVar('state') ?:[];
 if (!empty($states)) {
     if (!empty($states) && is_array($states)) {
-        $query->orWhere($table_name.".state", $states);        
+        $query->whereIn($table_name.".state", $states);        
+    }
+}
+
+$gender = $request->getVar('gender') ?:[];
+if (!empty($gender)) {
+    if (!empty($gender) && is_array($gender)) {
+        $query->whereIn($table_name.".gender", $gender);        
     }
 }
 
 
+$specialization = $request->getVar('specialization') ?:[];
+if (!empty($specialization)) {
+    // Join partner_specialization
+    $query->join(
+        'partner_specialization',
+        "partner_specialization.user_id = {$table_name}.id",
+        'left'
+    );
+
+    // Join specializations to get slug
+    $query->join(
+        'service',
+        'service.id = partner_specialization.sp_id',
+        'left'
+    );
+
+    // Filter by specialization slug
+    $query->whereIn('service.slug', $specialization);
+}
+
+
+$expertise = $request->getVar('expertise') ?:[];
+if (!empty($expertise)) {
+    // Join partner_expertise
+    $query->join(
+        'partner_expertise',
+        "partner_expertise.user_id = {$table_name}.id",
+        'left'
+    );
+
+    // Join expertises to get slug
+    $query->join(
+        'service as service2',
+        'service2.id = partner_expertise.e_id',
+        'left'
+    );
+
+    // Filter by expertise slug
+    $query->whereIn('service2.slug', $expertise);
+}
+
+$certification = $request->getVar('certification') ?:[];
+if (!empty($certification)) {
+    // Join partner_certification
+    $query->join(
+        'partner_certification',
+        "partner_certification.user_id = {$table_name}.id",
+        'left'
+    );
+
+    // Join certifications to get slug
+    $query->join(
+        'certification as certification',
+        'certification.id = partner_certification.c_id',
+        'left'
+    );
+
+    // Filter by certification slug
+    $query->whereIn('certification.slug', $certification);
+}
+
+
+$education = $request->getVar('education') ?:[];
+if (!empty($education)) {
+    // Join partner_education
+    $query->join(
+        'partner_education',
+        "partner_education.user_id = {$table_name}.id",
+        'left'
+    );
+
+    // Join educations to get slug
+    $query->join(
+        'education as education',
+        'education.id = partner_education.ed_id',
+        'left'
+    );
+
+    // Filter by education slug
+    $query->whereIn('education.slug', $education);
+}
 
 
 
-
+$query->distinct();
+$query->select($select);
 $query->orderBy($table_name . '.id', 'desc'); 
 
 
@@ -140,6 +218,7 @@ $data['data_list'] = $data_list;
 						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 							<!-- Search Filter -->
 							<form class="card search-filter">
+								<input type="hidden" name="service" value="<?=$service ?>">
 								<div class="card-header">
 									<h4 class="card-title mb-0">Search Filter</h4>
 								</div>
@@ -152,7 +231,7 @@ $data['data_list'] = $data_list;
 
 								<div class="filter-widget">
 									<h4>Country</h4>
-									<select class="form-control" id="country" name="country[]" multiple>
+									<select class="form-control" id="country" name="country[]">
 										<option value="">Select Country</option>
 										<?php
 										if(!empty($countries)){
@@ -169,7 +248,7 @@ $data['data_list'] = $data_list;
 										<option value="">Select State</option>
 										<?php 
 										if(!empty($states)){
-										$state = $db->table("states")->where(["id"=>$states,])->get()->getResultObject();
+										$state = $db->table("states")->whereIn("id", $states)->get()->getResultObject();
 										foreach ($state as $key => $value) {
 										?>
 											<option selected value="<?=$value->id ?>"><?=$value->name ?></option>
@@ -184,28 +263,17 @@ $data['data_list'] = $data_list;
 									<select class="form-control select" name="specialization[]" multiple>
 										<option value="">Select Specialization</option>
 										<?php
-										$list = $db->table("specializations")->where(["status"=>1,])->get()->getResultObject();
+										$list = $db->table("service")->where(["status"=>1,"service_type"=>2,])->get()->getResultObject();
 										foreach ($list as $key => $value) {
 										$selected = '';
+										if(in_array($value->slug, $specialization)) $selected = 'selected';
 										
 										?>
-											<option value="<?=$value->id ?>" <?=$selected ?> ><?=$value->name ?></option>
+											<option value="<?=$value->slug ?>" <?=$selected ?> ><?=$value->name ?></option>
 										<?php } ?>
 									</select>
 								</div>
-								<div class="filter-widget">
-									<h4>Services</h4>
-									<select class="form-control select" name="services[]" multiple>
-										<option value="">Select Services</option>
-										<?php
-										$list = $db->table("service")->where(["status"=>1,])->get()->getResultObject();
-										foreach ($list as $key => $value) {
-										$selected = '';
-										?>
-											<option value="<?=$value->id ?>" <?=$selected ?> ><?=$value->name ?></option>
-										<?php } ?>
-									</select>
-								</div>
+								
 								<div class="filter-widget">
 									<h4>Education</h4>
 									<select class="form-control select" name="education[]" multiple>
@@ -213,8 +281,10 @@ $data['data_list'] = $data_list;
 										<?php
 										$list = $db->table("education")->where(["status"=>1,])->get()->getResultObject();
 										foreach ($list as $key => $value) {
+											$selected = '';
+											if(in_array($value->slug, $education)) $selected = 'selected';
 										?>
-											<option value="<?=$value->id ?>" ><?=$value->name ?></option>
+											<option value="<?=$value->slug ?>" <?=$selected ?> ><?=$value->name ?></option>
 										<?php } ?>
 									</select>
 								</div>
@@ -228,15 +298,12 @@ $data['data_list'] = $data_list;
 									<select class="select" name="expertise[]" multiple >
 										<option value="">Select Expertise</option>
 										<?php
-										$list = $db->table("expertise")->where(["status"=>1,])->get()->getResultObject();
+										$list = $db->table("service")->where(["status"=>1,"service_type"=>3,])->get()->getResultObject();
 										foreach ($list as $key => $value) {
 										$selected = '';
-										if(!empty($partner_expertises))
-										{
-											if(in_array($value->id, $partner_expertises)) $selected = 'selected';
-										}
+										if(in_array($value->slug, $expertise)) $selected = 'selected';
 										?>
-											<option value="<?=$value->id ?>" <?=$selected ?> ><?=$value->name ?></option>
+											<option value="<?=$value->slug ?>" <?=$selected ?> ><?=$value->name ?></option>
 										<?php } ?>
 									</select>
 								</div>
@@ -248,12 +315,9 @@ $data['data_list'] = $data_list;
 										$list = $db->table("certification")->where(["status"=>1,])->get()->getResultObject();
 										foreach ($list as $key => $value) {
 										$selected = '';
-										if(!empty($partner_certifications))
-										{
-											if(in_array($value->id, $partner_certifications)) $selected = 'selected';
-										}
+										if(in_array($value->slug, $certification)) $selected = 'selected';
 										?>
-											<option value="<?=$value->id ?>" <?=$selected ?> ><?=$value->name ?></option>
+											<option value="<?=$value->slug ?>" <?=$selected ?> ><?=$value->name ?></option>
 										<?php } ?>
 									</select>
 								</div>
@@ -266,19 +330,19 @@ $data['data_list'] = $data_list;
 									<h4>Gender</h4>
 									<div>
 										<label class="custom_check">
-											<input type="checkbox" name="gender[]" value="1">
+											<input type="checkbox" name="gender[]" value="1" <?php if(in_array(1, $gender))echo'checked'; ?> >
 											<span class="checkmark"></span> Male
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
-											<input type="checkbox" name="gender[]" value="2">
+											<input type="checkbox" name="gender[]" value="2" <?php if(in_array(2, $gender))echo'checked'; ?> >
 											<span class="checkmark"></span> Female
 										</label>
 									</div>
 									<div>
 										<label class="custom_check">
-											<input type="checkbox" name="gender[]" value="3">
+											<input type="checkbox" name="gender[]" value="3" <?php if(in_array(3, $gender))echo'checked'; ?> >
 											<span class="checkmark"></span> Transgender
 										</label>
 									</div>
@@ -295,6 +359,7 @@ $data['data_list'] = $data_list;
 
 							<div class="col-md-12">
 								<form class="mb-3">
+									<input type="hidden" name="service" value="<?=$service ?>">
 									<div class="input-group">
 										<input type="text" placeholder="Search Keyword..." class="form-control">
 										<button type="submit" class="btn btn-primary">search</button>
@@ -308,13 +373,13 @@ $data['data_list'] = $data_list;
 								
 								<?php foreach ($data_list as $key => $value) { 
 									if($value->role==3)
-	                              	echo view("web/card/advocate-grid",["col"=>"col-md-6 col-lg-4","value"=>$value,]);
+	                              	echo view("web/card/advocate-grid",["col"=>"col-md-6 col-lg-4","value"=>$value,"service"=>$service,]);
 
 	                              	if($value->role==4)
-	                              	echo view("web/card/ca-grid",["col"=>"col-md-6 col-lg-4","value"=>$value,]);
+	                              	echo view("web/card/ca-grid",["col"=>"col-md-6 col-lg-4","value"=>$value,"service"=>$service,]);
 
 	                              	if($value->role==5)
-	                              	echo view("web/card/adviser-grid",["col"=>"col-md-6 col-lg-4","value"=>$value,]);
+	                              	echo view("web/card/adviser-grid",["col"=>"col-md-6 col-lg-4","value"=>$value,"service"=>$service,]);
 	                            } ?>								
 															
 							</div>
