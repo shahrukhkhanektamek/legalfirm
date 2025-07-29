@@ -15,7 +15,6 @@ $service_category = $builder->get()->getResult();
 
 
 
-
 $uri = $request->getUri()->getSegment(1);
 $limit = 12;
 $status = 1;
@@ -23,9 +22,6 @@ $order_by = $request->getVar('order_by') ?:'1';
 $filter_search_value = $request->getVar('filter_search_value');
 $page = $request->getVar('page') ?: 1;
 $offset = ($page - 1) * $limit;
-
-
-
 
 
 
@@ -60,6 +56,35 @@ if($uri=='advisers')
 }
 
 
+
+
+
+$countries = $request->getVar('country') ?:[];
+if (!empty($countries)) {
+    if (!empty($countries) && is_array($countries)) {
+
+        // // Fetch matching location IDs from DB
+        // $locationQuery = $db->table('property_location')
+        //     ->select('id')
+        //     ->where('status', 1)
+        //     ->whereIn('slug', $countries)
+        //     ->get();
+        // $locationDB = $locationQuery->getResult();
+        // foreach ($locationDB as $loc) {
+        //     $query->orWhere($table_name.".location", $loc->id);
+        // }
+
+        $query->orWhere($table_name.".country", $countries);
+        
+    }
+}
+
+$states = $request->getVar('state') ?:[];
+if (!empty($states)) {
+    if (!empty($states) && is_array($states)) {
+        $query->orWhere($table_name.".state", $states);        
+    }
+}
 
 
 
@@ -129,12 +154,26 @@ $data['data_list'] = $data_list;
 									<h4>Country</h4>
 									<select class="form-control" id="country" name="country[]" multiple>
 										<option value="">Select Country</option>
+										<?php
+										if(!empty($countries)){
+										$country = $db->table("countries")->where(["id"=>$countries,])->get()->getResultObject();
+										foreach ($country as $key => $value) {
+										?>
+											<option selected value="<?=$value->id ?>"><?=$value->name ?></option>
+										<?php }} ?>
 									</select>
 								</div>
 								<div class="filter-widget">
 									<h4>State</h4>
 									<select class="form-control" id="state" name="state[]" multiple>
 										<option value="">Select State</option>
+										<?php 
+										if(!empty($states)){
+										$state = $db->table("states")->where(["id"=>$states,])->get()->getResultObject();
+										foreach ($state as $key => $value) {
+										?>
+											<option selected value="<?=$value->id ?>"><?=$value->name ?></option>
+										<?php }} ?>
 									</select>
 								</div>
 
