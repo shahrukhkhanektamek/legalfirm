@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2025 at 10:25 PM
+-- Generation Time: Jul 31, 2025 at 10:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -6380,7 +6380,8 @@ INSERT INTO `login_history` (`id`, `user_id`, `role`, `ip_address`, `date`, `tim
 (312, '17', 3, '::1', '2025-07-30', '00:25:06', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (313, '1', 1, '::1', '2025-07-30', '00:36:05', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e'),
 (314, '17', 3, '::1', '2025-07-30', '00:41:29', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
-(315, '18', 4, '::1', '2025-07-30', '01:50:28', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e');
+(315, '18', 4, '::1', '2025-07-30', '01:50:28', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(316, '17', 3, '::1', '2025-07-31', '23:58:47', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e');
 
 -- --------------------------------------------------------
 
@@ -7936,6 +7937,7 @@ CREATE TABLE `users` (
   `dob` date DEFAULT NULL,
   `kyc_step` int(1) DEFAULT NULL COMMENT '0=not uploaded,1=Approve,2=under review,3=rejected',
   `kyc_message` text DEFAULT NULL,
+  `about` text DEFAULT NULL,
   `image` text DEFAULT NULL,
   `pan` text DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
@@ -7961,14 +7963,14 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_id`, `referral_id`, `company_name`, `name`, `email`, `password`, `remember_token`, `add_date_time`, `status`, `role`, `is_paid`, `gender`, `dob`, `kyc_step`, `kyc_message`, `image`, `pan`, `phone`, `address`, `country`, `state`, `city`, `pincode`, `add_by`, `update_date_time`, `update_history`, `slug`, `is_delete`, `passbook_image`, `pancard_image`, `aadharfront_image`, `aadharback_image`, `license`, `certificate`) VALUES
-(1, 101, NULL, 'My Brand', 'Bike King Vendor', 'admin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '2020-08-30 15:56:58', 1, 1, 1, 1, '0000-00-00', 1, 'gsgsghwegweyw', '2025-01-04-6778e0d6dfebc.png', '32523523', '123456890', NULL, NULL, 'DELHI', '5116', NULL, 1, '2025-06-14 00:53:13', NULL, 'bike-king', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 102, NULL, 'Demo Company', 'User', 'user@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 2, NULL, NULL, NULL, NULL, NULL, '1752501477-68750ce537c83.jpg', NULL, '654654', 'Demo Address', '99', '25', 'Delhi', '110086', 1, '2025-05-28 21:39:18', NULL, 'shte', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(17, 103, NULL, 'Demo Company', 'Advocate', 'advocate@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 3, NULL, 1, '2025-07-29', 2, NULL, NULL, NULL, '583', 'Demo Address', '99', '25', 'Delhi', '110086', 1, '2025-05-28 21:39:18', NULL, 'shte', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, 104, NULL, 'Demo Company', 'CA', 'ca@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '583', NULL, NULL, NULL, NULL, NULL, 1, '2025-05-28 21:39:18', NULL, 'shte', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 105, NULL, 'Demo Company', 'Adviser', 'adviser@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '583', NULL, NULL, NULL, NULL, NULL, 1, '2025-05-28 21:39:18', NULL, 'shte', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(20, 106, NULL, NULL, 'Shahrukh', 'shahrukh@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '2025-07-14 22:15:58', 1, 3, 0, 1, '1998-11-25', 0, '', 'user.png', NULL, '545646', NULL, '99', '25', 'Delhi', '110086', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(21, 107, NULL, NULL, 'Shahrukh', 'shahrukh1@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '2025-07-14 22:16:26', 1, 3, 0, 1, '1998-11-25', 0, '', 'user.png', NULL, '545646', NULL, '99', '25', 'Delhi', '110086', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `user_id`, `referral_id`, `company_name`, `name`, `email`, `password`, `remember_token`, `add_date_time`, `status`, `role`, `is_paid`, `gender`, `dob`, `kyc_step`, `kyc_message`, `about`, `image`, `pan`, `phone`, `address`, `country`, `state`, `city`, `pincode`, `add_by`, `update_date_time`, `update_history`, `slug`, `is_delete`, `passbook_image`, `pancard_image`, `aadharfront_image`, `aadharback_image`, `license`, `certificate`) VALUES
+(1, 101, NULL, 'My Brand', 'Bike King Vendor', 'admin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '2020-08-30 15:56:58', 1, 1, 1, 1, '0000-00-00', 1, 'gsgsghwegweyw', NULL, '2025-01-04-6778e0d6dfebc.png', '32523523', '123456890', NULL, NULL, 'DELHI', '5116', NULL, 1, '2025-06-14 00:53:13', NULL, 'bike-king', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 102, NULL, 'Demo Company', 'User', 'user@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 2, NULL, NULL, NULL, NULL, NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1752501477-68750ce537c83.jpg', NULL, '654654', 'Demo Address', '99', '25', 'Delhi', '110086', 1, '2025-05-28 21:39:18', NULL, 'shte', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 103, NULL, 'Demo Company', 'Advocate', 'advocate@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 3, NULL, 1, '2025-07-29', 2, NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL, NULL, '583', 'Demo Address', '99', '25', 'Delhi', '110086', 1, '2025-05-28 21:39:18', NULL, 'shte', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 104, NULL, 'Demo Company', 'CA', 'ca@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 4, NULL, NULL, NULL, NULL, NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL, NULL, '583', NULL, NULL, NULL, NULL, NULL, 1, '2025-05-28 21:39:18', NULL, 'shte', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 105, NULL, 'Demo Company', 'Adviser', 'adviser@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, '2025-05-28 21:39:18', 1, 5, NULL, NULL, NULL, NULL, NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL, NULL, '583', NULL, NULL, NULL, NULL, NULL, 1, '2025-05-28 21:39:18', NULL, 'shte', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(20, 106, NULL, NULL, 'Shahrukh', 'shahrukh@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '2025-07-14 22:15:58', 1, 3, 0, 1, '1998-11-25', 0, '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'user.png', NULL, '545646', NULL, '99', '25', 'Delhi', '110086', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 107, NULL, NULL, 'Shahrukh', 'shahrukh1@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '2025-07-14 22:16:26', 1, 3, 0, 1, '1998-11-25', 0, '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'user.png', NULL, '545646', NULL, '99', '25', 'Delhi', '110086', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -8516,7 +8518,7 @@ ALTER TABLE `kyc`
 -- AUTO_INCREMENT for table `login_history`
 --
 ALTER TABLE `login_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=316;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=317;
 
 --
 -- AUTO_INCREMENT for table `menu_category`

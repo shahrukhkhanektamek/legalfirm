@@ -69,7 +69,7 @@ if(!empty($user))
 									<div class="card-body">
 										<h4 class="card-title">About Me</h4>
 										<div class="form-group mb-0">
-											<textarea class="form-control" rows="5" name="about"><?=@$user->amount ?></textarea>
+											<textarea class="form-control" rows="5" name="about"><?=@$user->about ?></textarea>
 										</div>
 									</div>
 								</div>

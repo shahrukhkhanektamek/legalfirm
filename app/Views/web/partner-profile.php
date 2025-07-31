@@ -1,6 +1,7 @@
 <?php 
 
 $user_id = decript($uri2);
+
 $row = $db->table("users")->where(['users.id'=>$user_id,"users.status"=>1,])
 ->join('role',"role.id = users.role",'left')
 ->join('countries',"countries.id = users.country",'left')
@@ -11,7 +12,30 @@ if(!empty($row))
 {
 	include"include/header.php";
 
-$educations = $db->table("partner_education")->join('education',"partner_education.ed_id = education.id",'left')->where(['user_id'=>$user_id,])->get()->getResultObject();
+	$user_id = $row->id;
+
+	$kyc = $db->table('kyc')->where(["user_id"=>$user_id,])->orderBy('id','desc')->get()->getFirstRow();
+
+	$educations = $db->table("partner_education")
+	->where(['partner_education.user_id'=>$user_id,])
+	->join('education as education',"partner_education.ed_id = education.id",'left')->get()->getResultObject();	
+
+	$partner_specialization = $db->table("partner_specialization")
+	->where(['partner_specialization.user_id'=>$user_id,])
+	->join('service as service',"partner_specialization.sp_id = service.id",'left')->get()->getResultObject();
+
+	$partner_service = $db->table("partner_service")
+	->where(['partner_service.user_id'=>$user_id,])
+	->join('service as service',"partner_service.s_id = service.id",'left')->get()->getResultObject();
+
+	$partner_expertise = $db->table("partner_expertise")
+	->where(['partner_expertise.user_id'=>$user_id,])
+	->join('service as service',"partner_expertise.e_id = service.id",'left')->get()->getResultObject();
+
+	$partner_certification = $db->table("partner_certification")
+	->where(['partner_certification.user_id'=>$user_id,])
+	->join('certification as certification',"partner_certification.c_id = certification.id",'left')->get()->getResultObject();
+
 
 
 $page_title = '';
@@ -81,7 +105,7 @@ if($uri=='adviser')
 											<li><i class="far fa-thumbs-up"></i> 99%</li>
 											<li><i class="far fa-comment"></i> 35 Feedback</li>
 											<li><i class="fas fa-map-marker-alt"></i> <?=$row->country_name ?>, <?=$row->state_name ?></li>
-											<li><i class="far fa-money-bill-alt"></i> <?=price_formate(@$row->price) ?> Appointment Charge </li>
+											<li><i class="far fa-money-bill-alt"></i> <?=price_formate(@$kyc->appointment_amount) ?> Appointment Charge </li>
 										</ul>
 									</div>
 									<div class="provider-action">
@@ -112,9 +136,6 @@ if($uri=='adviser')
 										<a class="nav-link active" href="#doc_overview" data-bs-toggle="tab">Overview</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="#doc_locations" data-bs-toggle="tab">Locations</a>
-									</li>
-									<li class="nav-item">
 										<a class="nav-link" href="#doc_reviews" data-bs-toggle="tab">Reviews</a>
 									</li>
 									<li class="nav-item">
@@ -135,331 +156,96 @@ if($uri=='adviser')
 											<!-- About Details -->
 											<div class="widget about-widget">
 												<h4 class="widget-title">About Me</h4>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+												<p><?=$row->about ?></p>
 											</div>
 											<!-- /About Details -->
 										
+
+										<?php if(!empty($educations)){ ?>
 											<!-- Education Details -->
 											<div class="widget education-widget">
 												<h4 class="widget-title">Education</h4>
 												<div class="experience-box">
 													<ul class="experience-list">
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="#/" class="name">American University</a>
-																	<div>Diploma in Aeronautic</div>
-																	<span class="time">1998 - 2003</span>
+														<?php foreach ($educations as $key => $value) { ?>
+															<li>
+																<div class="experience-user">
+																	<div class="before-circle"></div>
 																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="#/" class="name">American University</a>
-																	<div>B.Tech in Aeropace Engineer</div>
-																	<span class="time">2003 - 2005</span>
+																<div class="experience-content">
+																	<div class="timeline-content">
+																		<a href="#/" class="name"><?=$value->collage ?></a>
+																		<div><?=$value->name ?></div>
+																		<span class="time">Complete Year <?=$value->year_complete ?></span>
+																	</div>
 																</div>
-															</div>
-														</li>
+															</li>
+														<?php } ?>
 													</ul>
 												</div>
 											</div>
 											<!-- /Education Details -->
+										<?php } ?>
 									
-											<!-- Experience Details -->
-											<div class="widget experience-widget">
-												<h4 class="widget-title">Work & Experience</h4>
-												<div class="experience-box">
-													<ul class="experience-list">
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="#/" class="name">Imperial College London</a>
-																	<span class="time">2010 - Present (5 years)</span>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="#/" class="name">City College London</a>
-																	<span class="time">2007 - 2010 (3 years)</span>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="#/" class="name">Parsons School of Design</a>
-																	<span class="time">2005 - 2007 (2 years)</span>
-																</div>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-											<!-- /Experience Details -->
-								
-											<!-- Awards Details -->
-											<div class="widget awards-widget">
-												<h4 class="widget-title">Awards</h4>
-												<div class="experience-box">
-													<ul class="experience-list">
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<p class="exp-year">July 2019</p>
-																	<h4 class="exp-title">Humanitarian Award</h4>
-																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<p class="exp-year">March 2011</p>
-																	<h4 class="exp-title">Certificate for International Volunteer Service</h4>
-																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<p class="exp-year">May 2008</p>
-																	<h4 class="exp-title">The Best Instructor of The Year Award</h4>
-																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-																</div>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-											<!-- /Awards Details -->
 											
+										<?php if(!empty($partner_service)){ ?>	
 											<!-- Services List -->
 											<div class="service-list">
 												<h4>Services</h4>
 												<ul class="clearfix">
-													<li>Designing</li>
-													<li>Constructing</li>
-													<li>Teaching</li>
-													<li>Guest Lecturing</li>
-													<li>Analyzing</li>
-													<li>Testing</li>
+													<?php foreach ($partner_service as $key => $value) { ?>
+														<li><?=$value->name ?></li>
+													<?php } ?>
 												</ul>
 											</div>
 											<!-- /Services List -->
-											
+										<?php } ?>
+										
+										<?php if(!empty($partner_specialization)){ ?>
 											<!-- Specializations List -->
 											<div class="service-list">
 												<h4>Specializations</h4>
 												<ul class="clearfix">
-													<li>Structural Analysis</li>
-													<li>Electronic Systems</li>	
-													<li>Structural Design</li>	
-													<li>Engineering</li>	
-													<li>Transportation Systems</li>	
-													<li>Aerodynamics</li>	
+													<?php foreach ($partner_specialization as $key => $value) { ?>
+														<li><?=$value->name ?></li>
+													<?php } ?>
 												</ul>
 											</div>
 											<!-- /Specializations List -->
+										<?php } ?>
+											
+										<?php if(!empty($partner_expertise)){ ?>
+											<!-- Expertise List -->
+											<div class="service-list">
+												<h4>Expertise</h4>
+												<ul class="clearfix">
+													<?php foreach ($partner_expertise as $key => $value) { ?>
+														<li><?=$value->name ?></li>
+													<?php } ?>
+												</ul>
+											</div>
+											<!-- /Expertise List -->
+										<?php } ?>
+
+										<?php if(!empty($partner_certification)){ ?>	
+											<!-- Certification List -->
+											<div class="service-list">
+												<h4>Certification</h4>
+												<ul class="clearfix">
+													<?php foreach ($partner_certification as $key => $value) { ?>
+														<li><?=$value->name ?></li>
+													<?php } ?>
+												</ul>
+											</div>
+											<!-- /Certification List -->
+										<?php } ?>
 
 										</div>
 									</div>
 								</div>
 								<!-- /Overview Content -->
 								
-								<!-- Locations Content -->
-								<div role="tabpanel" id="doc_locations" class="tab-pane fade">
 								
-									<!-- Location List -->
-									<div class="location-list">
-										<div class="row">
-										
-											<!-- Clinic Content -->
-											<div class="col-md-6">
-												<div class="clinic-content">
-													<h4 class="clinic-name"><a href="#">King's College London</a></h4>
-													<p class="pro-speciality">Instructor</p>
-													<div class="rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star"></i>
-														<span class="d-inline-block average-rating">(4)</span>
-													</div>
-													<div class="clinic-details mb-0">
-														<h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2286  Sundown Lane, Austin, Texas 78749, USA <br><a href="javascript:void(0);">Get Directions</a></h5>
-														<ul>
-															<li>
-																<a href="assets/img/features/feature-01.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-01.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="assets/img/features/feature-02.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-02.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="assets/img/features/feature-03.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-03.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="assets/img/features/feature-04.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-04.jpg" alt="Feature Image">
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<!-- /Clinic Content -->
-											
-											<!-- Clinic Timing -->
-											<div class="col-md-4">
-												<div class="clinic-timing">
-													<div>
-														<p class="timings-days">
-															<span> Mon - Sat </span>
-														</p>
-														<p class="timings-times">
-															<span>10:00 AM - 2:00 PM</span>
-															<span>4:00 PM - 9:00 PM</span>
-														</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>Sun</span>
-													</p>
-													<p class="timings-times">
-														<span>10:00 AM - 2:00 PM</span>
-													</p>
-													</div>
-												</div>
-											</div>
-											<!-- /Clinic Timing -->
-											
-											<div class="col-md-2">
-												<div class="consult-price">
-													$250
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- /Location List -->
-									
-									<!-- Location List -->
-									<div class="location-list">
-										<div class="row">
-										
-											<!-- Clinic Content -->
-											<div class="col-md-6">
-												<div class="clinic-content">
-													<h4 class="clinic-name"><a href="#">Imperial College London</a></h4>
-													<p class="pro-speciality">Instructor</p>
-													<div class="rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star"></i>
-														<span class="d-inline-block average-rating">(4)</span>
-													</div>
-													<div class="clinic-details mb-0">
-														<p class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2883  University Street, Seattle, Texas Washington, 98155 <br><a href="javascript:void(0);">Get Directions</a></p>
-														<ul>
-															<li>
-																<a href="assets/img/features/feature-01.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-01.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="assets/img/features/feature-02.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-02.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="assets/img/features/feature-03.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-03.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="assets/img/features/feature-04.jpg" data-fancybox="gallery2">
-																	<img src="assets/img/features/feature-04.jpg" alt="Feature Image">
-																</a>
-															</li>
-														</ul>
-													</div>
-
-												</div>
-											</div>
-											<!-- /Clinic Content -->
-											
-											<!-- Clinic Timing -->
-											<div class="col-md-4">
-												<div class="clinic-timing">
-													<div>
-														<p class="timings-days">
-															<span> Tue - Fri </span>
-														</p>
-														<p class="timings-times">
-															<span>11:00 AM - 1:00 PM</span>
-															<span>6:00 PM - 11:00 PM</span>
-														</p>
-													</div>
-													<div>
-														<p class="timings-days">
-															<span>Sat - Sun</span>
-														</p>
-														<p class="timings-times">
-															<span>8:00 AM - 10:00 AM</span>
-															<span>3:00 PM - 7:00 PM</span>
-														</p>
-													</div>
-												</div>
-											</div>
-											<!-- /Clinic Timing -->
-											
-											<div class="col-md-2">
-												<div class="consult-price">
-													$350
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- /Location List -->
-
-								</div>
-								<!-- /Locations Content -->
 								
 								<!-- Reviews Content -->
 								<div role="tabpanel" id="doc_reviews" class="tab-pane fade">
@@ -471,7 +257,7 @@ if($uri=='adviser')
 											<!-- Comment List -->
 											<li>
 												<div class="comment">
-													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/student/student.jpg">
+													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="<?=base_url() ?>assets/img/student/student.jpg">
 													<div class="comment-body">
 														<div class="meta-data">
 															<span class="comment-author">Richard Wilson</span>
@@ -512,7 +298,7 @@ if($uri=='adviser')
 												<ul class="comments-reply">
 													<li>
 														<div class="comment">
-															<img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/student/student-01.jpg">
+															<img class="avatar avatar-sm rounded-circle" alt="User Image" src="<?=base_url() ?>assets/img/student/student-01.jpg">
 															<div class="comment-body">
 																<div class="meta-data">
 																	<span class="comment-author">Charlene Reed</span>
@@ -557,7 +343,7 @@ if($uri=='adviser')
 											<!-- Comment List -->
 											<li>
 												<div class="comment">
-													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/student/student-03.jpg">
+													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="<?=base_url() ?>assets/img/student/student-03.jpg">
 													<div class="comment-body">
 														<div class="meta-data">
 															<span class="comment-author">Travis Trimble</span>

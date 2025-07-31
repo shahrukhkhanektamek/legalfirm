@@ -254,7 +254,7 @@ class PartnerKycController extends BaseController
             if(!empty($update_data))
             $this->db->table('kyc')->where('id',$insertID)->update($update_data);
 
-            $this->db->table('users')->where('id',$user_id)->update(["kyc_step"=>2,]);
+            $this->db->table('users')->where('id',$user_id)->update(["kyc_step"=>2,"about"=>$this->request->getPost('about'),]);
 
             $action = 'reload';
             $responseCode = 200;
