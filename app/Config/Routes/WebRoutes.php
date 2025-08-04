@@ -19,8 +19,7 @@ $routes->post('search-education', 'Home::search_education');
 
 
 $routes->post('contact-enquiry', 'Enquiry::contact_enquiry');
-$routes->post('bike-enquiry', 'Enquiry::bike_enquiry');
-$routes->post('bike-booking-enquiry', 'Enquiry::bike_booking_enquiry');
+$routes->post('lead-enquiry', 'Enquiry::lead_enquiry');
 
 
 

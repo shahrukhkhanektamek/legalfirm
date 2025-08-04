@@ -50,19 +50,25 @@ class AdminServiceController extends BaseController
         
         ->select("service_category.name as category_name, 
                 CASE 
-                  WHEN service_type = 1 THEN 'Other' 
-                  WHEN service_type = 2 THEN 'Legal' 
+                  WHEN service_type = 1 THEN 'CA' 
+                  WHEN service_type = 2 THEN 'Advocate' 
+                  WHEN service_type = 3 THEN 'Adviser' 
                   ELSE 'other' 
               END AS service_type_name,
             {$this->arr_values['table_name']}.*")
         ->join('service_category', 'service_category.id = ' . $this->arr_values['table_name'] . '.category', 'left')
 
-        ->where([$this->arr_values['table_name'] . '.status' => $status])
-        ->orderBy($this->arr_values['table_name'] . '.id', $order_by)
+        ->where([$this->arr_values['table_name'] . '.status' => $status]);
         
-        ->limit($limit, $offset)
-        ->get()->getResult();
-          
+
+        if(!empty($filter_search_value))
+        {
+            $data_list->groupStart()
+                ->like($this->arr_values['table_name'] . '.name', $filter_search_value)
+            ->groupEnd();
+        }
+        
+        $data_list = $data_list->orderBy($this->arr_values['table_name'] . '.id', $order_by)->limit($limit, $offset)->get()->getResult();
 
 
         $total = $this->db->table($this->arr_values['table_name'])->countAll();

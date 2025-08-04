@@ -168,7 +168,26 @@ require APPPATH. 'Libraries/phpmailer/SMTP.php';
 
     }
 
-
+  function lead_status($value='')
+  {
+    $arr = array(
+      "0"=>'New',
+      "1"=>'Collowup',
+      "2"=>'Not Interested',
+      "3"=>'Transfer',
+    );
+    if($value=='')
+    {
+      return $arr;
+    }
+    else
+    {
+      if(!empty($arr[$value]))
+        return '<span class="badge btn btn-dark" style="margin: 0 auto;">'.$arr[$value].'</span>';
+      else
+        return null;        
+    }    
+  }
 
 
 

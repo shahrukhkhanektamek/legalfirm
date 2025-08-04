@@ -163,6 +163,34 @@ function print_input_search_success_error(search_input,message,type)
 
 
 
+
+function setCookie(name, value) {
+  const expires = new Date();
+  expires.setFullYear(expires.getFullYear() + 100); // 100 years from now
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires.toUTCString()}; path=/`;
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+let uniqueId = getCookie('unique_id');
+
+
+if (!uniqueId) {
+  uniqueId = 'id_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+  setCookie('unique_id', uniqueId);
+  console.log('Unique ID set for lifetime:', uniqueId);
+} else {
+  console.log('Existing Unique ID:', uniqueId);
+}
+
+
+
+
+
 function print_toast(message,type)
 {
   const bottomRightContainer = document.createElement('div')
@@ -229,6 +257,7 @@ var form = '';
           var formDtataNew = new FormData(this);
           formDtataNew.append("lat", localStorage.getItem("lat"));
           formDtataNew.append("long", localStorage.getItem("long"));
+          formDtataNew.append("uniqueId", uniqueId);
 
           $.ajax({
            url: url1,

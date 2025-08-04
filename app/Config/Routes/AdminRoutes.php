@@ -258,7 +258,10 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter'=>'Admi
         $routes->group('lead-enquiry', function($routes) {
             $routes->get('/', 'AdminLeadEnquiryController::index', ['as' => 'lead-enquiry.list']);
             $routes->get('load_data', 'AdminLeadEnquiryController::load_data', ['as' => 'lead-enquiry.load_data']);
+            $routes->post('time_line', 'AdminLeadEnquiryController::time_line', ['as' => 'lead-enquiry.time_line']);
             $routes->post('transfer_now', 'AdminLeadEnquiryController::transfer_now', ['as' => 'lead-enquiry.transfer_now']);
+            $routes->post('update', 'AdminLeadEnquiryController::update', ['as' => 'lead-enquiry.update']);
+            $routes->post('assign', 'AdminLeadEnquiryController::assign', ['as' => 'lead-enquiry.assign']);
             $routes->get('view/(:any)', 'AdminLeadEnquiryController::view/$1', ['as' => 'lead-enquiry.view']);
             $routes->post('delete/(:any)', 'AdminLeadEnquiryController::delete/$1', ['as' => 'lead-enquiry.delete']);
         });

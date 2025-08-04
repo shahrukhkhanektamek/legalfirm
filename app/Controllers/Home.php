@@ -116,32 +116,68 @@ class Home extends BaseController
     {        
         $search = $this->request->getVar('search');
         $table_name = 'users';
-        $package_table = 'vendor_package';
-        $builder = $this->db->table($table_name)
+        // $package_table = 'vendor_package';
+        // $builder = $this->db->table($table_name)
 
-            ->select("{$table_name}.*, city.name as city_name")
+        //     ->select("{$table_name}.*, city.name as city_name")
+        //     ->join('city', 'city.id = '.$table_name.'.city', 'left')
+        //     ->join($package_table, "{$package_table}.vendor_id = {$table_name}.id", 'left')
+        //     ->where("{$table_name}.status", 1)
+        //     ->where("{$table_name}.role", 3)
+        //     ->where("{$package_table}.is_delete", 0)
+        //     ->where("{$package_table}.plan_end_date_time >=", date('Y-m-d H:i:s'));
+        // if (!empty($search)) {
+        //     $builder->groupStart()
+        //         ->like("{$table_name}.name", $search)
+        //         ->groupEnd();
+        // }
+        // $builder->groupBy("{$table_name}.id");
+        // $data_list = $builder
+        //     ->orderBy("{$table_name}.id", 'desc')
+        //     ->limit(50, 0)
+        //     ->get()
+        //     ->getResult();
+
+
+        $table_name = 'users';
+        $builder = $this->db->table($table_name)
             ->join('city', 'city.id = '.$table_name.'.city', 'left')
-            ->join($package_table, "{$package_table}.vendor_id = {$table_name}.id", 'left')
+            ->join('states', 'states.id = '.$table_name.'.state', 'left')
+
+            ->select("{$table_name}.*, city.name as city_name, states.name as state_name,
+                CASE 
+                    WHEN {$table_name}.role = 3 THEN 'Advocate' 
+                    WHEN {$table_name}.role = 4 THEN 'CA' 
+                    WHEN {$table_name}.role = 5 THEN 'Adviser' 
+                    ELSE 'other' 
+                END AS role_name,
+
+                ")
+
             ->where("{$table_name}.status", 1)
-            ->where("{$table_name}.role", 3)
-            ->where("{$package_table}.is_delete", 0)
-            ->where("{$package_table}.plan_end_date_time >=", date('Y-m-d H:i:s'));
+            ->where("{$table_name}.is_delete", 0);
         if (!empty($search)) {
             $builder->groupStart()
                 ->like("{$table_name}.name", $search)
                 ->groupEnd();
         }
-        $builder->groupBy("{$table_name}.id");
+
+
         $data_list = $builder
             ->orderBy("{$table_name}.id", 'desc')
             ->limit(50, 0)
             ->get()
             ->getResult();
+
+
+
+
+
         $return_data = [];
         foreach ($data_list as $key => $value) {
             $return_data[] = [
                 "id" => $value->id,
-                "text" => $value->company_name.' ('.$value->name.', '.$value->area.', '.$value->city_name.')',
+                "text" => $value->name.' '.$value->phone.', '.$value->email.', '.$value->state_name.' ('.$value->role_name.')',
             ];
         }
         $data['results'] = $return_data;

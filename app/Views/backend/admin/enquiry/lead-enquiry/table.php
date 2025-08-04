@@ -2,10 +2,11 @@
     <thead>
         <tr>
             <th data-ordering="false">Date Time</th>
-            <th data-ordering="false">User&nbsp;Name</th>
-            <th data-ordering="false">User Email</th>
-            <th data-ordering="false">User Phone</th>
-            <th data-ordering="false">Bike&nbsp;Details</th>
+            <th data-ordering="false">User Details</th>
+            <th data-ordering="false">Service&nbsp;Details</th>
+            <th data-ordering="false">Partner Detail</th>
+            <th data-ordering="false">Employee Detail</th>
+            <th data-ordering="false">Status</th>
             <!--<th data-ordering="false">URL</th>-->
             <th data-ordering="false">Action</th>
         </tr>
@@ -19,23 +20,53 @@
                     <?=date("d M, Y", strtotime($value->add_date_time))?><br>
                     <small><?=date("h:i A", strtotime($value->add_date_time))?></small>
                 </td>
-                <td><?=$value->name?></td>
-                <td><?=$value->email?></td>
-                <td><?=$value->phone?></td>
                 <td>
-                    <small>Bike id:  <?=$value->bike_id ?></small>
-                    <br>
-                    <b><?=$value->bike_name?></b><br>
-                    Bike Color: <?=$value->color_name?><br>
-                    Bike Price: <?=price_formate($value->price)?>
-                    
-                    
+                    <b>Name: </b><?=$value->name?><br>
+                    <b>Email: </b><?=$value->email?><br>
+                    <b>Phone: </b><?=$value->phone?><br>
+                    <b>State: </b><?=$value->state_name?><br>
                 </td>
-                <!--<td><?//=$value->url?></td>-->
                 <td>
-                    <a data-id="<?=encript($value->id) ?>" class="btn btn-sm btn-outline-primary btn-icon waves-effect transfer-modal-open" data-bs-toggle="tooltip" data-bs-placement="top" title="Share to Showroom"><i class="ri-share-forward-line"></i></a>
+                    <b>Service Name: </b><?=$value->service_name?><br>
+                </td>
+                <td>
+                    <b>Lead For: </b><span class="badge btn btn-info"><?=$value->service_type_name ?></span><br>
+                    <b>View Status: </b>
+                        <?php if($value->is_view){ ?>
+                            <span class="badge btn btn-success">Scratch</span>
+                        <?php }else{?>
+                            <span class="badge btn btn-danger">Not Scratch</span>
+                        <?php } ?>
+                    <br>
+                    <?php if(!empty($value->partner_name)){ ?>
+                        <b>Partner Name: </b><?=$value->partner_name?><br>
+                        <b>Partner Phone: </b><?=$value->partner_phone?><br>
+                        <b>Partner Email: </b><?=$value->partner_email?><br>
+                    <?php }else{?>
+                        <span class="badge btn btn-danger">Not Assign Yet</span>                    
+                    <?php } ?>
+                </td>
+                <td>
+                    <b>Lead For: </b><span class="badge btn btn-info"><?=$value->service_type_name ?></span><br>
+                    <?php if(!empty($value->partner_name)){ ?>
+                        <b>Partner Name: </b><?=$value->partner_name?><br>
+                        <b>Partner Phone: </b><?=$value->partner_phone?><br>
+                        <b>Partner Email: </b><?=$value->partner_email?><br>
+                    <?php }else{?>
+                        <span class="badge btn btn-danger">Not Assign Yet</span>                    
+                    <?php } ?>
+                </td>
+                <td><?=lead_status($value->followup_status) ?></td>
+                <td>
+                    <a data-id="<?=encript($value->id) ?>" class="w-xs mt-1 btn btn-sm btn-outline-primary btn-icon waves-effect transfer-modal-open" data-bs-toggle="tooltip" data-bs-placement="top" title="Share to Showroom"><i class="ri-share-forward-line"></i> &nbsp;Transfer</a>
 
-                    <a href="<?=$data['route'].'/delete/'.encript($value->id)?>" class="btn btn-sm btn-danger btn-icon waves-effect waves-light remove-item-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="ri-delete-bin-4-line"></i></a>
+                    <a data-id="<?=encript(@$value->id)?>" class="w-xs mt-1 btn btn-sm btn-outline-primary btn-icon waves-effect assign-lead" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Comment"><i class="ri-share-forward-fill"></i> &nbsp;Assign</a>
+
+                    <a data-id="<?=encript(@$value->id)?>" class="w-xs mt-1 btn btn-sm btn-outline-primary btn-icon waves-effect add-status" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Comment"><i class="ri-add-fill"></i> &nbsp;Comment</a>
+
+                    <a data-id="<?=encript(@$value->id)?>" class="w-xs mt-1 btn btn-sm btn-outline-primary btn-icon waves-effect load-timeline" data-bs-toggle="tooltip" data-bs-placement="top" title="TimeLine"><i class="ri-time-line"></i> &nbsp;TimeLine</a>
+
+                    <!-- <a href="<?=$data['route'].'/delete/'.encript($value->id)?>" class="btn btn-sm btn-danger btn-icon waves-effect waves-light remove-item-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="ri-delete-bin-4-line"></i></a> -->
                 </td>
             </tr>
          <?php } ?>

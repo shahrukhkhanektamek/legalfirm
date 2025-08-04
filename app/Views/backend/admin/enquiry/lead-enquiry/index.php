@@ -100,8 +100,114 @@
 
             
 
+    <div id="addStatus" class="modal fade zoomIn" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Add Comment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3 form_data" action="<?=base_url(route_to('lead-enquiry.update')) ?>" method="post" enctype="multipart/form-data" id="form_data_submit" novalidate>
+
+                         <?= csrf_field() ?>
+                        <input type="hidden" name="id" id="statusId" value="0">
 
 
+                        <div class="col-md-12">
+                            <label for="formstatus" class="form-label">Status <span class="text-danger">*</span></label>
+                            <select class="js-example-basic-single" id="formstatus" name="followup_status" data-minimum-results-for-search="Infinity" required>
+                                <option value="">Select </option>
+                                <?php 
+                                foreach (lead_status() as $key => $value) {                                
+                                ?>
+                                    <option value="<?=$key ?>"><?=$value ?></option>
+                                <?php } ?>
+                            </select>
+                            <div class="invalid-feedback">Please select any on option.</div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label">Comment<span class="text-danger">*</span></label>
+                            <textarea class="form-control" rows="5" name="message" required></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label"> Reminder Date<span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" name="date" >
+                        </div>
+
+                        <div class="col-12">
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-success btn-label"><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i> Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+
+                
+    <div id="load-timeline" class="modal fade zoomIn" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">TimeLine</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="load-timeline-body">
+                    
+                    wait...
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+    <div id="assignLead" class="modal fade zoomIn" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Assign</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3 form_data" action="<?=base_url(route_to('lead-enquiry.assign')) ?>" method="post" enctype="multipart/form-data" id="form_data_submit" novalidate>
+
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="id" id="statusId2" value="0">
+
+
+                        <div class="col-md-12">
+                            <label for="employee_id" class="form-label">Employee <span class="text-danger">*</span></label>
+                            <select class="js-example-basic-single" id="employee_id" name="employee_id" data-minimum-results-for-search="Infinity" required>
+                                <option value="">Select </option>
+                                <?php 
+                                    $employees = $db->table("users")->where(["role"=>4,])->get()->getResult();
+                                    foreach ($employees as $key => $value) {                                
+                                ?>
+                                    <option value="<?=$value->id ?>"><?=$value->name ?></option>
+                                <?php } ?>                  
+                            </select>
+                        </div>
+
+
+                        <div class="col-12">
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-success btn-label"><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i> Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
         
 <?=view('backend/include/footer') ?>
@@ -177,7 +283,7 @@
       data_loader("#data-list",1);
         var form = new FormData();
         form.append("id", transferId);
-        form.append("vendor_id", $("#select-vendor").val());
+        form.append("partner_id", $("#select-vendor").val());
 
         var settings = {
           "url": "<?=$data['route']?>/transfer_now",
@@ -201,5 +307,75 @@
         });
    }));
 
+
+   $(document).on("click", ".assign-lead",(function(e) {
+        $("#statusId2").val($(this).data('id'));
+        $("#assignLead").modal("show");
+   }));
+
+    $(document).on("click", ".add-status",(function(e) {
+        $("#statusId").val($(this).data('id'));
+        $("#addStatus").modal("show");
+    }));
+
+
+    $(document).on("click", ".load-timeline",(function(e) {
+        loader("show");
+        var form = new FormData();
+        form.append('id',$(this).data('id'));
+
+
+        var settings = {
+          "url": "<?=base_url(route_to('lead-enquiry.time_line')) ?>",
+          "method": "POST",
+          "timeout": 0,
+          "processData": false,
+          "headers": {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+           },
+          "mimeType": "multipart/form-data",
+          "contentType": false,
+          "dataType": "json",
+          "data": form
+        };
+        $.ajax(settings).always(function (response) {
+            loader("hide");
+            response = admin_response_data_check(response);
+            if(response.status==200)
+            {
+                var data = response.data;
+                var html = `<table class="table table-responsive table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Comment</th>
+                            <th>Employee</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr> 
+                    </thead><body>`;
+                
+                $(data).each(function(index, item){
+                    html = html+`
+                        <tr>
+                            <td>${item.message}</td>
+                            <td>${item.employee_name}</td>
+                            <td>${item.add_date_time}</td>
+                            <td>${item.followup_status}</td>
+                        </tr>
+                    `;
+                });
+                html = html+'</body></table>';
+
+
+                $("#load-timeline-body").html(html);
+
+                $("#load-timeline").modal("show");
+            }
+            else
+            {
+                error_message(response.message);
+            }
+        });
+   }));
    
 </script>

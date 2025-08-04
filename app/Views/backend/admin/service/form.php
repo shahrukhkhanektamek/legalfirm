@@ -42,8 +42,9 @@
                                     <label class="form-label">Select Service Type <span class="text-danger">*</span></label>
                                     <select class="form-control" name="service_type" >
                                         <option value="">Select</option>
-                                        <option value="1" <?php if(@$row->service_type==1)echo'selected'; ?> >Other</option>
-                                        <option value="2" <?php if(@$row->service_type==2)echo'selected'; ?> >Legal</option>                                        
+                                        <option value="1" <?php if(@$row->service_type==1)echo'selected'; ?> >CA</option>
+                                        <option value="2" <?php if(@$row->service_type==2)echo'selected'; ?> >Advocate</option>
+                                        <option value="3" <?php if(@$row->service_type==3)echo'selected'; ?> >Adviser</option>
                                     </select>
                                 </div>
 

@@ -57,7 +57,7 @@ $cities = $db->table('city')->getWhere(["status"=>1,])->getResultObject();
 						<!-- Blog Sidebar -->
 						<div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
 
-							<div class="card category-widget">
+							<div class="card category-widget d-none">
 								<div class="card-body">
 									<?php if($row->service_type==1){ ?>
 										<a href="<?=base_url().'ca?service='.$row->slug?>" class="btn btn-primary">Hire CA</a>									
@@ -76,22 +76,47 @@ $cities = $db->table('city')->getWhere(["status"=>1,])->getResultObject();
 								</div>
 								<div class="card-body">
 
-									<form>
+									<form class="form_data" action="<?=base_url('lead-enquiry')?>" method="post" enctype="multipart/form-data" id="form_data_submit" novalidate>
+		                                <?= csrf_field() ?>
+		                                <input type="hidden" name="url" value="<?=(empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>">
+		                                <input type="hidden" name="service" value="<?=encript($row->id) ?>">
+
 										<div class="form-group">
 											<label>Name <span class="text-danger">*</span></label>
-											<input type="text" class="form-control">
+											<input type="text" class="form-control" name="name" required>
 										</div>
 										<div class="form-group">
-											<label>Your Email Address <span class="text-danger">*</span></label>
-											<input type="email" class="form-control">
+											<label>Phone <span class="text-danger">*</span></label>
+											<input type="text" class="form-control" name="phone" required>
+										</div>
+										<div class="form-group">
+											<label>Your Email Address </label>
+											<input type="email" class="form-control" name="email">
 										</div>
 										<div class="form-group">
 											<label>Comments</label>
-											<textarea rows="4" class="form-control"></textarea>
+											<textarea rows="4" class="form-control" name="message"></textarea>
 										</div>
+										<div class="form-group d-none">
+											<label>Country</label>
+											<select class="form-control" id="country" name="country">
+												<option value="99" selected>India</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>State</label>
+											<select class="form-control" id="state" name="state">
+												<option value="">Select State</option>
+											</select>
+										</div>
+
 										<div class="submit-section">
-											<button class="btn btn-primary submit-btn" type="submit">Submit</button>
+											<button class="btn btn-primary" type="submit">Submit</button>
 										</div>
+
+										
+
+										
 									</form>
 								</div>
 							</div>
@@ -187,7 +212,13 @@ $cities = $db->table('city')->getWhere(["status"=>1,])->getResultObject();
     text-underline-offset: 0.3rem;
     z-index: 2;
 }
-.show-more-height:after,
+.tp-service-5-title {
+    font-size: 30px;
+    margin-bottom: 5px;
+    display: block;
+    font-weight: 800;
+}
+/*.show-more-height:after,
 .show-more-height2:after {
     content: "";
     position: absolute;
@@ -198,7 +229,7 @@ $cities = $db->table('city')->getWhere(["status"=>1,])->getResultObject();
     height: 60px;
     background: linear-gradient(0deg, rgba(246, 247, 249, 1) 0%, rgba(246, 247, 249, 0) 100%);
     z-index: 1;
-}
+}*/
 </style>
 
          <section class="bd-course-breadcrumb-area section-space">
@@ -223,7 +254,7 @@ $cities = $db->table('city')->getWhere(["status"=>1,])->getResultObject();
                                                 <?php } ?>
                                             </ul>
                                         </div>
-                                        <div class="show-more">Click to view more<i class="far fa-angle-down ms-2"></i></div>
+                                        <div class="show-more"><span>Click to view more</span><i class="fa fa-angle-double-down ms-2"></i></div>
                                     </div>
                                  </div>
                             </div>
@@ -237,7 +268,7 @@ $cities = $db->table('city')->getWhere(["status"=>1,])->getResultObject();
                             <div class="col-lg-9">
 
                                  <div class="servicecontent">
-                                    <div class="tp-service-5-right">
+                                    <div class="tp-service-5-right" style="position: relative;">
                                         <span class="tp-service-5-title"><?=$row->name?> in City</span>
                                         <div class="tp-service-5-list text2 show-more-height2 p-relative">
                                             <ul class="row">
@@ -246,7 +277,7 @@ $cities = $db->table('city')->getWhere(["status"=>1,])->getResultObject();
                                                 <?php } ?>
                                             </ul>
                                         </div>
-                                        <div class="show-more2">Click to view more<i class="far fa-angle-down ms-2"></i></div>
+                                        <div class="show-more2"><span>Click to view more</span><i class="fa fa-angle-double-down ms-2"></i></div>
                                     </div>
                                  </div>
                             </div>
@@ -281,17 +312,25 @@ $cities = $db->table('city')->getWhere(["status"=>1,])->getResultObject();
 <script  type="text/javascript">
 $(".show-more").click(function () {
   if ($(".text").hasClass("show-more-height")) {
-    $(this).text("Click to view less");
+    $(".show-more span").text("Click to view less");
+    $(".show-more i").addClass("fa-angle-double-up");
+    $(".show-more i").removeClass("fa-angle-double-down");
   } else {
-    $(this).text("Click to view more");
+    $(".show-more span").text("Click to view more");
+    $(".show-more i").addClass("fa-angle-double-down");
+    $(".show-more i").removeClass("fa-angle-double-up");
   }
   $(".text").toggleClass("show-more-height");
 });
 $(".show-more2").click(function () {
   if ($(".text2").hasClass("show-more-height2")) {
-    $(this).text("Click to view less");
+    $(".show-more2 span").text("Click to view less");
+    $(".show-more2 i").addClass("fa-angle-double-up");
+    $(".show-more2 i").removeClass("fa-angle-double-down");
   } else {
-    $(this).text("Click to view more");
+    $(".show-more2 span").text("Click to view more");
+    $(".show-more2 i").addClass("fa-angle-double-down");
+    $(".show-more2 i").removeClass("fa-angle-double-up");
   }
   $(".text2").toggleClass("show-more-height2");
 });

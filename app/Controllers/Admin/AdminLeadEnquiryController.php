@@ -5,6 +5,8 @@ use CodeIgniter\Database\Database;
 use CodeIgniter\Config\Services;
 use App\Models\ImageModel;
 
+use App\Models\Custom;
+
 class AdminLeadEnquiryController extends BaseController
 {
      protected $arr_values = array(
@@ -31,7 +33,8 @@ class AdminLeadEnquiryController extends BaseController
         $data['upload_path'] = $this->arr_values['upload_path'];
         $data['route'] = base_url(route_to($this->arr_values['routename'].'list'));      
         $data['pagenation'] = array($this->arr_values['title']);
-        return view($this->arr_values['folder_name'].'/index',compact('data'));
+        $db = $this->db;
+        return view($this->arr_values['folder_name'].'/index',compact('data','db'));
     }
     public function load_data()
     {
@@ -52,13 +55,34 @@ class AdminLeadEnquiryController extends BaseController
         
         $where = [];
         $query = $this->db->table($this->arr_values['table_name'])
-            ->join('product', 'product.id = ' . $this->arr_values['table_name'] . '.bike_id', 'left')
-            ->join('color', 'color.id = ' . $this->arr_values['table_name'] . '.color', 'left')
+            ->join('service', 'service.id = ' . $this->arr_values['table_name'] . '.service_id', 'left')
+            ->join('states', 'states.id = ' . $this->arr_values['table_name'] . '.state', 'left')
+            ->join(
+                'partner_lead as partner_lead',
+                'partner_lead.lead_id = ' . $this->arr_values['table_name'] . '.id AND partner_lead.status = 1',
+                'left'
+            )
+            ->join('users as partner', 'partner.id = ' . 'partner_lead.partner_id', 'left')
             ->select("
                 {$this->arr_values['table_name']}.*, 
-                product.price as price, 
-                color.name as color_name,
-                color.code as color_code
+                CASE 
+                    WHEN {$this->arr_values['table_name']}.service_type = 1 THEN 'CA' 
+                    WHEN {$this->arr_values['table_name']}.service_type = 2 THEN 'Advocate' 
+                    WHEN {$this->arr_values['table_name']}.service_type = 3 THEN 'Adviser' 
+                    ELSE 'other' 
+                END AS service_type_name,
+
+
+                states.name as state_name,
+                service.name as service_name,
+
+                partner.name as partner_name,
+                partner.phone as partner_phone,
+                partner.email as partner_email,
+
+                partner_lead.is_view as is_view,
+
+
             ")
             ->where([
                 $this->arr_values['table_name'] . '.status' => $status
@@ -167,25 +191,20 @@ class AdminLeadEnquiryController extends BaseController
     public function transfer_now()
     {
         $id = decript($this->request->getVar('id'));        
-        $vendor_id = $this->request->getVar('vendor_id');        
+        $partner_id = $this->request->getVar('partner_id');        
         $data = $this->db->table($this->arr_values['table_name'])->where(["id"=>$id,])->get()->getFirstRow();
         
 
-        $transferData['inquiry_table_id'] = $id;
-        $transferData['vendor_id'] = $vendor_id;
-        $transferData['name'] = $data->name;
-        $transferData['email'] = $data->email;
-        $transferData['phone'] = $data->phone;
-        $transferData['bike_id'] = $data->bike_id;
-        $transferData['bike_name'] = $data->bike_name;
-        $transferData['color'] = $data->color;
+        $transferData['lead_id'] = $id;
+        $transferData['partner_id'] = $partner_id;
 
 
         $transferData['add_date_time'] = date("Y-m-d H:i:s");
         $transferData['update_date_time'] = date("Y-m-d H:i:s");
         $transferData['status'] = 1;
+        $transferData['is_view'] = 0;
 
-        $check = $this->db->table("vendor_enquiry_lead")->where(["inquiry_table_id"=>$id,"vendor_id"=>$vendor_id,])->get()->getFirstRow();
+        $check = $this->db->table("partner_lead")->where(["lead_id"=>$id,"partner_id"=>$partner_id,"status"=>1,])->get()->getFirstRow();
         if(!empty($check))
         {
             $action = 'delete';
@@ -196,11 +215,14 @@ class AdminLeadEnquiryController extends BaseController
             $result['data'] = [];
             return $this->response->setStatusCode($responseCode)->setJSON($result);
         }
+
+        $Custom = new Custom();
+        $inId = $Custom->transfer($id,$partner_id);
+
         
 
-
         
-        if($this->db->table("vendor_enquiry_lead")->insert($transferData))
+        if($inId)
         {
             $action = 'delete';
             $responseCode = 200;
@@ -220,6 +242,145 @@ class AdminLeadEnquiryController extends BaseController
             $result['data'] = [];
             return $this->response->setStatusCode($responseCode)->setJSON($result);
         }
+    }
+
+    public function update()
+    {
+        $id = decript($this->request->getPost('id'));
+        $followup_status = $this->request->getPost('followup_status');
+        $message = $this->request->getPost('message');
+        $date = $this->request->getPost('date');
+
+        $session = session()->get('user');
+        $user_id = $session['id'];
+
+        $data = [
+            "followup_status"=>$followup_status,
+        ];
+
+        $entryStatus = false;        
+        $data['update_date_time'] = date("Y-m-d H:i:s");
+        if($this->db->table($this->arr_values['table_name'])->where('id', $id)->update($data)) $entryStatus = true;
+        else $entryStatus = false;
+        
+        if($entryStatus)
+        {
+
+            $this->db->table('lead_followup')->insert([
+                'user_id'=>$user_id,
+                'lead_id'=>$id,
+                'followup_status'=>$followup_status,
+                'message'=>$message,
+                'date'=>$date,
+                'add_date_time'=>date("Y-m-d H:i:s"),
+            ]);
+
+            $action = 'modalsubmitadd';
+            $responseCode = 200;
+            $result['status'] = $responseCode;
+            $result['message'] = 'Success';
+            $result['action'] = $action;
+            $result['modalid'] = 'addStatus';
+            $result['data'] = [];
+            return $this->response->setStatusCode($responseCode)->setJSON($result);            
+        }
+        else
+        {
+            $action = 'modalsubmitadd';
+            $responseCode = 400;
+            $result['status'] = $responseCode;
+            $result['message'] = $this->db->error()['message'];
+            $result['action'] = $action;
+            $result['modalid'] = 'addStatus';
+            $result['data'] = [];
+            return $this->response->setStatusCode($responseCode)->setJSON($result);
+        }
+    }
+
+    public function assign()
+    {
+        $id = decript($this->request->getPost('id'));
+        $employee_id = $this->request->getPost('employee_id');
+        $session = session()->get('user');
+        $user_id = $session['id'];
+
+
+        $row = $this->db->table($this->arr_values['table_name'])->where(["id"=>$id,])->get()->getFirstRow();
+
+        $data = [
+            "employee_id"=>$employee_id,
+        ];
+
+        $entryStatus = false;        
+        $data['update_date_time'] = date("Y-m-d H:i:s");
+        if($this->db->table($this->arr_values['table_name'])->where('id', $id)->update($data)) $entryStatus = true;
+        else $entryStatus = false;
+        
+        if($entryStatus)
+        {
+            $this->db->table('lead_followup')->insert([
+                'user_id'=>$user_id,
+                'lead_id'=>$id,
+                'followup_status'=>$row->followup_status,
+                'message'=>"Lead Assing",
+                'add_date_time'=>date("Y-m-d H:i:s"),
+            ]);
+
+            $action = 'assignLead';
+            $responseCode = 200;
+            $result['status'] = $responseCode;
+            $result['message'] = 'Success';
+            $result['action'] = $action;
+            $result['modalid'] = 'addStatus';
+            $result['data'] = [];
+            return $this->response->setStatusCode($responseCode)->setJSON($result);            
+        }
+        else
+        {
+            $action = 'assignLead';
+            $responseCode = 400;
+            $result['status'] = $responseCode;
+            $result['message'] = $this->db->error()['message'];
+            $result['action'] = $action;
+            $result['modalid'] = 'addStatus';
+            $result['data'] = [];
+            return $this->response->setStatusCode($responseCode)->setJSON($result);
+        }
+    }
+
+    public function time_line()
+    {        
+        $id = decript($this->request->getPost('id'));
+
+        $table_name = 'lead_followup';
+        $status = 1;
+        $order_by = 'desc';
+        $data['route'] = base_url(route_to($this->arr_values['routename'].'list'));   
+        
+        $data_list = $this->db->table($table_name)
+        ->join('users', 'users.id = ' . $table_name . '.user_id', 'left')
+
+        ->select("users.name as employee_name, {$table_name}.*")
+        ->where(["lead_id"=>$id,])
+        ->orderBy($table_name . '.id', $order_by)
+        ->get()
+        ->getResult();
+
+
+        foreach ($data_list as &$item) {
+            $item->add_date_time = date("d M, Y h:i A");
+            $item->followup_status = lead_status($item->followup_status);
+        }
+        unset($item); // good practice when using references
+
+        
+        $responseCode = 200;
+        $result['status'] = $responseCode;
+        $result['status'] = $responseCode;
+        $result['message'] = 'Success';
+        $result['action'] = 'view';
+        $result['data'] = $data_list;
+        return $this->response->setStatusCode($responseCode)->setJSON($result);
     }
 
 }
