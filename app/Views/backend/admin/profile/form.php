@@ -79,11 +79,7 @@
                                                 </select>
                                                 <div class="invalid-feedback">Please enter sex</div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-6">
-                                                <label for="age" class="form-label">Age <span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="age" name="age" placeholder="i.e 32" value="<?=$row->age?>" required>
-                                                <div class="invalid-feedback">Please provide a valid age.</div>
-                                            </div>
+                                            
                                             <div class="col-md-6">
                                                 <label for="mobile" class="form-label">Phone number <span class="text-danger">*</span></label>
                                                 <input type="number" class="form-control" id="mobile" name="mobile" placeholder="i.e 1234567890" value="<?=$row->phone?>" required>

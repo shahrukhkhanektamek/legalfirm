@@ -46,7 +46,7 @@ class AdminProfileController extends BaseController
         $data = [
             "name"=>$this->request->getPost('name'),
             "gender"=>$this->request->getPost('gender'),
-            "age"=>$this->request->getPost('age'),
+            // "age"=>$this->request->getPost('age'),
             "phone"=>$this->request->getPost('mobile'),
             "email"=>$this->request->getPost('email'),
             "status"=>1,

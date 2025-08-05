@@ -29,7 +29,7 @@ class AdminAuth implements FilterInterface
                 session()->remove('user');
                 return redirect()->route('auth.login');
             }
-            else if($user->role!=1)
+            else if($user->role!=1 && $user->role!=6)
             {
                 return redirect()->route('auth.login');
             }

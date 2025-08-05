@@ -5,6 +5,25 @@
 </li>
 
 <li class="nav-item">
+    <a class="nav-link menu-link" href="#managePartner" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="managePartner">
+        <i class="ri-contacts-line"></i> <span data-key="t-dashboards">Manage Partner</span>
+    </a>
+    <div class="collapse menu-dropdown" id="managePartner">
+        <ul class="nav nav-sm flex-column">
+            <li class="nav-item">
+                <a href="<?=base_url(route_to('admin-user.list')).'?type=3'?>" class="nav-link" data-key="t-analytics"> Advocates </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url(route_to('admin-user.list')).'?type=4'?>" class="nav-link" data-key="t-analytics"> CA </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?=base_url(route_to('admin-user.list')).'?type=5'?>" class="nav-link" data-key="t-analytics"> Advisers </a>
+            </li>
+        </ul>
+    </div>
+</li>
+
+<li class="nav-item">
     <a class="nav-link menu-link" href="#manageuser" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="manageuser">
         <i class="ri-contacts-line"></i> <span data-key="t-dashboards">Manage User</span>
     </a>
@@ -12,42 +31,25 @@
         <ul class="nav nav-sm flex-column">
 
             <li class="nav-item">
-                <a href="<?=base_url(route_to('admin-user.list'))?>" class="nav-link" data-key="t-analytics"> Advocates </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('admin-user.list'))?>" class="nav-link" data-key="t-analytics"> CA </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('admin-user.list'))?>" class="nav-link" data-key="t-analytics"> Advisers </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('admin-user.list'))?>" class="nav-link" data-key="t-analytics"> Users </a>
+                <a href="<?=base_url(route_to('admin-user.list')).'?type=2'?>" class="nav-link" data-key="t-analytics"> Users </a>
             </li>
 
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('admin-user.list'))?>" class="nav-link" data-key="t-analytics"> Kyc </a>
-            </li>
-        </ul>
-    </div>
-</li> <!-- end Dashboard Menu -->
-
-
-<li class="nav-item">
-    <a class="nav-link menu-link" href="#leads" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="leads">
-        <i class="ri-message-2-line"></i> <span data-key="t-dashboards">User Leads</span>
-    </a>
-    <div class="collapse menu-dropdown" id="leads">
-        <ul class="nav nav-sm flex-column">
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('booking-enquiry.list'))?>" class="nav-link" data-key="t-analytics"> Booking </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?=base_url(route_to('lead-enquiry.list'))?>" class="nav-link" data-key="t-analytics"> Enquiry </a>
-            </li>
         </ul>
     </div>
 </li>
 
+
+
+<li class="nav-item">
+    <a class="nav-link menu-link" href="<?=base_url(route_to('lead-enquiry.list'))?>">
+        <i class="ri-wallet-line"></i> <span data-key="t-transaction">Leads</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link menu-link" href="<?=base_url(route_to('kyc.list'))?>">
+        <i class="ri-wallet-line"></i> <span data-key="t-transaction">Kyc</span>
+    </a>
+</li>
 <li class="nav-item">
     <a class="nav-link menu-link" href="<?=base_url(route_to('transaction.list'))?>">
         <i class="ri-wallet-line"></i> <span data-key="t-transaction">Payment History</span>

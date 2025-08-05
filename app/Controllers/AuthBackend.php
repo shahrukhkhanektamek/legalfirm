@@ -91,7 +91,7 @@ class AuthBackend extends BaseController
         // Query the user from the database
         $user = $this->db->table('users')
             ->where(['email' => $username])
-            ->whereIn('role', [1])
+            ->whereIn('role', [1,6])
             ->get()
             ->getRow();
 
@@ -208,10 +208,9 @@ class AuthBackend extends BaseController
         $db->table('login_history')->where(['user_id'=>$user_id,'status'=>1,])->update(['status'=>0,]);
         session()->remove('user');
 
-        if($role==1)
-        $result['url'] = base_url(route_to('auth.login'));
-        if($role==3)
-        $result['url'] = base_url('vendor-login');
+        if($role==1) $result['url'] = base_url(route_to('auth.login'));
+        if($role==3) $result['url'] = base_url('vendor-login');
+        if($role==6) $result['url'] = base_url('auth/login');
 
         $responseCode = 200;
         $result['message'] = 'Logout Successfully';

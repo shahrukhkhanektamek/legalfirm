@@ -31,27 +31,24 @@
                 </td>
                 <td>
                     <b>Lead For: </b><span class="badge btn btn-info"><?=$value->service_type_name ?></span><br>
-                    <b>View Status: </b>
+                    <?php if(!empty($value->partner_name)){ ?>
+                        <b>Partner Name: </b><?=$value->partner_name?><br>
+                        <b>Partner Phone: </b><?=$value->partner_phone?><br>
+                        <b>Partner Email: </b><?=$value->partner_email?><br>
                         <?php if($value->is_view){ ?>
                             <span class="badge btn btn-success">Scratch</span>
                         <?php }else{?>
                             <span class="badge btn btn-danger">Not Scratch</span>
                         <?php } ?>
-                    <br>
-                    <?php if(!empty($value->partner_name)){ ?>
-                        <b>Partner Name: </b><?=$value->partner_name?><br>
-                        <b>Partner Phone: </b><?=$value->partner_phone?><br>
-                        <b>Partner Email: </b><?=$value->partner_email?><br>
                     <?php }else{?>
-                        <span class="badge btn btn-danger">Not Assign Yet</span>                    
+                        <span class="badge btn btn-danger">Not Transfer Yet</span>                    
                     <?php } ?>
                 </td>
                 <td>
-                    <b>Lead For: </b><span class="badge btn btn-info"><?=$value->service_type_name ?></span><br>
-                    <?php if(!empty($value->partner_name)){ ?>
-                        <b>Partner Name: </b><?=$value->partner_name?><br>
-                        <b>Partner Phone: </b><?=$value->partner_phone?><br>
-                        <b>Partner Email: </b><?=$value->partner_email?><br>
+                    <?php if(!empty($value->employee_name)){ ?>
+                        <b>Employee Name: </b><?=$value->employee_name?><br>
+                        <b>Employee Phone: </b><?=$value->employee_phone?><br>
+                        <b>Employee Email: </b><?=$value->employee_email?><br>
                     <?php }else{?>
                         <span class="badge btn btn-danger">Not Assign Yet</span>                    
                     <?php } ?>

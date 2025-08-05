@@ -148,6 +148,7 @@ class Enquiry extends BaseController
 
 
             // $Custom->transfer($insertId,$partner_id);
+            $Custom->employee_auto_transfer($insertId,1,$date);
 
             // $action = 'mainmodalsubmitadd';
             $action = 'reload';

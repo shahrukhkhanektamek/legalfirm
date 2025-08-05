@@ -189,7 +189,7 @@
                             <select class="js-example-basic-single" id="employee_id" name="employee_id" data-minimum-results-for-search="Infinity" required>
                                 <option value="">Select </option>
                                 <?php 
-                                    $employees = $db->table("users")->where(["role"=>4,])->get()->getResult();
+                                    $employees = $db->table("users")->where(["role"=>6,])->get()->getResult();
                                     foreach ($employees as $key => $value) {                                
                                 ?>
                                     <option value="<?=$value->id ?>"><?=$value->name ?></option>

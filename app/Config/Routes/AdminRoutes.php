@@ -1,6 +1,6 @@
 <?php 
 
-$routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter'=>'AdminAuth',] ,function ($routes) {
+$adminEmployeeRoutes = function ($routes) {
     
     $routes->get('dashboard', 'AdminDashboardController::index', ['as' => 'admin.dashboard']);
 
@@ -101,12 +101,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter'=>'Admi
 
 
 
-
-
-
-
-
-
     $routes->group('admin-user', function($routes) {
         $routes->get('/', 'AdminUserController::index', ['as' => 'admin-user.list']);
         $routes->get('load_data', 'AdminUserController::load_data', ['as' => 'admin-user.load_data']);
@@ -114,8 +108,29 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter'=>'Admi
         $routes->get('edit/(:any)?', 'AdminUserController::edit/$1', ['as' => 'admin-user.edit']);
         $routes->get('view/(:any)', 'AdminUserController::view/$1', ['as' => 'admin-user.view']);
         $routes->post('update', 'AdminUserController::update', ['as' => 'admin-user.update']);
+
+        $routes->get('change-password/(:any)', 'AdminUserController::change_password/$1', ['as' => 'admin-user.change-password']);
+        $routes->post('change-password-action', 'AdminUserController::change_password_action', ['as' => 'admin-user.change-password-action']);
+
         $routes->post('delete/(:any)', 'AdminUserController::delete/$1', ['as' => 'admin-user.delete']);
         $routes->post('block_unblock/(:any)', 'AdminUserController::block_unblock/$1', ['as' => 'admin-user.block_unblock']);
+    });
+
+
+
+    $routes->group('kyc', function($routes) {
+        $routes->get('/', 'AdminKycController::index', ['as' => 'kyc.list']);
+        $routes->get('load_data', 'AdminKycController::load_data', ['as' => 'kyc.load_data']);
+        $routes->get('add', 'AdminKycController::add', ['as' => 'kyc.add']);
+        $routes->get('edit/(:any)?', 'AdminKycController::edit/$1', ['as' => 'kyc.edit']);
+        $routes->get('view/(:any)', 'AdminKycController::view/$1', ['as' => 'kyc.view']);
+        $routes->post('update', 'AdminKycController::update', ['as' => 'kyc.update']);
+
+        $routes->get('change-password/(:any)', 'AdminKycController::change_password/$1', ['as' => 'kyc.change-password']);
+        $routes->post('change-password-action', 'AdminKycController::change_password_action', ['as' => 'kyc.change-password-action']);
+
+        $routes->post('delete/(:any)', 'AdminKycController::delete/$1', ['as' => 'kyc.delete']);
+        $routes->post('block_unblock/(:any)', 'AdminKycController::block_unblock/$1', ['as' => 'kyc.block_unblock']);
     });
 
   
@@ -244,9 +259,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter'=>'Admi
 
 
 
-    /*enquiry statrt*/
-
-      
+    /*enquiry statrt*/      
 
         $routes->group('contact-enquiry', function($routes) {
             $routes->get('/', 'AdminContactEnquiryController::index', ['as' => 'contact-enquiry.list']);
@@ -283,5 +296,10 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter'=>'Admi
 
     /*enquiry end*/
 
-});
+};
+
+
+
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter'=>'AdminAuth',], $adminEmployeeRoutes);
+
 
