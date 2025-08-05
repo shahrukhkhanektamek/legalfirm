@@ -187,10 +187,10 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 						<ul class="main-nav">
 							
 							<li class="has-submenu active"><a href="<?=$base_url ?>">Home</a></li>
-							<li class="has-submenu"><a href="<?=$base_url ?>">Personal Injury</a></li>
-							<li class="has-submenu"><a href="<?=$base_url ?>">Family Law</a></li>
-							<li class="has-submenu"><a href="<?=$base_url ?>">Criminal Defense</a></li>
-							<li class="has-submenu"><a href="<?=$base_url ?>">Business and Corporate Law</a></li>
+							<li class="has-submenu"><a href="<?=$base_url.'personal-injury' ?>">Personal Injury</a></li>
+							<li class="has-submenu"><a href="<?=$base_url.'family-law' ?>">Family Law</a></li>
+							<li class="has-submenu"><a href="<?=$base_url.'criminal-defense' ?>">Criminal Defense</a></li>
+							<li class="has-submenu"><a href="<?=$base_url.'business-and-corporate-law' ?>">Business and Corporate Law</a></li>
 							<li class="has-submenu">
 								<a href="<?=$base_url ?>#">Other Services <i class="fas fa-chevron-down"></i></a>
 
@@ -206,7 +206,7 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 										<li class="has-submenu">
 											<a href="<?=$base_url.$value->slug ?>"><?=$value->name ?></a>
 											<?php
-												$services = $db->table("service")->where(["status"=>1,"service_type"=>1,"category"=>$value->id,])->get()->getResult();
+												$services = $db->table("service")->where(["status"=>1,"category"=>$value->id,])->limit(10)->get()->getResult();
 												if(!empty($services)){
 											?>
 												<ul class="submenu">

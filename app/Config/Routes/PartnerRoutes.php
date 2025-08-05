@@ -35,11 +35,23 @@ $routes->group('partner', ['namespace' => 'App\Controllers\Partner', 'filter'=>'
     });
 
 
-    $routes->group('lead-enquiry', function($routes) {
-        $routes->get('/', 'VendorLeadEnquiryController::index', ['as' => 'partner.lead-enquiry.list']);
-        $routes->get('load_data', 'VendorLeadEnquiryController::load_data', ['as' => 'partner.lead-enquiry.load_data']);
-        $routes->get('view/(:any)', 'VendorLeadEnquiryController::view/$1', ['as' => 'partner.lead-enquiry.view']);
-        $routes->post('scratch', 'VendorLeadEnquiryController::scratch', ['as' => 'partner.lead-enquiry.scratch']);
+    $routes->group('lead', function($routes) {
+        $routes->get('/', 'PartnerLeadController::index', ['as' => 'partner.lead.list']);
+        $routes->get('load_data', 'PartnerLeadController::load_data', ['as' => 'partner.lead.load_data']);
+        $routes->get('view/(:any)', 'PartnerLeadController::view/$1', ['as' => 'partner.lead.view']);
+        $routes->post('scratch', 'PartnerLeadController::scratch', ['as' => 'partner.lead.scratch']);
+    });
+
+    $routes->group('appointment', function($routes) {
+        $routes->get('/', 'PartnerAppointmentController::index', ['as' => 'partner.appointment.list']);
+        $routes->get('load_data', 'PartnerAppointmentController::load_data', ['as' => 'partner.appointment.load_data']);
+        $routes->get('view/(:any)', 'PartnerAppointmentController::view/$1', ['as' => 'partner.appointment.view']);
+        $routes->post('scratch', 'PartnerAppointmentController::scratch', ['as' => 'partner.appointment.scratch']);
+    });
+
+    $routes->group('review', function($routes) {
+        $routes->get('/', 'PartnerReviewController::index', ['as' => 'partner.review.list']);
+        $routes->get('load_data', 'PartnerReviewController::load_data', ['as' => 'partner.review.load_data']);
     });
 
     $routes->group('booking-enquiry', function($routes) {

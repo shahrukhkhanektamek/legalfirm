@@ -13,7 +13,7 @@ class AdminKycController extends BaseController
         'table_name'=>'users',
         'page_title'=>'Kyc',
         "folder_name"=>'backend/admin/kyc',
-        "upload_path"=>'upload/',
+        "upload_path"=>'upload/kyc/',
         "page_name"=>'kyc-user.php',
        );
 
@@ -48,8 +48,10 @@ class AdminKycController extends BaseController
         $data['upload_path'] = $this->arr_values['upload_path'];
         $data['route'] = base_url(route_to($this->arr_values['routename'].'list'));   
 
-        $data_list = $this->db->table($this->arr_values['table_name'])->where([$this->arr_values['table_name'].'.status' => $status,])        
-        // ->where($this->arr_values['table_name'].'.role =', $type)
+        $data_list = $this->db->table($this->arr_values['table_name'])->where([$this->arr_values['table_name'].'.kyc_step' => $status,])        
+        ->where($this->arr_values['table_name'].'.role !=', 1)
+        ->where($this->arr_values['table_name'].'.role !=', 2)
+        ->where($this->arr_values['table_name'].'.role !=', 6)
         ->orderBy($this->arr_values['table_name'].'.id',$order_by)
         ->limit($limit, $offset)
         ->get()->getResult();
@@ -102,7 +104,48 @@ class AdminKycController extends BaseController
         if(!empty($row))
         {
             $db=$this->db;
-            return view($this->arr_values['folder_name'].'/account-view',compact('data','row','db'));
+
+            $user_id = $row->id;
+            $kyc = $this->db->table('kyc')->where(["user_id"=>$user_id,])->orderBy('id','desc')->get()->getFirstRow();
+
+
+            $partner_specializations = [];
+            $partner_specialization = $this->db->table("partner_specialization")->where(["user_id"=>$user_id,])->get()->getResultObject();
+            foreach ($partner_specialization as $key => $value) {
+                $partner_specializations[] = $value->sp_id;
+            }
+
+
+            $partner_services = [];
+            $partner_service = $this->db->table("partner_service")->where(["user_id"=>$user_id,])->get()->getResultObject();
+            foreach ($partner_service as $key => $value) {
+                $partner_services[] = $value->s_id;
+            }
+
+
+            $partner_expertises = [];
+            $partner_expertise = $this->db->table("partner_expertise")->where(["user_id"=>$user_id,])->get()->getResultObject();
+            foreach ($partner_expertise as $key => $value) {
+                $partner_expertises[] = $value->e_id;
+            }
+
+
+            $partner_certifications = [];
+            $partner_certification = $this->db->table("partner_certification")->where(["user_id"=>$user_id,])->get()->getResultObject();
+            foreach ($partner_certification as $key => $value) {
+                $partner_certifications[] = $value->c_id;
+            }
+
+
+            $partner_educations = [];
+            $partner_education = $this->db->table("partner_education")->where(["user_id"=>$user_id,])->get()->getResultObject();
+            foreach ($partner_education as $key => $value) {
+                $partner_educations[] = $value->ed_id;
+            }
+
+
+
+            return view($this->arr_values['folder_name'].'/form',compact('data','row','db','kyc','partner_specializations','partner_services','partner_expertises','partner_certifications','partner_educations','partner_education'));
         }
         else
         {
@@ -114,72 +157,176 @@ class AdminKycController extends BaseController
     public function update()
     {
         $id = decript($this->request->getPost('id'));
-
         $session = session()->get('user');
         $add_by = $session['id'];
 
-        $data = [
-            "name"=>$this->request->getPost('name'),
-            "phone"=>$this->request->getPost('phone'),
-            "email"=>$this->request->getPost('email'),
-            "gender"=>$this->request->getPost('gender'),
-            "dob"=>$this->request->getPost('dob'),
-            "address"=>$this->request->getPost('address'),
-            "country"=>$this->request->getPost('country'),
-            "state"=>$this->request->getPost('state'),
-            "city"=>$this->request->getPost('city'),
-            "pincode"=>$this->request->getPost('pincode'),
-            "status"=>$this->request->getPost('status'),
-            "is_delete"=>0,
-        ];
+
+        $lastKyc = $this->db->table('kyc')->where(["id"=>$id,])->orderBy('id','desc')->get()->getFirstRow();
+        $user_id = $lastKyc->user_id;
+
+        $user = $this->db->table('users')->where(["id"=>$user_id,])->orderBy('id','desc')->get()->getFirstRow();
+
+        
+        
+        $data = [];
+        $data['user_id'] = $user_id;
+        $data['bank_holder_name'] = $this->request->getPost('bank_holder_name');
+        $data['nomani'] = $this->request->getPost('nomani');
+        $data['bank_name'] = $this->request->getPost('bank_name');
+        $data['account_number'] = $this->request->getPost('account_number');
+        $data['account_type'] = $this->request->getPost('account_type');
+        $data['ifsc'] = $this->request->getPost('ifsc');
+        $data['pan'] = $this->request->getPost('pan');
+        $data['rg_mobile'] = $this->request->getPost('rg_mobile');
+        $data['rg_email'] = $this->request->getPost('rg_email');
+        $data['address'] = $this->request->getPost('address');
+
+        $data['bar_number'] = $this->request->getPost('bar_number');
+        $data['enrollment_year'] = $this->request->getPost('enrollment_year');
+        $data['practicing_court'] = $this->request->getPost('practicing_court');
+        $data['membership_number'] = $this->request->getPost('membership_number');
+        $data['firm_name'] = $this->request->getPost('address');
+        $data['appointment_amount'] = $this->request->getPost('appointment_amount');
+        $data['experience'] = $this->request->getPost('experience');
+        $kyc_step = $this->request->getPost('kyc_step');
 
 
-        $email = $this->request->getPost('email');
-        $checkEmail = $this->db->table($this->arr_values['table_name'])->where('id !=', $id)->where(["email"=>$email,])->get()->getFirstRow();
-        if(!empty($checkEmail))
+        $data['kyc_message'] = $this->request->getPost('kyc_message');
+        if($kyc_step==1) $data['status'] = 1;
+        else $data['status'] = 0;
+
+        $data['add_by'] = $add_by;
+        $data['is_delete'] = 0;
+
+
+        
+        if($this->db->table('kyc')->where('id',$id)->update($data))
         {
-            $action = 'add';
-            if(empty($insertId)) $action = 'edit';
-            $responseCode = 400;
-            $result['status'] = $responseCode;
-            $result['message'] = 'Email id exist!';
-            $result['action'] = $action;
-            $result['data'] = [];
-            return $this->response->setStatusCode($responseCode)->setJSON($result);               
-        }
+            $insertID = $id;
+            
+
+
+            $inTable = 'partner_specialization';
+            $specialization = $this->request->getPost('specialization');
+            $specializationDelete = $this->db->table($inTable)->where(["user_id"=>$user_id,]);
+            if(!empty($specialization)) $specializationDelete->whereNotIn("sp_id", $specialization);
+            $specializationDelete->delete();
+            if(!empty($specialization))
+            {
+                foreach ($specialization as $key => $value) {
+                    $InData = ["user_id"=>$user_id,"sp_id"=>$value,];
+                    if(empty($this->db->table($inTable)->where($InData)->get()->getFirstRow()))
+                        $this->db->table($inTable)->insert($InData);
+                }                
+            }
 
 
 
 
-
-        $entryStatus = false;
-        if(empty($id))
-        {
-            $data['add_by'] = $add_by;
-            $data['add_date_time'] = date("Y-m-d H:i:s");
-            $data['update_date_time'] = date("Y-m-d H:i:s");
-            if($this->db->table($this->arr_values['table_name'])->insert($data)) $entryStatus = true;
-            else $entryStatus = false;
-            $id = $insertId = $this->db->insertID();
-        }
-        else
-        {
-            $data['update_date_time'] = date("Y-m-d H:i:s");
-            if($this->db->table($this->arr_values['table_name'])->where('id', $id)->update($data)) $entryStatus = true;
-            else $entryStatus = false;
-        }
+            $inTable = 'partner_service';
+            $service = $this->request->getPost('service');
+            $serviceDelete = $this->db->table($inTable)->where(["user_id"=>$user_id,]);
+            if(!empty($service)) $serviceDelete->whereNotIn("s_id", $service);
+            $serviceDelete->delete();
+            if(!empty($service))
+            {
+                foreach ($service as $key => $value) {
+                    $InData = ["user_id"=>$user_id,"s_id"=>$value,];
+                    if(empty($this->db->table($inTable)->where($InData)->get()->getFirstRow()))
+                        $this->db->table($inTable)->insert($InData);
+                }                
+            }
 
 
-        if($entryStatus)
-        {
-            $action = 'add';
-            if(empty($insertId)) $action = 'edit';
+            $inTable = 'partner_expertise';
+            $expertise = $this->request->getPost('expertise');
+            $expertiseDelete = $this->db->table($inTable)->where(["user_id"=>$user_id,]);
+            if(!empty($expertise)) $expertiseDelete->whereNotIn("e_id", $expertise);
+            $expertiseDelete->delete();
+            if(!empty($expertise))
+            {
+                foreach ($expertise as $key => $value) {
+                    $InData = ["user_id"=>$user_id,"e_id"=>$value,];
+                    if(empty($this->db->table($inTable)->where($InData)->get()->getFirstRow()))
+                        $this->db->table($inTable)->insert($InData);
+                }                
+            }
+
+
+            $inTable = 'partner_certification';
+            $certification = $this->request->getPost('certification');
+            $certificationDelete = $this->db->table($inTable)->where(["user_id"=>$user_id,]);
+            if(!empty($certification)) $certificationDelete->whereNotIn("c_id", $certification);
+            $certificationDelete->delete();
+            if(!empty($certification))
+            {
+                foreach ($certification as $key => $value) {
+                    $InData = ["user_id"=>$user_id,"c_id"=>$value,];
+                    if(empty($this->db->table($inTable)->where($InData)->get()->getFirstRow()))
+                        $this->db->table($inTable)->insert($InData);
+                }                
+            }
+
+            
+
+
+            $inTable = 'partner_education';
+            $education = $this->request->getPost('education');
+            $collage = $this->request->getPost('collage');
+            $year_complete = $this->request->getPost('year_complete');
+            $educationDelete = $this->db->table($inTable)->where(["user_id"=>$user_id,]);
+            if(!empty($education)) $educationDelete->whereNotIn("ed_id", $education);
+            $educationDelete->delete();
+            if(!empty($education))
+            {
+                foreach ($education as $key => $value) {
+                    $InData = ["user_id"=>$user_id,"ed_id"=>$value,"collage"=>$collage[$key],"year_complete"=>$year_complete[$key],];
+                    if(empty($this->db->table($inTable)->where($InData)->get()->getFirstRow()))
+                        $this->db->table($inTable)->insert($InData);
+                }                
+            }
+
+          
+
+
+            $update_data['specialization'] = json_encode($specialization);
+            $update_data['service'] = json_encode($service);
+            $update_data['expertise'] = json_encode($expertise);
+            $update_data['certification'] = json_encode($certification);
+            $update_data['education'] = json_encode($education);
+
+
+
+            $ImageModel = new ImageModel();
+
+            $all_image_column_names = ['passbook_image','pancard_image','aadharfront_image','aadharback_image','license','certificate'];
+            $return_image_array = $ImageModel->upload_multiple_image($all_image_column_names,$this->arr_values['table_name'],$id,$this->request,$this->arr_values['upload_path']);
+            if(!empty($return_image_array))
+            {
+                foreach ($return_image_array as $key => $value)
+                {
+                    if(!empty($value)) $update_data[$key] = $value;
+                }
+            }
+            else
+            {
+                foreach ($all_image_column_names as $key => $value)
+                {
+                    $update_data[$value] = json_encode([]);
+                }
+            }
+            if(!empty($update_data))
+            $this->db->table('kyc')->where('id',$insertID)->update($update_data);
+
+            $this->db->table('users')->where('id',$user_id)->update(["kyc_step"=>$kyc_step,"about"=>$this->request->getPost('about'),]);
+
+            $action = 'reload';
             $responseCode = 200;
             $result['status'] = $responseCode;
             $result['message'] = 'Success';
             $result['action'] = $action;
             $result['data'] = [];
-            return $this->response->setStatusCode($responseCode)->setJSON($result);            
+            return $this->response->setStatusCode($responseCode)->setJSON($result); 
         }
         else
         {
@@ -191,6 +338,9 @@ class AdminKycController extends BaseController
             $result['data'] = [];
             return $this->response->setStatusCode($responseCode)->setJSON($result);
         }
+        
+
+
     }
    
 

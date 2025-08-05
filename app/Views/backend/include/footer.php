@@ -287,6 +287,60 @@ $(document).ready(function () {
         }
       }
     });
+    $('#select-all-partner').select2({
+      ajax: {
+        url: "<?=base_url(route_to('search-partner'))?>",
+        method:"post",
+        "headers": {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+       },
+        data: function (params) {
+          var query = {
+            search: params.term,
+            type: 'public'
+          }
+
+          // Query parameters will be ?search=[term]&type=public
+          return query;
+        }
+      }
+    });
+    $('#select-all-user').select2({
+      ajax: {
+        url: "<?=base_url(route_to('search-user'))?>",
+        method:"post",
+        "headers": {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+       },
+        data: function (params) {
+          var query = {
+            search: params.term,
+            type: 'public'
+          }
+
+          // Query parameters will be ?search=[term]&type=public
+          return query;
+        }
+      }
+    });
+    $('#select-all-employee').select2({
+      ajax: {
+        url: "<?=base_url(route_to('search-employee'))?>",
+        method:"post",
+        "headers": {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+       },
+        data: function (params) {
+          var query = {
+            search: params.term,
+            type: 'public'
+          }
+
+          // Query parameters will be ?search=[term]&type=public
+          return query;
+        }
+      }
+    });
 
     $('#country').select2({
       ajax: {

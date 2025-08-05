@@ -32,6 +32,7 @@ else
 					if(!empty($value_image->image_path))
 					{
 					$image_path = FCPATH.$upload_path.$value_image->image_path;
+		
 					if(file_exists($image_path))
 					{
 						$image = base64_encode(file_get_contents($image_path));

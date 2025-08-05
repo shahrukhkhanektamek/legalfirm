@@ -108,50 +108,8 @@
 											<div class="tab-pane show active" id="upcoming-appointments">
 												<div class="card card-table mb-0">
 													<div class="card-body">
-														<div class="table-responsive">
-															<table class="table table-hover table-center mb-0">
-																<thead>
-																	<tr>
-																		<th>Name</th>
-																		<th>Phone</th>
-																		<th>Email</th>
-																		<th>State</th>
-																		<th>Requirment</th>
-																		<th>Date Time</th>
-																		<th></th>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr>
-																		<td>
-																			<h2 class="table-avatar">
-																				<a href="student-profile.php" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="<?=base_url() ?>assets/img/student/student-01.jpg" alt="User Image"></a>
-																				<a href="student-profile.php">Richard Wilson <span>#PT0016</span></a>
-																			</h2>
-																		</td>
-																		<td>General</td>
-																		<td>General</td>
-																		<td>General</td>
-																		<td>General</td>
-																		<td>11 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
-																		<td class="text-end">
-																			<div class="table-action">
-																				<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																					<i class="far fa-eye"></i> View
-																				</a>
-																				
-																				<a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-																					<i class="fas fa-check"></i> Accept
-																				</a>
-																				<a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-																					<i class="fas fa-times"></i> Cancel
-																				</a>
-																			</div>
-																		</td>
-																	</tr>
+														<div class="table-responsive" id="data-list">
 																	
-																</tbody>
-															</table>		
 														</div>
 													</div>
 												</div>
@@ -162,7 +120,7 @@
 											<div class="tab-pane" id="today-appointments">
 												<div class="card card-table mb-0">
 													<div class="card-body">
-														<div class="table-responsive">
+														<div class="table-responsive" id="data-list2">
 															<table class="table table-hover table-center mb-0">
 																<thead>
 																	<tr>
@@ -227,10 +185,161 @@
 
 
 
+
 <script>
-	
+   var data = '';
+   var main_url = "<?=base_url(route_to('partner.lead.load_data'))?>";
+   var main_url2 = "<?=base_url(route_to('partner.appointment.load_data'))?>";
+
+    function get_url_data()
+    {
+        var type = 1;
+        var status = 1;
+        var order_by = 'desc';
+        var limit = 12;
+        var filter_search_value = '';
+        data = `type=${type}&status=${status}&order_by=${order_by}&limit=${limit}&filter_search_value=${filter_search_value}`;
+    }
+    get_url_data();
+    url = main_url+'?'+data;
+    url2 = main_url2+'?'+data;
+    load_table_today_lead();
+    load_table_appointment();
+
+
+   $(document).on("click", ".pagination a",(function(e) {      
+      event.preventDefault();
+      get_url_data()
+      url = $(this).attr("href")+'&'+data;
+      load_table_today_lead();
+   }));
+
+   function load_table_today_lead()
+   {
+        data_loader("#data-list",1);
+        var form = new FormData();
+        var settings = {
+          "url": url,
+          "method": "GET",
+          "timeout": 0,
+          "processData": false,
+          "headers": {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+           },
+          "mimeType": "multipart/form-data",
+          "contentType": false,
+          "dataType": "json",
+          "data": form
+        };
+        $.ajax(settings).always(function (response) {
+            data_loader("#data-list",0);
+            response = admin_response_data_check(response);
+            $("#data-list").html(response.data.list);
+
+        });
+   }
+
+   $(document).on("click", ".pagination2 a",(function(e) {      
+      event.preventDefault();
+      get_url_data()
+      url2 = $(this).attr("href")+'&'+data;
+      load_table_appointment();
+   }));
+
+   function load_table_appointment()
+   {
+        data_loader("#data-list2",1);
+        var form = new FormData();
+        var settings = {
+          "url": url2,
+          "method": "GET",
+          "timeout": 0,
+          "processData": false,
+          "headers": {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+           },
+          "mimeType": "multipart/form-data",
+          "contentType": false,
+          "dataType": "json",
+          "data": form
+        };
+        $.ajax(settings).always(function (response) {
+            data_loader("#data-list2",0);
+            response = admin_response_data_check(response);
+            $("#data-list2").html(response.data.list);
+
+        });
+   }
 </script>
 
+<script>
+$(document).on("click", ".scratch-lead",(function(e) {      
+    event.preventDefault();
+    var id = $(this).data('id');
+    loader("show");
+    var form = new FormData();
+    form.append("id", id);
+    
+    var settings = {
+      "url": "<?=base_url(route_to('partner.lead.scratch'))?>",
+      "method": "POST",
+      "timeout": 0,
+      "processData": false,
+      "headers": {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+       },
+      "mimeType": "multipart/form-data",
+      "contentType": false,
+      "dataType": "json",
+      "data": form
+    };
+    $.ajax(settings).always(function (response) {
+        loader("hide");
+        response = admin_response_data_check(response);
+        if(response.status==200)
+        {
+            $("#rowapname"+id).html(response.data.name)
+            $("#rowapemail"+id).html(response.data.email)
+            $("#rowapphone"+id).html(response.data.phone)                
+        }
+        
+
+    });
+}));
+$(document).on("click", ".scratch-appointment",(function(e) {      
+    event.preventDefault();
+    var id = $(this).data('id');
+    loader("show");
+    var form = new FormData();
+    form.append("id", id);
+    
+    var settings = {
+      "url": "<?=base_url(route_to('partner.appointment.scratch'))?>",
+      "method": "POST",
+      "timeout": 0,
+      "processData": false,
+      "headers": {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+       },
+      "mimeType": "multipart/form-data",
+      "contentType": false,
+      "dataType": "json",
+      "data": form
+    };
+    $.ajax(settings).always(function (response) {
+        loader("hide");
+        response = admin_response_data_check(response);
+        if(response.status==200)
+        {
+            $("#rowapname"+id).html(response.data.name)
+            $("#rowapemail"+id).html(response.data.email)
+            $("#rowapphone"+id).html(response.data.phone)                
+        }
+        
+
+    });
+}));
+</script>
    
 <?=view("web/include/footer"); ?>
 

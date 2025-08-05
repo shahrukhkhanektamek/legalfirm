@@ -31,12 +31,18 @@
                                 </div>
                                 <div class="card-header">
                                     <div class="row mt-2">
+
                                         <div class="col-md-2">
                                             <select class="form-control status" id="statuschange">
-                                               <option value="1">Active</option>
-                                               <option value="0">Inactive</option>
+                                                    <option value="2">Under Review</option>
+                                                    <option value="4">KYC Change Request</option>
+                                                    <option value="1">Approve</option>
+                                                    <option value="3">Reject</option>
+                                                    <option value="0">Document Not Uploaded</option>
                                             </select>
-                                         </div>
+                                        </div>
+
+                                        
                                          <div class="col-md-2">
                                             <select class="form-control order_by" id="order_by">
                                                <option value="desc">DESC</option>

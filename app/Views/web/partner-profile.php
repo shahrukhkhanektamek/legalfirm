@@ -117,7 +117,7 @@ if($uri=='adviser')
 										</a>
 									</div>
 									<div class="clinic-booking">
-										<a class="apt-btn" href="booking.html">Book Appointment</a>
+										<a class="apt-btn" href="<?=base_url() ?>appointment?partner=<?=encript($row->id) ?>">Book Appointment</a>
 									</div>
 								</div>
 							</div>

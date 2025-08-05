@@ -23,9 +23,15 @@
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+						<a href="<?=base_url().$user_role->nav.'/' ?>lead">
 							<i class="fas fa-calendar-check"></i>
 							<span>Leads</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?=base_url().$user_role->nav.'/' ?>appointment">
+							<i class="fas fa-calendar-check"></i>
+							<span>Appointment</span>
 						</a>
 					</li>
 
@@ -80,7 +86,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/' ?>reviews">
+						<a href="<?=base_url().$user_role->nav.'/' ?>review">
 							<i class="fas fa-star"></i>
 							<span>Reviews</span>
 						</a>

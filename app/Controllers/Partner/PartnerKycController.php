@@ -164,6 +164,8 @@ class PartnerKycController extends BaseController
             }
 
 
+
+
             $inTable = 'partner_service';
             $service = $this->request->getPost('service');
             $serviceDelete = $this->db->table($inTable)->where(["user_id"=>$user_id,]);
@@ -208,6 +210,7 @@ class PartnerKycController extends BaseController
                 }                
             }
 
+            
 
 
             $inTable = 'partner_education';
@@ -229,7 +232,11 @@ class PartnerKycController extends BaseController
           
 
 
-
+            $update_data['specialization'] = json_encode($specialization);
+            $update_data['service'] = json_encode($service);
+            $update_data['expertise'] = json_encode($expertise);
+            $update_data['certification'] = json_encode($certification);
+            $update_data['education'] = json_encode($education);
 
 
 

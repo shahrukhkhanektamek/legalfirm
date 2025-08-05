@@ -55,12 +55,12 @@
         <i class="ri-wallet-line"></i> <span data-key="t-transaction">Payment History</span>
     </a>
 </li>
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link menu-link" href="<?=base_url(route_to('transaction.list'))?>">
         <i class="ri-wallet-line"></i> <span data-key="t-transaction">Cases</span>
     </a>
 </li>
-
+ -->
 <li class="nav-item">
     <a class="nav-link menu-link" href="#services" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="services">
         <i class="ri-message-2-line"></i> <span data-key="t-dashboards">Services</span>

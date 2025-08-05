@@ -47,7 +47,7 @@
                                                <option value="asc">ASC</option>
                                             </select>
                                          </div>
-                                         <div class="col-md-2">
+                                         <div class="col-md-2 hide">
                                             <select class="form-control limit" id="limit">
                                                <option value="12">12</option>
                                                <option value="24">24</option>
@@ -55,13 +55,23 @@
                                                <option value="100">100</option>
                                             </select>
                                          </div>
+                                         <div class="col-md-6 mb-2 hide">
+                                            <select class="form-control " id="select-all-partner">
+                                               <option value="">All Partner</option>
+                                            </select>
+                                         </div>
+                                         <div class="col-md-6 hide">
+                                            <select class="form-control " id="select-all-employee">
+                                               <option value="">All Employee</option>
+                                            </select>
+                                         </div>
 
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                             <div class="">
                                                 <input type="date" class="form-control" id="from-date" value="">
                                             </div>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                             <div class="">
                                                 <input type="date" class="form-control" id="to-date" value="">
                                             </div>

@@ -151,9 +151,7 @@ class Home extends BaseController
                     WHEN {$table_name}.role = 5 THEN 'Adviser' 
                     ELSE 'other' 
                 END AS role_name,
-
                 ")
-
             ->where("{$table_name}.status", 1)
             ->where("{$table_name}.is_delete", 0);
         if (!empty($search)) {
@@ -162,18 +160,13 @@ class Home extends BaseController
                 ->groupEnd();
         }
 
-
         $data_list = $builder
             ->orderBy("{$table_name}.id", 'desc')
             ->limit(50, 0)
             ->get()
             ->getResult();
 
-
-
-
-
-        $return_data = [];
+        $return_data[] = ["id"=>"","text"=>"All Partner",];
         foreach ($data_list as $key => $value) {
             $return_data[] = [
                 "id" => $value->id,
@@ -183,6 +176,130 @@ class Home extends BaseController
         $data['results'] = $return_data;
         return $this->response->setStatusCode(200)->setJSON($data);       
     }
+
+
+    public function search_partner($value='')
+    {        
+        $search = $this->request->getVar('search');       
+
+        $table_name = 'users';
+        $builder = $this->db->table($table_name)
+            ->join('city', 'city.id = '.$table_name.'.city', 'left')
+            ->join('states', 'states.id = '.$table_name.'.state', 'left')
+
+            ->select("{$table_name}.*, city.name as city_name, states.name as state_name,
+                CASE 
+                    WHEN {$table_name}.role = 3 THEN 'Advocate' 
+                    WHEN {$table_name}.role = 4 THEN 'CA' 
+                    WHEN {$table_name}.role = 5 THEN 'Adviser' 
+                    ELSE 'other' 
+                END AS role_name,
+                ")
+            ->where("{$table_name}.status", 1)
+            ->whereIn("{$table_name}.role", [3,4,5])
+            ->where("{$table_name}.is_delete", 0);
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like("{$table_name}.name", $search)
+                ->groupEnd();
+        }
+        $data_list = $builder
+            ->orderBy("{$table_name}.id", 'desc')
+            ->limit(50, 0)
+            ->get()
+            ->getResult();
+        $return_data[] = ["id"=>"","text"=>"All Partner",];
+        foreach ($data_list as $key => $value) {
+            $return_data[] = [
+                "id" => $value->id,
+                "text" => $value->name.' '.$value->phone.', '.$value->email.', '.$value->state_name.' ('.$value->role_name.')',
+            ];
+        }
+        $data['results'] = $return_data;
+        return $this->response->setStatusCode(200)->setJSON($data);       
+    }
+    public function search_user($value='')
+    {        
+        $search = $this->request->getVar('search');       
+
+        $table_name = 'users';
+        $builder = $this->db->table($table_name)
+            ->join('city', 'city.id = '.$table_name.'.city', 'left')
+            ->join('states', 'states.id = '.$table_name.'.state', 'left')
+
+            ->select("{$table_name}.*, city.name as city_name, states.name as state_name,
+                CASE 
+                    WHEN {$table_name}.role = 3 THEN 'Advocate' 
+                    WHEN {$table_name}.role = 4 THEN 'CA' 
+                    WHEN {$table_name}.role = 5 THEN 'Adviser' 
+                    ELSE 'other' 
+                END AS role_name,
+                ")
+            ->where("{$table_name}.status", 1)
+            ->whereIn("{$table_name}.role", [2])
+            ->where("{$table_name}.is_delete", 0);
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like("{$table_name}.name", $search)
+                ->groupEnd();
+        }
+        $data_list = $builder
+            ->orderBy("{$table_name}.id", 'desc')
+            ->limit(50, 0)
+            ->get()
+            ->getResult();
+        $return_data[] = ["id"=>"","text"=>"All User",];
+        foreach ($data_list as $key => $value) {
+            $return_data[] = [
+                "id" => $value->id,
+                "text" => $value->name.' '.$value->phone.', '.$value->email.', '.$value->state_name.' ('.$value->role_name.')',
+            ];
+        }
+        $data['results'] = $return_data;
+        return $this->response->setStatusCode(200)->setJSON($data);       
+    }
+    public function search_employee($value='')
+    {        
+        $search = $this->request->getVar('search');       
+
+        $table_name = 'users';
+        $builder = $this->db->table($table_name)
+            ->join('city', 'city.id = '.$table_name.'.city', 'left')
+            ->join('states', 'states.id = '.$table_name.'.state', 'left')
+
+            ->select("{$table_name}.*, city.name as city_name, states.name as state_name,
+                CASE 
+                    WHEN {$table_name}.role = 3 THEN 'Advocate' 
+                    WHEN {$table_name}.role = 4 THEN 'CA' 
+                    WHEN {$table_name}.role = 5 THEN 'Adviser' 
+                    ELSE 'other' 
+                END AS role_name,
+                ")
+            ->where("{$table_name}.status", 1)
+            ->whereIn("{$table_name}.role", [6])
+            ->where("{$table_name}.is_delete", 0);
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like("{$table_name}.name", $search)
+                ->groupEnd();
+        }
+        $data_list = $builder
+            ->orderBy("{$table_name}.id", 'desc')
+            ->limit(50, 0)
+            ->get()
+            ->getResult();
+        $return_data[] = ["id"=>"","text"=>"All Employee",];
+        foreach ($data_list as $key => $value) {
+            $return_data[] = [
+                "id" => $value->id,
+                "text" => $value->name.' '.$value->phone.', '.$value->email.', '.$value->state_name.' ('.$value->role_name.')',
+            ];
+        }
+        $data['results'] = $return_data;
+        return $this->response->setStatusCode(200)->setJSON($data);       
+    }
+
+
     public function search_country($value='')
     {        
         $search = $this->request->getVar('search');

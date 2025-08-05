@@ -279,7 +279,7 @@ class Custom extends Model
         if(@$oldLead->to_partner_id!=1)
         {
             $db->table("enquiry_lead")->where(["id"=>$lead_id,])->update(["is_transfer"=>1,"followup_status"=>3,]);
-            $db->table("partner_lead")->where(["lead_id"=>$lead_id,"partner_id"=>$oldLead->to_partner_id,])->update(["status"=>2,]);
+            $db->table("partner_lead")->where(["lead_id"=>$lead_id,"partner_id"=>@$oldLead->to_partner_id,])->update(["status"=>2,]);
         }
 
         return $inID;
