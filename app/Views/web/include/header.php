@@ -145,7 +145,9 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
     margin: 0 5px 0 0;
     border-radius: 3px;
 }
-
+.review-listing > ul li .comment .comment-body {
+    width: 100%;
+}
 
 
 

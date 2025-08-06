@@ -79,12 +79,12 @@
 					</li>
 
 
-					<li>
+					<!-- <li>
 						<a href="<?=base_url().$user_role->nav.'/' ?>my-clients">
 							<i class="fas fa-user-injured"></i>
 							<span>My clients</span>
 						</a>
-					</li>
+					</li> -->
 					<li>
 						<a href="<?=base_url().$user_role->nav.'/' ?>review">
 							<i class="fas fa-star"></i>

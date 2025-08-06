@@ -1,3 +1,4 @@
+<?php $user = get_user(); ?>
 <?php 
 
 $user_id = decript($uri2);
@@ -8,6 +9,10 @@ $row = $db->table("users")->where(['users.id'=>$user_id,"users.status"=>1,])
 ->join('states',"states.id = users.state",'left')
 ->select("users.*, role.name as role_name, countries.name as country_name, states.name as state_name")
 ->get()->getFirstRow();
+
+$count_review = count_review($user_id);
+
+
 if(!empty($row))
 {
 	include"include/header.php";
@@ -35,6 +40,36 @@ if(!empty($row))
 	$partner_certification = $db->table("partner_certification")
 	->where(['partner_certification.user_id'=>$user_id,])
 	->join('certification as certification',"partner_certification.c_id = certification.id",'left')->get()->getResultObject();
+
+
+
+
+
+    $limit = 10;
+    $status = 1;
+    $order_by = 'desc';
+    $page = 1; 
+    $offset = ($page - 1) * $limit;
+
+    
+
+
+    $table_name = 'review';
+    $query = $db->table($table_name)
+        ->join('users', 'users.id = ' . $table_name.'.user_id', 'left')
+        ->select("{$table_name}.*, 
+
+            users.name as name,
+            users.image as image,
+
+            ")
+        ->where([
+            $table_name . '.status' =>1,
+            $table_name . ".partner_id" => $user_id
+        ]);
+
+    $data_list = $query->orderBy($table_name . '.id', $order_by)->limit($limit, $offset)->get()->getResult();
+  
 
 
 
@@ -87,12 +122,20 @@ if($uri=='adviser')
 										<p class="pro-speciality"><?php foreach ($educations as $key => $value) { if($key==0) echo $value->name; else echo', '.$value->name; } ?></p>
 										<p class="pro-department"><img src="<?=base_url() ?>assets/img/icon.png" class="img-fluid" alt="Speciality"><?=$row->role_name ?></p>
 										<div class="rating">
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star filled"></i>
-											<i class="fas fa-star"></i>
-											<span class="d-inline-block average-rating">(35)</span>
+
+											<?php
+												$i = 1;
+												while ($i<=5) {
+													if($i<=$count_review['average_rating'])
+													 	echo '<i class="fas fa-star filled"></i>';
+													else
+														echo '<i class="fas fa-star"></i>';
+													$i++;	
+												}
+											?>
+											
+
+											<span class="d-inline-block average-rating">(<?=$count_review['total'] ?>)</span>
 										</div>
 										<div class="clinic-details">
 											<p class="pro-location"><i class="fas fa-map-marker-alt"></i> <?=$row->country_name ?>, <?=$row->state_name ?> - <a href="javascript:void(0);">Get Directions</a></p>
@@ -138,9 +181,9 @@ if($uri=='adviser')
 									<li class="nav-item">
 										<a class="nav-link" href="#doc_reviews" data-bs-toggle="tab">Reviews</a>
 									</li>
-									<li class="nav-item">
+									<!-- <li class="nav-item">
 										<a class="nav-link" href="#doc_business_hours" data-bs-toggle="tab">Business Hours</a>
-									</li>
+									</li> -->
 								</ul>
 							</nav>
 							<!-- /Tab Menu -->
@@ -252,143 +295,16 @@ if($uri=='adviser')
 								
 									<!-- Review Listing -->
 									<div class="widget review-listing">
-										<ul class="comments-list">
+
+										<?php echo $view = view('partner/review/table',compact('data_list'),[],true); ?>
 										
-											<!-- Comment List -->
-											<li>
-												<div class="comment">
-													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="<?=base_url() ?>assets/img/student/student.jpg">
-													<div class="comment-body">
-														<div class="meta-data">
-															<span class="comment-author">Richard Wilson</span>
-															<span class="comment-date">Reviewed 2 Days ago</span>
-															<div class="review-count rating">
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star"></i>
-															</div>
-														</div>
-														<p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the instructor</p>
-														<p class="comment-content">
-															Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-															sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-															Ut enim ad minim veniam, quis nostrud exercitation.
-															Curabitur non nulla sit amet nisl tempus
-														</p>
-														<div class="comment-reply">
-															<a class="comment-btn" href="#">
-																<i class="fas fa-reply"></i> Reply
-															</a>
-														   <p class="recommend-btn">
-															<span>Recommend?</span>
-															<a href="#" class="like-btn">
-																<i class="far fa-thumbs-up"></i> Yes
-															</a>
-															<a href="#" class="dislike-btn">
-																<i class="far fa-thumbs-down"></i> No
-															</a>
-														</p>
-														</div>
-													</div>
-												</div>
-												
-												<!-- Comment Reply -->
-												<ul class="comments-reply">
-													<li>
-														<div class="comment">
-															<img class="avatar avatar-sm rounded-circle" alt="User Image" src="<?=base_url() ?>assets/img/student/student-01.jpg">
-															<div class="comment-body">
-																<div class="meta-data">
-																	<span class="comment-author">Charlene Reed</span>
-																	<span class="comment-date">Reviewed 3 Days ago</span>
-																	<div class="review-count rating">
-																		<i class="fas fa-star filled"></i>
-																		<i class="fas fa-star filled"></i>
-																		<i class="fas fa-star filled"></i>
-																		<i class="fas fa-star filled"></i>
-																		<i class="fas fa-star"></i>
-																	</div>
-																</div>
-																<p class="comment-content">
-																	Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-																	sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-																	Ut enim ad minim veniam.
-																	Curabitur non nulla sit amet nisl tempus
-																</p>
-																<div class="comment-reply">
-																	<a class="comment-btn" href="#">
-																		<i class="fas fa-reply"></i> Reply
-																	</a>
-																	<p class="recommend-btn">
-																		<span>Recommend?</span>
-																		<a href="#" class="like-btn">
-																			<i class="far fa-thumbs-up"></i> Yes
-																		</a>
-																		<a href="#" class="dislike-btn">
-																			<i class="far fa-thumbs-down"></i> No
-																		</a>
-																	</p>
-																</div>
-															</div>
-														</div>
-													</li>
-												</ul>
-												<!-- /Comment Reply -->
-												
-											</li>
-											<!-- /Comment List -->
-											
-											<!-- Comment List -->
-											<li>
-												<div class="comment">
-													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="<?=base_url() ?>assets/img/student/student-03.jpg">
-													<div class="comment-body">
-														<div class="meta-data">
-															<span class="comment-author">Travis Trimble</span>
-															<span class="comment-date">Reviewed 4 Days ago</span>
-															<div class="review-count rating">
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star"></i>
-															</div>
-														</div>
-														<p class="comment-content">
-															Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-															sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-															Ut enim ad minim veniam, quis nostrud exercitation.
-															Curabitur non nulla sit amet nisl tempus
-														</p>
-														<div class="comment-reply">
-															<a class="comment-btn" href="#">
-																<i class="fas fa-reply"></i> Reply
-															</a>
-															<p class="recommend-btn">
-																<span>Recommend?</span>
-																<a href="#" class="like-btn">
-																	<i class="far fa-thumbs-up"></i> Yes
-																</a>
-																<a href="#" class="dislike-btn">
-																	<i class="far fa-thumbs-down"></i> No
-																</a>
-															</p>
-														</div>
-													</div>
-												</div>
-											</li>
-											<!-- /Comment List -->
-											
-										</ul>
 										
 										<!-- Show All -->
-										<div class="all-feedback text-center">
+										<!-- <div class="all-feedback text-center">
 											<a href="#" class="btn btn-primary btn-sm">
 												Show all feedback <strong>(167)</strong>
 											</a>
-										</div>
+										</div> -->
 										<!-- /Show All -->
 										
 									</div>
@@ -396,42 +312,46 @@ if($uri=='adviser')
 								
 									<!-- Write Review -->
 									<div class="write-review">
-										<h4>Write a review for <strong>David Lee</strong></h4>
+										<h4>Write a review for <strong><?=$row->name ?></strong> 
+											<?php if(@$user->role!=2){ ?>
+												<a href="<?=base_url('login').'?callBack='.encript((empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]") ?>" style="font-size: 12px;color: red;">Login First</a>
+											<?php } ?>
+										</h4>
 										
 										<!-- Write Review Form -->
-										<form>
+										<form class="form_data" action="<?= base_url('user/review/add'); ?>" method="post" id="ReviewForm" novalidate >
+
+											<input type="hidden" name="partner_id" value="<?=encript($row->id) ?>">
+
 											<div class="form-group">
 												<label>Review</label>
 												<div class="star-rating">
-													<input id="star-5" type="radio" name="rating" value="star-5">
+													<input id="star-5" type="radio" name="rating" value="5">
 													<label for="star-5" title="5 stars">
 														<i class="active fa fa-star"></i>
 													</label>
-													<input id="star-4" type="radio" name="rating" value="star-4">
+													<input id="star-4" type="radio" name="rating" value="4">
 													<label for="star-4" title="4 stars">
 														<i class="active fa fa-star"></i>
 													</label>
-													<input id="star-3" type="radio" name="rating" value="star-3">
+													<input id="star-3" type="radio" name="rating" value="3">
 													<label for="star-3" title="3 stars">
 														<i class="active fa fa-star"></i>
 													</label>
-													<input id="star-2" type="radio" name="rating" value="star-2">
+													<input id="star-2" type="radio" name="rating" value="2">
 													<label for="star-2" title="2 stars">
 														<i class="active fa fa-star"></i>
 													</label>
-													<input id="star-1" type="radio" name="rating" value="star-1">
+													<input id="star-1" type="radio" name="rating" value="1">
 													<label for="star-1" title="1 star">
 														<i class="active fa fa-star"></i>
 													</label>
 												</div>
 											</div>
-											<div class="form-group">
-												<label>Title of your review</label>
-												<input class="form-control" type="text" placeholder="If you could say it in one sentence, what would you say?">
-											</div>
+											
 											<div class="form-group">
 												<label>Your review</label>
-												<textarea id="review_desc" maxlength="100" class="form-control"></textarea>
+												<textarea id="review_desc" maxlength="100" class="form-control" name="message" required></textarea>
 											  
 											  <div class="d-flex justify-content-between mt-3"><small class="text-muted"><span id="chars">100</span> characters remaining</small></div>
 											</div>
@@ -439,13 +359,13 @@ if($uri=='adviser')
 											<div class="form-group">
 												<div class="terms-accept">
 													<div class="custom-checkbox">
-													   <input type="checkbox" id="terms_accept">
-													   <label for="terms_accept">I have read and accept <a href="term-condition.html">Terms and Conditions</a> &amp; Conditions</label>
+													   <input type="checkbox" id="terms_accept" value="1" name="term">
+													   <label for="terms_accept">I have read and accept <a href="<?=base_url() ?>term-condition">Terms and Conditions</a> &amp; Conditions</label>
 													</div>
 												</div>
 											</div>
 											<div class="submit-section">
-												<button type="submit" class="btn btn-primary submit-btn">Add Review</button>
+												<button type="submit" class="btn btn-primary">Add Review</button>
 											</div>
 										</form>
 										<!-- /Write Review Form -->

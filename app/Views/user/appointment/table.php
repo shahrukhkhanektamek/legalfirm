@@ -8,19 +8,25 @@
 				<img src="<?=image_check($value->image,'user.png') ?>" alt="User Image">
 			</a>
 			<div class="profile-det-info">
-				<h3><a href="student-profile.html"><?=$value->name ?></a></h3>
+				<h3><a href="student-profile.html"><?=$value->name ?> <span class="badge badge-success"><?=$value->role_name ?></span></a></h3>
 				<div class="customer-details">
 					<h5><i class="far fa-clock"></i> <?=date("d m Y h:i A", strtotime($value->add_date_time)) ?></h5>
 					<h5><i class="fas fa-map-marker-alt"></i> <?=$value->state_name ?></h5>
 					<h5><i class="fas fa-envelope"></i> <a href="#"><span id="rowapemail<?=encript($value->id) ?>"><?=$value->email ?></span></a></h5>
 					<h5 class="mb-2"><i class="fas fa-phone"></i> <span id="rowapphone<?=encript($value->id) ?>"><?=$value->phone ?></span></h5>
 					<h5 class="mb-2"><i class="fas fa-message"></i> <?=$value->message ?></h5>
+
+					<?php if($value->payment_status==1){ ?>
+						<a href="#" class="badge badge-success">Paid</a>
+					<?php }else{ ?>
+						<a href="#" class="badge badge-danger">Unpaid</a>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
 		<div class="appointment-action">
 			<?php if($value->is_view==0){ ?>
-				<a href="#" class="btn btn-sm bg-info-light scratch-appointment" id="rowapbuttron<?=encript($value->id) ?>" data-id="<?=encript($value->id) ?>"><i class="far fa-eye"></i> View</a>
+				<!-- <a href="#" class="btn btn-sm bg-info-light scratch-appointment" data-id="<?=encript($value->id) ?>"><i class="far fa-eye"></i> View</a> -->
 			<?php }else{?>
 				
 			<?php } ?>

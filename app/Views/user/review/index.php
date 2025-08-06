@@ -8,10 +8,10 @@
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="<?=base_url() ?>">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Leads</li>
+									<li class="breadcrumb-item active" aria-current="page">Reviews</li>
 								</ol>
 							</nav>
-							<h2 class="breadcrumb-title">Leads</h2>
+							<h2 class="breadcrumb-title">Reviews</h2>
 						</div>
 					</div>
 				</div>
@@ -25,24 +25,23 @@
 					<div class="row">
 						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 						
-							<?=view("partner/nav"); ?>
+							<?=view("user/nav"); ?>
 							
 						</div>
-						
-						<div class="col-md-7 col-lg-8 col-xl-9" id="data-list">
-							
+						<div class="col-md-7 col-lg-8 col-xl-9">
+							<div class="pro-review review-listing" id="data-list">
+															
+							</div>
 						</div>
 					</div>
-
 				</div>
 
 			</div>		
 			<!-- /Page Content -->
 
-
 <script>
    var data = '';
-   var main_url = "<?=base_url(route_to('partner.appointment.load_data'))?>";
+   var main_url = "<?=base_url(route_to('user.review.load_data'))?>";
 
     function get_url_data()
     {
@@ -89,47 +88,38 @@
         });
    }
 
+	$(document).on("click", ".delete-review",(function(e) {      
+	    event.preventDefault();
+	    var id = $(this).data('id');
+	    loader("show");
+	    var form = new FormData();
+	    form.append("id", id);
+	    
+	    var settings = {
+	      "url": "<?=base_url(route_to('user.review.delete'))?>",
+	      "method": "POST",
+	      "timeout": 0,
+	      "processData": false,
+	      "headers": {
+	        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+	       },
+	      "mimeType": "multipart/form-data",
+	      "contentType": false,
+	      "dataType": "json",
+	      "data": form
+	    };
+	    $.ajax(settings).always(function (response) {
+	        loader("hide");
+	        response = admin_response_data_check(response);
+	        if(response.status==200)
+	        {
+	            load_table_data()
+	        }
+	        
+
+	    });
+	}));
  
-</script>
-
-
-
-<script>
-
-$(document).on("click", ".scratch-appointment",(function(e) {      
-    event.preventDefault();
-    var id = $(this).data('id');
-    loader("show");
-    var form = new FormData();
-    form.append("id", id);
-    
-    var settings = {
-      "url": "<?=base_url(route_to('partner.appointment.scratch'))?>",
-      "method": "POST",
-      "timeout": 0,
-      "processData": false,
-      "headers": {
-        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-       },
-      "mimeType": "multipart/form-data",
-      "contentType": false,
-      "dataType": "json",
-      "data": form
-    };
-    $.ajax(settings).always(function (response) {
-        loader("hide");
-        response = admin_response_data_check(response);
-        if(response.status==200)
-        {
-            $("#rowapname"+id).html(response.data.name)
-            $("#rowapemail"+id).html(response.data.email)
-            $("#rowapphone"+id).html(response.data.phone)                
-            $("#rowapbuttron"+id).remove()                
-        }
-        
-
-    });
-}));
 </script>
 
 <?=view("web/include/footer"); ?>

@@ -26,6 +26,7 @@ class AuthUser extends BaseController
         $device_id = "";
         $password = $user->password;
         $firebase_token = $this->request->getPost('firebase_token');
+        $uniqueId = $this->request->getPost('uniqueId');
         $date_time = date("Y-m-d H:i:s");
         
         // Prepare token data
@@ -76,6 +77,14 @@ class AuthUser extends BaseController
 
             // Set session data
             session()->set('user', $data);
+
+            if($user->role==2)
+            {
+                $this->db->table("enquiry_lead")->where(["user_id"=>$uniqueId,])->update(["user_id"=>$user->id,]);
+                $this->db->table("appointment")->where(["user_id"=>$uniqueId,])->update(["user_id"=>$user->id,]);
+            }
+
+
         }
 
         return $access_token;
@@ -85,6 +94,7 @@ class AuthUser extends BaseController
     public function login_action()
     {
         // Get username and password from POST request
+        $callBack = $this->request->getPost('callBack');
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
         
@@ -119,7 +129,14 @@ class AuthUser extends BaseController
                 ->get()
                 ->getRow();
             
-            $url = site_url($roledata->route . '/dashboard'); // equivalent to url(route())
+            if(empty($callBack))
+            {
+                $url = site_url($roledata->route . '/dashboard');
+            }
+            else
+            {
+                $url = decript($callBack);
+            }
 
             // Here you might want to create a session for the user
             $this->token_session($user);

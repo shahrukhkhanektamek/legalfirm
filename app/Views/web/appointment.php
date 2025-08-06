@@ -1,4 +1,28 @@
-<?php include"include/header.php"; ?>
+<?php
+	$user = get_user();
+	if(@$user->role==2){
+?>
+
+
+<?php include"include/header.php";
+
+$user_id = decript(request()->getGet('partner'));
+
+$row = $db->table("users")->where(['users.id'=>$user_id,"users.status"=>1,])
+->join('role',"role.id = users.role",'left')
+->join('countries',"countries.id = users.country",'left')
+->join('states',"states.id = users.state",'left')
+->select("users.*, role.name as role_name, countries.name as country_name, states.name as state_name")
+->get()->getFirstRow();
+
+$count_review = count_review($user_id);
+
+
+$kyc = $db->table("kyc")->where(['kyc.user_id'=>$user_id,"kyc.status"=>1,])->orderBy('id', 'desc')->get()->getFirstRow();
+
+
+
+ ?>
 			
 			<!-- Breadcrumb -->
 			<div class="breadcrumb-bar">
@@ -28,42 +52,50 @@
 								<div class="card-body">
 								
 									<!-- Checkout Form -->
-									<form action="booking-success.php">
+									
+									<form class="form_data" action="<?= base_url('user/appointment/book'); ?>" method="post" id="AppointmentForm" novalidate >
+
+										<input type="hidden" name="partner_id" value="<?=encript($row->id) ?>">
 									
 										<!-- Personal Information -->
 										<div class="info-widget">
 											<h4 class="card-title">Personal Information</h4>
 											<div class="row">
-												<div class="col-md-6 col-sm-12">
+												<div class="col-md-4 col-sm-12">
 													<div class="form-group card-label">
 														<label>First Name</label>
-														<input class="form-control" type="text">
+														<input class="form-control" type="text" name="name" required>
 													</div>
 												</div>
-												<div class="col-md-6 col-sm-12">
-													<div class="form-group card-label">
-														<label>Last Name</label>
-														<input class="form-control" type="text">
-													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
+												<div class="col-md-4 col-sm-12">
 													<div class="form-group card-label">
 														<label>Email</label>
-														<input class="form-control" type="email">
+														<input class="form-control" type="email" name="email" required>
 													</div>
 												</div>
-												<div class="col-md-6 col-sm-12">
+												<div class="col-md-4 col-sm-12">
 													<div class="form-group card-label">
 														<label>Phone</label>
-														<input class="form-control" type="text">
+														<input class="form-control" type="number" name="phone" required>
 													</div>
 												</div>
+												<div class="form-group d-none">
+													<label>Country</label>
+													<select class="form-control" id="country" name="country">
+														<option value="99" selected>India</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>State</label>
+													<select class="form-control" id="state" name="state">
+														<option value="">Select State</option>
+													</select>
+												</div>
 											</div>
-											<div class="exist-customer">Existing Customer? <a href="login.html">Click here to login</a></div>
 										</div>
 										<!-- /Personal Information -->
 										
-										<div class="payment-widget">
+										<div class="payment-widget d-none">
 											<h4 class="card-title">Payment Method</h4>
 											
 											<!-- Credit Card Payment -->
@@ -118,22 +150,25 @@
 											</div>
 											<!-- /Paypal Payment -->
 											
-											<!-- Terms Accept -->
-											<div class="terms-accept">
-												<div class="custom-checkbox">
-												   <input type="checkbox" id="terms_accept">
-												   <label for="terms_accept">I have read and accept Terms &amp; Conditions</label>
-												</div>
-											</div>
-											<!-- /Terms Accept -->
 											
-											<!-- Submit Section -->
-											<div class="submit-section mt-4">
-												<button type="submit" class="btn btn-primary submit-btn">Confirm and Pay</button>
-											</div>
-											<!-- /Submit Section -->
+											
 											
 										</div>
+
+										<!-- Terms Accept -->
+										<div class="terms-accept">
+											<div class="custom-checkbox">
+											   <input type="checkbox" id="terms_accept" value="1" name="term">
+											   <label for="terms_accept">I have read and accept Terms &amp; Conditions</label>
+											</div>
+										</div>
+										<!-- /Terms Accept -->
+
+										<!-- Submit Section -->
+											<div class="submit-section mt-4">
+												<button type="submit" class="btn btn-primary">Confirm and Pay</button>
+											</div>
+										<!-- /Submit Section -->
 									</form>
 									<!-- /Checkout Form -->
 									
@@ -154,20 +189,25 @@
 									<!-- Booking instructor Info -->
 									<div class="booking-pro-info">
 										<a href="instructor-profile.html" class="booking-pro-img">
-											<img src="assets/img/instructors/instructor-thumb-01.jpg" alt="User Image">
+											<img src="<?=image_check($row->image,'user.png') ?>" alt="User Image">
 										</a>
 										<div class="booking-info">
-											<h4><a href="instructor-profile.html">Darren Elder</a></h4>
+											<h4><a href="instructor-profile.html"><?=$row->name ?></a></h4>
 											<div class="rating">
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star"></i>
-												<span class="d-inline-block average-rating">35</span>
+												<?php
+													$i = 1;
+													while ($i<=5) {
+														if($i<=$count_review['average_rating'])
+														 	echo '<i class="fas fa-star filled"></i>';
+														else
+															echo '<i class="fas fa-star"></i>';
+														$i++;	
+													}
+												?>
+												<span class="d-inline-block average-rating"><?=$count_review['total'] ?></span>
 											</div>
 											<div class="clinic-details">
-												<p class="pro-location"><i class="fas fa-map-marker-alt"></i> Newyork, USA</p>
+												<p class="pro-location"><i class="fas fa-map-marker-alt"></i> <?=$row->country_name ?>, <?=$row->state_name ?></p>
 											</div>
 										</div>
 									</div>
@@ -175,20 +215,15 @@
 									
 									<div class="booking-summary">
 										<div class="booking-item-wrap">
-											<ul class="booking-date">
-												<li>Date <span>16 Nov 2019</span></li>
-												<li>Time <span>10:00 AM</span></li>
-											</ul>
+											
 											<ul class="booking-fee">
-												<li>Consulting Fee <span>$100</span></li>
-												<li>Booking Fee <span>$10</span></li>
-												<li>Video Call <span>$50</span></li>
+												<li>Appointment Fee <span><?=price_formate(@$kyc->appointment_amount) ?></span></li>
 											</ul>
 											<div class="booking-total">
 												<ul class="booking-total-list">
 													<li>
 														<span>Total</span>
-														<span class="total-cost">$160</span>
+														<span class="total-cost"><?=price_formate(@$kyc->appointment_amount) ?></span>
 													</li>
 												</ul>
 											</div>
@@ -207,3 +242,7 @@
 			<!-- /Page Content -->
    
 <?php include"include/footer.php"; ?>
+<?php }else{ 
+	$callBack = encript((empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+	include"login.php";
+} ?>

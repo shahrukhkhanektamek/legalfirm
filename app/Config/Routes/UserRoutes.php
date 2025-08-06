@@ -40,18 +40,22 @@ $routes->group('user', ['namespace' => 'App\Controllers\User', 'filter'=>'UserAu
     });
 
 
-    $routes->group('lead-enquiry', function($routes) {
-        $routes->get('/', 'UserLeadEnquiryController::index', ['as' => 'user.lead-enquiry.list']);
-        $routes->get('load_data', 'UserLeadEnquiryController::load_data', ['as' => 'user.lead-enquiry.load_data']);
-        $routes->get('view/(:any)', 'UserLeadEnquiryController::view/$1', ['as' => 'user.lead-enquiry.view']);
-        $routes->post('scratch', 'UserLeadEnquiryController::scratch', ['as' => 'user.lead-enquiry.scratch']);
+    $routes->group('review', function($routes) {
+        $routes->get('/', 'UserReviewController::index', ['as' => 'user.review.list']);
+        $routes->get('load_data', 'UserReviewController::load_data', ['as' => 'user.review.load_data']);
+        $routes->post('delete', 'UserReviewController::delete', ['as' => 'user.review.delete']);
+        $routes->post('add', 'UserReviewController::add', ['as' => 'user.review.add']);
     });
 
-    $routes->group('booking-enquiry', function($routes) {
-        $routes->get('/', 'UserBookingEnquiryController::index', ['as' => 'user.booking-enquiry.list']);
-        $routes->get('load_data', 'UserBookingEnquiryController::load_data', ['as' => 'user.booking-enquiry.load_data']);
-        $routes->get('view/(:any)', 'UserBookingEnquiryController::view/$1', ['as' => 'user.booking-enquiry.view']);
-        $routes->post('scratch', 'UserBookingEnquiryController::scratch', ['as' => 'user.booking-enquiry.scratch']);
+    $routes->group('lead', function($routes) {
+        $routes->get('/', 'UserLeadController::index', ['as' => 'user.lead.list']);
+        $routes->get('load_data', 'UserLeadController::load_data', ['as' => 'user.lead.load_data']);
+    });
+
+    $routes->group('appointment', function($routes) {
+        $routes->get('/', 'UserAppointmentController::index', ['as' => 'user.appointment.list']);
+        $routes->get('load_data', 'UserAppointmentController::load_data', ['as' => 'user.appointment.load_data']);
+        $routes->post('book', 'UserAppointmentController::book', ['as' => 'user.review.book']);
     });
 
 

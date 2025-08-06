@@ -25,46 +25,12 @@
 					<div class="row">
 						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 						
-							<?=view("partner/nav"); ?>
+							<?=view("user/nav"); ?>
 							
 						</div>
 						
-						<div class="col-md-7 col-lg-8 col-xl-9">
-
-                            
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-3 col-sm-12">
-                                            <div class="form-group card-label">
-                                                <label>Select Type</label>
-                                                <select class="form-control select">
-                                                    <option value="">Select</option>
-                                                    <option value="0">New</option>
-                                                    <option value="2">Viewed</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-12">
-                                            <div class="form-group card-label">
-                                                <label>From date</label>
-                                                <input class="form-control" type="date" name="name" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-12">
-                                            <div class="form-group card-label">
-                                                <label>To date</label>
-                                                <input class="form-control" type="date" name="name" required>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>                                    
-                            </div>
-                            
-
-                            <div id="data-list"></div>							
+						<div class="col-md-7 col-lg-8 col-xl-9" id="data-list">
+							
 						</div>
 					</div>
 
@@ -76,7 +42,7 @@
 
 <script>
    var data = '';
-   var main_url = "<?=base_url(route_to('partner.lead.load_data'))?>";
+   var main_url = "<?=base_url(route_to('user.lead.load_data'))?>";
 
     function get_url_data()
     {
@@ -137,7 +103,7 @@ $(document).on("click", ".scratch-lead",(function(e) {
     form.append("id", id);
     
     var settings = {
-      "url": "<?=base_url(route_to('partner.lead.scratch'))?>",
+      "url": "<?=base_url(route_to('user.lead.scratch'))?>",
       "method": "POST",
       "timeout": 0,
       "processData": false,
@@ -156,8 +122,7 @@ $(document).on("click", ".scratch-lead",(function(e) {
         {
             $("#rowname"+id).html(response.data.name)
             $("#rowemail"+id).html(response.data.email)
-            $("#rowphone"+id).html(response.data.phone) 
-            $("#rowbuttron"+id).remove()                  
+            $("#rowphone"+id).html(response.data.phone)                
         }
     });
 }));

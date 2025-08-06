@@ -20,6 +20,7 @@
 								$i++;	
 							}
 						?>
+						<a href="#" data-id="<?=encript($value->id) ?>" class="btn btn-danger delete-review" style="margin: 0 0 0 10px;font-size: 10px;padding: 5px 8px;color: white;"><i class="fa fa-trash text-white"></i></a>
 					</div>
 				</div>
 				<p class="comment-content">
@@ -36,8 +37,6 @@
 	
 </ul>
 
-<?php if(!empty($data['startData'])){ ?>
-
 <div class="pagination">
         <div class="pagination-result">
         Showing
@@ -48,4 +47,3 @@
     </div>
     <?=$data['pager']?>
 </div>
-<?php } ?>

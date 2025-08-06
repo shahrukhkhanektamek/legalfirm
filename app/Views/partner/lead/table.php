@@ -21,7 +21,7 @@
 		</div>
 		<div class="appointment-action">
 			<?php if($value->is_view==0){ ?>
-				<a href="#" class="btn btn-sm bg-info-light scratch-lead" data-id="<?=encript($value->id) ?>"><i class="far fa-eye"></i> View</a>
+				<a href="#" class="btn btn-sm bg-info-light scratch-lead" id="rowbuttron<?=encript($value->id) ?>" data-id="<?=encript($value->id) ?>"><i class="far fa-eye"></i> View</a>
 			<?php }else{?>
 				
 			<?php } ?>

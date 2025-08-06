@@ -438,6 +438,22 @@ require APPPATH. 'Libraries/phpmailer/SMTP.php';
       return $image;
   }
 
+  function count_review($partner_id)
+  {
+      $db = \Config\Database::connect();
+      $reviewSummary = $db->table('review')
+      ->select('COUNT(*) as total_reviews, AVG(rating) as average_rating')
+      ->where([
+          'partner_id' => $partner_id,
+          'is_delete' => 0,
+          'status' => 1,
+      ])
+      ->get()
+      ->getRow();
+
+      return ["total"=>$reviewSummary->total_reviews,"average_rating"=>number_format($reviewSummary->average_rating, 2),];
+  }
+
   function gender($value='')
   {
       $arr = array(

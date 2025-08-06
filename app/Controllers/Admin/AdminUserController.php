@@ -121,9 +121,11 @@ class AdminUserController extends BaseController
         ->select("
                 {$this->arr_values['table_name']}.*, 
                 CASE
+                    WHEN {$this->arr_values['table_name']}.role = 2 THEN 'User'
                     WHEN {$this->arr_values['table_name']}.role = 3 THEN 'Advocate'
                     WHEN {$this->arr_values['table_name']}.role = 4 THEN 'CA'
                     WHEN {$this->arr_values['table_name']}.role = 5 THEN 'Adviser'
+                    WHEN {$this->arr_values['table_name']}.role = 6 THEN 'Employee'
                     ELSE 'other'
                 END AS role_name,
                 states.name as state_name,

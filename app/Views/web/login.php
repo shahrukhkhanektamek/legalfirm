@@ -26,6 +26,11 @@
 											<h3>Login <span>DreamsCLG</span></h3>
 										</div>
 										<form class="form_data" action="<?= base_url(route_to('auth.user.login-action')); ?>" method="post" id="LoginForm" novalidate >
+
+											<?php if(!empty(request()->getGet('callBack') || !empty($callBack))){ ?>
+												<input type="hidden" name="callBack" value="<?=request()->getGet('callBack')?request()->getGet('callBack'):$callBack ?>">
+											<?php } ?>
+
 											<div class="form-group form-focus">
 												<input type="email" class="form-control floating" name="username" required>
 												<label class="focus-label">Email</label>

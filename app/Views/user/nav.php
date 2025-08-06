@@ -30,7 +30,7 @@
 												</a>
 											</li>
 											<li>
-												<a href="<?=base_url().$user_role->nav.'/' ?>reviews">
+												<a href="<?=base_url().$user_role->nav.'/' ?>review">
 													<i class="fas fa-star"></i>
 													<span>Reviews</span>
 												</a>
