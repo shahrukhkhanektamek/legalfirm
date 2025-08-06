@@ -364,9 +364,11 @@ if($uri=='adviser')
 													</div>
 												</div>
 											</div>
-											<div class="submit-section">
-												<button type="submit" class="btn btn-primary">Add Review</button>
-											</div>
+											<?php if(@$user->role==2){ ?>
+												<div class="submit-section">
+													<button type="submit" class="btn btn-primary">Add Review</button>
+												</div>
+											<?php } ?>
 										</form>
 										<!-- /Write Review Form -->
 										

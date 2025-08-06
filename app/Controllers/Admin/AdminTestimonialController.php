@@ -5,16 +5,16 @@ use CodeIgniter\Database\Database;
 use CodeIgniter\Config\Services;
 use App\Models\ImageModel;
 
-class AdminBlogCategoryController extends BaseController
+class AdminTestimonialController extends BaseController
 {
      protected $arr_values = array(
-        'routename'=>'blog-category.', 
-        'title'=>'Blog Category', 
-        'table_name'=>'blog_category',
-        'page_title'=>'Blog Category',
-        "folder_name"=>'backend/admin/blog-category',
+        'routename'=>'testimonial.', 
+        'title'=>'Testimonial', 
+        'table_name'=>'testimonial',
+        'page_title'=>'Testimonial',
+        "folder_name"=>'backend/admin/testimonial',
         "upload_path"=>'upload/',
-        "page_name"=>'blogs.php',
+        "page_name"=>'testimonial.php',
        );
 
       public function __construct()
@@ -115,6 +115,8 @@ class AdminBlogCategoryController extends BaseController
 
         $data = [
             "name"=>$this->request->getPost('name'),
+            "designation"=>$this->request->getPost('designation'),
+            "message"=>$this->request->getPost('message'),
             "status"=>$this->request->getPost('status'),
             "is_delete"=>0,
         ];
@@ -139,14 +141,15 @@ class AdminBlogCategoryController extends BaseController
 
         if($entryStatus)
         {
-            $name = $data['name'];
-            if(empty($this->request->getPost('slug'))) $slug = slug($name);
-            else $slug = slug($this->request->getPost('slug'));
-            $p_id = $id;
-            $table_name = $this->arr_values['table_name'];
-            $new_slug = insert_slug($slug,$p_id,$table_name,$this->arr_values['page_name']);
+            $ImageModel = new ImageModel();
+            
+            $image = $ImageModel->upload_image('image', $this->request);
+            if(!empty($image)) $update_data['image'] = $image;
 
-            insert_meta_tag($new_slug,$name);
+            if(!empty($update_data))
+            {
+                $this->db->table($this->arr_values['table_name'])->where(["id"=>$id,])->update($update_data);
+            }
 
             $action = 'add';
             if(empty($insertId)) $action = 'edit';

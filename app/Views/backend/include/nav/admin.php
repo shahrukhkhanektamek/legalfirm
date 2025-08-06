@@ -136,6 +136,11 @@
         <i class="ri-image-line"></i> <span data-key="t-transaction">Certification</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link menu-link" href="<?=base_url(route_to('testimonial.list'))?>">
+        <i class="ri-image-line"></i> <span data-key="t-transaction">Testimonial</span>
+    </a>
+</li>
 
 
 

@@ -62,7 +62,7 @@
 														</div>
 														<div class="dash-widget-info">
 															<h6>Total Lead</h6>
-															<h3>1500</h3>
+															<h3><?=$db->table('partner_lead')->where(["partner_id"=>$user->id,])->countAllResults()?></h3>
 														</div>
 													</div>
 												</div>
@@ -74,7 +74,19 @@
 														</div>
 														<div class="dash-widget-info">
 															<h6>Today Lead</h6>
-															<h3>160</h3>
+															<h3>
+																<?php 
+																	$date = date("Y-m-d");
+																	$year = date("Y", strtotime($date));
+															        $month = date("m", strtotime($date));
+															        $day = date("d", strtotime($date));
+																	echo $db->table('partner_lead')
+																	->where('YEAR(partner_lead.add_date_time)', $year)
+														            ->where('MONTH(partner_lead.add_date_time)', $month)
+														            ->where('DAY(partner_lead.add_date_time)', $day)
+																	->where(["partner_id"=>$user->id,])->countAllResults();
+																?>
+															</h3>
 														</div>
 													</div>
 												</div>

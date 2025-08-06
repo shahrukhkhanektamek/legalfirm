@@ -113,7 +113,7 @@ foreach ($services as $key => $value) {
 							<div class="instructor-slider slider">
 							
 									<?php
-										$advocates = $db->table("users")->limit(10)->where(["status"=>1,"role"=>3,])->orderBy('id','desc')->get()->getResult();
+										$advocates = $db->table("users")->limit(10)->where(["status"=>1,"role"=>3,"kyc_step"=>1,])->orderBy('id','desc')->get()->getResult();
 										foreach ($advocates as $key => $value) {
 											echo view("web/card/advocate-grid",["col"=>"","value"=>$value,]);
 									} ?>				
@@ -173,7 +173,7 @@ foreach ($services as $key => $value) {
 							<div class="instructor-slider slider">
 
 								<?php
-									$adviser = $db->table("users")->limit(10)->where(["status"=>1,"role"=>5,])->orderBy('id','desc')->get()->getResult();
+									$adviser = $db->table("users")->limit(10)->where(["status"=>1,"role"=>5,"kyc_step"=>1,])->orderBy('id','desc')->get()->getResult();
 									foreach ($adviser as $key => $value) {
 										echo view("web/card/adviser-grid",["col"=>"","value"=>$value,]);
 								} ?>
@@ -254,7 +254,7 @@ foreach ($services as $key => $value) {
 							<div class="instructor-slider slider">
 								
 								<?php
-									$ca = $db->table("users")->limit(10)->where(["status"=>1,"role"=>4,])->orderBy('id','desc')->get()->getResult();
+									$ca = $db->table("users")->limit(10)->where(["status"=>1,"role"=>4,"kyc_step"=>1,])->orderBy('id','desc')->get()->getResult();
 									foreach ($ca as $key => $value) {
 										echo view("web/card/ca-grid",["col"=>"","value"=>$value,]);
 								} ?>						
@@ -300,23 +300,19 @@ foreach ($services as $key => $value) {
 					<div class="col-md-12">
 						<div class="review-slider slider">
 						
+						<?php
+							$testimonials = $db->table("testimonial")->where(["status"=>1,])->orderBy('id','desc')->get()->getResult();
+							foreach ($testimonials as $key => $value) { ?>								
 							<!-- Review Widget -->
 								<div class="review-blog">
 									<div class="review-top d-flex align-items-center">
 										<div class="review-img">
-											<a href="javascript:void(0);"><img class="img-fluid" src="assets/img/review/review-01.jpg" alt="Post Image"></a>
+											<a href="javascript:void(0);"><img class="img-fluid" src="<?=image_check($value->image,'user.png') ?>" alt="Post Image"></a>
 										</div>
 										<div class="review-info">
-											<h3>Davis Payerf</h3>
-											<h5>Mechanical Engineering</h5>								
-											<div class="rating">
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star"></i>
-												<span class="average-rating">3.2</span>
-											</div>
+											<h3><?=$value->name ?></h3>
+											<h5><?=$value->designation ?></h5>								
+											
 										</div>
 									</div>
 									<div class="review-content">
@@ -324,57 +320,9 @@ foreach ($services as $key => $value) {
 									</div>
 								</div>
 								<!-- / Review Widget -->
+						<?php } ?>	
 								
-								<!-- Review Widget -->
-								<div class="review-blog">
-									<div class="review-top d-flex align-items-center">
-										<div class="review-img">
-											<a href="javascript:void(0);"><img class="img-fluid" src="assets/img/review/review-01.jpg" alt="Post Image"></a>
-										</div>
-										<div class="review-info">
-											<h3>Davis Payerf</h3>
-											<h5>Mechanical Engineering</h5>								
-											<div class="rating">
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star"></i>
-												<span class="average-rating">3.2</span>
-											</div>
-										</div>
-									</div>
-									<div class="review-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat</p>
-									</div>
-								</div>
-								<!-- /Review Widget -->
 								
-								<!-- Review Widget -->
-								
-								<div class="review-blog">
-									<div class="review-top d-flex align-items-center">
-										<div class="review-img">
-											<a href="javascript:void(0);"><img class="img-fluid" src="assets/img/review/review-01.jpg" alt="Post Image"></a>
-										</div>
-										<div class="review-info">
-											<h3>Davis Payerf</h3>
-											<h5>Mechanical Engineering</h5>								
-											<div class="rating">
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star filled"></i>
-												<i class="fas fa-star"></i>
-												<span class="average-rating">3.2</span>
-											</div>
-										</div>
-									</div>
-									<div class="review-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat</p>
-									</div>
-								</div>
-								<!-- /Review Widget -->
 							
 						</div>
 					</div>					
@@ -397,42 +345,31 @@ foreach ($services as $key => $value) {
 				</div>
 				
 				<div class="row">
+
+					<?php
+						$blogs = $db->table("blog")->where(["status"=>1,])->limit(5)->orderBy('id','desc')->get()->getResult();
+						foreach ($blogs as $key => $value) { ?>	
 				
 					<!-- News Widget -->
 					<div class="col-md-12">
 						<div class="news-blog d-flex">
 							<div class="news-img">
-								<img src="assets/img/news/news-01.jpg" class="img-fluid" alt="">
+								<img src="<?=image_check($value->image)?>" class="img-fluid" alt="" style="width: 150px;">
 							</div>
 							<div class="d-flex align-items-center">
 								<div class="news-content">
-									<span>June 21, 2020</span>
-									<h2><a href="blog-details.html">While the lovely valley team work</a></h2>
-									<p>Event Description. A party is a gathering of people who have been invited by a host for the purposes of… </p>
+									<span><?=date("M d, Y", strtotime($value->add_date_time)) ?></span>
+									<h2><a href="<?=base_url().$value->slug ?>"><?=$value->name ?></a></h2>
+									<p><?=$value->sort_description ?> </p>
 								</div>
-								<div class=""><a href="blog-details.html" class="btn btn-read">READ MORE</a></div>
+								<div class=""><a href="<?=base_url().$value->slug ?>" class="btn btn-read">READ MORE</a></div>
 							</div>
 						</div>
 					</div>
 					<!-- /News Widget -->
+				<?php } ?>
 					
-					<!-- News Widget -->
-					<div class="col-md-12">
-						<div class="news-blog d-flex">
-							<div class="news-img">
-								<img src="assets/img/news/news-02.jpg" class="img-fluid" alt="">
-							</div>
-							<div class="d-flex align-items-center">
-								<div class="news-content">
-									<span>June 21, 2020</span>
-									<h2><a href="blog-details.html">While the lovely valley team work</a></h2>
-									<p>Event Description. A party is a gathering of people who have been invited by a host for the purposes of… </p>
-								</div>
-								<div class=""><a href="blog-details.html" class="btn btn-read">READ MORE</a></div>
-							</div>
-						</div>
-					</div>
-					<!-- /News Widget -->
+					
 					
 					<div class="col-md-12">
 						<div class="see-all"> 

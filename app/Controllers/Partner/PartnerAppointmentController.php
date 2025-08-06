@@ -83,10 +83,10 @@ class PartnerAppointmentController extends BaseController
 
         if($type==1)
         {
-            // $from_date = date('Y-m-d 00:00:00');
-            // $to_date = date('Y-m-d 23:59:59');
-            // $query->where($this->arr_values['table_name'].".add_date_time >=", $from_date);
-            // $query->where($this->arr_values['table_name'].".add_date_time <=", $to_date);
+            $from_date = date('Y-m-d 00:00:00');
+            $to_date = date('Y-m-d 23:59:59');
+            $query->where($this->arr_values['table_name'].".add_date_time >=", $from_date);
+            $query->where($this->arr_values['table_name'].".add_date_time <=", $to_date);
         }
 
         if(!empty($from_date))

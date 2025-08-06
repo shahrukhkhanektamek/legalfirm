@@ -240,6 +240,17 @@ $adminEmployeeRoutes = function ($routes) {
         $routes->post('block_unblock/(:any)', 'AdminBlogController::block_unblock/$1', ['as' => 'blog.block_unblock']);
     });
 
+    $routes->group('testimonial', function($routes) {
+        $routes->get('/', 'AdminTestimonialController::index', ['as' => 'testimonial.list']);
+        $routes->get('load_data', 'AdminTestimonialController::load_data', ['as' => 'testimonial.load_data']);
+        $routes->get('add', 'AdminTestimonialController::add', ['as' => 'testimonial.add']);
+        $routes->get('edit/(:any)?', 'AdminTestimonialController::edit/$1', ['as' => 'testimonial.edit']);
+        $routes->get('view/(:any)', 'AdminTestimonialController::view/$1', ['as' => 'testimonial.view']);
+        $routes->post('update', 'AdminTestimonialController::update', ['as' => 'testimonial.update']);
+        $routes->post('delete/(:any)', 'AdminTestimonialController::delete/$1', ['as' => 'testimonial.delete']);
+        $routes->post('block_unblock/(:any)', 'AdminTestimonialController::block_unblock/$1', ['as' => 'testimonial.block_unblock']);
+    });
+
 
     
     

@@ -14,7 +14,6 @@
 					<h5><i class="fas fa-map-marker-alt"></i> <?=$value->state_name ?></h5>
 					<h5><i class="fas fa-envelope"></i> <a href="#"><span id="rowapemail<?=encript($value->id) ?>"><?=$value->email ?></span></a></h5>
 					<h5 class="mb-2"><i class="fas fa-phone"></i> <span id="rowapphone<?=encript($value->id) ?>"><?=$value->phone ?></span></h5>
-					<h5 class="mb-2"><i class="fas fa-message"></i> <?=$value->message ?></h5>
 				</div>
 			</div>
 		</div>
