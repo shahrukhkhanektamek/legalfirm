@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2025 at 03:01 PM
+-- Generation Time: Aug 06, 2025 at 10:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,7 +60,8 @@ INSERT INTO `appointment` (`id`, `user_id`, `partner_id`, `name`, `phone`, `coun
 (3, '3', 17, 'Three', '1122334455', 99, 25, 'asfsa', 1, 0, 0, 'test@gmail.com', 'http://localhost/projects/legalfirmnew/energy-law', '::1', NULL, '2025-08-05 12:14:03', '2025-08-05 12:14:03', NULL, NULL, 0),
 (6, '3', 17, 'Demo 1', '2353215325123', 99, 25, NULL, 1, 0, 0, 'sharukhkhanektamek1998@gmail.com', '', NULL, 3, '2025-08-06 18:12:12', '2025-08-06 18:12:12', NULL, NULL, 0),
 (7, '3', 17, 'dsaf', '52523', 99, 32, NULL, 1, 0, 1, '23532', '', NULL, 3, '2025-08-06 18:14:12', '2025-08-06 18:14:12', NULL, NULL, 0),
-(8, '3', 19, 'aas', '5151235', 99, 32, NULL, 1, 0, 0, 'sharukhkhanektamek1998@gmail.com', '', NULL, 3, '2025-08-06 18:18:00', '2025-08-06 18:18:00', NULL, NULL, 0);
+(8, '3', 19, 'aas', '5151235', 99, 32, NULL, 1, 0, 0, 'sharukhkhanektamek1998@gmail.com', '', NULL, 3, '2025-08-06 18:18:00', '2025-08-06 18:18:00', NULL, NULL, 0),
+(9, '3', 17, 'Master Pro', '52623623', 99, 12, NULL, 1, 0, 1, 'sharukhkhanektamek1998@gmail.com', '', NULL, 3, '2025-08-07 00:54:28', '2025-08-07 00:54:28', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -124,8 +125,7 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`id`, `name`, `location`, `sort_description`, `full_description`, `image`, `image2`, `date`, `time`, `tages`, `category`, `sub_category`, `s_option`, `status`, `add_by`, `add_date_time`, `update_date_time`, `update_history`, `slug`, `is_delete`) VALUES
-(8, 'Updated Ducati Panigale V2 & Panigale V2 S Debut At EICMA 2024', NULL, 0x50726f66657373696f6e616c6c79206275696c6420756e69717565206d61726b6574732076696120706172616c6c656c20746f74616c206c696e6b6167652e204d6f6e6f746f6e656374616c6c79206d6178696d697a6520636f72706f726174652e, 0x3c703e50726f66657373696f6e616c6c79206275696c6420756e69717565206d61726b6574732076696120706172616c6c656c20746f74616c206c696e6b6167652e204d6f6e6f746f6e656374616c6c79206d6178696d697a6520636f72706f7261746520696e74656c6c65637475616c206361706974616c2077686572656173206772616e756c617220636174616c7973747320666f72206368616e67652e204173736572746976656c792070726f766964652061636365737320746f20696e657870656e7369766520746563686e6f6c6f676965732077686572656173207669727475616c20706c6174666f726d732e4e6f206f6e652072656a656374732c206469736c696b65732c206f722061766f69647320706c65617375726520697473656c662c206265636175736520697420697320706c6561737572652062757420626563617573652074686f73652077686f20646f206e6f74206b6e6f7720686f7720746f2070757273756520706c656173757265206f6e20746865206f746865722068616e642c2077652064656e6f756e63652077697468207269676874656f757320696e6469676e6174696f6e20616e64206469736c696b65206d656e2077686f2061726520736f2062656775696c656420616e642064656d6f72616c697a65642062792074686520636861726d73206f6620706c656173757265206f6620746865206d6f6d656e742c20736f20626c696e646564206279206465736972652c207468617420746865792063616e6e6f7420666f726573656520746865207061696e20616e642074726f75626c6520746861742061726520626f756e6420746f20656e73756520657175616c20626c616d652062656c6f6e677320746f2074686f73652077686f206661696c20696e2074686569722064757479207468726f756768207765616b6e657373206f662077696c6c2c207768696368206973207468652073616d6520617320736179696e67207468726f75676820736872696e6b696e672066726f6d20746f696c20616e64207061696e2074686573652063617365732061726520706572666563746c7920497073756d20646f6c6f72206665756769617420657374207472697374697175652e3c2f703e0d0a0d0a3c703e50726f66657373696f6e616c6c79206275696c6420756e69717565206d61726b6574732076696120706172616c6c656c20746f74616c206c696e6b6167652e204d6f6e6f746f6e656374616c6c79206d6178696d697a6520636f72706f7261746520696e74656c6c65637475616c206361706974616c2077686572656173206772616e756c617220636174616c7973747320666f72206368616e67652e204173736572746976656c792070726f766964652061636365737320746f20696e657870656e7369766520746563686e6f6c6f676965732077686572656173207669727475616c20706c6174666f726d732e4e6f206f6e652072656a656374732c206469736c696b65732c206f722061766f69647320706c65617375726520697473656c662c206265636175736520697420697320706c6561737572652062757420626563617573652074686f73652077686f20646f206e6f74206b6e6f7720686f7720746f2070757273756520706c656173757265206f6e20746865206f746865722068616e642c2077652064656e6f756e63652077697468207269676874656f757320696e6469676e6174696f6e20616e64206469736c696b65206d656e2077686f2061726520736f2062656775696c656420616e642064656d6f72616c697a65642062792074686520636861726d73206f6620706c656173757265206f6620746865206d6f6d656e742c20736f20626c696e646564206279206465736972652c207468617420746865792063616e6e6f7420666f726573656520746865207061696e20616e642074726f75626c6520746861742061726520626f756e6420746f20656e73756520657175616c20626c616d652062656c6f6e677320746f2074686f73652077686f206661696c20696e2074686569722064757479207468726f756768207765616b6e657373206f662077696c6c2c207768696368206973207468652073616d6520617320736179696e67207468726f75676820736872696e6b696e672066726f6d20746f696c20616e64207061696e2074686573652063617365732061726520706572666563746c7920497073756d20646f6c6f72206665756769617420657374207472697374697175652e3c2f703e0d0a0d0a3c703e50726f66657373696f6e616c6c79206275696c6420756e69717565206d61726b6574732076696120706172616c6c656c20746f74616c206c696e6b6167652e204d6f6e6f746f6e656374616c6c79206d6178696d697a6520636f72706f7261746520696e74656c6c65637475616c206361706974616c2077686572656173206772616e756c617220636174616c7973747320666f72206368616e67652e204173736572746976656c792070726f766964652061636365737320746f20696e657870656e7369766520746563686e6f6c6f676965732077686572656173207669727475616c20706c6174666f726d732e4e6f206f6e652072656a656374732c206469736c696b65732c206f722061766f69647320706c65617375726520697473656c662c206265636175736520697420697320706c6561737572652062757420626563617573652074686f73652077686f20646f206e6f74206b6e6f7720686f7720746f2070757273756520706c656173757265206f6e20746865206f746865722068616e642c2077652064656e6f756e63652077697468207269676874656f757320696e6469676e6174696f6e20616e64206469736c696b65206d656e2077686f2061726520736f2062656775696c656420616e642064656d6f72616c697a65642062792074686520636861726d73206f6620706c656173757265206f6620746865206d6f6d656e742c20736f20626c696e646564206279206465736972652c207468617420746865792063616e6e6f7420666f726573656520746865207061696e20616e642074726f75626c6520746861742061726520626f756e6420746f20656e73756520657175616c20626c616d652062656c6f6e677320746f2074686f73652077686f206661696c20696e2074686569722064757479207468726f756768207765616b6e657373206f662077696c6c2c207768696368206973207468652073616d6520617320736179696e67207468726f75676820736872696e6b696e672066726f6d20746f696c20616e64207061696e2074686573652063617365732061726520706572666563746c7920497073756d20646f6c6f72206665756769617420657374207472697374697175652e3c2f703e0d0a, '1749656120_68c1aff60993eb7c59cb.webp', '[]', NULL, NULL, '', 5, 0, 0, 1, 1, '2025-06-05 18:23:42', '2025-06-13 00:02:21', NULL, 'afsa', 0),
-(11, 'Royal Enfield Flying Flea S6 Scrambler Spotted Testing For First Time, Along With The Flying Flea C6', NULL, 0x54686520466c79696e6720466c6561205336206861732061206d6f726520727567676564206c6f6f6b696e672064657369676e20636f6d706172656420746f207468652043362e204974207374696c6c2066656174757265732061206c6f74206f66207468652073616d6520726574726f2064657369676e20656c656d656e74732c20737563682061732074686520726f756e6420686561646c696768742c2074686520746561722064726f70207368617065642074616e6b20616e642074686520686172647461696c2d6c696b65207374796c696e672061742074686520726561722e, 0x3c703e54686520466c79696e6720466c6561205336206861732061206d6f726520727567676564206c6f6f6b696e672064657369676e20636f6d706172656420746f207468652043362e204974207374696c6c2066656174757265732061206c6f74206f66207468652073616d6520726574726f2064657369676e20656c656d656e74732c20737563682061732074686520726f756e6420686561646c696768742c2074686520746561722064726f70207368617065642074616e6b20616e642074686520686172647461696c2d6c696b65207374796c696e672061742074686520726561722e3c2f703e0d0a0d0a3c703e54686520656c6563747269632062696b65206665617475726573206120726f756e642054465420636f6e736f6c652c20776869636820636f756c64206f66666572206665617475726573206c696b6520736d61727470686f6e6520636f6e6e656374697669747920666f72207475726e2d62792d7475726e206e617669676174696f6e2e20416c6f6e67207769746820746869732c207468652062696b6520636f756c6420616c736f20666561747572652073776974636861626c65204142532061742074686520726561722c2077686963682077696c6c206d616b652069742065617369657220666f722072696465727320746f2072696465207468652062696b65206f6666726f61642e3c2f703e0d0a0d0a3c703e4f766572616c6c2c2074686520466c79696e6720466c6561205336206265696e672074657374656420697320612077656c636f6d6520646576656c6f706d656e742c20616e6420776f756c64206d616b6520666f722061207265616c6c7920676f6f6420616c7465726e617469766520746f2074686520556c74726176696f6c657474652053686f636b7761766520776869636820697320636f6d696e6720746f20496e646961206279206561726c792d323032362e205468617420736169642c2074686520556c74726176696f6c657474652053686f636b776176652077696c6c20626520612072656c61746976656c79206166666f726461626c65206f7074696f6e20636f6d706172656420746f2074686520466c79696e6720466c65612053362e20526f79616c20456e6669656c64206861642073616964207468617420746865697220656c656374726963206c696e6575702077696c6c206265207072656d69756d206f66666572696e67732073696d696c617220746f207468652062696b657320696e2074686520363530636320706c6174666f726d2e266e6273703b3c2f703e0d0a, '1749879900_0379146ab2808e9aa6e9.avif', '[]', NULL, NULL, '', 6, 0, 0, 1, 1, '2025-06-14 11:15:00', '2025-06-14 11:15:00', NULL, 'royal-enfield-flying-flea-s6-scrambler-spotted-testing-for-first-time-along-with-the-flying-flea-c6', 0);
+(11, 'While the lovely valley team work', NULL, 0x4576656e74204465736372697074696f6e2e2041207061727479206973206120676174686572696e67206f662070656f706c652077686f2068617665206265656e20696e7669746564206279206120686f737420666f722074686520707572706f, 0x3c703e54686520466c79696e6720466c6561205336206861732061206d6f726520727567676564206c6f6f6b696e672064657369676e20636f6d706172656420746f207468652043362e204974207374696c6c2066656174757265732061206c6f74206f66207468652073616d6520726574726f2064657369676e20656c656d656e74732c20737563682061732074686520726f756e6420686561646c696768742c2074686520746561722064726f70207368617065642074616e6b20616e642074686520686172647461696c2d6c696b65207374796c696e672061742074686520726561722e3c2f703e0d0a0d0a3c703e54686520656c6563747269632062696b65206665617475726573206120726f756e642054465420636f6e736f6c652c20776869636820636f756c64206f66666572206665617475726573206c696b6520736d61727470686f6e6520636f6e6e656374697669747920666f72207475726e2d62792d7475726e206e617669676174696f6e2e20416c6f6e67207769746820746869732c207468652062696b6520636f756c6420616c736f20666561747572652073776974636861626c65204142532061742074686520726561722c2077686963682077696c6c206d616b652069742065617369657220666f722072696465727320746f2072696465207468652062696b65206f6666726f61642e3c2f703e0d0a0d0a3c703e4f766572616c6c2c2074686520466c79696e6720466c6561205336206265696e672074657374656420697320612077656c636f6d6520646576656c6f706d656e742c20616e6420776f756c64206d616b6520666f722061207265616c6c7920676f6f6420616c7465726e617469766520746f2074686520556c74726176696f6c657474652053686f636b7761766520776869636820697320636f6d696e6720746f20496e646961206279206561726c792d323032362e205468617420736169642c2074686520556c74726176696f6c657474652053686f636b776176652077696c6c20626520612072656c61746976656c79206166666f726461626c65206f7074696f6e20636f6d706172656420746f2074686520466c79696e6720466c65612053362e20526f79616c20456e6669656c64206861642073616964207468617420746865697220656c656374726963206c696e6575702077696c6c206265207072656d69756d206f66666572696e67732073696d696c617220746f207468652062696b657320696e2074686520363530636320706c6174666f726d2e266e6273703b3c2f703e0d0a, '1754509577_e095ea76b4f754a5bc00.webp', '[]', NULL, NULL, '', 6, 0, 0, 1, 1, '2025-06-14 11:15:00', '2025-08-07 01:16:17', NULL, 'while-the-lovely-valley-team-work', 0);
 
 -- --------------------------------------------------------
 
@@ -150,8 +150,8 @@ CREATE TABLE `blog_category` (
 --
 
 INSERT INTO `blog_category` (`id`, `name`, `status`, `add_by`, `add_date_time`, `update_date_time`, `update_history`, `slug`, `is_delete`) VALUES
-(5, 'Automotive News', 1, NULL, NULL, '2025-06-05 18:21:29', NULL, 'automotive-news', 0),
-(6, 'Electric Technology', 1, 1, '2025-06-05 18:22:24', '2025-06-05 18:22:24', NULL, 'electric-technology', 0);
+(6, 'Legal Service', 1, 1, '2025-06-05 18:22:24', '2025-08-07 01:33:51', NULL, 'legal-service', 0),
+(7, 'Adviser Service', 1, 1, '2025-08-07 01:34:59', '2025-08-07 01:34:59', NULL, 'adviser-service', 0);
 
 -- --------------------------------------------------------
 
@@ -6568,13 +6568,16 @@ INSERT INTO `login_history` (`id`, `user_id`, `role`, `ip_address`, `date`, `tim
 (335, '1', 1, '::1', '2025-08-05', '23:50:34', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (336, '3', 2, '::1', '2025-08-06', '01:28:01', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (337, '17', 3, '::1', '2025-08-06', '01:35:09', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
-(338, '1', 1, '::1', '2025-08-06', '02:49:37', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e'),
+(338, '1', 1, '::1', '2025-08-06', '02:49:37', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (339, '3', 2, '::1', '2025-08-06', '13:00:07', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (340, '3', 2, '::1', '2025-08-06', '13:00:18', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (341, '3', 2, '::1', '2025-08-06', '13:01:01', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (342, '3', 2, '::1', '2025-08-06', '16:27:24', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
 (343, '3', 2, '::1', '2025-08-06', '17:40:20', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
-(344, '17', 3, '::1', '2025-08-06', '18:19:22', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e');
+(344, '17', 3, '::1', '2025-08-06', '18:19:22', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(345, '17', 3, '::1', '2025-08-07', '00:48:21', '', NULL, '', NULL, 0, 'e10adc3949ba59abbe56e057f20f883e'),
+(346, '3', 2, '::1', '2025-08-07', '00:54:06', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e'),
+(347, '1', 1, '::1', '2025-08-07', '00:57:27', '', NULL, '', NULL, 1, 'e10adc3949ba59abbe56e057f20f883e');
 
 -- --------------------------------------------------------
 
@@ -6757,13 +6760,11 @@ INSERT INTO `meta_tags` (`id`, `page_name`, `slug`, `meta_title`, `meta_author`,
 (459, 'Mobile Connectivity', 'mobile-connectivity', 'Mobile Connectivity', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (460, 'Fast Charging', 'fast-charging', 'Fast Charging', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (461, 'Charging Point', 'charging-point', 'Charging Point', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0),
-(464, 'Automotive News', 'automotive-news', 'Automotive News', 'Lorem dummy text just for demo view hi hello copy paste', 'marketing', 'Lorem dummy text just for demo view hi hello copy paste Lorem dummy text just for demo view hi hello copy paste', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (465, 'Electric Technology', 'electric-technology', 'Electric Technology', 'Lorem dummy text just for demo view hi hello copy paste', 'marketing', 'Lorem dummy text just for demo view hi hello copy paste Lorem dummy text just for demo view hi hello copy paste Lorem dummy text just for demo view hi hello copy paste', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (480, 'Yamaha MT 15 V2.0', 'yamaha-mt-15-v2-0', 'Yamaha MT 15 V2.0', 'Lorem dummy text just for demo view hi hello copy paste', 'marketing', 'The Yamaha MT 15 V2.0’s price starts from Rs 84,301 (ex-showroom) in India. The MT V2.0 version of India’s favourite commuter is available in two variants and four colour schemes.', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (486, 'Proprietorship', 'proprietorship-2', 'Proprietorship', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (490, 'Yamaha MT 15 V2.0', 'yamaha-mt-15-v2-0-1', 'Yamaha MT 15 V2.0', 'Lorem dummy text just for demo view hi hello copy paste', 'marketing', 'The Yamaha MT 15 V2.0’s price starts from Rs 84,301 (ex-showroom) in India. The MT V2.0 version of India’s favourite commuter is available in two variants and four colour schemes.', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (491, 'Updated Ducati Panigale V2 & Panigale V2 S Debut At EICMA 2024', 'updated-ducati-panigale-v2-panigale-v2-s-debut-at-eicma-2024', 'Updated Ducati Panigale V2 & Panigale V2 S Debut At EICMA 2024', 'Lorem dummy text just for demo view hi hello copy paste', 'marketing', 'Lorem dummy text just for demo view hi hello copy paste Lorem dummy text just for demo view hi hello copy paste Lorem dummy text just for demo view hi hello copy paste', NULL, 1, NULL, NULL, NULL, NULL, 0),
-(492, 'Updated Ducati Panigale V2 & Panigale V2 S Debut At EICMA 2024', 'afsa', 'Updated Ducati Panigale V2 & Panigale V2 S Debut At EICMA 2024', 'Lorem dummy text just for demo view hi hello copy paste', 'marketing', 'Lorem dummy text just for demo view hi hello copy paste Lorem dummy text just for demo view hi hello copy paste Lorem dummy text just for demo view hi hello copy paste', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (493, 'Royal Enfield Flying Flea S6 Scrambler Spotted Testing For First Time, Along With The Flying Flea C6', 'royal-enfield-flying-flea-s6-scrambler-spotted-testing-for-first-time-along-with-the-flying-flea-c6', 'Royal Enfield Flying Flea S6 Scrambler Spotted Testing For First Time, Along With The Flying Flea C6', 'Royal Enfield Flying Flea S6 Scrambler Spotted Testing For First Time, Along With The Flying Flea C6', 'marketing', 'The Flying Flea S6 has a more rugged looking design compared to the C6. It still features a lot of the same retro design elements, such as the round headlight, the tear drop shaped tank and the hardtail-like styling at the rear.', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (500, 'Honda Activa 6G', 'honda-activa-6g', 'Honda Activa 6G', 'Honda Activa 6G', 'Honda Activa 6G, align-items-center ', 'The Honda Activa 110 is the best selling scooter in India. At times, it is even the best selling two-wheeler in India, beating the Hero Splendor every now and then.', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (508, 'Revolt RV400', 'revolt-rv400', 'Revolt RV400', 'Revolt RV400', 'marketing', 'The F77 is Ultraviolette\'s only street-legal bike. The F77 Mach 2 was first launched in 2022.', NULL, 1, NULL, NULL, NULL, NULL, 0),
@@ -6903,7 +6904,10 @@ INSERT INTO `meta_tags` (`id`, `page_name`, `slug`, `meta_title`, `meta_author`,
 (644, 'MBA Finance', 'mba-finance', 'MBA Finance', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (645, 'BFSI Sector Certification', 'bfsi-sector-certification', 'BFSI Sector Certification', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0),
 (646, 'Banking Professional Certification', 'banking-professional-certification', 'Banking Professional Certification', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0),
-(647, 'Business and Corporate Law', 'business-and-corporate-law', 'Business and Corporate Law', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0);
+(647, 'Business and Corporate Law', 'business-and-corporate-law', 'Business and Corporate Law', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0),
+(649, 'While the lovely valley team work', 'while-the-lovely-valley-team-work', 'While the lovely valley team work', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0),
+(650, 'Legal Service', 'legal-service', 'Legal Service', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0),
+(651, 'Adviser Service', 'adviser-service', 'Adviser Service', '', '', '', NULL, 1, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -7661,9 +7665,6 @@ INSERT INTO `slugs` (`id`, `slug`, `table_name`, `p_id`, `page_name`) VALUES
 (303, 'moa-amendment', 'service', 53, 'single-service.php'),
 (320, 'gst-registration', 'service', 24, 'single-service.php'),
 (322, 'trademark-registration', 'service', 16, 'single-service.php'),
-(464, 'automotive-news', 'blog_category', 5, 'blog.php'),
-(465, 'electric-technology', 'blog_category', 6, 'blog.php'),
-(493, 'afsa', 'blog', 8, 'blog-single.php'),
 (497, 'bike-king', 'users', 2, 'howroom-single.php'),
 (528, 'accounting-compliance', 'service_category', 17, 'services.php'),
 (529, 'income-tax', 'service_category', 16, 'services.php'),
@@ -7804,7 +7805,10 @@ INSERT INTO `slugs` (`id`, `slug`, `table_name`, `p_id`, `page_name`) VALUES
 (664, 'bfsi-sector-certification', 'certification', 14, 'partners.php'),
 (665, 'banking-professional-certification', 'certification', 15, 'partners.php'),
 (666, 'advisery', 'service_category', 19, 'services.php'),
-(667, 'business-and-corporate-law', 'service', 124, 'single-service.php');
+(667, 'business-and-corporate-law', 'service', 124, 'single-service.php'),
+(669, 'while-the-lovely-valley-team-work', 'blog', 11, 'blog-single.php'),
+(670, 'legal-service', 'blog_category', 6, 'blogs.php'),
+(671, 'adviser-service', 'blog_category', 7, 'blogs.php');
 
 -- --------------------------------------------------------
 
@@ -7921,6 +7925,36 @@ INSERT INTO `states` (`id`, `name`, `country_id`, `add_by`, `add_date_time`, `up
 (33, 'UTTARANCHAL', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
 (34, 'JHARKHAND', 99, NULL, NULL, NULL, NULL, NULL, 0, 1),
 (35, 'CHATTISGARH', 99, NULL, NULL, NULL, NULL, NULL, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `testimonial`
+--
+
+CREATE TABLE `testimonial` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `designation` text DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `image` text DEFAULT NULL,
+  `status` int(1) NOT NULL,
+  `add_by` int(11) DEFAULT NULL,
+  `add_date_time` datetime DEFAULT NULL,
+  `update_date_time` datetime DEFAULT NULL,
+  `update_history` text DEFAULT NULL,
+  `slug` text DEFAULT NULL,
+  `is_delete` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `testimonial`
+--
+
+INSERT INTO `testimonial` (`id`, `name`, `designation`, `message`, `image`, `status`, `add_by`, `add_date_time`, `update_date_time`, `update_history`, `slug`, `is_delete`) VALUES
+(11, 'Davis Payerf', 'Mechanical Engineering', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat', '1754509264_c2ae823286497a708067.webp', 1, 1, '2025-06-14 11:15:00', '2025-08-07 01:11:04', NULL, 'royal-enfield-flying-flea-s6-scrambler-spotted-testing-for-first-time-along-with-the-flying-flea-c6', 0),
+(12, 'Davis Payerf', 'Mechanical Engineering', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat', '1754509264_c2ae823286497a708067.webp', 1, 1, '2025-06-14 11:15:00', '2025-08-07 01:11:04', NULL, 'royal-enfield-flying-flea-s6-scrambler-spotted-testing-for-first-time-along-with-the-flying-flea-c6', 0),
+(13, 'Davis Payerf', 'Mechanical Engineering', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat', '1754509264_c2ae823286497a708067.webp', 1, 1, '2025-06-14 11:15:00', '2025-08-07 01:11:04', NULL, 'royal-enfield-flying-flea-s6-scrambler-spotted-testing-for-first-time-along-with-the-flying-flea-c6', 0);
 
 -- --------------------------------------------------------
 
@@ -8413,6 +8447,12 @@ ALTER TABLE `states`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `testimonial`
+--
+ALTER TABLE `testimonial`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `transaction`
 --
 ALTER TABLE `transaction`
@@ -8450,7 +8490,7 @@ ALTER TABLE `vendor_package`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `banner`
@@ -8468,7 +8508,7 @@ ALTER TABLE `blog`
 -- AUTO_INCREMENT for table `blog_category`
 --
 ALTER TABLE `blog_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `blog_sub_category`
@@ -8576,7 +8616,7 @@ ALTER TABLE `lead_transfers`
 -- AUTO_INCREMENT for table `login_history`
 --
 ALTER TABLE `login_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=345;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=348;
 
 --
 -- AUTO_INCREMENT for table `menu_category`
@@ -8588,7 +8628,7 @@ ALTER TABLE `menu_category`
 -- AUTO_INCREMENT for table `meta_tags`
 --
 ALTER TABLE `meta_tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=648;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=652;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -8690,13 +8730,19 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `slugs`
 --
 ALTER TABLE `slugs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=668;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=672;
 
 --
 -- AUTO_INCREMENT for table `states`
 --
 ALTER TABLE `states`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `testimonial`
+--
+ALTER TABLE `testimonial`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `transaction`
