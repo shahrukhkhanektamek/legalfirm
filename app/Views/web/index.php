@@ -9,9 +9,9 @@
 					<div class="row">
 						<div class="col-lg-7 col-md-7">
 							<div class="banner-content">
-								<p>All Legal Services</p> 
-								<h1>Achieve Your Dreams.</h1>
-								<h1>Book your Course.</h1>
+								<p><?=env('APP_NAME') ?></p> 
+								<h1>Where Your Rights  </h1>
+								<h1>Find Their Strongest Ally.</h1>
 								<div class="btn-item">
 									<a class="btn get-btn" href="contact">Contact now</a>
 									<a class="btn courses-btn" href="services">All Services</a>

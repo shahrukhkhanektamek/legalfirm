@@ -225,7 +225,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]]
             );
 
@@ -267,7 +267,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]]
             );
 
@@ -330,7 +330,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]]
             );
 
@@ -371,7 +371,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]]
             );
 
@@ -421,7 +421,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]],
                 ['tools' => [['googleSearch' => (object)[]]]] // Simulate tool usage config
             );
@@ -476,7 +476,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]]
             );
 
@@ -513,7 +513,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]]
             );
 
@@ -563,7 +563,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]]
             );
 
@@ -601,7 +601,7 @@ class GeminiModel extends Model
                 Generate the checklist based on these details.
             ";
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]]
             );
             return $response;
@@ -642,7 +642,7 @@ class GeminiModel extends Model
             }
 
             $response = $this->ai->generateContent(
-                'gemini-1.5-flash',
+                'gemini-2.5-flash',
                 [['role' => "user", 'parts' => [['text' => "{$systemInstruction}\n\n{$userPrompt}"]]]]
             );
 
@@ -700,7 +700,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]],
                 ['generationConfig' => ['responseMimeType' => "application/json"]]
             );
@@ -761,7 +761,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]]
             );
 
@@ -814,7 +814,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]],
                 ['generationConfig' => ['responseMimeType' => "application/json"]]
             );
@@ -874,7 +874,7 @@ class GeminiModel extends Model
             ";
 
             $response = $this->ai->generateContent(
-                "gemini-1.5-flash",
+                "gemini-2.5-flash",
                 [['role' => "user", 'parts' => [['text' => $prompt]]]],
                 ['tools' => [['googleSearch' => (object)[]]]] // Simulate tool usage config
             );
@@ -893,6 +893,9 @@ class GeminiModel extends Model
             ];
 
         } catch (Exception $e) {
+
+            print_r($e->getMessage());
+
             log_message('error', "Error performing legal research with Gemini API: " . $e->getMessage());
             return [
                 'summary' => "Error",

@@ -19,11 +19,11 @@
 							<div class="account-content">
 								<div class="row align-items-center justify-content-center">
 									<div class="col-md-7 col-lg-6 login-left">
-										<img src="assets/img/login-banner.jpg" class="img-fluid" alt="DreamsCLG Login">	
+										<img src="assets/img/login-banner.jpg" class="img-fluid" alt="<?=env('APP_NAME') ?> Login">	
 									</div>
 									<div class="col-md-12 col-lg-6 login-right">
 										<div class="login-header">
-											<h3>Login <span>DreamsCLG</span></h3>
+											<h3>Login <span><?=env('APP_NAME') ?></span></h3>
 										</div>
 										<form class="form_data" action="<?= base_url(route_to('auth.user.login-action')); ?>" method="post" id="LoginForm" novalidate >
 

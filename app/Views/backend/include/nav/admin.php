@@ -38,13 +38,21 @@
     </div>
 </li>
 
-
-
 <li class="nav-item">
-    <a class="nav-link menu-link" href="<?=base_url(route_to('lead-enquiry.list'))?>">
-        <i class="ri-wallet-line"></i> <span data-key="t-transaction">Leads</span>
+    <a class="nav-link menu-link" href="#manageLeads" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="manageLeads">
+        <i class="ri-contacts-line"></i> <span data-key="t-dashboards">Manage Lead</span>
     </a>
+    <div class="collapse menu-dropdown" id="manageLeads">
+        <ul class="nav nav-sm flex-column">
+
+            <li class="nav-item"><a href="<?=base_url(route_to('lead-enquiry.list')).'?type=2'?>" class="nav-link" data-key="t-analytics"> Leads </a></li>
+            <li class="nav-item"><a href="<?=base_url(route_to('contact-enquiry.list'))?>" class="nav-link" data-key="t-analytics"> Contact Leads </a></li>
+
+        </ul>
+    </div>
 </li>
+
+
 <li class="nav-item">
     <a class="nav-link menu-link" href="<?=base_url(route_to('kyc.list'))?>">
         <i class="ri-wallet-line"></i> <span data-key="t-transaction">Kyc</span>

@@ -9,9 +9,9 @@
 							
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-about">
-									<h2 class="footer-title">ABOUT DreamsCLG</h2>
+									<h2 class="footer-title">ABOUT <?=env('APP_NAME') ?></h2>
 									<div class="footer-about-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat mauris Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat mauris </p>
+										<p>At <?=env('APP_NAME') ?>, we stand by you with expert guidance, clear advice, and strong representation. From civil disputes to corporate matters, our team is dedicated to protecting your rights and securing the best possible outcome. With integrity and commitment at our core, we turn legal challenges into solutions. </p>
 										
 									</div>
 								</div>
@@ -42,8 +42,8 @@
 								<div class="footer-widget footer-menu">
 									<h2 class="footer-title">Quick Links</h2>
 									<ul>
-										<li><a href="<?=base_url()?>booking">About Us</a></li>
-										<li><a href="<?=base_url()?>chat">Contact Us</a></li>
+										<li><a href="<?=base_url()?>about">About Us</a></li>
+										<li><a href="<?=base_url()?>contact">Contact Us</a></li>
 										<li><a href="<?=base_url()?>advocates">Advocates</a></li>
 										<li><a href="<?=base_url()?>advisers">Legal Advisers </a></li>
 										<li><a href="<?=base_url()?>ca">Chartered Accountant (CA)</a></li>
@@ -86,7 +86,7 @@
 							<div class="row">
 								<div class="col-md-4 col-lg-4">
 									<div class="copyright-text">
-										<p class="mb-0">© 2021 All Rights Reserved</p>
+										<p class="mb-0">© 2025 All Rights Reserved</p>
 									</div>
 								</div>
 								<div class="col-md-6 col-lg-4">

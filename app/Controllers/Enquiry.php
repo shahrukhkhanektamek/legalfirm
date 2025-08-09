@@ -19,7 +19,7 @@ class Enquiry extends BaseController
         $data['name'] = $this->request->getPost('name');
         $data['email'] = $this->request->getPost('email');
         $data['phone'] = $this->request->getPost('phone');
-        $data['subject'] = $this->request->getPost('subject');
+        // $data['subject'] = $this->request->getPost('subject');
         $data['coment'] = $this->request->getPost('message');
         
 
@@ -30,17 +30,17 @@ class Enquiry extends BaseController
         $data['update_date_time'] = date("Y-m-d H:i:s");
 
 
-        if ($this->request->getPost('captcha') != session()->get('captcha_answer'))
-        {
-            $action = 'modalsubmitadd';
-            $responseCode = 400;
-            $result['status'] = $responseCode;
-            $result['message'] = 'Wrong Captcha!';
-            $result['modalid'] = 'enquiryModal';
-            $result['action'] = $action;
-            $result['data'] = [];
-            return $this->response->setStatusCode($responseCode)->setJSON($result);
-        }
+        // if ($this->request->getPost('captcha') != session()->get('captcha_answer'))
+        // {
+        //     $action = 'modalsubmitadd';
+        //     $responseCode = 400;
+        //     $result['status'] = $responseCode;
+        //     $result['message'] = 'Wrong Captcha!';
+        //     $result['modalid'] = 'enquiryModal';
+        //     $result['action'] = $action;
+        //     $result['data'] = [];
+        //     return $this->response->setStatusCode($responseCode)->setJSON($result);
+        // }
 
 
 

@@ -1,9 +1,3 @@
-/*
-Author       : Dreamguys
-Template Name: Pathivu - Bootstrap Template
-Version      : 1.0
-*/
-
 /*============================
  [Table of CSS]
  
@@ -3075,15 +3069,7 @@ body.indexthree {
 	11. Header Four
 -----------------------*/
 
-body.indexfour .container-fluid {
-    padding-left: 30px;
-    padding-right: 30px;
-}
-body.indexfour {
-    color: #272b41;
-    font-family: "Poppins",sans-serif;
-    font-size: 0.9375rem;
-}
+
 .headerfour .dropdown-item {
    font-size:14px;
 }
@@ -10900,9 +10886,7 @@ body.indexthree {
 	26. Home Four
 -----------------------*/
 
-body.indexfour {
-	background-color: #fcf8f3;
-}
+
 .indexfour .form-control {
     font-size: 15px;
 }
