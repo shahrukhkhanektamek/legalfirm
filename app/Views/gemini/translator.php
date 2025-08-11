@@ -56,7 +56,7 @@ if(!empty($user))
 												<div class="col-md-6">
 													<div class="col-12 mt-2">
 														<label>Translate To</label>
-														<select class="form-control select" id="Jurisdiction">   
+														<select class="form-control select" id="language">   
 														   <option value="Bengali">Bengali</option>
 														   <option value="Marathi">Marathi</option>
 														   <option value="Telugu">Telugu</option>
@@ -82,7 +82,7 @@ if(!empty($user))
 															<?php
 					                                             $file_data = array(
 					                                                 "position"=>1,
-					                                                 "columna_name"=>"license",
+					                                                 "columna_name"=>"file",
 					                                                 "multiple"=>false,
 					                                                 "accept"=>'.pdf',
 					                                                 "col"=>"col-md-2",
@@ -104,7 +104,10 @@ if(!empty($user))
 												<div class="col-md-6">
 													<div class="col-12">
 														<label>Translated Document</label>
-														<textarea class="form-control" id="comment" rows="5" placeholder="Paste text here or upload a document above..." style="min-height: 245px !important;"></textarea>
+														<div class="live_chat" id="live_chat">
+															<div class="chat1 resaponse-area" id="chat1" style="min-height: 245px;padding: 10px 10px;border: 1px solid;border-radius: 5px;">
+															</div>
+														</div>
 													</div>
 												</div>
 
@@ -119,19 +122,7 @@ if(!empty($user))
 									</div>
 								</div>
 
-								<div class="card resaponse-area-card">
-									<div class="card-body">
-										<div class="fcrse_3">													
-											<div class="live_chat" id="live_chat">
-												<div class="chat1 resaponse-area" id="chat1">
-													
-												</div>
-											</div>
-											
-										</div>	
-											
-									</div>
-								</div>
+								
 							
 								
 						
@@ -189,8 +180,7 @@ if(!empty($user))
       
         var form = new FormData();
         form.append("comment",comment);
-        form.append("Jurisdiction",$("#Jurisdiction").val());
-        form.append("ResearchType",$("#ResearchType").val());
+        form.append("language",$("#language").val());
         var settings = {
           "url": "<?=$data['actionUrl'] ?>",
           "method": "POST",

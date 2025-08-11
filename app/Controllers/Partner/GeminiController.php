@@ -148,8 +148,7 @@ class GeminiController extends BaseController
         $user_id = $session['id'];
 
         $comment = $this->request->getPost('comment');
-        $Jurisdiction = $this->request->getPost('Jurisdiction');
-        $ResearchType = $this->request->getPost('ResearchType');
+        $language = $this->request->getPost('language');
 
         $data['title'] = "".$this->arr_values['title'];
         $data['page_title'] = "AI ".$this->arr_values['page_title'];
@@ -160,16 +159,15 @@ class GeminiController extends BaseController
         $db = $this->db;
         $row = [];
 
-        $query['query'] = $comment;
-        $query['jurisdiction'] = $Jurisdiction;
-        $query['type'] = $ResearchType;
+        $query = $comment;
+        
 
         $GeminiModel = new GeminiModel();
-        $response = $GeminiModel->performLegalResearch($query);
+        $response = $GeminiModel->translateDocument($query, $language);
 
         $responseCode = 200;
         $result['status'] = $responseCode;
-        $result['message'] = $response['responseText'];
+        $result['message'] = $response;
         $result['action'] = 'view';
         $result['data'] = [];
         return $this->response->setStatusCode($responseCode)->setJSON($result);         
