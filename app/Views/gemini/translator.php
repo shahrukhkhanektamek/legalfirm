@@ -52,68 +52,66 @@ if(!empty($user))
 									<div class="card-body">
 										<div class="live_comment">
 											<div class="row">
-												<div class="col-12">
-													<textarea class="form-control" id="comment" rows="5" placeholder="e.g., What constitutes 'anticipatory bail' under the BNSS and what are the landmark Supreme Court judgments governing its grant?"></textarea>
+
+												<div class="col-md-6">
+													<div class="col-12 mt-2">
+														<label>Translate To</label>
+														<select class="form-control select" id="Jurisdiction">   
+														   <option value="Bengali">Bengali</option>
+														   <option value="Marathi">Marathi</option>
+														   <option value="Telugu">Telugu</option>
+														   <option value="Tamil">Tamil</option>
+														   <option value="Gujarati">Gujarati</option>
+														   <option value="Urdu">Urdu</option>
+														   <option value="Kannada">Kannada</option>
+														   <option value="Odia">Odia</option>
+														   <option value="Punjabi">Punjabi</option>
+														   <option value="Malayalam">Malayalam</option>
+														   <option value="English">English</option>
+														   <option value="Spanish">Spanish</option>
+														   <option value="French">French</option>
+														   <option value="German">German</option>
+														   <option value="Arabic">Arabic</option>
+														   <option value="Russian">Russian</option>
+														   <option value="Chinese (Simplified)">Chinese (Simplified)</option>
+														</select>
+													</div>
+
+													<div class="col-md-12 mt-2">
+														<div class="form-group mb-0">
+															<?php
+					                                             $file_data = array(
+					                                                 "position"=>1,
+					                                                 "columna_name"=>"license",
+					                                                 "multiple"=>false,
+					                                                 "accept"=>'.pdf',
+					                                                 "col"=>"col-md-2",
+					                                                 "alt_text"=>"none",
+					                                                 "row"=>@$kyc,
+					                                                 "placeholder"=>"Drag & drop a PDF, or click to upload",
+					                                                 "css"=>["height"=>"50px","width"=>'100%',"margin-bottom"=>'10px',],
+					                                             );
+					                                        ?>
+					                                        <?=view('upload-multiple/index',compact('file_data','db','data'))?>
+														</div>
+													</div>
+
+													<div class="col-12">
+														<textarea class="form-control" id="comment" rows="5" placeholder="Paste text here or upload a document above..."></textarea>
+													</div>
 												</div>
 
-												<div class="col-4 mt-2">
-													<label>Jurisdiction</label>
-													<select class="form-control select" id="Jurisdiction">
-													   <option value="All India">All India</option>
-													   <optgroup label="States">
-														    <option value="Andhra Pradesh">Andhra Pradesh</option>
-														    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-														    <option value="Assam">Assam</option>
-														    <option value="Bihar">Bihar</option>
-														    <option value="Chhattisgarh">Chhattisgarh</option>
-														    <option value="Goa">Goa</option>
-														    <option value="Gujarat">Gujarat</option>
-														    <option value="Haryana">Haryana</option>
-														    <option value="Himachal Pradesh">Himachal Pradesh</option>
-														    <option value="Jharkhand">Jharkhand</option>
-														    <option value="Karnataka">Karnataka</option>
-														    <option value="Kerala">Kerala</option>
-														    <option value="Madhya Pradesh">Madhya Pradesh</option>
-														    <option value="Maharashtra">Maharashtra</option>
-														    <option value="Manipur">Manipur</option>
-														    <option value="Meghalaya">Meghalaya</option>
-														    <option value="Mizoram">Mizoram</option>
-														    <option value="Nagaland">Nagaland</option>
-														    <option value="Odisha">Odisha</option>
-														    <option value="Punjab">Punjab</option>
-														    <option value="Rajasthan">Rajasthan</option>
-														    <option value="Sikkim">Sikkim</option>
-														    <option value="Tamil Nadu">Tamil Nadu</option>
-														    <option value="Telangana">Telangana</option>
-														    <option value="Tripura">Tripura</option>
-														    <option value="Uttar Pradesh">Uttar Pradesh</option>
-														    <option value="Uttarakhand">Uttarakhand</option>
-														    <option value="West Bengal">West Bengal</option>
-														  </optgroup>
+												<div class="col-md-6">
+													<div class="col-12">
+														<label>Translated Document</label>
+														<textarea class="form-control" id="comment" rows="5" placeholder="Paste text here or upload a document above..." style="min-height: 245px !important;"></textarea>
+													</div>
+												</div>
 
-														  <optgroup label="Union Territories">
-														    <option value="Andaman & Nicobar Islands">Andaman & Nicobar Islands</option>
-														    <option value="Chandigarh">Chandigarh</option>
-														    <option value="Dadra & Nagar Haveli & Daman & Diu">Dadra & Nagar Haveli & Daman & Diu</option>
-														    <option value="Delhi (NCT)">Delhi (NCT)</option>
-														    <option value="Jammu & Kashmir">Jammu & Kashmir</option>
-														    <option value="Ladakh">Ladakh</option>
-														    <option value="Lakshadweep">Lakshadweep</option>
-														    <option value="Puducherry">Puducherry</option>
-														  </optgroup>
-													</select>
-												</div>
-												<div class="col-4 mt-2">
-													<label>Research Type</label>
-													<select class="form-control select" id="ResearchType">
-														<option value="All">All</option>
-														<option value="Case Law">Case Law</option>
-														<option value="Statutes">Statutes</option>
-													</select>
-												</div>
+												
 												<div class="col-4 mt-2">
 													<label style="color: white;">sd</label>
-													<button class="btn btn-primary btn_live w-100" id="submit-comment">Research</button>
+													<button class="btn btn-primary btn_live w-100" id="submit-comment">Translate</button>
 												</div>
 											</div>
 										</div>

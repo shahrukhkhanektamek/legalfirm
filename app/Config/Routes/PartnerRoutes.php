@@ -75,6 +75,26 @@ $routes->group('partner', ['namespace' => 'App\Controllers\Partner', 'filter'=>'
             $routes->post('legal_research_action', 'GeminiController::legal_research_action');
         });
 
+        $routes->group('translator', function($routes) {
+            $routes->get('/', 'GeminiController::translator');
+            $routes->post('translator_action', 'GeminiController::translator_action');
+        });
+        
+        $routes->group('complaint-writer', function($routes) {
+            $routes->get('/', 'GeminiController::complaint_writer');
+            $routes->post('complaint_writer_action', 'GeminiController::complaint_writer_action');
+        });
+        
+        $routes->group('document-generator', function($routes) {
+            $routes->get('/', 'GeminiController::document_generator');
+            $routes->post('document_generator_action', 'GeminiController::document_generator_action');
+        });
+        
+        $routes->group('document-analyzer', function($routes) {
+            $routes->get('/', 'GeminiController::document_analyzer');
+            $routes->post('document_analyzer_action', 'GeminiController::document_analyzer_action');
+        });
+
     });
 
 

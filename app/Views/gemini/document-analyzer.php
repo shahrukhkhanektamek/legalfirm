@@ -10,25 +10,7 @@ if(!empty($user))
 	$user_role = get_role_by_id($user->role);
 }
 ?>
-<style>
-.me, .boat{
-    text-align: right;
-    margin-bottom: 5px;
-    box-shadow: 0px 0px 9px -4px rgba(0, 0, 0, 0.5);
-    width: 50%;
-    margin: 25px 0 25px auto;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-.boat {
-    margin: auto 0 0 0;
-    text-align: left;
-}
-#live_chat {
-    overflow: auto;
-    padding: 20px 15px;
-}
-</style>
+
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="<?=base_url() ?>assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css">		
 	<link rel="stylesheet" href="<?=base_url() ?>assets/plugins/dropzone/dropzone.min.css">
@@ -41,10 +23,10 @@ if(!empty($user))
 							<nav aria-label="breadcrumb" class="page-breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="<?=base_url() ?>">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Ask Ally</li>
+									<li class="breadcrumb-item active" aria-current="page"> Legal Research</li>
 								</ol>
 							</nav>
-							<h2 class="breadcrumb-title">Ask Ally</h2>
+							<h2 class="breadcrumb-title"> Legal Research</h2>
 						</div>
 					</div>
 				</div>
@@ -64,39 +46,60 @@ if(!empty($user))
 
 								
 
-
-							
 								
+
 								<div class="card">
 									<div class="card-body">
-										<div class="col-xl-12 col-lg-12">
-											<div class="right_side">							
-												<div class="fcrse_3">
-													
-													<div class="live_chat" id="live_chat">
-														<div class="chat1 resaponse-area" id="chat1">
-															
-														</div>
+										<div class="live_comment">
+											<div class="row">
+
+												<div class="col-md-12 mt-2">
+													<div class="form-group mb-0">
+														<?php
+				                                             $file_data = array(
+				                                                 "position"=>1,
+				                                                 "columna_name"=>"license",
+				                                                 "multiple"=>false,
+				                                                 "accept"=>'.pdf',
+				                                                 "col"=>"col-md-2",
+				                                                 "alt_text"=>"none",
+				                                                 "row"=>@$kyc,
+				                                                 "placeholder"=>"Drag & drop a PDF here, or click to select a file PDF files only",
+				                                                 "css"=>["height"=>"200px","width"=>'100%',"margin-bottom"=>'10px',],
+				                                             );
+				                                        ?>
+				                                        <?=view('upload-multiple/index',compact('file_data','db','data'))?>
 													</div>
-													<div class="live_comment">
-														<div class="row">
-															<div class="col-11">
-																<input class="form-control" id="comment" type="text" placeholder="Say Something..." />
-															</div>
-															<div class="col-1">
-																<button class="btn btn-primary btn_live"  id="submit-comment"><i class="fa fa-search"></i></button>																
-															</div>
-														</div>
-													</div>
-													<div class="hide" style="display:none;" id="output"></div>
-												</div>													
+												</div>												
+												
+												<div class="col-4 mt-2">
+													<label style="color: white;">sd</label>
+													<button class="btn btn-primary btn_live w-100" id="submit-comment">Analyze Document</button>
+												</div>
 											</div>
 										</div>
+										<div class="hide" style="display:none;" id="output"></div>
+									</div>
+								</div>
+
+								<div class="card resaponse-area-card">
+									<div class="card-body">
+										<div class="fcrse_3">													
+											<div class="live_chat" id="live_chat">
+												<div class="chat1 resaponse-area" id="chat1">
+													
+												</div>
+											</div>
+											
+										</div>	
 											
 									</div>
-								</div>	
-
+								</div>
+							
+								
 						
+
+														
 							
 						</div>
 
@@ -113,11 +116,13 @@ if(!empty($user))
 
 
 
+
+
+
 <script>
 	
    $(document).on("click", "#submit-comment",(function(e) {
-      // event.preventDefault();
-   		console.log("{fasf");
+      event.preventDefault();
       submit_comment();
    }));
 
@@ -134,17 +139,23 @@ if(!empty($user))
    		if(comment.trim()=='')
    			return false;
 
-        $(".chat1").append(`<div class="me">${(comment)}</div>`);
+   		$("#submit-comment").attr("disabled", true)
+   		data_loader("#chat1",1);
+   		$(".resaponse-area-card").show();
+
+
+        // $(".chat1").append(`<div class="me">${(comment)}</div>`);
         $(".chat1").append(`<div class="boat wait"><span class="dot-loader"><span></span><span></span><span></span></span></div>`);
-        $("#comment").val('');
+        // $("#comment").val('');
         var div = document.getElementById("live_chat");
   			div.scrollTop = div.scrollHeight;
       
         var form = new FormData();
         form.append("comment",comment);
-        // form.append("id","{{request()->input('id')}}");
+        form.append("Jurisdiction",$("#Jurisdiction").val());
+        form.append("ResearchType",$("#ResearchType").val());
         var settings = {
-          "url": "<?=($data['route'].'/gemini/ask-ally/action') ?>",
+          "url": "<?=$data['actionUrl'] ?>",
           "method": "POST",
           "timeout": 0,
           "processData": false,
@@ -158,10 +169,12 @@ if(!empty($user))
         };
         $.ajax(settings).always(function (response) {
             
+   		$("#submit-comment").attr("disabled", false);
+
             response = admin_response_data_check(response);
             if(response.status==200)
             {
-              	$(".chat1").append(`<div class="boat">${(response.message)}</div>`);
+              	$(".chat1").html(`<div class="boat">${(response.message)}</div>`);
               	$(".wait.boat").remove();
               	var div = document.getElementById("live_chat");
   				div.scrollTop = div.scrollHeight;
