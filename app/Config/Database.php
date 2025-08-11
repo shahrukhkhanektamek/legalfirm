@@ -177,24 +177,12 @@ class Database extends Config
             $this->defaultGroup = 'tests';
         }
 
- 
-        if($_SERVER['HTTP_HOST']=='localhost'){
-            $db_username = env('database.default.username');
-            $db_password = env('database.default.password');
-            $db_name = env('database.default.database');
-        }
-        else{
-            $db_username = env('database.default.usernameLive');
-            $db_password = env('database.default.passwordLive');
-            $db_name = env('database.default.databaseLive');
-        }
-
         $this->default = [
             'DSN'          => '',
             'hostname'     => env('database.default.hostname'),
-            'username'     => $db_username,
-            'password'     => $db_password,
-            'database'     => $db_name,
+            'username'     => env('database.default.username'),
+            'password'     => env('database.default.password'),
+            'database'     => env('database.default.database'),
             'DBDriver'     => env('database.default.DBDriver'),
             'DBPrefix'     => '',
             'pConnect'     => false,
