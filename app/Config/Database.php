@@ -177,7 +177,7 @@ class Database extends Config
             $this->defaultGroup = 'tests';
         }
 
-
+ 
         if($_SERVER['HTTP_HOST']=='localhost'){
             $db_username = env('database.default.username');
             $db_password = env('database.default.password');
