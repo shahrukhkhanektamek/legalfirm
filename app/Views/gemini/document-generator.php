@@ -10,6 +10,11 @@ if(!empty($user))
 	$user_role = get_role_by_id($user->role);
 }
 ?>
+<style>
+	.live_comment h3 {
+    margin: 22px 0 0 0;
+}
+</style>
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="<?=base_url() ?>assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css">		
@@ -52,68 +57,56 @@ if(!empty($user))
 									<div class="card-body">
 										<div class="live_comment">
 											<div class="row">
-												<div class="col-12">
-													<textarea class="form-control" id="comment" rows="5" placeholder="e.g., What constitutes 'anticipatory bail' under the BNSS and what are the landmark Supreme Court judgments governing its grant?"></textarea>
-												</div>
 
-												<div class="col-4 mt-2">
-													<label>Jurisdiction</label>
-													<select class="form-control select" id="Jurisdiction">
-													   <option value="All India">All India</option>
-													   <optgroup label="States">
-														    <option value="Andhra Pradesh">Andhra Pradesh</option>
-														    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-														    <option value="Assam">Assam</option>
-														    <option value="Bihar">Bihar</option>
-														    <option value="Chhattisgarh">Chhattisgarh</option>
-														    <option value="Goa">Goa</option>
-														    <option value="Gujarat">Gujarat</option>
-														    <option value="Haryana">Haryana</option>
-														    <option value="Himachal Pradesh">Himachal Pradesh</option>
-														    <option value="Jharkhand">Jharkhand</option>
-														    <option value="Karnataka">Karnataka</option>
-														    <option value="Kerala">Kerala</option>
-														    <option value="Madhya Pradesh">Madhya Pradesh</option>
-														    <option value="Maharashtra">Maharashtra</option>
-														    <option value="Manipur">Manipur</option>
-														    <option value="Meghalaya">Meghalaya</option>
-														    <option value="Mizoram">Mizoram</option>
-														    <option value="Nagaland">Nagaland</option>
-														    <option value="Odisha">Odisha</option>
-														    <option value="Punjab">Punjab</option>
-														    <option value="Rajasthan">Rajasthan</option>
-														    <option value="Sikkim">Sikkim</option>
-														    <option value="Tamil Nadu">Tamil Nadu</option>
-														    <option value="Telangana">Telangana</option>
-														    <option value="Tripura">Tripura</option>
-														    <option value="Uttar Pradesh">Uttar Pradesh</option>
-														    <option value="Uttarakhand">Uttarakhand</option>
-														    <option value="West Bengal">West Bengal</option>
-														  </optgroup>
+													
+													<div class="col-12 mt-2">
+														<label>Document Type</label>
+														<select class="form-control select" >   
+														    <optgroup label="Civil Matters"><option value="Plaint">Plaint</option>
+														   	   <option value="Written Statement">Written Statement</option>
+															   <option value="Civil Appeal">Civil Appeal</option>
+															   <option value="Execution Petition">Execution Petition</option>
+															   <option value="Affidavit in Evidence">Affidavit in Evidence</option>
+															   <option value="Injunction Application">Injunction Application</option>
+															</optgroup>
+															<optgroup label="Criminal Matters"><option value="Bail Application (Anticipatory)">Bail Application (Anticipatory)</option>
+															   <option value="Bail Application (Regular)">Bail Application (Regular)</option>
+															   <option value="Criminal Complaint">Criminal Complaint</option>
+															   <option value="Criminal Appeal">Criminal Appeal</option>
+															   <option value="Quashing Petition (FIR/Chargesheet)">Quashing Petition (FIR/Chargesheet)</option>
+															</optgroup>
+															<optgroup label="Family Law">
+																<option value="Divorce Petition (Mutual Consent)">Divorce Petition (Mutual Consent)</option>
+															   	<option value="Divorce Petition (Contested)">Divorce Petition (Contested)</option>
+															    <option value="Child Custody Petition">Child Custody Petition</option>
+															    <option value="Maintenance Application (CrPC 125)">Maintenance Application (CrPC 125)</option>
+															</optgroup>
+															<optgroup label="Specific Acts">
+																<option value="Complaint under Section 138 NI Act">Complaint under Section 138 NI Act</option>
+															   	<option value="Consumer Complaint">Consumer Complaint</option>
+															    <option value="RTI Application">RTI Application</option>
+															    <option value="DRT Application">DRT Application</option>
+															</optgroup>
+															<optgroup label="Agreements &amp; Affidavits">
+																<option value="General Affidavit">General Affidavit</option>
+															   	<option value="Rental Agreement">Rental Agreement</option>
+															    <option value="Sale Agreement (Movable Property)">Sale Agreement (Movable Property)</option>
+															    <option value="General Power of Attorney">General Power of Attorney</option>
+															    <option value="Legal Notice">Legal Notice</option>
+															</optgroup>
+														</select>
+													</div>
+													
+													<div class="col-12">
+														<label>Provide Case Details</label>
+														<textarea class="form-control"  rows="5" placeholder="e.g., 'My name is John Doe, son of Richard Doe, resident of 123 Main St, New Delhi. I need a bail application regarding FIR No. 456/2024 at Vasant Kunj police station. The allegations are of theft under section...'"></textarea>
+													</div>
 
-														  <optgroup label="Union Territories">
-														    <option value="Andaman & Nicobar Islands">Andaman & Nicobar Islands</option>
-														    <option value="Chandigarh">Chandigarh</option>
-														    <option value="Dadra & Nagar Haveli & Daman & Diu">Dadra & Nagar Haveli & Daman & Diu</option>
-														    <option value="Delhi (NCT)">Delhi (NCT)</option>
-														    <option value="Jammu & Kashmir">Jammu & Kashmir</option>
-														    <option value="Ladakh">Ladakh</option>
-														    <option value="Lakshadweep">Lakshadweep</option>
-														    <option value="Puducherry">Puducherry</option>
-														  </optgroup>
-													</select>
-												</div>
-												<div class="col-4 mt-2">
-													<label>Research Type</label>
-													<select class="form-control select" id="ResearchType">
-														<option value="All">All</option>
-														<option value="Case Law">Case Law</option>
-														<option value="Statutes">Statutes</option>
-													</select>
-												</div>
+													
+												
 												<div class="col-4 mt-2">
 													<label style="color: white;">sd</label>
-													<button class="btn btn-primary btn_live w-100" id="submit-comment">Research</button>
+													<button class="btn btn-primary btn_live w-100" id="submit-comment">Generate Document</button>
 												</div>
 											</div>
 										</div>

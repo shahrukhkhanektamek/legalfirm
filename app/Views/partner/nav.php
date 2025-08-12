@@ -48,31 +48,31 @@
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+						<a href="<?=base_url() ?>advocates">
 							<i class="fas fa-user-tie"></i>
 							<span>Lawyer</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>translator">
 							<i class="fas fa-language"></i>
 							<span>Translator</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>complaint-writer">
 							<i class="fas fa-pen-to-square"></i>
 							<span>Complaint Writer</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>document-generator">
 							<i class="fas fa-file"></i>
 							<span>Document Generator</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/' ?>leads">
+						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>document-analyzer">
 							<i class="fas fa-search"></i>
 							<span>Document Analyzer</span>
 						</a>

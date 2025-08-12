@@ -9,8 +9,17 @@ else
 
 ?>
 
-  <div class="drag-area"> 
+  <div class="drag-area" <?php if(!empty($file_data['css'])){
+  	echo"style='";
+  	$i=0;
+  	foreach ($file_data['css'] as $key => $value) {
+  		echo $key.':'.$value;echo';';
+  		$i++;
+  	}
+  	echo"'";
+  } ?>> 
     <div class="upload-icon">
+    	<p><?=@$file_data['placeholder'] ?></p>
       <i class="ri-file-upload-line"></i> 
     </div>
     <input type="file" accept="<?=$file_data['accept'] ?>" <?php if($file_data['multiple']==true)echo 'multiple'; ?> class="multiimagesuploadimages" data-target="multiimagesuploadimages<?=$file_data['position'] ?>" data-position="<?=$file_data['position'] ?>" data-cname="<?=$file_data['columna_name'] ?>" data-type="<?php if($file_data['multiple']==true)echo 'multiple';else echo'single'; ?>"  data-col="<?=$file_data['col'] ?>" data-alt_text="<?=$file_data['alt_text'] ?>">
