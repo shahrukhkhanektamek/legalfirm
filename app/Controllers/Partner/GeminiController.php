@@ -6,6 +6,8 @@ use CodeIgniter\Config\Services;
 use App\Models\ImageModel;
 use App\Models\GeminiModel;
 
+use Smalot\PdfParser\Parser;
+
 class GeminiController extends BaseController
 {
      protected $arr_values = array(
@@ -199,10 +201,6 @@ class GeminiController extends BaseController
         $session = session()->get('user');
         $user_id = $session['id'];
 
-        $comment = $this->request->getPost('comment');
-        $Jurisdiction = $this->request->getPost('Jurisdiction');
-        $ResearchType = $this->request->getPost('ResearchType');
-
         $data['title'] = "".$this->arr_values['title'];
         $data['page_title'] = "AI ".$this->arr_values['page_title'];
         $data['upload_path'] = $this->arr_values['upload_path'];
@@ -212,16 +210,25 @@ class GeminiController extends BaseController
         $db = $this->db;
         $row = [];
 
-        $query['query'] = $comment;
-        $query['jurisdiction'] = $Jurisdiction;
-        $query['type'] = $ResearchType;
+
+        $query['policeStation'] = $this->request->getPost('police_station');
+        $query['district'] = $this->request->getPost('district');
+        $query['state'] = $this->request->getPost('state');
+        $query['complainantName'] = $this->request->getPost('complainant_name');
+        $query['complainantAddress'] = $this->request->getPost('complainant_address');
+        $query['accusedName'] = $this->request->getPost('accused_name');
+        $query['accusedAddress'] = $this->request->getPost('accused_address');
+        $query['incidentDate'] = $this->request->getPost('date_of_incident');
+        $query['incidentLocation'] = $this->request->getPost('location_of_incident');
+        $query['incidentDescription'] = $this->request->getPost('description_of_incident');
+        
 
         $GeminiModel = new GeminiModel();
-        $response = $GeminiModel->performLegalResearch($query);
+        $response = $GeminiModel->generateComplaint($query);
 
         $responseCode = 200;
         $result['status'] = $responseCode;
-        $result['message'] = $response['responseText'];
+        $result['message'] = $response;
         $result['action'] = 'view';
         $result['data'] = [];
         return $this->response->setStatusCode($responseCode)->setJSON($result);         
@@ -253,8 +260,7 @@ class GeminiController extends BaseController
         $user_id = $session['id'];
 
         $comment = $this->request->getPost('comment');
-        $Jurisdiction = $this->request->getPost('Jurisdiction');
-        $ResearchType = $this->request->getPost('ResearchType');
+        $document_type = $this->request->getPost('document_type');
 
         $data['title'] = "".$this->arr_values['title'];
         $data['page_title'] = "AI ".$this->arr_values['page_title'];
@@ -266,15 +272,14 @@ class GeminiController extends BaseController
         $row = [];
 
         $query['query'] = $comment;
-        $query['jurisdiction'] = $Jurisdiction;
-        $query['type'] = $ResearchType;
+        $query['type'] = $document_type;
 
         $GeminiModel = new GeminiModel();
-        $response = $GeminiModel->performLegalResearch($query);
+        $response = $GeminiModel->generateLegalDocument($document_type, $comment);
 
         $responseCode = 200;
         $result['status'] = $responseCode;
-        $result['message'] = $response['responseText'];
+        $result['message'] = $response;
         $result['action'] = 'view';
         $result['data'] = [];
         return $this->response->setStatusCode($responseCode)->setJSON($result);         
@@ -318,18 +323,118 @@ class GeminiController extends BaseController
         $data['pagenation'] = array($this->arr_values['title']);
 
         $db = $this->db;
-        $row = [];
-
-        $query['query'] = $comment;
-        $query['jurisdiction'] = $Jurisdiction;
-        $query['type'] = $ResearchType;
+        $row = [];    
 
         $GeminiModel = new GeminiModel();
-        $response = $GeminiModel->performLegalResearch($query);
+        $response = $GeminiModel->analyzeLegalDocument($comment);
 
         $responseCode = 200;
         $result['status'] = $responseCode;
-        $result['message'] = $response['responseText'];
+        $result['message'] = $response;
+        $result['action'] = 'view';
+        $result['data'] = [];
+        return $this->response->setStatusCode($responseCode)->setJSON($result);         
+    }
+
+
+
+
+
+
+
+    public function law_news()
+    {
+        $session = session()->get('user');
+        $vendor_id = $session['id'];
+
+        $data['title'] = "".$this->arr_values['title'];
+        $data['page_title'] = "Manage ".$this->arr_values['page_title'];
+        $data['upload_path'] = $this->arr_values['upload_path'];
+        $data['route'] = base_url($this->arr_values['routename']);      
+        $data['actionUrl'] = $data['route'].'/gemini/law-news/law_news_action';
+        $data['pagenation'] = array($this->arr_values['title']);
+
+        $db = $this->db;
+
+        $row = [];
+
+        return view($this->arr_values['folder_name'].'/law-news',compact('data','db','row'));
+    }
+    public function law_news_action()
+    {
+        $session = session()->get('user');
+        $user_id = $session['id'];
+
+        $comment = $this->request->getPost('comment');
+        $Jurisdiction = $this->request->getPost('Jurisdiction');
+        $ResearchType = $this->request->getPost('ResearchType');
+
+        $data['title'] = "".$this->arr_values['title'];
+        $data['page_title'] = "AI ".$this->arr_values['page_title'];
+        $data['upload_path'] = $this->arr_values['upload_path'];
+        $data['route'] = base_url($this->arr_values['routename']);
+        $data['pagenation'] = array($this->arr_values['title']);
+
+        $db = $this->db;
+        $row = [];    
+
+        $GeminiModel = new GeminiModel();
+        $response = $GeminiModel->getLegalNews($comment);
+
+        $responseCode = 200;
+        $result['status'] = $responseCode;
+        $result['message'] = $response;
+        $result['action'] = 'view';
+        $result['data'] = [];
+        return $this->response->setStatusCode($responseCode)->setJSON($result);         
+    }
+
+
+
+
+
+    public function legal_acts()
+    {
+        $session = session()->get('user');
+        $vendor_id = $session['id'];
+
+        $data['title'] = "".$this->arr_values['title'];
+        $data['page_title'] = "Manage ".$this->arr_values['page_title'];
+        $data['upload_path'] = $this->arr_values['upload_path'];
+        $data['route'] = base_url($this->arr_values['routename']);      
+        $data['actionUrl'] = $data['route'].'/gemini/legal-acts/legal_acts_action';
+        $data['pagenation'] = array($this->arr_values['title']);
+
+        $db = $this->db;
+
+        $row = [];
+
+        return view($this->arr_values['folder_name'].'/legal-acts',compact('data','db','row'));
+    }
+    public function legal_acts_action()
+    {
+        $session = session()->get('user');
+        $user_id = $session['id'];
+
+        $comment = $this->request->getPost('comment');
+        $Jurisdiction = $this->request->getPost('Jurisdiction');
+        $ResearchType = $this->request->getPost('ResearchType');
+
+        $data['title'] = "".$this->arr_values['title'];
+        $data['page_title'] = "AI ".$this->arr_values['page_title'];
+        $data['upload_path'] = $this->arr_values['upload_path'];
+        $data['route'] = base_url($this->arr_values['routename']);
+        $data['pagenation'] = array($this->arr_values['title']);
+
+        $db = $this->db;
+        $row = [];    
+
+        $GeminiModel = new GeminiModel();
+        $response = $GeminiModel->getLegalNews($comment);
+
+        $responseCode = 200;
+        $result['status'] = $responseCode;
+        $result['message'] = $response;
         $result['action'] = 'view';
         $result['data'] = [];
         return $this->response->setStatusCode($responseCode)->setJSON($result);         

@@ -77,6 +77,18 @@
 							<span>Document Analyzer</span>
 						</a>
 					</li>
+					<!-- <li>
+						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>law-news">
+							<i class="fas fa-search"></i>
+							<span>Law & News</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>legal-acts">
+							<i class="fas fa-search"></i>
+							<span>Legal Acts</span>
+						</a>
+					</li> -->
 
 
 					<!-- <li>

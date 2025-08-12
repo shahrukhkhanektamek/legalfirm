@@ -113,7 +113,7 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 			}
 #resaponse-area, .resaponse-area {
     min-height: 200px;
-    max-height: 300px;
+    /*max-height: 300px;*/
     position: relative;
 }
 .resaponse-area .my-loader {

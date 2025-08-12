@@ -10,6 +10,9 @@ if(!empty($user))
 	$user_role = get_role_by_id($user->role);
 }
 ?>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="<?=base_url() ?>assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css">		
@@ -79,22 +82,19 @@ if(!empty($user))
 
 													<div class="col-md-12 mt-2">
 														<div class="form-group mb-0">
-															<?php
-					                                             $file_data = array(
-					                                                 "position"=>1,
-					                                                 "columna_name"=>"file",
-					                                                 "multiple"=>false,
-					                                                 "accept"=>'.pdf',
-					                                                 "col"=>"col-md-2",
-					                                                 "alt_text"=>"none",
-					                                                 "row"=>@$kyc,
-					                                                 "placeholder"=>"Drag & drop a PDF, or click to upload",
-					                                                 "css"=>["height"=>"50px","width"=>'100%',"margin-bottom"=>'10px',],
-					                                             );
-					                                        ?>
-					                                        <?=view('upload-multiple/index',compact('file_data','db','data'))?>
+															<div class="drag-area" style="height:50px;width:100%;margin-bottom:10px;"> 
+															    <div class="upload-icon">
+															    	<p>Drag &amp; drop a PDF, or click to upload</p>
+															      <i class="ri-file-upload-line"></i> 
+															    </div>
+															    <input type="file" id="pdfUpload" accept=".pdf">
+															</div>
 														</div>
 													</div>
+
+
+
+													
 
 													<div class="col-12">
 														<textarea class="form-control" id="comment" rows="5" placeholder="Paste text here or upload a document above..."></textarea>
@@ -112,7 +112,7 @@ if(!empty($user))
 												</div>
 
 												
-												<div class="col-4 mt-2">
+												<div class="col-12 mt-2">
 													<label style="color: white;">sd</label>
 													<button class="btn btn-primary btn_live w-100" id="submit-comment">Translate</button>
 												</div>
@@ -209,10 +209,42 @@ if(!empty($user))
         });
    }
 
+</script>
 
 
+<script>
+	document.getElementById('pdfUpload').addEventListener('change', function(e) {
+	    const file = e.target.files[0];
+	    if (!file) return;
 
+	    const reader = new FileReader();
+	    reader.onload = function(event) {
+	        const typedArray = new Uint8Array(event.target.result);
 
+	        pdfjsLib.getDocument(typedArray).promise.then(function(pdf) {
+	            let allText = '';
+
+	            const totalPages = pdf.numPages;
+	            let pagePromises = [];
+
+	            for (let i = 1; i <= totalPages; i++) {
+	                pagePromises.push(
+	                    pdf.getPage(i).then(function(page) {
+	                        return page.getTextContent().then(function(textContent) {
+	                            let pageText = textContent.items.map(item => item.str).join(' ');
+	                            allText += pageText + '\n\n';
+	                        });
+	                    })
+	                );
+	            }
+
+	            Promise.all(pagePromises).then(function() {
+	                $("#comment").val(allText);
+	            });
+	        });
+	    };
+	    reader.readAsArrayBuffer(file);
+	});
 
 </script>
 

@@ -94,6 +94,16 @@ $routes->group('partner', ['namespace' => 'App\Controllers\Partner', 'filter'=>'
             $routes->get('/', 'GeminiController::document_analyzer');
             $routes->post('document_analyzer_action', 'GeminiController::document_analyzer_action');
         });
+        
+        $routes->group('law-news', function($routes) {
+            $routes->get('/', 'GeminiController::law_news');
+            $routes->post('law_news_action', 'GeminiController::law_news_action');
+        });
+        
+        $routes->group('legal-acts', function($routes) {
+            $routes->get('/', 'GeminiController::legal_acts');
+            $routes->post('legal_acts_action', 'GeminiController::legal_acts_action');
+        });
 
     });
 

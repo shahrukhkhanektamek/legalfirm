@@ -10,7 +10,7 @@ if(!empty($user))
 	$user_role = get_role_by_id($user->role);
 }
 ?>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="<?=base_url() ?>assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css">		
 	<link rel="stylesheet" href="<?=base_url() ?>assets/plugins/dropzone/dropzone.min.css">
@@ -53,26 +53,23 @@ if(!empty($user))
 										<div class="live_comment">
 											<div class="row">
 
+
 												<div class="col-md-12 mt-2">
 													<div class="form-group mb-0">
-														<?php
-				                                             $file_data = array(
-				                                                 "position"=>1,
-				                                                 "columna_name"=>"license",
-				                                                 "multiple"=>false,
-				                                                 "accept"=>'.pdf',
-				                                                 "col"=>"col-md-2",
-				                                                 "alt_text"=>"none",
-				                                                 "row"=>@$kyc,
-				                                                 "placeholder"=>"Drag & drop a PDF here, or click to select a file PDF files only",
-				                                                 "css"=>["height"=>"200px","width"=>'100%',"margin-bottom"=>'10px',],
-				                                             );
-				                                        ?>
-				                                        <?=view('upload-multiple/index',compact('file_data','db','data'))?>
+														<div class="drag-area" style="height:200px;width:100%;margin-bottom:10px;"> 
+														    <div class="upload-icon">
+														    	<p>Drag & drop a PDF here, or click to select a file PDF files only</p>
+														      <i class="ri-file-upload-line"></i> 
+														    </div>
+														    <input type="file" id="pdfUpload" accept=".pdf">
+														</div>
 													</div>
-												</div>												
+												</div>
+												<div class="col-12 d-none">
+													<textarea class="form-control" id="comment" rows="5" placeholder="Paste text here or upload a document above..."></textarea>
+												</div>
 												
-												<div class="col-4 mt-2">
+												<div class="col-12 mt-2">
 													<label style="color: white;">sd</label>
 													<button class="btn btn-primary btn_live w-100" id="submit-comment">Analyze Document</button>
 												</div>
@@ -87,7 +84,7 @@ if(!empty($user))
 										<div class="fcrse_3">													
 											<div class="live_chat" id="live_chat">
 												<div class="chat1 resaponse-area" id="chat1">
-													
+													<pre id="set-res"></pre>
 												</div>
 											</div>
 											
@@ -171,10 +168,12 @@ if(!empty($user))
             
    		$("#submit-comment").attr("disabled", false);
 
+   			data_loader("#chat1",0);
+
             response = admin_response_data_check(response);
             if(response.status==200)
             {
-              	$(".chat1").html(`<div class="boat">${(response.message)}</div>`);
+              	$("#set-res").html(`<div class="boat">${(response.message)}</div>`);
               	$(".wait.boat").remove();
               	var div = document.getElementById("live_chat");
   				div.scrollTop = div.scrollHeight;
@@ -182,12 +181,45 @@ if(!empty($user))
         });
    }
 
+</script>
 
 
+<script>
+	document.getElementById('pdfUpload').addEventListener('change', function(e) {
+	    const file = e.target.files[0];
+	    if (!file) return;
 
+	    const reader = new FileReader();
+	    reader.onload = function(event) {
+	        const typedArray = new Uint8Array(event.target.result);
 
+	        pdfjsLib.getDocument(typedArray).promise.then(function(pdf) {
+	            let allText = '';
+
+	            const totalPages = pdf.numPages;
+	            let pagePromises = [];
+
+	            for (let i = 1; i <= totalPages; i++) {
+	                pagePromises.push(
+	                    pdf.getPage(i).then(function(page) {
+	                        return page.getTextContent().then(function(textContent) {
+	                            let pageText = textContent.items.map(item => item.str).join(' ');
+	                            allText += pageText + '\n\n';
+	                        });
+	                    })
+	                );
+	            }
+
+	            Promise.all(pagePromises).then(function() {
+	                $("#comment").val(allText);
+	            });
+	        });
+	    };
+	    reader.readAsArrayBuffer(file);
+	});
 
 </script>
+
 
 
 

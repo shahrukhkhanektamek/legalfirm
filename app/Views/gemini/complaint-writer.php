@@ -63,90 +63,60 @@ if(!empty($user))
 													
 													<div class="col-6 mt-2">
 														<label>State</label>
-														<select class="form-control select" >   
-														   <option value="Bengali">Bengali</option>
-														   <option value="Marathi">Marathi</option>
-														   <option value="Telugu">Telugu</option>
-														   <option value="Tamil">Tamil</option>
-														   <option value="Gujarati">Gujarati</option>
-														   <option value="Urdu">Urdu</option>
-														   <option value="Kannada">Kannada</option>
-														   <option value="Odia">Odia</option>
-														   <option value="Punjabi">Punjabi</option>
-														   <option value="Malayalam">Malayalam</option>
-														   <option value="English">English</option>
-														   <option value="Spanish">Spanish</option>
-														   <option value="French">French</option>
-														   <option value="German">German</option>
-														   <option value="Arabic">Arabic</option>
-														   <option value="Russian">Russian</option>
-														   <option value="Chinese (Simplified)">Chinese (Simplified)</option>
+														<select class="form-control select" id="state">
+															<?php $states = $db->table("states")->get()->getResultObject();
+															foreach ($states as $key => $value) {
+															?>
+															   <option value="<?=$value->name ?>"><?=$value->name ?></option>
+															<?php } ?>
 														</select>
 													</div>
 													<div class="col-6 mt-2">
 														<label>District</label>
-														<select class="form-control select" >   
-														   <option value="Bengali">Bengali</option>
-														   <option value="Marathi">Marathi</option>
-														   <option value="Telugu">Telugu</option>
-														   <option value="Tamil">Tamil</option>
-														   <option value="Gujarati">Gujarati</option>
-														   <option value="Urdu">Urdu</option>
-														   <option value="Kannada">Kannada</option>
-														   <option value="Odia">Odia</option>
-														   <option value="Punjabi">Punjabi</option>
-														   <option value="Malayalam">Malayalam</option>
-														   <option value="English">English</option>
-														   <option value="Spanish">Spanish</option>
-														   <option value="French">French</option>
-														   <option value="German">German</option>
-														   <option value="Arabic">Arabic</option>
-														   <option value="Russian">Russian</option>
-														   <option value="Chinese (Simplified)">Chinese (Simplified)</option>
-														</select>
+														<input class="form-control"  type="text" id="district" placeholder="District..." id="District" />														
 													</div>
 													<div class="col-12 mt-2">
 														<label>Police Station</label>
-														<input class="form-control"  type="text" placeholder="e.g., Vasant Kunj Police Station" />
+														<input class="form-control" id="police-station" type="text" placeholder="e.g., Vasant Kunj Police Station" />
 													</div>
 
 
 													<div class="col-12"><h3>Parties Involved</h3></div>
 													<div class="col-6 mt-2">
 														<label>Complainant Name</label>
-														<input class="form-control"  type="text" placeholder="" />
+														<input class="form-control" id="complainant-name" type="text" placeholder="" />
 													</div>
 													<div class="col-6 mt-2">
 														<label>Complainant Address</label>
-														<input class="form-control"  type="text" placeholder="" />
+														<input class="form-control" id="complainant-address" type="text" placeholder="" />
 													</div>
 													<div class="col-6 mt-2">
-														<label>Complainant Address</label>
-														<input class="form-control"  type="text" placeholder="" />
+														<label>Accused Name</label>
+														<input class="form-control" id="accused-name" type="text" placeholder="" />
 													</div>
 													<div class="col-6 mt-2">
 														<label>Accused Address</label>
-														<input class="form-control"  type="text" placeholder="" />
+														<input class="form-control" id="accused-address" type="text" placeholder="" />
 													</div>
 
 
 													<div class="col-12"><h3>Incident Details</h3></div>
 													<div class="col-6 mt-2">
 														<label>Date of Incident</label>
-														<input class="form-control"  type="date" placeholder="" />
+														<input class="form-control" id="date-of-incident" type="date" placeholder="" />
 													</div>
 													<div class="col-6 mt-2">
 														<label>Location of Incident</label>
-														<input class="form-control"  type="text" placeholder="" />
+														<input class="form-control" id="location-of-incident" type="text" placeholder="" />
 													</div>
 													<div class="col-12">
 														<label>Description of Incident</label>
-														<textarea class="form-control"  rows="5" placeholder="Clearly describe the events as they happened..."></textarea>
+														<textarea class="form-control" id="description-of-incident" rows="5" placeholder="Clearly describe the events as they happened..."></textarea>
 													</div>
 
 													
 												
-												<div class="col-4 mt-2">
+												<div class="col-12 mt-2">
 													<label style="color: white;">sd</label>
 													<button class="btn btn-primary btn_live w-100" id="submit-comment">Generate Complaint</button>
 												</div>
@@ -161,7 +131,7 @@ if(!empty($user))
 										<div class="fcrse_3">													
 											<div class="live_chat" id="live_chat">
 												<div class="chat1 resaponse-area" id="chat1">
-													
+													<pre id="set-res"></pre>
 												</div>
 											</div>
 											
@@ -210,8 +180,8 @@ if(!empty($user))
    function submit_comment()
    {
    		var comment = $("#comment").val();
-   		if(comment.trim()=='')
-   			return false;
+   		// if(comment.trim()=='')
+   		// 	return false;
 
    		$("#submit-comment").attr("disabled", true)
    		data_loader("#chat1",1);
@@ -225,9 +195,19 @@ if(!empty($user))
   			div.scrollTop = div.scrollHeight;
       
         var form = new FormData();
+        
         form.append("comment",comment);
-        form.append("Jurisdiction",$("#Jurisdiction").val());
-        form.append("ResearchType",$("#ResearchType").val());
+        form.append("state",$("#state").val());
+        form.append("district",$("#district").val());
+        form.append("police_station",$("#police-station").val());
+        form.append("complainant_name",$("#complainant-name").val());
+        form.append("complainant_address",$("#complainant-address").val());
+        form.append("accused_name",$("#accused-name").val());
+        form.append("accused_address",$("#accused-address").val());
+        form.append("date_of_incident",$("#date-of-incident").val());
+        form.append("location_of_incident",$("#location-of-incident").val());
+        form.append("description_of_incident",$("#description-of-incident").val());
+
         var settings = {
           "url": "<?=$data['actionUrl'] ?>",
           "method": "POST",
@@ -245,10 +225,12 @@ if(!empty($user))
             
    		$("#submit-comment").attr("disabled", false);
 
+   			data_loader("#chat1",0);
+
             response = admin_response_data_check(response);
             if(response.status==200)
             {
-              	$(".chat1").html(`<div class="boat">${(response.message)}</div>`);
+              	$("#set-res").html(`<div class="boat">${(response.message)}</div>`);
               	$(".wait.boat").remove();
               	var div = document.getElementById("live_chat");
   				div.scrollTop = div.scrollHeight;
