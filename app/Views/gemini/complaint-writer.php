@@ -43,9 +43,12 @@ if(!empty($user))
 				<div class="container">
 
 					<div class="row">
-						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">						
-							<?=view("partner/nav"); ?>							
-						</div>
+						
+						<?php
+							if($role==2) echo view("user/nav"); 
+							if(in_array($role,[3,4,5,5])) echo view("partner/nav"); 
+						?>
+						
 
 						<div class="col-md-7 col-lg-8 col-xl-9">
 

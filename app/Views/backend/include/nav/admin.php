@@ -204,14 +204,14 @@
             <li class="nav-item">
                 <a href="<?=base_url(route_to('meta-tag.list'))?>" class="nav-link"> Meta Tags </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="<?=base_url(route_to('script.index'))?>" class="nav-link"> Script </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a href="<?=base_url(route_to('setting.policy'))?>" class="nav-link"> Policies </a>
             </li>
             <li class="nav-item">
-                <a href="<?=base_url(route_to('setting.main'))?>" class="nav-link"> Social </a>
+                <a href="<?=base_url(route_to('setting.main'))?>" class="nav-link"> Contact Detail </a>
             </li>
         </ul>
     </div>

@@ -7842,7 +7842,7 @@ header.headertwelve{
 	-ms-flex-align: center;
 	align-items: center;
 	background-color: #115241;
-    height: 60px;
+    height: 80px;
     padding:  0 20px;
 	justify-content: space-between;
 	-webkit-justify-content: space-between;
@@ -7904,6 +7904,15 @@ header.headertwelve{
 }
 .menu-close {
 	font-size: 18px;
+    position: fixed;
+    right: 15px;
+    background: #115241;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    text-align: center;
+    align-items: center;
+    border-radius: 50%;
 }
 .menu-close i {
 	color: #FFFFFF;
@@ -7935,7 +7944,7 @@ html.menu-opened body {
     overflow: hidden;
 }
 .social-icon ul, .top-bar .language-icon ul {
-	display: inline-flex;
+	display: -webkit-inline-box;
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -26724,7 +26733,7 @@ h2.footer-title:after {
 	}
 	.main-menu-wrapper {
 		order: 3;
-		width: 260px;
+		width: 100%;
 		position: fixed;
 		top: 0;
 		bottom: 0;
@@ -26732,9 +26741,16 @@ h2.footer-title:after {
 		overflow-x: hidden;
 		overflow-y: auto;
 		z-index: 1060;
-		transform: translateX(-260px);
+		transform: translateX(-100%);
 		transition: all 0.4s;
 		background-color: #115241;
+	}
+	.menu-header .menu-logo {
+	    width: 70%;
+	}
+	.main-menu-wrapper-body {
+	    /*width: 256px;*/
+		height: 100%;
 	}
 	.menu-header {
 		display: -webkit-box;
@@ -28953,7 +28969,17 @@ h2.footer-title:after {
 
 
 
-
+@media(max-width: 767px)
+{
+	.col-xs-6 {
+	    width: 50%;
+	}
+	.register .count {
+        width: 150px;
+        height: 150px;
+        margin: 0 0 10px 0;
+    }
+}
 
 
 

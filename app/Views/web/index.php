@@ -40,9 +40,9 @@
 						
 
 <?php
-$services = $db->table("service")->limit(10)->where(["status"=>1,"service_type"=>2,])->orderBy('id','desc')->get()->getResult();
+$services = $db->table("service")->limit(6)->where(["status"=>1,"service_type"=>2,])->orderBy('id','desc')->get()->getResult();
 foreach ($services as $key => $value) {
-?>						<div class="col-md-4 col-sm-12">
+?>						<div class="col-md-4">
 							<div class="blog grid-blog grid-service">
 								<div class="blog-image">
 									<a href="<?=base_url().$value->slug ?>"><img class="img-fluid" src="<?=image_check($value->image) ?>" alt="Post Image"></a>
@@ -201,30 +201,38 @@ foreach ($services as $key => $value) {
 			<div class="container">
 				<div class="row">
 					<div class="col-12 col-lg-12 mx-auto text-center position-relative">
-						<div class="reg-count d-flex justify-content-center">
-							<div class="count">
-								<span>
-									<span>3,600+</span>
-									<p>Trusted Clients</p>
-								</span>
+						<div class="reg-count row justify-content-center">
+							<div class="col-md-3 col-xs-6">
+								<div class="count">
+									<span>
+										<span>3,600+</span>
+										<p>Trusted Clients</p>
+									</span>
+								</div>
 							</div>
-							<div class="count">
-								<span>
-									<span>18.489</span>
-									<p>Case Studies</p>
-								</span>
+							<div class="col-md-3 col-xs-6">
+								<div class="count">
+									<span>
+										<span>18.489</span>
+										<p>Case Studies</p>
+									</span>
+								</div>
 							</div>
-							<div class="count">
-								<span>
-									<span>16.840+</span>
-									<p>Total Cases Won</p>
-								</span>
+							<div class="col-md-3 col-xs-6">
+								<div class="count">
+									<span>
+										<span>16.840+</span>
+										<p>Total Cases Won</p>
+									</span>
+								</div>
 							</div>
-							<div class="count">
-								<span>
-									<span>99.5%</span>
-									<p>Success Rate</p>
-								</span>
+							<div class="col-md-3 col-xs-6">
+								<div class="count">
+									<span>
+										<span>99.5%</span>
+										<p>Success Rate</p>
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>

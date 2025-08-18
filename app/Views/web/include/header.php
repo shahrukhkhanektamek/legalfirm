@@ -15,6 +15,9 @@ $url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_
 
 $uri = false;
 if(!empty(explode($base_url, $url)[1]))	$uri = true;
+
+$contact_detail = json_decode($db->table('setting')->getWhere(["name"=>'main',])->getRow()->data);
+
 ?>
 
 <!DOCTYPE html>
@@ -148,7 +151,93 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 .review-listing > ul li .comment .comment-body {
     width: 100%;
 }
+.whatsapp-animation {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 12;
+    font-size: 40px;
+    background: green;
+    width: 55px;
+    height: 55px;
+    display: grid;
+    text-align: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+}
+.mobile-login {
+    font-size: 30px;
+    color: white;
+}
+.header.black-logo .bar-icon span,
+.header.sticky .bar-icon span
+{
+    background-color: black;
+}
+.header.black-logo .mobile-login,
+.header.sticky .mobile-login{
+	color: black;
+}
+.sidebar-overlay.opened {
+    display: none;
+}
+.panel-sidebar-close-btn, .panel-sidebar-open-btn, .mobile-login
+{
+    display: none;
+}
 
+@media only screen and (max-width: 1199px) {
+    .logo img {
+        width: 185px;
+        margin: 0 auto;
+    }
+
+    .mobile-login{
+    	display: block;
+    }
+
+
+
+	.theiaStickySidebar.open {
+		left: 0;
+	}
+	.theiaStickySidebar {
+	    position: fixed;
+	    top: 0;
+	    left: -100%;
+	    z-index: 999;
+	    width: 100%;
+	    height: 100%;
+	    background: white;
+	    overflow: auto;
+	    transition: all 0.5s;
+	}
+	.panel-sidebar-close-btn {
+	    position: absolute;
+	    right: 15px;
+	    top: 15px;
+	    font-size: 25px;
+	    cursor: pointer;
+	    display: block;
+	}
+	.panel-sidebar-open-btn {
+	    position: fixed;
+	    width: fit-content;
+	    display: block;
+	    z-index: 99;
+	    background: #50576f;
+	    border: 0;
+	    color: white;
+	    left: -20px;
+	    top: 45%;
+	    transform: rotate(90deg);
+	    display: block;
+	    font-size: 20px;
+	    padding: 0 10px;
+	}
+
+}
 
 
 		</style>
@@ -176,61 +265,76 @@ if(!empty(explode($base_url, $url)[1]))	$uri = true;
 							<img src="<?=$base_url ?>assets/img/logo-white.png" class="img-fluid logo-white" alt="Logo">
 							<img src="<?=$base_url ?>assets/img/logo-black.png" class="img-fluid logo-black" alt="Logo">
 						</a>
+
+						<?php if(!in_array($role, [2,3,4,5,6,7])){ ?>
+							<a href="<?=base_url('login') ?>" class="mobile-login">
+								<i class="fa fa-user"></i>
+							</a>
+						<?php }else{?>
+							<a href="<?=base_url($user_role->route.'/dashboard')?>" class="mobile-login">
+								<i class="fa fa-user"></i>
+							</a>
+						<?php } ?>
+
+							
 					</div>
 					<div class="main-menu-wrapper">
-						<div class="menu-header">
-							<a href="<?=$base_url ?>" class="menu-logo">
-								<img src="<?=$base_url ?>assets/img/logo-white.png" class="img-fluid" alt="Logo">
-							</a>
-							<a id="menu_close" class="menu-close" href="javascript:void(0);">
-								<i class="fas fa-times"></i>
-							</a>
-						</div>
-						<ul class="main-nav">
-							
-							<li class="has-submenu active"><a href="<?=$base_url ?>">Home</a></li>
-							<li class="has-submenu"><a href="<?=$base_url.'personal-injury' ?>">Personal Injury</a></li>
-							<li class="has-submenu"><a href="<?=$base_url.'family-law' ?>">Family Law</a></li>
-							<li class="has-submenu"><a href="<?=$base_url.'criminal-defense' ?>">Criminal Defense</a></li>
-							<li class="has-submenu"><a href="<?=$base_url.'business-and-corporate-law' ?>">Business and Corporate Law</a></li>
-							<li class="has-submenu">
-								<a href="<?=$base_url ?>#">Other Services <i class="fas fa-chevron-down"></i></a>
+						<div class="main-menu-wrapper-body">
 
-								<?php
-								$serviceCategory = $db->table("service_category")->where(["status"=>1,])->get()->getResult();
-								if(!empty($serviceCategory)) {
-								?>
+							<div class="menu-header">
+								<a href="<?=$base_url ?>" class="menu-logo">
+									<img src="<?=$base_url ?>assets/img/logo-white.png" class="img-fluid" alt="Logo">
+								</a>
+								<a id="menu_close" class="menu-close" href="javascript:void(0);">
+									<i class="fas fa-times"></i>
+								</a>
+							</div>
+							<ul class="main-nav">
+								
+								<li class="has-submenu21 active"><a href="<?=$base_url ?>">Home</a></li>
+								<li class="has-submenu21"><a href="<?=$base_url.'personal-injury' ?>">Personal Injury</a></li>
+								<li class="has-submenu21"><a href="<?=$base_url.'family-law' ?>">Family Law</a></li>
+								<li class="has-submenu21"><a href="<?=$base_url.'criminal-defense' ?>">Criminal Defense</a></li>
+								<li class="has-submenu21"><a href="<?=$base_url.'business-and-corporate-law' ?>">Business and Corporate Law</a></li>
+								<li class="has-submenu">
+									<a href="<?=$base_url ?>#">Other Services <i class="fas fa-chevron-down"></i></a>
 
-								<ul class="submenu">
-									<?php foreach ($serviceCategory as $key => $value) { 
-										
-										?>
-										<li class="has-submenu">
-											<a href="<?=$base_url.$value->slug ?>"><?=$value->name ?></a>
-											<?php
-												$services = $db->table("service")->where(["status"=>1,"category"=>$value->id,])->limit(10)->get()->getResult();
-												if(!empty($services)){
+									<?php
+									$serviceCategory = $db->table("service_category")->where(["status"=>1,])->get()->getResult();
+									if(!empty($serviceCategory)) {
+									?>
+
+									<ul class="submenu">
+										<?php foreach ($serviceCategory as $key => $value) { 
+											
 											?>
-												<ul class="submenu">
-													<?php 
-													foreach ($services as $key2 => $value2) {
-													?>
-														<li><a href="<?=$base_url.$value2->slug ?>"><?=$value2->name ?></a></li>
-													<?php } ?>
-												</ul>
-											<?php } ?>
-										</li>
-									<?php } ?>
-								</ul>
-							<?php } ?>
-							</li>
-							<li class="has-submenu"><a href="<?=$base_url ?>contact">Contact Us</a></li>
-							
-							
-						</ul>
+											<li class="has-submenu">
+												<a href="<?=$base_url.$value->slug ?>"><?=$value->name ?></a>
+												<?php
+													$services = $db->table("service")->where(["status"=>1,"category"=>$value->id,])->limit(10)->get()->getResult();
+													if(!empty($services)){
+												?>
+													<ul class="submenu">
+														<?php 
+														foreach ($services as $key2 => $value2) {
+														?>
+															<li><a href="<?=$base_url.$value2->slug ?>"><?=$value2->name ?></a></li>
+														<?php } ?>
+													</ul>
+												<?php } ?>
+											</li>
+										<?php } ?>
+									</ul>
+								<?php } ?>
+								</li>
+								<li class="has-submenu"><a href="<?=$base_url ?>contact">Contact Us</a></li>
+								
+								
+							</ul>
+						</div>
 					</div>		 
 					<ul class="nav header-navbar-rht">
-						<?php if(!in_array($role, [2,3,4,5,6,7])){ ?>
+						<?php if(!in_array($role, [2,3,4,5])){ ?>
 							<li><a href="<?=$base_url ?>login">Log in</a></li>
 							<li><a href="<?=$base_url ?>register" class="login-btn">Signup </a></li>
 						<?php }else{?>

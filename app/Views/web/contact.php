@@ -7,7 +7,11 @@
 label.focus-label {
     margin-left: 15px;
 }
+iframe{
+	width: 100% !important;
+}
 </style>	
+
 			<!-- Breadcrumb -->
 			<div class="breadcrumb-bar">
 				<div class="container-fluid">
@@ -39,19 +43,19 @@ label.focus-label {
 										<div class="col-md-6">
 											<div class="blue">
 												<h1><i class="fa fa-phone"></i></h1>
-												<p><a href="tel:1122334455">+91-1122334455</a></p>
+												<p><a href="tel:<?=$contact_detail->mobile ?>">+91-<?=$contact_detail->mobile ?></a></p>
 											</div>
 										</div> 
 										<div class="col-md-6">
 											<div class="orange">
 												<h1><i class="fa fa-envelope"></i></h1>
-												<p><a href="mailto:test@gmail.com">test@gmail.com</a></p>
+												<p><a href="mailto:<?=$contact_detail->email ?>"><?=$contact_detail->email ?></a></p>
 											</div>
 										</div>
 										<div class="col-md-12 mt-3">
 											<div class="blue">
 												<h1><i class="fa fa-map-marker-alt"></i></h1>
-												<p>J-555 Delhi, India</p>
+												<p><a href="<?=$contact_detail->location_map ?>"><?=$contact_detail->address ?></a></p>
 											</div>
 										</div>
 									</div>
@@ -98,7 +102,7 @@ label.focus-label {
 									</div>										
 								</div>
 								<div class="col-md-12">
-									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18925.645857061943!2d77.04962024813074!3d28.66877489758849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0438728d3fc9%3A0x64e1eebb4ec4e142!2sNangloi%2C%20Delhi%2C%20110041!5e1!3m2!1sen!2sin!4v1754772626938!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+									<?=$contact_detail->google_map ?>
 								</div>
 
 							</div>

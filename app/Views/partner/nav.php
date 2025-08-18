@@ -1,5 +1,8 @@
 <?php $user = $user = get_user();$user_role = get_role_by_id($user->role); ?>
-<!-- Profile Sidebar -->
+<span class="panel-sidebar-open-btn">Menu</span>
+<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+	<i class="fa fa-times panel-sidebar-close-btn"></i>
+	<!-- Profile Sidebar -->
 	<div class="profile-sidebar">
 		<div class="widget-profile pro-widget-content">
 			<div class="profile-info-widget">
@@ -34,57 +37,58 @@
 							<span>Appointment</span>
 						</a>
 					</li>
-
-					<li>
-						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>ask-ally">
-							<i class="fas fa-robot"></i>
-							<span>Ask Ally</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>legal-research">
-							<i class="fas fa-scale-balanced"></i>
-							<span>Legal Research</span>
-						</a>
-					</li>
 					<li>
 						<a href="<?=base_url() ?>advocates">
 							<i class="fas fa-user-tie"></i>
 							<span>Lawyer</span>
 						</a>
 					</li>
+
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>translator">
+						<a href="<?=base_url().'gemini/' ?>ask-ally">
+							<i class="fas fa-robot"></i>
+							<span>Ask Ally</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?=base_url().'gemini/' ?>legal-research">
+							<i class="fas fa-scale-balanced"></i>
+							<span>Legal Research</span>
+						</a>
+					</li>
+					
+					<li>
+						<a href="<?=base_url().'gemini/' ?>translator">
 							<i class="fas fa-language"></i>
 							<span>Translator</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>complaint-writer">
+						<a href="<?=base_url().'gemini/' ?>complaint-writer">
 							<i class="fas fa-pen-to-square"></i>
 							<span>Complaint Writer</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>document-generator">
+						<a href="<?=base_url().'gemini/' ?>document-generator">
 							<i class="fas fa-file"></i>
 							<span>Document Generator</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>document-analyzer">
+						<a href="<?=base_url().'gemini/' ?>document-analyzer">
 							<i class="fas fa-search"></i>
 							<span>Document Analyzer</span>
 						</a>
 					</li>
 					<!-- <li>
-						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>law-news">
+						<a href="<?=base_url().'gemini/' ?>law-news">
 							<i class="fas fa-search"></i>
 							<span>Law & News</span>
 						</a>
 					</li>
 					<li>
-						<a href="<?=base_url().$user_role->nav.'/gemini/' ?>legal-acts">
+						<a href="<?=base_url().'gemini/' ?>legal-acts">
 							<i class="fas fa-search"></i>
 							<span>Legal Acts</span>
 						</a>
@@ -132,3 +136,4 @@
 		</div>
 	</div>
 	<!-- /Profile Sidebar -->
+</div>

@@ -1,4 +1,6 @@
-	
+<?php 
+$contact_detail = json_decode($db->table('setting')->getWhere(["name"=>'main',])->getRow()->data);
+?>
 		<!-- Footer -->	
 		<footer class="footer">
 				
@@ -25,11 +27,11 @@
 								<div class="footer-widget footer-menu">
 									<h2 class="footer-title">POPULAR Services</h2>
 									<ul>
-										<li><a href="<?=base_url()?>services">Personal Injury</a></li>
-										<li><a href="<?=base_url()?>services">Family Law</a></li>
-										<li><a href="<?=base_url()?>services">Criminal Defense</a></li>
-										<li><a href="<?=base_url()?>services">Business and Corporate Law</a></li>
-										<li><a href="<?=base_url()?>services">Real Estate</a></li>
+										<li><a href="<?=base_url()?>personal-injury">Personal Injury</a></li>
+										<li><a href="<?=base_url()?>family-law">Family Law</a></li>
+										<li><a href="<?=base_url()?>criminal-defense">Criminal Defense</a></li>
+										<li><a href="<?=base_url()?>business-and-corporate-law">Business and Corporate Law</a></li>
+										<li><a href="<?=base_url()?>real-estate-and-property-law">Real Estate</a></li>
 									</ul>
 								</div>
 								<!-- /Footer Widget -->
@@ -91,16 +93,20 @@
 								</div>
 								<div class="col-md-6 col-lg-4">
 									<div class="copyright-text center-text">
-										<p class="mb-0"><a href="<?=base_url()?>term-condition">Terms and Conditions</a> - <a href="<?=base_url()?>privacy-policy">Privacy Policy</a></p>
+										<p class="mb-0">
+											<a href="<?=base_url()?>term-condition">Terms and Conditions</a> - 
+											<a href="<?=base_url()?>refund-policy">Refund Policy</a> - 
+											<a href="<?=base_url()?>privacy-policy">Privacy Policy</a>
+										</p>
 									</div>
 								</div>
 								<div class="col-md-2 col-lg-4 right-text">
 									<div class="social-icon">
 											<ul>
-												<li><a href="<?=base_url()?>#" class="icon" target="_blank"><i class="fab fa-facebook-f"></i> </a></li>
-												<li><a href="<?=base_url()?>#" class="icon" target="_blank"><i class="fab fa-twitter"></i> </a></li>
-												<li><a href="<?=base_url()?>#" class="icon" target="_blank"><i class="fab fa-instagram"></i> </a></li>
-												<li><a href="<?=base_url()?>#" class="icon" target="_blank"><i class="fab fa-linkedin-in"></i> </a></li>
+												<li><a href="<?=$contact_detail->facebook ?>" class="icon" target="_blank"><i class="fab fa-facebook-f"></i> </a></li>
+												<li><a href="<?=$contact_detail->twitter ?>" class="icon" target="_blank"><i class="fab fa-twitter"></i> </a></li>
+												<li><a href="<?=$contact_detail->instagram ?>" class="icon" target="_blank"><i class="fab fa-instagram"></i> </a></li>
+												<li><a href="<?=$contact_detail->linkedin ?>" class="icon" target="_blank"><i class="fab fa-linkedin-in"></i> </a></li>
 											</ul>
 										</div>
 								</div>
@@ -118,6 +124,12 @@
 		</div>		
 		<!-- /Main Wrapper -->
 	
+
+
+<a target="_blank" href="https://wa.me/91<?=$contact_detail->whatsapp ?>?text=Hello%20I%20want%20to%20connect%20with%20you" class="whatsapp-animation"><i class="fab fa-whatsapp"></i></a>
+
+
+
 		<!-- jQuery -->
 		  <!-- <script src="<?=base_url() ?>assets/js/jquery-3.7.1.min.js" type="2c8673e8960f9f9975d13815-text/javascript"></script> -->
 		  
@@ -167,6 +179,17 @@
 	  });
 	});
 </script>
+
+
+<script>
+	$(document).on('click',".panel-sidebar-open-btn",function (e) {
+	  $(".theiaStickySidebar").addClass("open");
+	});
+	$(document).on('click',".panel-sidebar-close-btn",function (e) {
+	  $(".theiaStickySidebar").removeClass("open");
+	});
+</script>
+
 
 <script>
 	$('#country').select2({

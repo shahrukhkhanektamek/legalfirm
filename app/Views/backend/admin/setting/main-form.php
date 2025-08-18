@@ -26,32 +26,32 @@
                                 <div class="card">
                                     <div class="card-body frm">
                                         <div class="row gy-3">
-                                            <div class="col-lg-4 hide">
+                                            <div class="col-lg-4 ">
                                                 <label class="form-label" for="product-title-input">Phone</label>
                                                 <input type="text" class="form-control" placeholder="Enter Mobile number" name="mobile" value="<?=@$form_data->mobile?>" required>
                                             </div>
 
-                                            <div class="col-lg-4 hide">
+                                            <div class="col-lg-4 ">
                                                 <label class="form-label" for="product-title-input">WhatsApp Number</label>
                                                 <input type="text" class="form-control" placeholder="Enter WhatsApp number" name="whatsapp" value="<?=@$form_data->whatsapp?>" required>
                                             </div>
 
-                                            <div class="col-lg-4 hide">
+                                            <div class="col-lg-4 ">
                                                 <label class="form-label" for="product-title-input">Email</label>
                                                 <input type="text" class="form-control" placeholder="Enter Email address" name="email" value="<?=@$form_data->email?>" required>
                                             </div>
 
-                                            <div class="col-lg-6 hide">
+                                            <div class="col-lg-6 ">
                                                 <label class="form-label" for="product-title-input">Address</label>
                                                 <textarea class="form-control" name="address" required><?=@$form_data->address?></textarea>
                                             </div>
 
-                                            <div class="col-lg-6 hide">
+                                            <div class="col-lg-6 ">
                                                 <label class="form-label" for="product-title-input">Map Link</label>
                                                 <textarea class="form-control" name="location_map" required><?=@$form_data->location_map?></textarea>
                                             </div>
 
-                                            <div class="col-lg-12 hide">
+                                            <div class="col-lg-12 ">
                                                 <label class="form-label" for="product-title-input">Google Map</label>
                                                 <textarea class="form-control" name="google_map" rows="4" required><?=@$form_data->google_map?></textarea>
                                             </div>

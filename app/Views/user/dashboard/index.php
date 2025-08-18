@@ -25,9 +25,7 @@
 					<div class="row">
 						
 						<!-- Profile Sidebar -->
-						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-							<?=view("user/nav"); ?>
-						</div>
+						<?=view("user/nav"); ?>						
 						<!-- / Profile Sidebar -->
 						
 						<div class="col-md-7 col-lg-8 col-xl-9">
